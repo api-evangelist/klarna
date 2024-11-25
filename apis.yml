@@ -91,7 +91,8 @@ apis:
       to the endpoint you specify when creating the order. Your response is
       interpreted using the response code and body. Read more on
       [here](https://docs.klarna.com/kco/).
-  - name: Hosted Payment Page API
+  - aid: klarna:hosted-payment-page-api
+    name: HPP
     tags:
       - Hosted
       - Payments
@@ -106,12 +107,12 @@ apis:
           Klarna Payments without the need of hosting the web page that manages
           the client side of Klarna Payments. A complete HPP payment session
           will involve three of Klarna services.
+      - type: OpenAPI
+        url: properties/hosted-payment-page-api-openapi.yml
     description: >-
       Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
       Payments without the need of hosting the web page that manages the client
-      side of Klarna Payments. A complete HPP payment session will involve three
-      of Klarna services.
-    aid: klarna:hosted-payment-page-api
+      side of Klarna Payments.
   - name: Order Management API
     tags:
       - Orders

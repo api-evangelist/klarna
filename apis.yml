@@ -45,7 +45,8 @@ apis:
       for storing a customer's payment method. Tokens are created using the
       [`generate a customer token`](https://docs.klarna.com/api/payments/) call
       in the payments API.
-  - name: Kustom Checkout API
+  - aid: klarna:kustom-checkout-api
+    name: Checkout API V3
     tags:
       - Checkout
     humanURL: https://docs.klarna.com/api/checkout/
@@ -58,12 +59,14 @@ apis:
           the checkout order during the purchase. As soon as the purchase is
           completed the order should be read and handled using the Order
           Management API. Read more on Klarna checkout.
+      - type: OpenAPI
+        url: properties/kustom-checkout-api-openapi.yml
     description: >-
       The checkout API is used to create a checkout with Klarna and update the
       checkout order during the purchase. As soon as the purchase is completed
-      the order should be read and handled using the Order Management API. Read
-      more on Klarna checkout.
-    aid: klarna:kustom-checkout-api
+      the order should be read and handled using the [Order Management
+      API](https://docs.klarna.com/api/ordermanagement). Read more on [Klarna
+      checkout](https://docs.klarna.com/kco/).
   - name: Kustom Checkout Callback API
     tags:
       - Checkout

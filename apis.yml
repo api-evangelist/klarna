@@ -43,14 +43,9 @@ apis:
       for storing a customer's payment method. Tokens are created using the
       generate a customer token call in the payments API.
   - name: Kustom Checkout API
-    description: >-
-      The checkout API is used to create a checkout with Klarna and update the
-      checkout order during the purchase. As soon as the purchase is completed
-      the order should be read and handled using the Order Management API. Read
-      more on Klarna checkout.
-    humanURL: https://docs.klarna.com/api/checkout/
     tags:
       - Checkout
+    humanURL: https://docs.klarna.com/api/checkout/
     properties:
       - url: https://docs.klarna.com/api/checkout/
         name: Kustom Checkout API
@@ -60,15 +55,16 @@ apis:
           the checkout order during the purchase. As soon as the purchase is
           completed the order should be read and handled using the Order
           Management API. Read more on Klarna checkout.
-  - name: Kustom Checkout Callback API
     description: >-
-      Klarna provides a number of different callbacks during the customer's
-      checkout session. The callbacks can be used to update the order when the
-      customer changes their address as well as to do a final check to validate
-      the order before it is submitted.
-    humanURL: https://docs.klarna.com/api/checkout-merchant/
+      The checkout API is used to create a checkout with Klarna and update the
+      checkout order during the purchase. As soon as the purchase is completed
+      the order should be read and handled using the Order Management API. Read
+      more on Klarna checkout.
+    aid: klarna:kustom-checkout-api
+  - name: Kustom Checkout Callback API
     tags:
       - Checkout
+    humanURL: https://docs.klarna.com/api/checkout-merchant/
     properties:
       - url: https://docs.klarna.com/api/checkout-merchant/
         name: Kustom Checkout Callback API
@@ -78,17 +74,18 @@ apis:
           checkout session. The callbacks can be used to update the order when
           the customer changes their address as well as to do a final check to
           validate the order before it is submitted.
-  - name: Hosted Payment Page API
     description: >-
-      Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
-      Payments without the need of hosting the web page that manages the client
-      side of Klarna Payments. A complete HPP payment session will involve three
-      of Klarna services.
-    humanURL: https://docs.klarna.com/api/hpp-merchant/
+      Klarna provides a number of different callbacks during the customer's
+      checkout session. The callbacks can be used to update the order when the
+      customer changes their address as well as to do a final check to validate
+      the order before it is submitted.
+    aid: klarna:kustom-checkout-callback-api
+  - name: Hosted Payment Page API
     tags:
       - Hosted
       - Payments
       - Pages
+    humanURL: https://docs.klarna.com/api/hpp-merchant/
     properties:
       - url: https://docs.klarna.com/api/hpp-merchant/
         name: Hosted Payment Page API
@@ -98,15 +95,16 @@ apis:
           Klarna Payments without the need of hosting the web page that manages
           the client side of Klarna Payments. A complete HPP payment session
           will involve three of Klarna services.
-  - name: Order Management API
     description: >-
-      The Order Management API is used for handling an order after the customer
-      has completed the purchase. It is used for all actions you need to manage
-      your orders. Examples being: updating, capturing, reading and refunding an
-      order. order.
-    humanURL: https://docs.klarna.com/api/ordermanagement/
+      Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
+      Payments without the need of hosting the web page that manages the client
+      side of Klarna Payments. A complete HPP payment session will involve three
+      of Klarna services.
+    aid: klarna:hosted-payment-page-api
+  - name: Order Management API
     tags:
       - Orders
+    humanURL: https://docs.klarna.com/api/ordermanagement/
     properties:
       - url: https://docs.klarna.com/api/ordermanagement/
         name: Order Management API
@@ -116,70 +114,80 @@ apis:
           customer has completed the purchase. It is used for all actions you
           need to manage your orders. Examples being: updating, capturing,
           reading and refunding an order.
-  - name: Merchant Card Service API
     description: >-
-      The Merchant Card Service (MCS) API is used to settle orders with virtual
-      credit cards.
-    humanURL: https://docs.klarna.com/api/merchant-card-service/
+      The Order Management API is used for handling an order after the customer
+      has completed the purchase. It is used for all actions you need to manage
+      your orders. Examples being: updating, capturing, reading and refunding an
+      order. order.
+    aid: klarna:order-management-api
+  - name: Merchant Card Service API
     tags:
       - Merchants
       - Cards
+    humanURL: https://docs.klarna.com/api/merchant-card-service/
     properties:
-      - name: Merchant Card Service API
+      - url: https://docs.klarna.com/api/merchant-card-service/
+        name: Merchant Card Service API
+        type: Documentation
         description: >-
           The Merchant Card Service (MCS) API is used to settle orders with
           virtual credit cards.
-        url: https://docs.klarna.com/api/merchant-card-service/
-        type: Documentation
-  - name: Shipping Service Callback API
     description: >-
-      The Integrator implements the Klarna Shipping Service Callback API as
-      described in the documentation. The Integrator is the upstream provider of
-      shipping options for KSS.
-    humanURL: https://docs.klarna.com/api/merchant-shipping-introduction/
+      The Merchant Card Service (MCS) API is used to settle orders with virtual
+      credit cards.
+    aid: klarna:merchant-card-service-api
+  - name: Shipping Service Callback API
     tags:
       - Shipping
       - Callbacks
+    humanURL: https://docs.klarna.com/api/merchant-shipping-introduction/
     properties:
-      - name: Shipping Service Callback API
+      - url: https://docs.klarna.com/api/merchant-shipping-introduction/
+        name: Shipping Service Callback API
+        type: Documentation
         description: >-
           Integrator: the Integrator implements the Klarna Shipping Service
           Callback API as described in the documentation. The Integrator is the
           upstream provider of shipping options for KSS.
-        url: https://docs.klarna.com/api/merchant-shipping-introduction/
-        type: Documentation
-  - name: Klarna Settlements API
     description: >-
-      The Settlements API helps you with the reconciliation of payments, made by
-      Klarna to your bank account. Every payment has a unique payment_reference
-      that can be found in the settlement reports and on your bank statement.
-    humanURL: https://docs.klarna.com/api/settlements/
+      The Integrator implements the Klarna Shipping Service Callback API as
+      described in the documentation. The Integrator is the upstream provider of
+      shipping options for KSS.
+    aid: klarna:shipping-service-callback-api
+  - name: Klarna Settlements API
     tags:
       - Settlements
+    humanURL: https://docs.klarna.com/api/settlements/
     properties:
-      - name: Settlements API
+      - url: https://docs.klarna.com/api/settlements/
+        name: Settlements API
+        type: Documentation
         description: >-
           The Settlements API helps you with the reconciliation of payments,
           made by Klarna to your bank account. Every payment has a unique
           payment_reference that can be found in the settlement reports and on
           your bank statement.
-        url: https://docs.klarna.com/api/settlements/
-        type: Documentation
-  - name: Klarna Disputes API
     description: >-
-      The Disputes API offers Klarna partners and merchants an easy way to
-      handle customer disputes.
-    humanURL: https://docs.klarna.com/api/disputes-api/disputes-api_2.0.0/
+      The Settlements API helps you with the reconciliation of payments, made by
+      Klarna to your bank account. Every payment has a unique payment_reference
+      that can be found in the settlement reports and on your bank statement.
+    aid: klarna:klarna-settlements-api
+  - name: Klarna Disputes API
     tags:
       - Disputes
       - Payments
+    humanURL: https://docs.klarna.com/api/disputes-api/disputes-api_2.0.0/
     properties:
-      - name: Disputes API
+      - url: https://docs.klarna.com/api/disputes-api/disputes-api_2.0.0/
+        name: Disputes API
+        type: Documentation
         description: >-
           The Disputes API offers Klarna partners and merchants an easy way to
           handle customer disputes.
-        url: https://docs.klarna.com/api/disputes-api/disputes-api_2.0.0/
-        type: Documentation
+    description: >-
+      The Disputes API offers Klarna partners and merchants an easy way to
+      handle customer disputes.
+    aid: klarna:klarna-disputes-api
 name: Klarna
 tags:
   - Payments

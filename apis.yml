@@ -214,7 +214,8 @@ apis:
 
 
       <!-- ReDoc-Inject: <security-definitions> -->
-  - name: Klarna Disputes API
+  - aid: klarna:klarna-disputes-api
+    name: Disputes API v2
     tags:
       - Disputes
       - Payments
@@ -226,10 +227,62 @@ apis:
         description: >-
           The Disputes API offers Klarna partners and merchants an easy way to
           handle customer disputes.
+      - type: OpenAPI
+        url: properties/klarna-disputes-api-openapi.yml
     description: >-
-      The Disputes API offers Klarna partners and merchants an easy way to
-      handle customer disputes.
-    aid: klarna:klarna-disputes-api
+      === IMPORTANT NOTICE ===
+
+
+      Please be advised that onboarding to API v2 has been halted as we prepare
+      for the upcoming release of API v3. We appreciate your understanding and
+      encourage you to check our documentation for updates on the new version.
+
+       The Disputes API offers Klarna partners and merchants an easy way to handle customer disputes. 
+
+      Use the available endpoints to:
+
+      * Get a list of disputes, filtered by various parameters.
+
+      * Get a full, detailed version of a dispute, including all the associated
+      requests and responses.
+
+      * Respond to a dispute request.
+
+      * Download/upload a file attachment linked to a specific request response.
+
+      * Accept loss for a dispute.
+
+
+      Please note that there are two ways to authenticate:
+
+      * Klarna partners should authenticate via OAuth2 with client credentials.
+      This allows access to multiple merchants in a single API call.
+
+      * Klarna merchants (not partnered) should authenticate with basic auth
+      credentials. Additionally, please set the `x-klarna-basic-mid` header to
+      the merchant ID.
+
+
+      Before you get started, please make sure you understand the
+      [disputes](https://docs.klarna.com/disputes/) process.
+
+
+      ### FAQ
+
+      * Why is the API returning 403?
+        * Please make sure your credentials and the endpoint you're calling are correct. Klarna APIs may also respond with a 403 for invalid paths.
+      * Why doesn't the /enroll endpoint work?
+        * Self-enrollment is currently only supported for basic merchants. If the merchant is a partner or related to a partner, it will fail.
+      * GET v2/disputes returns an empty list, why?
+        * Are you sure there are disputes to list?
+        * Since you got through to the endpoint your client credentials are valid. Some partners or merchants may have been onboarded to the api incorrectly.
+      * Why am I getting an invalid date format when responding to a dispute?
+        * Only the following ISO 8601 format is currently supported: `YYYY-MM-DDTHH:mm:ss.sssZ`. Please note it includes ms.
+
+      # Authentication
+
+
+      <!-- ReDoc-Inject: <security-definitions> -->
 name: Klarna
 tags:
   - Payments

@@ -92,7 +92,7 @@ apis:
       interpreted using the response code and body. Read more on
       [here](https://docs.klarna.com/kco/).
   - aid: klarna:hosted-payment-page-api
-    name: HPP
+    name: Hosted Payment Page (HPP)
     tags:
       - Hosted
       - Payments
@@ -107,13 +107,14 @@ apis:
           Klarna Payments without the need of hosting the web page that manages
           the client side of Klarna Payments. A complete HPP payment session
           will involve three of Klarna services.
-      - type: OpenAPI
-        url: properties/hosted-payment-page-api-openapi.yml
+      - url: properties/hosted-payment-page-api-openapi.yml
+        type: OpenAPI
     description: >-
       Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
       Payments without the need of hosting the web page that manages the client
       side of Klarna Payments.
-  - name: Order Management API
+  - aid: klarna:order-management-api
+    name: Klarna Order Management API
     tags:
       - Orders
     humanURL: https://docs.klarna.com/api/ordermanagement/
@@ -126,12 +127,23 @@ apis:
           customer has completed the purchase. It is used for all actions you
           need to manage your orders. Examples being: updating, capturing,
           reading and refunding an order.
+      - type: OpenAPI
+        url: properties/order-management-api-openapi.yml
     description: >-
       The Order Management API is used for handling an order after the customer
       has completed the purchase. It is used for all actions you need to manage
       your orders. Examples being: updating, capturing, reading and refunding an
-      order. order.
-    aid: klarna:order-management-api
+      order.
+
+
+      Read more on the [Order
+      management](https://docs.klarna.com/order-management/) process.
+
+
+      # Authentication
+
+
+      <!-- ReDoc-Inject: <security-definitions> -->
   - name: Merchant Card Service API
     tags:
       - Merchants

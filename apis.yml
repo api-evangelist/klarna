@@ -11,7 +11,11 @@ apis:
       - url: https://docs.klarna.com/api/introduction
         type: Documentation
     description: >-
-      Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech company that provides online financial services. The company provides payment processing services for the e-commerce industry, managing store claims and customer payments. The company is a "buy now, pay later" service provider.
+      Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech
+      company that provides online financial services. The company provides
+      payment processing services for the e-commerce industry, managing store
+      claims and customer payments. The company is a "buy now, pay later"
+      service provider.
 name: Klarna
 tags:
   - API
@@ -22,8 +26,44 @@ created: '2024-11-12'
 modified: '2024-11-25'
 position: Consumer
 description: >-
-  Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech company that provides online financial services. The company provides payment processing services for the e-commerce industry, managing store claims and customer payments. The company is a "buy now, pay later" service provider.
+  Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech company
+  that provides online financial services. The company provides payment
+  processing services for the e-commerce industry, managing store claims and
+  customer payments. The company is a "buy now, pay later" service provider.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common:
+  - name: API Authentication
+    url: https://docs.klarna.com/api/authentication/
+    type: Authentication
+  - name: Errors
+    url: https://docs.klarna.com/api/errors/
+    type: Errors
+  - name: Rate limit
+    url: https://docs.klarna.com/api/rate-limit/
+    type: RateLimits
+  - name: Klarna Docs
+    url: https://docs.klarna.com/
+    type: Documentation
+  - name: Klarna Docs - Error codes and messages
+    url: >-
+      https://docs.klarna.com/resources/developer-tools/error-handling/error-codes-and-messages/
+    type: Errors
+  - name: Klarna Docs - Glossary
+    url: https://docs.klarna.com/resources/business-tools/glossary/
+    type: Glossary
+  - name: Klarna Docs - Platform integrations
+    url: https://docs.klarna.com/platform-solutions/
+    type: Integrations
+  - name: Terms and Conditions | Klarna International
+    url: >-
+      https://www.klarna.com/international/terms-and-conditions/?_gl=1*1842tzc*_ga*NDI0ODM2NTg2LjE3MzE0NTIyMDk.*_ga_F4RYPWHEGX*MTczMjU2NzcwMy4zLjEuMTczMjU2ODQyMS4wLjAuMjE4NDI5NzU5
+    type: TermsOfService
+  - name: Klarna Status
+    url: https://status.klarna.com/
+    type: Status
+  - name: Klarna Status - Incident History
+    url: https://status.klarna.com/history
+    type: StatusHistory

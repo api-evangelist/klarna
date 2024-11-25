@@ -184,7 +184,8 @@ apis:
       described in the documentation. The Integrator is the upstream provider of
       shipping options for KSS.
     aid: klarna:shipping-service-callback-api
-  - name: Klarna Settlements API
+  - aid: klarna:klarna-settlements-api
+    name: Klarna Settlements API
     tags:
       - Settlements
     humanURL: https://docs.klarna.com/api/settlements/
@@ -197,11 +198,22 @@ apis:
           made by Klarna to your bank account. Every payment has a unique
           payment_reference that can be found in the settlement reports and on
           your bank statement.
+      - type: OpenAPI
+        url: properties/klarna-settlements-api-openapi.yml
     description: >-
       The Settlements API helps you with the reconciliation of payments, made by
       Klarna to your bank account. Every payment has a unique payment_reference
       that can be found in the settlement reports and on your bank statement.
-    aid: klarna:klarna-settlements-api
+
+
+      Read more on [Settlement
+      reports](https://docs.klarna.com/settlement-reports/).
+
+
+      # Authentication
+
+
+      <!-- ReDoc-Inject: <security-definitions> -->
   - name: Klarna Disputes API
     tags:
       - Disputes

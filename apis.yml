@@ -15,8 +15,8 @@ apis:
           The payments API is used to create a session to offer Klarna's payment
           methods as part of your checkout. As soon as the purchase is completed
           the order should be read and handled using the Order Management API.
-      - type: OpenAPI
-        url: properties/klarna-payments-api.yml
+      - url: properties/klarna-payments-api.yml
+        type: OpenAPI
     description: >-
       The payments API is used to create a session to offer Klarna's payment
       methods as part of your checkout. As soon as the purchase is completed the

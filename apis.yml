@@ -121,7 +121,13 @@ apis:
     tags:
       - Merchants
       - Cards
-    properties: []
+    properties:
+      - name: Merchant Card Service API
+        description: >-
+          The Merchant Card Service (MCS) API is used to settle orders with
+          virtual credit cards.
+        url: https://docs.klarna.com/api/merchant-card-service/
+        type: Documentation
   - name: Shipping Service Callback API
     description: >-
       The Integrator implements the Klarna Shipping Service Callback API as
@@ -173,7 +179,7 @@ apis:
         type: Documentation
 name: Klarna
 tags:
-  - API
+  - Payments
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party

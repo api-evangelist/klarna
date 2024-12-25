@@ -15,7 +15,7 @@ apis:
           The payments API is used to create a session to offer Klarna's payment
           methods as part of your checkout. As soon as the purchase is completed
           the order should be read and handled using the Order Management API.
-      - url: openapiklarna-payments-api-openapi.yml
+      - url: openapi/klarna-payments-api-openapi.yml
         type: OpenAPI
     description: >-
       The payments API is used to create a session to offer Klarna's payment
@@ -38,7 +38,7 @@ apis:
           subscriptions and for storing a customer's payment method. Tokens are
           created using the generate a customer token call in the payments API.
       - type: OpenAPI
-        url: openapiklarna-customer-token-api-openapi.yml
+        url: openapi/klarna-customer-token-api-openapi.yml
     description: >-
       The Customer Token API is used to charge customers with a tokenized Klarna
       payment method and can be used for recurring purchases, subscriptions and
@@ -60,7 +60,7 @@ apis:
           completed the order should be read and handled using the Order
           Management API. Read more on Klarna checkout.
       - type: OpenAPI
-        url: openapikustom-checkout-api-openapi.yml
+        url: openapi/kustom-checkout-api-openapi.yml
     description: >-
       The checkout API is used to create a checkout with Klarna and update the
       checkout order during the purchase. As soon as the purchase is completed
@@ -82,7 +82,7 @@ apis:
           the customer changes their address as well as to do a final check to
           validate the order before it is submitted.
       - type: OpenAPI
-        url: openapikustom-checkout-callback-api-openapi.yml
+        url: openapi/kustom-checkout-callback-api-openapi.yml
     description: >-
       Klarna provides a number of different callbacks during the customer's
       checkout session. The callbacks can be used to update the order when the
@@ -107,7 +107,7 @@ apis:
           Klarna Payments without the need of hosting the web page that manages
           the client side of Klarna Payments. A complete HPP payment session
           will involve three of Klarna services.
-      - url: openapihosted-payment-page-api-openapi.yml
+      - url: openapi/hosted-payment-page-api-openapi.yml
         type: OpenAPI
     description: >-
       Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
@@ -128,7 +128,7 @@ apis:
           need to manage your orders. Examples being: updating, capturing,
           reading and refunding an order.
       - type: OpenAPI
-        url: openapiorder-management-api-openapi.yml
+        url: openapi/order-management-api-openapi.yml
     description: >-
       The Order Management API is used for handling an order after the customer
       has completed the purchase. It is used for all actions you need to manage
@@ -158,7 +158,7 @@ apis:
           The Merchant Card Service (MCS) API is used to settle orders with
           virtual credit cards.
       - type: OpenAPI
-        url: openapimerchant-card-service-api-openapi.yml
+        url: openapi/merchant-card-service-api-openapi.yml
     description: >-
       The Merchant Card Service (MCS) API is used to settle orders with virtual
       credit cards.
@@ -199,7 +199,7 @@ apis:
           payment_reference that can be found in the settlement reports and on
           your bank statement.
       - type: OpenAPI
-        url: openapiklarna-settlements-api-openapi.yml
+        url: openapi/klarna-settlements-api-openapi.yml
     description: >-
       The Settlements API helps you with the reconciliation of payments, made by
       Klarna to your bank account. Every payment has a unique payment_reference
@@ -227,7 +227,7 @@ apis:
         description: >-
           The Disputes API offers Klarna partners and merchants an easy way to
           handle customer disputes.
-      - url: openapiklarna-disputes-api-openapi.yml
+      - url: openapi/klarna-disputes-api-openapi.yml
         type: OpenAPI
     description: >-
       The Disputes API offers Klarna partners and merchants an easy way to

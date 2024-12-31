@@ -1,5 +1,6 @@
 aid: klarna
 url: >-
+
   https://raw.githubusercontent.com/api-search/api-reference-introduction-klarna/refs/heads/main/apis.yml
 apis:
   - aid: klarna:klarna-payments-api
@@ -11,13 +12,15 @@ apis:
       - url: https://docs.klarna.com/api/payments/
         name: Klarna Payments API
         type: Documentation
-        description: >-
+        description: |-
+
           The payments API is used to create a session to offer Klarna's payment
           methods as part of your checkout. As soon as the purchase is completed
           the order should be read and handled using the Order Management API.
       - url: openapi/klarna-payments-api-openapi.yml
         type: OpenAPI
-    description: >-
+    description: |-
+
       The payments API is used to create a session to offer Klarna's payment
       methods as part of your checkout. As soon as the purchase is completed the
       order should be read and handled using the [`Order Management
@@ -32,14 +35,16 @@ apis:
       - url: https://docs.klarna.com/api/customertoken/
         name: Klarna Customer Token API
         type: Documentation
-        description: >-
+        description: |-
+
           The Customer Token API is used to charge customers with a tokenized
           Klarna payment method and can be used for recurring purchases,
           subscriptions and for storing a customer's payment method. Tokens are
           created using the generate a customer token call in the payments API.
-      - type: OpenAPI
-        url: openapi/klarna-customer-token-api-openapi.yml
-    description: >-
+      - url: openapi/klarna-customer-token-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       The Customer Token API is used to charge customers with a tokenized Klarna
       payment method and can be used for recurring purchases, subscriptions and
       for storing a customer's payment method. Tokens are created using the
@@ -54,14 +59,16 @@ apis:
       - url: https://docs.klarna.com/api/checkout/
         name: Kustom Checkout API
         type: Documentation
-        description: >-
+        description: |-
+
           The checkout API is used to create a checkout with Klarna and update
           the checkout order during the purchase. As soon as the purchase is
           completed the order should be read and handled using the Order
           Management API. Read more on Klarna checkout.
-      - type: OpenAPI
-        url: openapi/kustom-checkout-api-openapi.yml
-    description: >-
+      - url: openapi/kustom-checkout-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       The checkout API is used to create a checkout with Klarna and update the
       checkout order during the purchase. As soon as the purchase is completed
       the order should be read and handled using the [Order Management
@@ -76,14 +83,16 @@ apis:
       - url: https://docs.klarna.com/api/checkout-merchant/
         name: Kustom Checkout Callback API
         type: Documentation
-        description: >-
+        description: |-
+
           Klarna provides a number of different callbacks during the customer's
           checkout session. The callbacks can be used to update the order when
           the customer changes their address as well as to do a final check to
           validate the order before it is submitted.
-      - type: OpenAPI
-        url: openapi/kustom-checkout-callback-api-openapi.yml
-    description: >-
+      - url: openapi/kustom-checkout-callback-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       Klarna provides a number of different callbacks during the customer's
       checkout session. The callbacks can be used to update the order when the
       customer changes their address as well as to do a final check to validate
@@ -102,14 +111,16 @@ apis:
       - url: https://docs.klarna.com/api/hpp-merchant/
         name: Hosted Payment Page API
         type: Documentation
-        description: >-
+        description: |-
+
           Hosted Payment Page (HPP) API is a service that lets you integrate
           Klarna Payments without the need of hosting the web page that manages
           the client side of Klarna Payments. A complete HPP payment session
           will involve three of Klarna services.
       - url: openapi/hosted-payment-page-api-openapi.yml
         type: OpenAPI
-    description: >-
+    description: |-
+
       Hosted Payment Page (HPP) API is a service that lets you integrate Klarna
       Payments without the need of hosting the web page that manages the client
       side of Klarna Payments.
@@ -122,25 +133,33 @@ apis:
       - url: https://docs.klarna.com/api/ordermanagement/
         name: Order Management API
         type: Documentation
-        description: >-
+        description: |-
+
           The Order Management API is used for handling an order after the
           customer has completed the purchase. It is used for all actions you
           need to manage your orders. Examples being: updating, capturing,
           reading and refunding an order.
-      - type: OpenAPI
-        url: openapi/order-management-api-openapi.yml
-    description: >-
+      - url: openapi/order-management-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       The Order Management API is used for handling an order after the customer
       has completed the purchase. It is used for all actions you need to manage
       your orders. Examples being: updating, capturing, reading and refunding an
       order.
 
 
+
+
       Read more on the [Order
       management](https://docs.klarna.com/order-management/) process.
 
 
+
+
       # Authentication
+
+
 
 
       <!-- ReDoc-Inject: <security-definitions> -->
@@ -154,19 +173,24 @@ apis:
       - url: https://docs.klarna.com/api/merchant-card-service/
         name: Merchant Card Service API
         type: Documentation
-        description: >-
+        description: |-
+
           The Merchant Card Service (MCS) API is used to settle orders with
           virtual credit cards.
-      - type: OpenAPI
-        url: openapi/merchant-card-service-api-openapi.yml
-    description: >-
+      - url: openapi/merchant-card-service-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       The Merchant Card Service (MCS) API is used to settle orders with virtual
       credit cards.
 
 
+
+
       Read more on [Merchant card
       service](https://docs.klarna.com/merchant-card-service/).
-  - name: Shipping Service Callback API
+  - aid: klarna:shipping-service-callback-api
+    name: Shipping Service Callback API
     tags:
       - Shipping
       - Callbacks
@@ -175,15 +199,16 @@ apis:
       - url: https://docs.klarna.com/api/merchant-shipping-introduction/
         name: Shipping Service Callback API
         type: Documentation
-        description: >-
+        description: |-
+
           Integrator: the Integrator implements the Klarna Shipping Service
           Callback API as described in the documentation. The Integrator is the
           upstream provider of shipping options for KSS.
-    description: >-
+    description: |-
+
       The Integrator implements the Klarna Shipping Service Callback API as
       described in the documentation. The Integrator is the upstream provider of
       shipping options for KSS.
-    aid: klarna:shipping-service-callback-api
   - aid: klarna:klarna-settlements-api
     name: Klarna Settlements API
     tags:
@@ -193,24 +218,32 @@ apis:
       - url: https://docs.klarna.com/api/settlements/
         name: Settlements API
         type: Documentation
-        description: >-
+        description: |-
+
           The Settlements API helps you with the reconciliation of payments,
           made by Klarna to your bank account. Every payment has a unique
           payment_reference that can be found in the settlement reports and on
           your bank statement.
-      - type: OpenAPI
-        url: openapi/klarna-settlements-api-openapi.yml
-    description: >-
+      - url: openapi/klarna-settlements-api-openapi.yml
+        type: OpenAPI
+    description: |-
+
       The Settlements API helps you with the reconciliation of payments, made by
       Klarna to your bank account. Every payment has a unique payment_reference
       that can be found in the settlement reports and on your bank statement.
+
+
 
 
       Read more on [Settlement
       reports](https://docs.klarna.com/settlement-reports/).
 
 
+
+
       # Authentication
+
+
 
 
       <!-- ReDoc-Inject: <security-definitions> -->
@@ -224,18 +257,20 @@ apis:
       - url: https://docs.klarna.com/api/disputes-api/disputes-api_2.0.0/
         name: Disputes API
         type: Documentation
-        description: >-
+        description: |-
+
           The Disputes API offers Klarna partners and merchants an easy way to
           handle customer disputes.
       - url: openapi/klarna-disputes-api-openapi.yml
         type: OpenAPI
-    description: >-
+    description: |-
+
       The Disputes API offers Klarna partners and merchants an easy way to
       handle customer disputes. 
 name: Klarna
 tags:
   - Payments
-type: Index
+type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
@@ -252,6 +287,7 @@ common:
     name: Klarna Docs
     type: Documentation
   - url: >-
+
       https://docs.klarna.com/resources/developer-tools/error-handling/error-codes-and-messages/
     name: Klarna Docs - Error codes and messages
     type: Errors
@@ -262,6 +298,7 @@ common:
     name: Klarna Docs - Platform integrations
     type: Integrations
   - url: >-
+
       https://www.klarna.com/international/terms-and-conditions/?_gl=1*1842tzc*_ga*NDI0ODM2NTg2LjE3MzE0NTIyMDk.*_ga_F4RYPWHEGX*MTczMjU2NzcwMy4zLjEuMTczMjU2ODQyMS4wLjAuMjE4NDI5NzU5
     name: Terms and Conditions | Klarna International
     type: TermsOfService
@@ -272,9 +309,9 @@ common:
     name: Klarna Status - Incident History
     type: StatusHistory
 created: '2024-11-12T00:00:00.000Z'
-modified: '2024-11-25'
-position: Consumer
-description: >-
+modified: '2024-12-30'
+position: Consuming
+description: |-
   Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech company
   that provides online financial services. The company provides payment
   processing services for the e-commerce industry, managing store claims and

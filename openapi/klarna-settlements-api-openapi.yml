@@ -55,7 +55,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayoutSummary
-      summary: Payout summary
+      summary: Klarna Payout summary
       description: Returns a summary of payouts for each currency code in a date range.
   /payouts/{payment_reference}:
     get:
@@ -88,7 +88,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayout
-      summary: Payout details
+      summary: Klarna Payout details
       description: Returns a specific payout based on a given payment reference.
   /payouts:
     get:
@@ -164,7 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayouts
-      summary: List all payouts
+      summary: Klarna List all payouts
       description: Returns a collection of payouts.
   /reports/payout-with-transactions:
     get:
@@ -191,7 +191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayoutReportWithTransactions
-      summary: Get a payouts summary (CSV)
+      summary: Klarna Get a payouts summary (CSV)
       description: |-
         More information about this CSV format is available at:
                                              https://docs.klarna.com/settlement-reports
@@ -220,7 +220,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: payout
-      summary: Get a payouts summary (PDF)
+      summary: Klarna Get a payouts summary (PDF)
       description: A single settlement summed up in pdf format
   /transactions:
     get:
@@ -272,7 +272,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getTransactions
-      summary: List transactions in a payout
+      summary: Klarna List transactions in a payout
       description: Returns a collection of transactions.
   /reports/payouts-summary-with-transactions:
     get:
@@ -312,7 +312,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayoutsSummaryReportWithTransactions
-      summary: Get a payouts summary with transactions (CSV)
+      summary: Klarna Get a payouts summary with transactions (CSV)
       description: |-
         More information about this CSV format is available at:
                                              https://docs.klarna.com/settlement-reports
@@ -354,7 +354,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: payoutsSummary
-      summary: Get a payouts summary with transactions (PDF)
+      summary: Klarna Get a payouts summary with transactions (PDF)
       description: Returns a summary for all payouts between the given dates
 info:
   title: Klarna Settlements API

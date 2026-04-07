@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Merchant Card Service API
+  title: Klarna Merchant Card Service API
   description: >-
     The Merchant Card Service (MCS) API is used to settle orders with virtual
     credit cards.
@@ -12,7 +12,7 @@ info:
 paths:
   /merchantcard/v3/promises:
     post:
-      summary: Create a card promise
+      summary: Klarna Create a card promise
       description: >-
         To create promise provide a purchase currency and the cards to be
         created. The old promise is automatically invalidated if a new promise
@@ -36,7 +36,7 @@ paths:
           description: Service unavailable
   /merchantcard/v3/promises/{promise_id}:
     get:
-      summary: Get details of a card promise
+      summary: Klarna Get details of a card promise
       description: To get the promise resource simply provide a promise identifier.
       operationId: readPromise
       parameters:
@@ -59,7 +59,7 @@ paths:
           description: Not found
   /merchantcard/v3/settlements:
     post:
-      summary: Create a card settlement
+      summary: Klarna Create a card settlement
       description: >-
         To create a settlement resource provide a completed order identifier and
         (optionally) a promise identifier.
@@ -84,7 +84,7 @@ paths:
           description: Service unavailable
   /merchantcard/v3/settlements/{settlement_id}:
     get:
-      summary: Get details of card  settlement
+      summary: Klarna Get details of card  settlement
       description: To get the settlement resource provide the settlement identifier.
       operationId: readSettlement
       parameters:
@@ -116,7 +116,7 @@ paths:
           description: Not Found
   /merchantcard/v3/settlements/order/{order_id}:
     get:
-      summary: Get card settlement details for an order
+      summary: Klarna Get card settlement details for an order
       description: To get the order's settlement resource provide the order identifier.
       operationId: readSettlementByOrderId
       parameters:
@@ -148,7 +148,7 @@ paths:
           description: Not Found
   /merchantcard/v3/orders/{order_id}/cancel-request:
     post:
-      summary: Request order cancellation
+      summary: Klarna Request order cancellation
       description: >-
         Request cancellation for an order. If the order is already cancelled, a
         `200` status is returned.
@@ -204,7 +204,7 @@ paths:
         '503':
           description: Service unavailable
     get:
-      summary: Get order cancellation status
+      summary: Klarna Get order cancellation status
       description: >-
         Get the status of an order cancellation request. The order must have an
         associated Virtual Credit Card Settlement.

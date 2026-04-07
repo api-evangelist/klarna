@@ -9,7 +9,7 @@ components:
         price:
           description: The price of the add-on
           enum:
-            - null
+            - 
           format: int64
           minimum: 0
           type: integer
@@ -271,7 +271,7 @@ components:
         price:
           description: The price for this location
           enum:
-            - null
+            - 
           format: int64
           type: integer
       type: object
@@ -662,7 +662,7 @@ components:
         price:
           description: The price of the selected shipping option
           enum:
-            - null
+            - 
           format: int64
           type: integer
         selected_addons:
@@ -673,13 +673,13 @@ components:
         tax_amount:
           description: The tax amount of the selected shipping option
           enum:
-            - null
+            - 
           format: int64
           type: integer
         tax_rate:
           description: The tax rate of the selected shipping option
           enum:
-            - null
+            - 
           format: int64
           type: integer
         timeslot:
@@ -706,7 +706,7 @@ components:
         price:
           description: Price
           enum:
-            - null
+            - 
           format: int64
           type: integer
         start:
@@ -1109,7 +1109,7 @@ paths:
           description: Order not found
       security:
         - basicAuth: []
-      summary: Get order details
+      summary: Klarna Get order details
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/acknowledge:
@@ -1203,7 +1203,7 @@ paths:
             and outcome of risk assessment.
       security:
         - basicAuth: []
-      summary: Update the order amount and order lines
+      summary: Klarna Update the order amount and order lines
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/captures:
@@ -1260,7 +1260,7 @@ paths:
           description: Order not found.
       security:
         - basicAuth: []
-      summary: Capture an order
+      summary: Klarna Capture an order
       tags:
         - Captures
     get:
@@ -1290,7 +1290,7 @@ paths:
           description: Order not found.
       security:
         - basicAuth: []
-      summary: List all order captures
+      summary: Klarna List all order captures
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}:
@@ -1329,7 +1329,7 @@ paths:
           description: Order or capture not found.
       security:
         - basicAuth: []
-      summary: Get capture details
+      summary: Klarna Get capture details
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date:
@@ -1386,7 +1386,7 @@ paths:
           description: Order or capture not found.
       security:
         - basicAuth: []
-      summary: Extend payment due date
+      summary: Klarna Extend payment due date
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date-options:
@@ -1421,7 +1421,7 @@ paths:
           description: Order or capture not found.
       security:
         - basicAuth: []
-      summary: List options for extension of payment due date
+      summary: Klarna List options for extension of payment due date
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/shipping-info:
@@ -1477,7 +1477,7 @@ paths:
           description: Order or capture not found.
       security:
         - basicAuth: []
-      summary: Add shipping information
+      summary: Klarna Add shipping information
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/trigger-send-out:
@@ -1528,7 +1528,7 @@ paths:
           description: Order or capture not found.
       security:
         - basicAuth: []
-      summary: Send customer communication
+      summary: Klarna Send customer communication
       tags:
         - Captures
   /ordermanagement/v1/orders/{order_id}/customer-details:
@@ -1579,7 +1579,7 @@ paths:
             updated.
       security:
         - basicAuth: []
-      summary: Update customer addresses
+      summary: Klarna Update customer addresses
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/extend-authorization-time:
@@ -1619,7 +1619,7 @@ paths:
             or cancelled are among the possible causes.
       security:
         - basicAuth: []
-      summary: Extend the authorization time
+      summary: Klarna Extend the authorization time
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/merchant-references:
@@ -1663,7 +1663,7 @@ paths:
           description: Can not update a cancelled order.
       security:
         - basicAuth: []
-      summary: Update merchant references
+      summary: Klarna Update merchant references
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/refunds:
@@ -1724,7 +1724,7 @@ paths:
           description: Order not found.
       security:
         - basicAuth: []
-      summary: Refund an order
+      summary: Klarna Refund an order
       tags:
         - Refunds
   /ordermanagement/v1/orders/{order_id}/refunds/{refund_id}:
@@ -1759,7 +1759,7 @@ paths:
           description: Order or refund not found.
       security:
         - basicAuth: []
-      summary: Get refund details
+      summary: Klarna Get refund details
       tags:
         - Refunds
   /ordermanagement/v1/orders/{order_id}/release-remaining-authorization:
@@ -1801,7 +1801,7 @@ paths:
           description: Can not release when order is cancelled or has no captures.
       security:
         - basicAuth: []
-      summary: Release an authorization
+      summary: Klarna Release an authorization
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/shipping-info:
@@ -1845,7 +1845,7 @@ paths:
           description: Order not found.
       security:
         - basicAuth: []
-      summary: Add shipping information
+      summary: Klarna Add shipping information
       tags:
         - Orders
   /ordermanagement/v1/orders/{order_id}/cancel:
@@ -1883,7 +1883,7 @@ paths:
           description: Cancel not allowed (e.g. order has captures or is closed)
       security:
         - basicAuth: []
-      summary: Cancel an order
+      summary: Klarna Cancel an order
       tags:
         - Orders
 servers:

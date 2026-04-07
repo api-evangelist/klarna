@@ -5,13 +5,13 @@ info:
     Payments without the need of hosting the web page that manages the client
     side of Klarna Payments.
   version: '1.1'
-  title: HPP
+  title: Klarna HPP
   license:
     name: Klarna Bank AB
 paths:
   /hpp/v1/sessions:
     post:
-      summary: Create an HPP session
+      summary: Klarna Create an HPP session
       description: >-
         Use this API to create an HPP session after creating a payment session.
 
@@ -51,7 +51,7 @@ paths:
           description: Payment session has expired.
   /hpp/v1/sessions/{session_id}:
     get:
-      summary: Get details of an HPP session
+      summary: Klarna Get details of an HPP session
       description: >-
         Use this API to read an HPP session content and it's status.
 
@@ -79,7 +79,7 @@ paths:
         '404':
           description: HPP session has expired or could not be found by provided id.
     delete:
-      summary: Disable an HPP session
+      summary: Klarna Disable an HPP session
       description: >-
         Use this API to disable an HPP session if payment session had to be
         cancelled for any reason.
@@ -107,7 +107,7 @@ paths:
           description: HPP session has expired or could not be found by provided id.
   /hpp/v1/sessions/{session_id}/distribution:
     post:
-      summary: Distribute an HPP session
+      summary: Klarna Distribute an HPP session
       description: >-
         Use this API to distribute to the Consumer a link to the Hosted Payment
         Page either by e-mail or SMS after you have created an HPP session.

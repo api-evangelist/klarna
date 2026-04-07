@@ -1888,3 +1888,7 @@ paths:
         - Orders
 servers:
   - url: https://api.klarna.com
+tags:
+  - name: Captures
+  - name: Orders
+  - name: Refunds

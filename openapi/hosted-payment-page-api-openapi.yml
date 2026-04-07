@@ -49,6 +49,8 @@ paths:
           description: You were not authorized to execute this operation.
         '404':
           description: Payment session has expired.
+      tags:
+        - Hpp
   /hpp/v1/sessions/{session_id}:
     get:
       summary: Klarna Get details of an HPP session
@@ -78,6 +80,8 @@ paths:
           description: You were not authorized to execute this operation.
         '404':
           description: HPP session has expired or could not be found by provided id.
+      tags:
+        - Hpp
     delete:
       summary: Klarna Disable an HPP session
       description: >-
@@ -105,6 +109,8 @@ paths:
           description: You were not authorized to execute this operation.
         '404':
           description: HPP session has expired or could not be found by provided id.
+      tags:
+        - Hpp
   /hpp/v1/sessions/{session_id}/distribution:
     post:
       summary: Klarna Distribute an HPP session
@@ -148,6 +154,8 @@ paths:
           description: >-
             We were unable to distribute the link due to an internal error.
             Please try again
+      tags:
+        - Hpp
 servers:
   - url: https://api.klarna.com
 components:
@@ -473,3 +481,5 @@ components:
           type: integer
           format: int64
           description: Width of the image
+tags:
+  - name: Hpp

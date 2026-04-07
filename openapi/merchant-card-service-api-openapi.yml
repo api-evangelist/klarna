@@ -34,6 +34,8 @@ paths:
           description: Bad Request
         '503':
           description: Service unavailable
+      tags:
+        - Merchantcard
   /merchantcard/v3/promises/{promise_id}:
     get:
       summary: Klarna Get details of a card promise
@@ -57,6 +59,8 @@ paths:
           description: Forbidden
         '404':
           description: Not found
+      tags:
+        - Merchantcard
   /merchantcard/v3/settlements:
     post:
       summary: Klarna Create a card settlement
@@ -82,6 +86,8 @@ paths:
           description: Forbidden
         '503':
           description: Service unavailable
+      tags:
+        - Merchantcard
   /merchantcard/v3/settlements/{settlement_id}:
     get:
       summary: Klarna Get details of card  settlement
@@ -114,6 +120,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      tags:
+        - Merchantcard
   /merchantcard/v3/settlements/order/{order_id}:
     get:
       summary: Klarna Get card settlement details for an order
@@ -146,6 +154,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      tags:
+        - Merchantcard
   /merchantcard/v3/orders/{order_id}/cancel-request:
     post:
       summary: Klarna Request order cancellation
@@ -203,6 +213,8 @@ paths:
             Card Settlement.
         '503':
           description: Service unavailable
+      tags:
+        - Merchantcard
     get:
       summary: Klarna Get order cancellation status
       description: >-
@@ -245,6 +257,8 @@ paths:
             Card Settlement.
         '503':
           description: Service unavailable
+      tags:
+        - Merchantcard
 servers:
   - url: https://api.klarna.com
 components:
@@ -520,3 +534,5 @@ components:
           type: string
           example: No cancellation request found for this order.
           description: Human-readable message for the bad request.
+tags:
+  - name: Merchantcard

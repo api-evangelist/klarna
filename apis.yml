@@ -96,8 +96,8 @@ apis:
     name: Hosted Payment Page (HPP)
     tags:
       - Hosted
-      - Payments
       - Pages
+      - Payments
     humanURL: https://docs.klarna.com/api/hpp-merchant/
     properties:
       - url: https://docs.klarna.com/api/hpp-merchant/
@@ -141,8 +141,8 @@ apis:
   - aid: klarna:merchant-card-service-api
     name: Merchant Card Service API
     tags:
-      - Merchants
       - Cards
+      - Merchants
     humanURL: https://docs.klarna.com/api/merchant-card-service/
     properties:
       - url: https://docs.klarna.com/api/merchant-card-service/
@@ -160,8 +160,8 @@ apis:
   - aid: klarna:shipping-service-callback-api
     name: Shipping Service Callback API
     tags:
-      - Shipping
       - Callbacks
+      - Shipping
     humanURL: https://docs.klarna.com/api/merchant-shipping-introduction/
     properties:
       - url: https://docs.klarna.com/api/merchant-shipping-introduction/

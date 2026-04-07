@@ -57,6 +57,8 @@ paths:
       operationId: getPayoutSummary
       summary: Klarna Payout summary
       description: Returns a summary of payouts for each currency code in a date range.
+      tags:
+        - Payouts
   /payouts/{payment_reference}:
     get:
       parameters:
@@ -90,6 +92,8 @@ paths:
       operationId: getPayout
       summary: Klarna Payout details
       description: Returns a specific payout based on a given payment reference.
+      tags:
+        - Payouts
   /payouts:
     get:
       parameters:
@@ -166,6 +170,8 @@ paths:
       operationId: getPayouts
       summary: Klarna List all payouts
       description: Returns a collection of payouts.
+      tags:
+        - Payouts
   /reports/payout-with-transactions:
     get:
       parameters:
@@ -195,6 +201,8 @@ paths:
       description: |-
         More information about this CSV format is available at:
                                              https://docs.klarna.com/settlement-reports
+      tags:
+        - Reports
   /reports/payout:
     get:
       parameters:
@@ -222,6 +230,8 @@ paths:
       operationId: payout
       summary: Klarna Get a payouts summary (PDF)
       description: A single settlement summed up in pdf format
+      tags:
+        - Reports
   /transactions:
     get:
       parameters:
@@ -274,6 +284,8 @@ paths:
       operationId: getTransactions
       summary: Klarna List transactions in a payout
       description: Returns a collection of transactions.
+      tags:
+        - Transactions
   /reports/payouts-summary-with-transactions:
     get:
       parameters:
@@ -316,6 +328,8 @@ paths:
       description: |-
         More information about this CSV format is available at:
                                              https://docs.klarna.com/settlement-reports
+      tags:
+        - Reports
   /reports/payouts-summary:
     get:
       parameters:
@@ -356,6 +370,8 @@ paths:
       operationId: payoutsSummary
       summary: Klarna Get a payouts summary with transactions (PDF)
       description: Returns a summary for all payouts between the given dates
+      tags:
+        - Reports
 info:
   title: Klarna Settlements API
   description: >-
@@ -943,3 +959,7 @@ components:
       required:
         - transactions
         - pagination
+tags:
+  - name: Payouts
+  - name: Reports
+  - name: Transactions

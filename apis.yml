@@ -259,7 +259,7 @@ common:
     name: Klarna Status - Incident History
     type: StatusHistory
 created: '2024-11-12T00:00:00.000Z'
-modified: '2026-03-16'
+modified: '2026-04-28'
 position: Consuming
 description: >-
   Klarna Bank AB, commonly referred to as Klarna, is a Swedish fintech company that

@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/api-search/api-reference-introduction-klarna/r
 ## Timestamps
 
 - **Created:** 2024-11-12 
-- **Modified:** 2024-12-30 
+- **Modified:** 2026-04-28 
 
 ## APIs
 

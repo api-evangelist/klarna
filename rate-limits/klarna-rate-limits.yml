@@ -4,127 +4,41 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Klarna
 providerId: klarna
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Payments
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Klarna API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Payments
+  - BNPL
+description: Klarna does not publish numeric API rate limits in its public developer documentation. Limits
+  are applied per merchant (MID) and per environment (playground vs production); the public docs reference
+  HTTP error codes and idempotency rather than per-second throughput numbers.
+sources:
+  - https://docs.klarna.com/api/errors/
+notes: Public docs do not enumerate per-second / per-minute thresholds. Reconcile from authenticated merchant
+  portal docs when available.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  unavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Klarna Payments API V1
-      - Klarna Payments API V1
-      - Checkout API V3
-      - Checkout API V3
-      - Hosted Payment Page (HPP)
-      - Klarna Order Management API
-      - Merchant Card Service API
-      - Shipping Service Callback API
-      - Klarna Settlements API
-      - Disputes API V2
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Klarna Payments API V1
-      - Klarna Payments API V1
-      - Checkout API V3
-      - Checkout API V3
-      - Hosted Payment Page (HPP)
-      - Klarna Order Management API
-      - Merchant Card Service API
-      - Shipping Service Callback API
-      - Klarna Settlements API
-      - Disputes API V2
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Klarna Payments API V1
-      - Klarna Payments API V1
-      - Checkout API V3
-      - Checkout API V3
-      - Hosted Payment Page (HPP)
-      - Klarna Order Management API
-      - Merchant Card Service API
-      - Shipping Service Callback API
-      - Klarna Settlements API
-      - Disputes API V2
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Klarna Payments API V1
-      - Klarna Payments API V1
-      - Checkout API V3
-      - Checkout API V3
-      - Hosted Payment Page (HPP)
-      - Klarna Order Management API
-      - Merchant Card Service API
-      - Shipping Service Callback API
-      - Klarna Settlements API
-      - Disputes API V2
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Klarna Payments API V1
-      - Klarna Payments API V1
-      - Checkout API V3
-      - Checkout API V3
-      - Hosted Payment Page (HPP)
-      - Klarna Order Management API
-      - Merchant Card Service API
-      - Shipping Service Callback API
-      - Klarna Settlements API
-      - Disputes API V2
+  - name: Per-merchant API throttling
+    scope: merchant
+    metric: varies
+    limit: 'see Klarna Developer docs (per-merchant; not numerically published)'
+  - name: Playground (sandbox)
+    scope: merchant
+    metric: varies
+    limit: 'sandbox throughput is lower than production; not numerically published'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Idempotency
+    description: Klarna Order Management endpoints accept Klarna-Idempotency-Key for safe retries on POST/PATCH
+      operations.
+  - name: Backoff
+    description: On 429 / 5xx responses, retry with exponential backoff and jitter; honor Retry-After when
+      present.
+  - name: Region-specific endpoints
+    description: Klarna serves different base URLs per region (api.klarna.com EU, api-na.klarna.com NA,
+      api-oc.klarna.com OC); throughput is independent per region.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

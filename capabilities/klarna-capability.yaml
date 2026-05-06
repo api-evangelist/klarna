@@ -1,0 +1,200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Klarna HPP
+  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting
+    the web page that manages the client side of Klarna Payments.
+  tags:
+  - Klarna
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: klarna
+    baseUri: https://api.klarna.com
+    description: Klarna HPP HTTP API.
+    resources:
+    - name: hpp-v1-sessions
+      path: /hpp/v1/sessions
+      operations:
+      - name: createhppsession
+        method: POST
+        description: Klarna Create an HPP session
+        inputParameters:
+        - name: User-Agent
+          in: header
+          type: string
+          description: User-Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: hpp-v1-sessions-session-id
+      path: /hpp/v1/sessions/{session_id}
+      operations:
+      - name: getsessionbyid
+        method: GET
+        description: Klarna Get details of an HPP session
+        inputParameters:
+        - name: session_id
+          in: path
+          type: string
+          required: true
+          description: HPP session id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: disablehppsession
+        method: DELETE
+        description: Klarna Disable an HPP session
+        inputParameters:
+        - name: session_id
+          in: path
+          type: string
+          required: true
+          description: HPP session id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: hpp-v1-sessions-session-id-distribution
+      path: /hpp/v1/sessions/{session_id}/distribution
+      operations:
+      - name: distributehppsession
+        method: POST
+        description: Klarna Distribute an HPP session
+        inputParameters:
+        - name: session_id
+          in: path
+          type: string
+          required: true
+          description: HPP session id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: klarna-rest
+    description: REST adapter for Klarna HPP.
+    resources:
+    - path: /hpp/v1/sessions
+      name: createhppsession
+      operations:
+      - method: POST
+        name: createhppsession
+        description: Klarna Create an HPP session
+        call: klarna.createhppsession
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /hpp/v1/sessions/{session_id}
+      name: getsessionbyid
+      operations:
+      - method: GET
+        name: getsessionbyid
+        description: Klarna Get details of an HPP session
+        call: klarna.getsessionbyid
+        with:
+          session_id: rest.session_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /hpp/v1/sessions/{session_id}
+      name: disablehppsession
+      operations:
+      - method: DELETE
+        name: disablehppsession
+        description: Klarna Disable an HPP session
+        call: klarna.disablehppsession
+        with:
+          session_id: rest.session_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /hpp/v1/sessions/{session_id}/distribution
+      name: distributehppsession
+      operations:
+      - method: POST
+        name: distributehppsession
+        description: Klarna Distribute an HPP session
+        call: klarna.distributehppsession
+        with:
+          session_id: rest.session_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: klarna-mcp
+    transport: http
+    description: MCP adapter for Klarna HPP for AI agent use.
+    tools:
+    - name: createhppsession
+      description: Klarna Create an HPP session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: klarna.createhppsession
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getsessionbyid
+      description: Klarna Get details of an HPP session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: klarna.getsessionbyid
+      with:
+        session_id: tools.session_id
+      inputParameters:
+      - name: session_id
+        type: string
+        description: HPP session id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: disablehppsession
+      description: Klarna Disable an HPP session
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: klarna.disablehppsession
+      with:
+        session_id: tools.session_id
+      inputParameters:
+      - name: session_id
+        type: string
+        description: HPP session id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: distributehppsession
+      description: Klarna Distribute an HPP session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: klarna.distributehppsession
+      with:
+        session_id: tools.session_id
+      inputParameters:
+      - name: session_id
+        type: string
+        description: HPP session id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.

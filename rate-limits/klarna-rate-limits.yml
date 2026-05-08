@@ -3,42 +3,33 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Klarna
 providerId: klarna
-created: '2026-05-04'
-modified: '2026-05-05'
+created: '2026-05-08'
+modified: '2026-05-08'
 reconciled: false
 tags:
-  - Rate Limiting
-  - Payments
-  - BNPL
-description: Klarna does not publish numeric API rate limits in its public developer documentation. Limits
-  are applied per merchant (MID) and per environment (playground vs production); the public docs reference
-  HTTP error codes and idempotency rather than per-second throughput numbers.
+- Fintech
+- BNPL
+- Payments
+- Cards
+- Shopping
+- Rate Limiting
+- Quotas
+- Throttling
+description: Placeholder rate-limit artifact for Klarna. Replace with real limits once researched.
+notes: Initial scaffold — limits have not yet been reconciled.
 sources:
-  - https://docs.klarna.com/api/errors/
-notes: Public docs do not enumerate per-second / per-minute thresholds. Reconcile from authenticated merchant
-  portal docs when available.
+- https://www.klarna.com/
 responseCodes:
   throttled: 429
-  unavailable: 503
 limits:
-  - name: Per-merchant API throttling
-    scope: merchant
-    metric: varies
-    limit: 'see Klarna Developer docs (per-merchant; not numerically published)'
-  - name: Playground (sandbox)
-    scope: merchant
-    metric: varies
-    limit: 'sandbox throughput is lower than production; not numerically published'
+- name: Default
+  scope: account
+  metric: varies
+  limit: see provider documentation
+  notes: Pending reconciliation.
 policies:
-  - name: Idempotency
-    description: Klarna Order Management endpoints accept Klarna-Idempotency-Key for safe retries on POST/PATCH
-      operations.
-  - name: Backoff
-    description: On 429 / 5xx responses, retry with exponential backoff and jitter; honor Retry-After when
-      present.
-  - name: Region-specific endpoints
-    description: Klarna serves different base URLs per region (api.klarna.com EU, api-na.klarna.com NA,
-      api-oc.klarna.com OC); throughput is independent per region.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

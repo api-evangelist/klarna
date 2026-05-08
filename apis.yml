@@ -2,28 +2,77 @@ aid: klarna
 url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/apis.yml
 name: Klarna
 x-type: company
-description: >-
-  Klarna is a Swedish fintech offering BNPL, banking, cards, and a shopping app to 150M+ consumers. Merchant API supports Pay-in-3, Pay-in-30, and financing.
+description: Klarna is a Swedish fintech offering BNPL, banking, cards, and a shopping app to 150M+ consumers. Merchant API
+  supports Pay-in-3, Pay-in-30, and financing.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Fintech
-  - BNPL
-  - Payments
-  - Cards
-  - Shopping
+- Fintech
+- BNPL
+- Payments
+- Cards
+- Shopping
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+- name: Klarna Payments API
+  description: Create and authorize Klarna payment sessions; create orders against authorizations.
+  humanURL: https://docs.klarna.com/klarna-payments/
+  baseURL: https://api.klarna.com
+  tags:
+  - Payments
+  - BNPL
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/klarna-payments/
+- name: Klarna Checkout API
+  description: Hosted Klarna Checkout (KCO) for full-funnel checkout experience.
+  humanURL: https://docs.klarna.com/klarna-checkout/
+  baseURL: https://api.klarna.com
+  tags:
+  - Checkout
+  - Hosted
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/klarna-checkout/
+- name: Klarna Order Management API
+  description: Capture, refund, cancel and update orders post-authorization.
+  humanURL: https://docs.klarna.com/order-management/
+  baseURL: https://api.klarna.com
+  tags:
+  - Order Management
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/order-management/
+- name: Klarna Customer Token API
+  description: Persist a payment authorization as a customer token for repeat purchases.
+  humanURL: https://docs.klarna.com/customer-token/
+  baseURL: https://api.klarna.com
+  tags:
+  - Tokens
+  - Recurring
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/customer-token/
+- name: Klarna Settlements API
+  description: Read merchant settlement reports and transactions.
+  humanURL: https://docs.klarna.com/settlements/
+  baseURL: https://api.klarna.com
+  tags:
+  - Settlements
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/settlements/
 common:
-  - type: Website
-    url: https://www.klarna.com/
-  - type: Plans
-    url: plans/klarna-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/klarna-rate-limits.yml
-  - type: FinOps
-    url: finops/klarna-finops.yml
+- type: Website
+  url: https://www.klarna.com/
+- type: Plans
+  url: plans/klarna-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/klarna-rate-limits.yml
+- type: FinOps
+  url: finops/klarna-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,225 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Klarna Settlements API — Reports
+  description: 'Klarna Settlements API — Reports. 4 operations. Lead operation: Klarna Get a payouts summary (PDF). Self-contained
+    Naftiko capability covering one Klarna business surface.'
+  tags:
+  - Klarna
+  - Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KLARNA_API_KEY: KLARNA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: settlements-reports
+    baseUri: https://api.klarna.com/settlements/v1
+    description: Klarna Settlements API — Reports business capability. Self-contained, no shared references.
+    resources:
+    - name: reports-payout
+      path: /reports/payout
+      operations:
+      - name: payout
+        method: GET
+        description: Klarna Get a payouts summary (PDF)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: payment_reference
+          in: query
+          type: string
+          description: The reference id of the payout
+          required: true
+    - name: reports-payout-with-transactions
+      path: /reports/payout-with-transactions
+      operations:
+      - name: getpayoutreportwithtransactions
+        method: GET
+        description: Klarna Get a payouts summary (CSV)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: payment_reference
+          in: query
+          type: string
+          description: The reference id of the payout
+          required: true
+    - name: reports-payouts-summary
+      path: /reports/payouts-summary
+      operations:
+      - name: payoutssummary
+        method: GET
+        description: Klarna Get a payouts summary with transactions (PDF)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults
+            to the start of the day, ie 00:00:00. For example 2020-01-
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults
+            to the start of the day, ie 00:00:00. This might lead to u
+          required: true
+    - name: reports-payouts-summary-with-transactions
+      path: /reports/payouts-summary-with-transactions
+      operations:
+      - name: getpayoutssummaryreportwithtransactions
+        method: GET
+        description: Klarna Get a payouts summary with transactions (CSV)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults
+            to the start of the day, ie 00:00:00. For example 2020-01-
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults
+            to the start of the day, ie 00:00:00. This might lead to u
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.KLARNA_USER}}'
+      password: '{{env.KLARNA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: settlements-reports-rest
+    port: 8080
+    description: REST adapter for Klarna Settlements API — Reports. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/reports/payout
+      name: reports-payout
+      description: REST surface for reports-payout.
+      operations:
+      - method: GET
+        name: payout
+        description: Klarna Get a payouts summary (PDF)
+        call: settlements-reports.payout
+        with:
+          payment_reference: rest.payment_reference
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/payout-with-transactions
+      name: reports-payout-with-transactions
+      description: REST surface for reports-payout-with-transactions.
+      operations:
+      - method: GET
+        name: getpayoutreportwithtransactions
+        description: Klarna Get a payouts summary (CSV)
+        call: settlements-reports.getpayoutreportwithtransactions
+        with:
+          payment_reference: rest.payment_reference
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/payouts-summary
+      name: reports-payouts-summary
+      description: REST surface for reports-payouts-summary.
+      operations:
+      - method: GET
+        name: payoutssummary
+        description: Klarna Get a payouts summary with transactions (PDF)
+        call: settlements-reports.payoutssummary
+        with:
+          start_date: rest.start_date
+          end_date: rest.end_date
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/payouts-summary-with-transactions
+      name: reports-payouts-summary-with-transactions
+      description: REST surface for reports-payouts-summary-with-transactions.
+      operations:
+      - method: GET
+        name: getpayoutssummaryreportwithtransactions
+        description: Klarna Get a payouts summary with transactions (CSV)
+        call: settlements-reports.getpayoutssummaryreportwithtransactions
+        with:
+          start_date: rest.start_date
+          end_date: rest.end_date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: settlements-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Klarna Settlements API — Reports. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: klarna-get-payouts-summary-pdf
+      description: Klarna Get a payouts summary (PDF)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: settlements-reports.payout
+      with:
+        payment_reference: tools.payment_reference
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-payouts-summary-csv
+      description: Klarna Get a payouts summary (CSV)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: settlements-reports.getpayoutreportwithtransactions
+      with:
+        payment_reference: tools.payment_reference
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-payouts-summary-transactions
+      description: Klarna Get a payouts summary with transactions (PDF)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: settlements-reports.payoutssummary
+      with:
+        start_date: tools.start_date
+        end_date: tools.end_date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-payouts-summary-transactions-2
+      description: Klarna Get a payouts summary with transactions (CSV)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: settlements-reports.getpayoutssummaryreportwithtransactions
+      with:
+        start_date: tools.start_date
+        end_date: tools.end_date
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,506 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Klarna Order Management API — Orders
+  description: 'Klarna Order Management API — Orders. 9 operations. Lead operation: Klarna Get order details. Self-contained
+    Naftiko capability covering one Klarna business surface.'
+  tags:
+  - Klarna
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KLARNA_API_KEY: KLARNA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: order-management-orders
+    baseUri: https://api.klarna.com
+    description: Klarna Order Management API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: ordermanagement-v1-orders-order_id
+      path: /ordermanagement/v1/orders/{order_id}
+      operations:
+      - name: getorder
+        method: GET
+        description: Klarna Get order details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Integrator
+          in: header
+          type: string
+    - name: ordermanagement-v1-orders-order_id-acknowledge
+      path: /ordermanagement/v1/orders/{order_id}/acknowledge
+      operations:
+      - name: acknowledgeorder
+        method: POST
+        description: Acknowledge a Klarna checkout order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+    - name: ordermanagement-v1-orders-order_id-authorization
+      path: /ordermanagement/v1/orders/{order_id}/authorization
+      operations:
+      - name: updateauthorization
+        method: PATCH
+        description: Klarna Update the order amount and order lines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ordermanagement-v1-orders-order_id-cancel
+      path: /ordermanagement/v1/orders/{order_id}/cancel
+      operations:
+      - name: cancelorder
+        method: POST
+        description: Klarna Cancel an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+    - name: ordermanagement-v1-orders-order_id-customer-details
+      path: /ordermanagement/v1/orders/{order_id}/customer-details
+      operations:
+      - name: updateconsumerdetails
+        method: PATCH
+        description: Klarna Update customer addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ordermanagement-v1-orders-order_id-extend-authorization-time
+      path: /ordermanagement/v1/orders/{order_id}/extend-authorization-time
+      operations:
+      - name: extendauthorizationtime
+        method: POST
+        description: Klarna Extend the authorization time
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+    - name: ordermanagement-v1-orders-order_id-merchant-references
+      path: /ordermanagement/v1/orders/{order_id}/merchant-references
+      operations:
+      - name: updatemerchantreferences
+        method: PATCH
+        description: Klarna Update merchant references
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ordermanagement-v1-orders-order_id-release-remaining-authorization
+      path: /ordermanagement/v1/orders/{order_id}/release-remaining-authorization
+      operations:
+      - name: releaseremainingauthorization
+        method: POST
+        description: Klarna Release an authorization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+    - name: ordermanagement-v1-orders-order_id-shipping-info
+      path: /ordermanagement/v1/orders/{order_id}/shipping-info
+      operations:
+      - name: appendordershippinginfo
+        method: POST
+        description: Klarna Add shipping information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.KLARNA_USER}}'
+      password: '{{env.KLARNA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: order-management-orders-rest
+    port: 8080
+    description: REST adapter for Klarna Order Management API — Orders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/ordermanagement/v1/orders/{order-id}
+      name: ordermanagement-v1-orders-order-id
+      description: REST surface for ordermanagement-v1-orders-order_id.
+      operations:
+      - method: GET
+        name: getorder
+        description: Klarna Get order details
+        call: order-management-orders.getorder
+        with:
+          order_id: rest.order_id
+          Klarna-Integrator: rest.Klarna-Integrator
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/acknowledge
+      name: ordermanagement-v1-orders-order-id-acknowledge
+      description: REST surface for ordermanagement-v1-orders-order_id-acknowledge.
+      operations:
+      - method: POST
+        name: acknowledgeorder
+        description: Acknowledge a Klarna checkout order
+        call: order-management-orders.acknowledgeorder
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/authorization
+      name: ordermanagement-v1-orders-order-id-authorization
+      description: REST surface for ordermanagement-v1-orders-order_id-authorization.
+      operations:
+      - method: PATCH
+        name: updateauthorization
+        description: Klarna Update the order amount and order lines
+        call: order-management-orders.updateauthorization
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/cancel
+      name: ordermanagement-v1-orders-order-id-cancel
+      description: REST surface for ordermanagement-v1-orders-order_id-cancel.
+      operations:
+      - method: POST
+        name: cancelorder
+        description: Klarna Cancel an order
+        call: order-management-orders.cancelorder
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/customer-details
+      name: ordermanagement-v1-orders-order-id-customer-details
+      description: REST surface for ordermanagement-v1-orders-order_id-customer-details.
+      operations:
+      - method: PATCH
+        name: updateconsumerdetails
+        description: Klarna Update customer addresses
+        call: order-management-orders.updateconsumerdetails
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/extend-authorization-time
+      name: ordermanagement-v1-orders-order-id-extend-authorization-time
+      description: REST surface for ordermanagement-v1-orders-order_id-extend-authorization-time.
+      operations:
+      - method: POST
+        name: extendauthorizationtime
+        description: Klarna Extend the authorization time
+        call: order-management-orders.extendauthorizationtime
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/merchant-references
+      name: ordermanagement-v1-orders-order-id-merchant-references
+      description: REST surface for ordermanagement-v1-orders-order_id-merchant-references.
+      operations:
+      - method: PATCH
+        name: updatemerchantreferences
+        description: Klarna Update merchant references
+        call: order-management-orders.updatemerchantreferences
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/release-remaining-authorization
+      name: ordermanagement-v1-orders-order-id-release-remaining-authorization
+      description: REST surface for ordermanagement-v1-orders-order_id-release-remaining-authorization.
+      operations:
+      - method: POST
+        name: releaseremainingauthorization
+        description: Klarna Release an authorization
+        call: order-management-orders.releaseremainingauthorization
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/shipping-info
+      name: ordermanagement-v1-orders-order-id-shipping-info
+      description: REST surface for ordermanagement-v1-orders-order_id-shipping-info.
+      operations:
+      - method: POST
+        name: appendordershippinginfo
+        description: Klarna Add shipping information
+        call: order-management-orders.appendordershippinginfo
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: order-management-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Klarna Order Management API — Orders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: klarna-get-order-details
+      description: Klarna Get order details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: order-management-orders.getorder
+      with:
+        order_id: tools.order_id
+        Klarna-Integrator: tools.Klarna-Integrator
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-klarna-checkout-order
+      description: Acknowledge a Klarna checkout order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-orders.acknowledgeorder
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-update-order-amount-and
+      description: Klarna Update the order amount and order lines
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: order-management-orders.updateauthorization
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-cancel-order
+      description: Klarna Cancel an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-orders.cancelorder
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-update-customer-addresses
+      description: Klarna Update customer addresses
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: order-management-orders.updateconsumerdetails
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-extend-authorization-time
+      description: Klarna Extend the authorization time
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-orders.extendauthorizationtime
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-update-merchant-references
+      description: Klarna Update merchant references
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: order-management-orders.updatemerchantreferences
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-release-authorization
+      description: Klarna Release an authorization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-orders.releaseremainingauthorization
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-add-shipping-information
+      description: Klarna Add shipping information
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-orders.appendordershippinginfo
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

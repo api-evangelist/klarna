@@ -1,0 +1,336 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Klarna Merchant Card Service API — Merchantcard
+  description: 'Klarna Merchant Card Service API — Merchantcard. 7 operations. Lead operation: Klarna Request order cancellation.
+    Self-contained Naftiko capability covering one Klarna business surface.'
+  tags:
+  - Klarna
+  - Merchantcard
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KLARNA_API_KEY: KLARNA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: merchant-card-service-merchantcard
+    baseUri: https://api.klarna.com
+    description: Klarna Merchant Card Service API — Merchantcard business capability. Self-contained, no shared references.
+    resources:
+    - name: merchantcard-v3-orders-order_id-cancel-request
+      path: /merchantcard/v3/orders/{order_id}/cancel-request
+      operations:
+      - name: postcancelorder
+        method: POST
+        description: Klarna Request order cancellation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement.
+          required: true
+      - name: getcancelorder
+        method: GET
+        description: Klarna Get order cancellation status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id for which to view its cancellation status. This order must have an associated Virtual Credit
+            Card Settlement.
+          required: true
+    - name: merchantcard-v3-promises
+      path: /merchantcard/v3/promises
+      operations:
+      - name: createpromise
+        method: POST
+        description: Klarna Create a card promise
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: merchantcard-v3-promises-promise_id
+      path: /merchantcard/v3/promises/{promise_id}
+      operations:
+      - name: readpromise
+        method: GET
+        description: Klarna Get details of a card promise
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: promise_id
+          in: path
+          type: string
+          required: true
+    - name: merchantcard-v3-settlements
+      path: /merchantcard/v3/settlements
+      operations:
+      - name: settlepromise
+        method: POST
+        description: Klarna Create a card settlement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: merchantcard-v3-settlements-order-order_id
+      path: /merchantcard/v3/settlements/order/{order_id}
+      operations:
+      - name: readsettlementbyorderid
+        method: GET
+        description: Klarna Get card settlement details for an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Unique identifier for the order associated to the settlement.
+          required: true
+        - name: KeyId
+          in: header
+          type: string
+          description: Unique identifier for the public key used for encryption of the card data.
+          required: true
+    - name: merchantcard-v3-settlements-settlement_id
+      path: /merchantcard/v3/settlements/{settlement_id}
+      operations:
+      - name: readsettlement
+        method: GET
+        description: Klarna Get details of card  settlement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: settlement_id
+          in: path
+          type: string
+          description: Unique settlement identifier.
+          required: true
+        - name: KeyId
+          in: header
+          type: string
+          description: Unique identifier for the public key used for encryption of the card data.
+          required: true
+  exposes:
+  - type: rest
+    namespace: merchant-card-service-merchantcard-rest
+    port: 8080
+    description: REST adapter for Klarna Merchant Card Service API — Merchantcard. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/merchantcard/v3/orders/{order-id}/cancel-request
+      name: merchantcard-v3-orders-order-id-cancel-request
+      description: REST surface for merchantcard-v3-orders-order_id-cancel-request.
+      operations:
+      - method: POST
+        name: postcancelorder
+        description: Klarna Request order cancellation
+        call: merchant-card-service-merchantcard.postcancelorder
+        with:
+          order_id: rest.order_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getcancelorder
+        description: Klarna Get order cancellation status
+        call: merchant-card-service-merchantcard.getcancelorder
+        with:
+          order_id: rest.order_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchantcard/v3/promises
+      name: merchantcard-v3-promises
+      description: REST surface for merchantcard-v3-promises.
+      operations:
+      - method: POST
+        name: createpromise
+        description: Klarna Create a card promise
+        call: merchant-card-service-merchantcard.createpromise
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchantcard/v3/promises/{promise-id}
+      name: merchantcard-v3-promises-promise-id
+      description: REST surface for merchantcard-v3-promises-promise_id.
+      operations:
+      - method: GET
+        name: readpromise
+        description: Klarna Get details of a card promise
+        call: merchant-card-service-merchantcard.readpromise
+        with:
+          promise_id: rest.promise_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchantcard/v3/settlements
+      name: merchantcard-v3-settlements
+      description: REST surface for merchantcard-v3-settlements.
+      operations:
+      - method: POST
+        name: settlepromise
+        description: Klarna Create a card settlement
+        call: merchant-card-service-merchantcard.settlepromise
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchantcard/v3/settlements/order/{order-id}
+      name: merchantcard-v3-settlements-order-order-id
+      description: REST surface for merchantcard-v3-settlements-order-order_id.
+      operations:
+      - method: GET
+        name: readsettlementbyorderid
+        description: Klarna Get card settlement details for an order
+        call: merchant-card-service-merchantcard.readsettlementbyorderid
+        with:
+          order_id: rest.order_id
+          KeyId: rest.KeyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchantcard/v3/settlements/{settlement-id}
+      name: merchantcard-v3-settlements-settlement-id
+      description: REST surface for merchantcard-v3-settlements-settlement_id.
+      operations:
+      - method: GET
+        name: readsettlement
+        description: Klarna Get details of card  settlement
+        call: merchant-card-service-merchantcard.readsettlement
+        with:
+          settlement_id: rest.settlement_id
+          KeyId: rest.KeyId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: merchant-card-service-merchantcard-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Klarna Merchant Card Service API — Merchantcard. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: klarna-request-order-cancellation
+      description: Klarna Request order cancellation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: merchant-card-service-merchantcard.postcancelorder
+      with:
+        order_id: tools.order_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-order-cancellation-status
+      description: Klarna Get order cancellation status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: merchant-card-service-merchantcard.getcancelorder
+      with:
+        order_id: tools.order_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-create-card-promise
+      description: Klarna Create a card promise
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: merchant-card-service-merchantcard.createpromise
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-details-card-promise
+      description: Klarna Get details of a card promise
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: merchant-card-service-merchantcard.readpromise
+      with:
+        promise_id: tools.promise_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-create-card-settlement
+      description: Klarna Create a card settlement
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: merchant-card-service-merchantcard.settlepromise
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-card-settlement-details
+      description: Klarna Get card settlement details for an order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: merchant-card-service-merchantcard.readsettlementbyorderid
+      with:
+        order_id: tools.order_id
+        KeyId: tools.KeyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-details-card-settlement
+      description: Klarna Get details of card  settlement
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: merchant-card-service-merchantcard.readsettlement
+      with:
+        settlement_id: tools.settlement_id
+        KeyId: tools.KeyId
+      outputParameters:
+      - type: object
+        mapping: $.

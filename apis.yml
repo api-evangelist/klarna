@@ -65,6 +65,8 @@ apis:
   - type: Documentation
     url: https://docs.klarna.com/settlements/
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/klarna
 - type: Website
   url: https://www.klarna.com/
 - type: Plans

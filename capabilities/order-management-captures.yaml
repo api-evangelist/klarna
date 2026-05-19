@@ -1,0 +1,410 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Klarna Order Management API — Captures
+  description: 'Klarna Order Management API — Captures. 7 operations. Lead operation: Klarna Capture an order. Self-contained
+    Naftiko capability covering one Klarna business surface.'
+  tags:
+  - Klarna
+  - Captures
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KLARNA_API_KEY: KLARNA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: order-management-captures
+    baseUri: https://api.klarna.com
+    description: Klarna Order Management API — Captures business capability. Self-contained, no shared references.
+    resources:
+    - name: ordermanagement-v1-orders-order_id-captures
+      path: /ordermanagement/v1/orders/{order_id}/captures
+      operations:
+      - name: captureorder
+        method: POST
+        description: Klarna Capture an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getcaptures
+        method: GET
+        description: Klarna List all order captures
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+    - name: ordermanagement-v1-orders-order_id-captures-capture_id
+      path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}
+      operations:
+      - name: getcapture
+        method: GET
+        description: Klarna Get capture details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: capture_id
+          in: path
+          type: string
+          description: Capture id
+          required: true
+    - name: ordermanagement-v1-orders-order_id-captures-capture_id-extend-due-date
+      path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date
+      operations:
+      - name: extendduedate
+        method: PATCH
+        description: Klarna Extend payment due date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: capture_id
+          in: path
+          type: string
+          description: Capture id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ordermanagement-v1-orders-order_id-captures-capture_id-extend-due-date-options
+      path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date-options
+      operations:
+      - name: getoptionsforextendduedate
+        method: GET
+        description: Klarna List options for extension of payment due date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: capture_id
+          in: path
+          type: string
+          description: Capture id
+          required: true
+    - name: ordermanagement-v1-orders-order_id-captures-capture_id-shipping-info
+      path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/shipping-info
+      operations:
+      - name: appendshippinginfo
+        method: POST
+        description: Klarna Add shipping information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: capture_id
+          in: path
+          type: string
+          description: Capture id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ordermanagement-v1-orders-order_id-captures-capture_id-trigger-send-out
+      path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/trigger-send-out
+      operations:
+      - name: triggersendout
+        method: POST
+        description: Klarna Send customer communication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Order id
+          required: true
+        - name: capture_id
+          in: path
+          type: string
+          description: Capture id
+          required: true
+        - name: Klarna-Idempotency-Key
+          in: header
+          type: string
+          description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended
+            to be a UUID version 4. Retries of requests are safe to
+    authentication:
+      type: basic
+      username: '{{env.KLARNA_USER}}'
+      password: '{{env.KLARNA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: order-management-captures-rest
+    port: 8080
+    description: REST adapter for Klarna Order Management API — Captures. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures
+      name: ordermanagement-v1-orders-order-id-captures
+      description: REST surface for ordermanagement-v1-orders-order_id-captures.
+      operations:
+      - method: POST
+        name: captureorder
+        description: Klarna Capture an order
+        call: order-management-captures.captureorder
+        with:
+          order_id: rest.order_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getcaptures
+        description: Klarna List all order captures
+        call: order-management-captures.getcaptures
+        with:
+          order_id: rest.order_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures/{capture-id}
+      name: ordermanagement-v1-orders-order-id-captures-capture-id
+      description: REST surface for ordermanagement-v1-orders-order_id-captures-capture_id.
+      operations:
+      - method: GET
+        name: getcapture
+        description: Klarna Get capture details
+        call: order-management-captures.getcapture
+        with:
+          order_id: rest.order_id
+          capture_id: rest.capture_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures/{capture-id}/extend-due-date
+      name: ordermanagement-v1-orders-order-id-captures-capture-id-extend-due-date
+      description: REST surface for ordermanagement-v1-orders-order_id-captures-capture_id-extend-due-date.
+      operations:
+      - method: PATCH
+        name: extendduedate
+        description: Klarna Extend payment due date
+        call: order-management-captures.extendduedate
+        with:
+          order_id: rest.order_id
+          capture_id: rest.capture_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures/{capture-id}/extend-due-date-options
+      name: ordermanagement-v1-orders-order-id-captures-capture-id-extend-due-date-options
+      description: REST surface for ordermanagement-v1-orders-order_id-captures-capture_id-extend-due-date-options.
+      operations:
+      - method: GET
+        name: getoptionsforextendduedate
+        description: Klarna List options for extension of payment due date
+        call: order-management-captures.getoptionsforextendduedate
+        with:
+          order_id: rest.order_id
+          capture_id: rest.capture_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures/{capture-id}/shipping-info
+      name: ordermanagement-v1-orders-order-id-captures-capture-id-shipping-info
+      description: REST surface for ordermanagement-v1-orders-order_id-captures-capture_id-shipping-info.
+      operations:
+      - method: POST
+        name: appendshippinginfo
+        description: Klarna Add shipping information
+        call: order-management-captures.appendshippinginfo
+        with:
+          order_id: rest.order_id
+          capture_id: rest.capture_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ordermanagement/v1/orders/{order-id}/captures/{capture-id}/trigger-send-out
+      name: ordermanagement-v1-orders-order-id-captures-capture-id-trigger-send-out
+      description: REST surface for ordermanagement-v1-orders-order_id-captures-capture_id-trigger-send-out.
+      operations:
+      - method: POST
+        name: triggersendout
+        description: Klarna Send customer communication
+        call: order-management-captures.triggersendout
+        with:
+          order_id: rest.order_id
+          capture_id: rest.capture_id
+          Klarna-Idempotency-Key: rest.Klarna-Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: order-management-captures-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Klarna Order Management API — Captures. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: klarna-capture-order
+      description: Klarna Capture an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-captures.captureorder
+      with:
+        order_id: tools.order_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-list-all-order-captures
+      description: Klarna List all order captures
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: order-management-captures.getcaptures
+      with:
+        order_id: tools.order_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-get-capture-details
+      description: Klarna Get capture details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: order-management-captures.getcapture
+      with:
+        order_id: tools.order_id
+        capture_id: tools.capture_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-extend-payment-due-date
+      description: Klarna Extend payment due date
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: order-management-captures.extendduedate
+      with:
+        order_id: tools.order_id
+        capture_id: tools.capture_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-list-options-extension-payment
+      description: Klarna List options for extension of payment due date
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: order-management-captures.getoptionsforextendduedate
+      with:
+        order_id: tools.order_id
+        capture_id: tools.capture_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-add-shipping-information
+      description: Klarna Add shipping information
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-captures.appendshippinginfo
+      with:
+        order_id: tools.order_id
+        capture_id: tools.capture_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: klarna-send-customer-communication
+      description: Klarna Send customer communication
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: order-management-captures.triggersendout
+      with:
+        order_id: tools.order_id
+        capture_id: tools.capture_id
+        Klarna-Idempotency-Key: tools.Klarna-Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.

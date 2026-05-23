@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/cancel_order_request_status",
+  "title": "cancel_order_request_status",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "PENDING",
+      "enum": [
+        "PENDING",
+        "CANCELLED",
+        "REJECTED"
+      ],
+      "description": "The status of the order cancellation request."
+    },
+    "check_after": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2018-12-04T10:26:06.000Z",
+      "description": "Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)\n\nThis field is only populated if status is `PENDING`."
+    },
+    "reason_code": {
+      "type": "string",
+      "example": "CARD_IN_USE",
+      "enum": [
+        "CARD_IN_USE",
+        "OTHER"
+      ],
+      "description": "Reason code for why the order cancellation was rejected.\n\nThis field is only populated if status is `REJECTED`."
+    },
+    "reason_message": {
+      "type": "string",
+      "example": "Cancellation request was rejected because the virtual credit card linked to this order is in use.",
+      "description": "Human-readable message for why the order cancellation was rejected.\n\nThis field is only populated if status is `REJECTED`."
+    }
+  }
+}

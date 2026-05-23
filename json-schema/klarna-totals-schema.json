@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Totals",
+  "title": "Totals",
+  "type": "object",
+  "properties": {
+    "commission_amount": {
+      "description": "The total amount of commissions, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "repay_amount": {
+      "description": "The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "sale_amount": {
+      "description": "The total amount of sales, in minor units",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "holdback_amount": {
+      "description": "The total amount of money withheld by Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "tax_amount": {
+      "description": "The total amount of tax, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "settlement_amount": {
+      "description": "The total amount of the settlement in question, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "fee_correction_amount": {
+      "description": "The total amount of fee correction, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "reversal_amount": {
+      "description": "The total amount of reversals, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "release_amount": {
+      "description": "The total amount of money released from holdback by Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "return_amount": {
+      "description": "The total amount of returns, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "fee_amount": {
+      "description": "The total amount of fees, in minor units",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "charge_amount": {
+      "description": "The total amount of charges, in minor units. The additional field detailed_type contains the purpose of the charge",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "credit_amount": {
+      "description": "The total amount of credits, in minor units. The additional field detailed_type contains the purpose of the credit",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "fee_refund_amount": {
+      "description": "The total amount of refunded fees in a given settlement, in minor units.",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "tax_refund_amount": {
+      "description": "The total amount of refunded tax in a given settlement, in minor units.",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "deposit_amount": {
+      "description": "The increase of your debt balance with Klarna if your returns, fees, and other charges exceed your sales within this settlement period. This debt will be deducted from your next settlements and describes the amount that is increasing your debt balance, to be seen in the closing_debt_balance. In minor units.",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "opening_debt_balance_amount": {
+      "description": "Your negative balance with Klarna from previous settlements, if your returns, fees, and other charges exceeded your sales. This amount equals the closing_debt_balance of your last settlement unless Klarna has invoiced you separately for the amount. In minor units.",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "closing_debt_balance_amount": {
+      "description": "Your debt balance after the settlement. This amount will be the opening debt balance of your next settlement and helps you understand which amounts will be deducted from your next settlements. In minor units.",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "commission_amount",
+    "repay_amount",
+    "sale_amount",
+    "holdback_amount",
+    "settlement_amount",
+    "reversal_amount",
+    "release_amount",
+    "return_amount",
+    "fee_amount",
+    "charge_amount",
+    "credit_amount",
+    "fee_refund_amount",
+    "tax_refund_amount",
+    "deposit_amount",
+    "opening_debt_balance_amount",
+    "closing_debt_balance_amount"
+  ]
+}

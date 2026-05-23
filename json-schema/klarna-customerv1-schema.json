@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomerV1",
+  "title": "CustomerV1",
+  "type": "object",
+  "properties": {
+    "date_of_birth": {
+      "type": "string",
+      "example": "1987-08-15",
+      "description": "Customer's date of birth (YYYY-MM-dd)"
+    },
+    "family_name": {
+      "type": "string",
+      "description": "Customer's family name"
+    },
+    "given_name": {
+      "type": "string",
+      "description": "Customer's given name"
+    },
+    "national_identification_number": {
+      "type": "string",
+      "example": "19870815-84932",
+      "description": "Customer's national identity number"
+    },
+    "title": {
+      "type": "string",
+      "example": "Mr",
+      "description": "Customer's title"
+    }
+  }
+}

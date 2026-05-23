@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateConsumer",
+  "title": "UpdateConsumer",
+  "properties": {
+    "shipping_address": {
+      "$ref": "#/components/schemas/address"
+    }
+  },
+  "type": "object"
+}

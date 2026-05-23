@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/customer",
+  "title": "customer",
+  "description": "Information about the customer placing the order.",
+  "properties": {
+    "date_of_birth": {
+      "description": "The customer date of birth. ISO 8601. ",
+      "example": "1981-09-06",
+      "format": "date",
+      "type": "string"
+    },
+    "national_identification_number": {
+      "description": "The customer national identification number",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

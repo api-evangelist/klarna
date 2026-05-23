@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TransactionCollection",
+  "title": "TransactionCollection",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Transaction"
+      }
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/Pagination"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "transactions",
+    "pagination"
+  ]
+}

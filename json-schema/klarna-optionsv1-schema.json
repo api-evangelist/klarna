@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OptionsV1",
+  "title": "OptionsV1",
+  "type": "object",
+  "properties": {
+    "background_images": {
+      "type": "array",
+      "description": "List of Images to use for the background. Best matching resolution will be used.",
+      "items": {
+        "$ref": "#/components/schemas/BackgroundImageV1"
+      }
+    },
+    "logo_url": {
+      "type": "string",
+      "example": "https://example.com/logo.jpg",
+      "description": "URL of the logo to be displayed"
+    },
+    "page_title": {
+      "type": "string",
+      "example": "Complete your purchase",
+      "description": "Title for the Payment Page"
+    },
+    "payment_method_categories": {
+      "type": "array",
+      "description": "Payment Method Categories to show on the Payment Page. All available categories will be given to the customer if none is specified using payment_method_category or payment_method_categories. Ignored field for KCO Orders.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DIRECT_DEBIT",
+          "DIRECT_BANK_TRANSFER",
+          "PAY_NOW",
+          "PAY_LATER",
+          "PAY_OVER_TIME",
+          "KLARNA"
+        ]
+      }
+    },
+    "payment_method_category": {
+      "type": "string",
+      "description": "Payment Method Category to show on the Payment Page. All available categories will be given to the customer if none is specified using payment_method_category or payment_method_categories. Ignored field for KCO Orders.",
+      "enum": [
+        "DIRECT_DEBIT",
+        "DIRECT_BANK_TRANSFER",
+        "PAY_NOW",
+        "PAY_LATER",
+        "PAY_OVER_TIME",
+        "KLARNA"
+      ]
+    },
+    "place_order_mode": {
+      "type": "string",
+      "example": "PLACE_ORDER",
+      "enum": [
+        "PLACE_ORDER",
+        "CAPTURE_ORDER",
+        "NONE"
+      ]
+    },
+    "purchase_type": {
+      "type": "string",
+      "example": "BUY",
+      "description": "The type of this purchase",
+      "enum": [
+        "BUY",
+        "RENT",
+        "BOOK",
+        "SUBSCRIBE",
+        "DOWNLOAD",
+        "ORDER",
+        "CONTINUE"
+      ]
+    },
+    "show_subtotal_detail": {
+      "type": "string",
+      "example": "HIDE",
+      "enum": [
+        "HIDE"
+      ]
+    }
+  }
+}

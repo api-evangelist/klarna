@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponse",
+  "title": "ErrorResponse",
+  "type": "object",
+  "properties": {
+    "error_code": {
+      "description": "ERROR_CODE",
+      "type": "string"
+    },
+    "error_messages": {
+      "description": "Array of error messages",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "correlation_id": {
+      "description": "Unique id for this request used for troubleshooting.",
+      "example": "2fe0311b-adc5-45e5-ac2b-963dac83c88b",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "error_code",
+    "error_messages",
+    "correlation_id"
+  ]
+}

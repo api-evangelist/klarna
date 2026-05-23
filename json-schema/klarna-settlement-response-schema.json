@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/settlement_response",
+  "title": "settlement_response",
+  "type": "object",
+  "properties": {
+    "settlement_id": {
+      "type": "string",
+      "example": "b0ec0bbd-534c-4b1c-b28a-628bf33c3324",
+      "description": "Unique settlement identifier."
+    },
+    "promise_id": {
+      "type": "string",
+      "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+      "description": "Unique identifier for the promise associated to the settlement."
+    },
+    "order_id": {
+      "type": "string",
+      "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+      "description": "Unique identifier for the order associated to the settlement."
+    },
+    "cards": {
+      "type": "array",
+      "description": "An array of Card objects.",
+      "items": {
+        "$ref": "#/components/schemas/card"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "example": "2018-12-03T10:26:06.000Z",
+      "description": "Settlement creation datetime (ISO 8601)."
+    },
+    "expires_at": {
+      "type": "string",
+      "example": "2018-12-04T10:26:06.000Z",
+      "description": "Settlement expiration datetime (ISO 8601)."
+    }
+  }
+}

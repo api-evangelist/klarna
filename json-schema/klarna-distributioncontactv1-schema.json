@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DistributionContactV1",
+  "title": "DistributionContactV1",
+  "type": "object",
+  "properties": {
+    "access_id": {
+      "type": "string",
+      "description": "Access Id for connection to HPP session. Only required if distribution method is 'token'",
+      "enum": [
+        "klarna:09f4a78d-d096-47d4-a0f6-abcf680c70fe",
+        "467521087419",
+        "278352"
+      ]
+    },
+    "email": {
+      "type": "string",
+      "example": "test@example.com",
+      "description": "Email where to send the email with the HPP link. Only required if distribution method is 'email'"
+    },
+    "phone": {
+      "type": "string",
+      "example": "07000212345",
+      "description": "Phone number where to send the sms with the HPP link. Only required if distribution method is 'sms'"
+    },
+    "phone_country": {
+      "type": "string",
+      "example": "SE",
+      "description": "ISO 3166 alpha-2 phone country. Only required if distribution method is 'sms'"
+    }
+  }
+}

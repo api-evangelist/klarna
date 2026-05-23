@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PayoutSummary",
+  "title": "PayoutSummary",
+  "type": "object",
+  "properties": {
+    "summary_total_fee_correction_amount": {
+      "description": "The total amount of fee correction, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_payout_date_start": {
+      "description": "ISO 8601 formatted date-time string",
+      "example": "2016-12-14T07:52:26Z",
+      "type": "string",
+      "format": "date-time"
+    },
+    "summary_total_release_amount": {
+      "description": "The total amount of money released from holdback by Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_settlement_currency": {
+      "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+      "example": "USD",
+      "type": "string"
+    },
+    "summary_payout_date_end": {
+      "description": "ISO 8601 formatted date-time string",
+      "example": "2016-12-14T07:52:26Z",
+      "type": "string",
+      "format": "date-time"
+    },
+    "summary_total_tax_amount": {
+      "description": "The total amount of tax, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_settlement_amount": {
+      "description": "The total amount of the settlement in question, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_holdback_amount": {
+      "description": "The total amount of money withheld by Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_reversal_amount": {
+      "description": "The total amount of reversals, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_return_amount": {
+      "description": "The total amount of returns, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_fee_amount": {
+      "description": "The total amount of fees, in minor units",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_commission_amount": {
+      "description": "The total amount of commissions, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_sale_amount": {
+      "description": "The total amount of sales, in minor units",
+      "example": 500,
+      "type": "integer",
+      "format": "int64"
+    },
+    "summary_total_repay_amount": {
+      "description": "The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units",
+      "example": 550,
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "summary_total_fee_correction_amount",
+    "summary_payout_date_start",
+    "summary_total_release_amount",
+    "summary_settlement_currency",
+    "summary_payout_date_end",
+    "summary_total_tax_amount",
+    "summary_total_settlement_amount",
+    "summary_total_holdback_amount",
+    "summary_total_reversal_amount",
+    "summary_total_return_amount",
+    "summary_total_fee_amount",
+    "summary_total_commission_amount",
+    "summary_total_sale_amount",
+    "summary_total_repay_amount"
+  ]
+}

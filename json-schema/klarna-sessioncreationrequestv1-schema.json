@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SessionCreationRequestV1",
+  "title": "SessionCreationRequestV1",
+  "type": "object",
+  "required": [
+    "payment_session_url"
+  ],
+  "properties": {
+    "merchant_urls": {
+      "$ref": "#/components/schemas/MerchantUrlsV1"
+    },
+    "options": {
+      "$ref": "#/components/schemas/OptionsV1"
+    },
+    "payment_session_url": {
+      "type": "string",
+      "example": "One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af",
+      "description": "URL of the KP Session or KCO Order to be hosted by the HPP Session"
+    },
+    "profile_id": {
+      "type": "string",
+      "example": "87ab3565-5e06-4006-9ada-8eedc6926703",
+      "description": "Profile id for default session options"
+    }
+  }
+}

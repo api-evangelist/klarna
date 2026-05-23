@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Capture",
+  "title": "Capture",
+  "properties": {
+    "billing_address": {
+      "$ref": "#/components/schemas/address"
+    },
+    "capture_id": {
+      "description": "The capture id. Generated when the capture is created.",
+      "example": "4ba29b50-be7b-44f5-a492-113e6a865e22",
+      "type": "string"
+    },
+    "captured_amount": {
+      "description": "The captured amount in minor units.",
+      "format": "int64",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "captured_at": {
+      "description": "The time of the capture. Specified in ISO 8601.",
+      "example": "2015-11-19T01:51:17Z",
+      "format": "date-time",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the capture shown to the customer.",
+      "example": "Order has been shipped",
+      "type": "string"
+    },
+    "klarna_reference": {
+      "description": "Customer friendly reference id, used as a reference when communicating with the customer.",
+      "example": "K4MADNY-1",
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "List of order lines for the capture shown to the customer.",
+      "items": {
+        "$ref": "#/components/schemas/order_line"
+      },
+      "type": "array"
+    },
+    "reference": {
+      "description": "Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "refunded_amount": {
+      "description": "Refunded amount for this capture in minor units.",
+      "example": 0,
+      "format": "int64",
+      "type": "integer"
+    },
+    "shipping_address": {
+      "$ref": "#/components/schemas/address"
+    },
+    "shipping_info": {
+      "description": "Shipping information for this capture.",
+      "items": {
+        "$ref": "#/components/schemas/shipping_info"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

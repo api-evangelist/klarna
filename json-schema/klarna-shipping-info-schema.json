@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/shipping_info",
+  "title": "shipping_info",
+  "description": "Shipping information for this capture.",
+  "properties": {
+    "return_shipping_company": {
+      "description": "Name of the shipping company for the return shipment (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+      "example": "DHL US",
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string"
+    },
+    "return_tracking_number": {
+      "description": "Tracking number for the return shipment. Maximum 100 characters.",
+      "example": "93456415674545679888",
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string"
+    },
+    "return_tracking_uri": {
+      "description": "URL where the customer can track the return shipment. Maximum 1024 characters.",
+      "example": "http://shipping.example/findmypackage?93456415674545679888",
+      "maxLength": 1024,
+      "minLength": 0,
+      "type": "string"
+    },
+    "shipping_company": {
+      "description": "Name of the shipping company (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+      "example": "DHL US",
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string"
+    },
+    "shipping_method": {
+      "description": "Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+      "example": "Home",
+      "pattern": "(PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+      "type": "string"
+    },
+    "tracking_number": {
+      "description": "Tracking number for the shipment. Maximum 100 characters.",
+      "example": "63456415674545679874",
+      "maxLength": 100,
+      "minLength": 0,
+      "type": "string"
+    },
+    "tracking_uri": {
+      "description": "URI where the customer can track their shipment. Maximum 1024 characters.",
+      "example": "http://shipping.example/findmypackage?63456415674545679874",
+      "maxLength": 1024,
+      "minLength": 0,
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

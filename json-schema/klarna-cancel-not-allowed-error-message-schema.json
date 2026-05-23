@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Cancel not allowed error message",
+  "title": "Cancel not allowed error message",
+  "properties": {
+    "correlation_id": {
+      "description": "Correlation id. For searching logs.",
+      "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+      "type": "string"
+    },
+    "error_code": {
+      "description": "Error code",
+      "example": "CANCEL_NOT_ALLOWED",
+      "type": "string"
+    },
+    "error_messages": {
+      "description": "Error messages",
+      "items": {
+        "description": "Error messages",
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

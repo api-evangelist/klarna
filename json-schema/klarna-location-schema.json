@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Location",
+  "title": "Location",
+  "description": "The location of the selected shipping option",
+  "properties": {
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "id": {
+      "description": "The location id",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name of the location",
+      "type": "string"
+    },
+    "price": {
+      "description": "The price for this location",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Address",
+  "title": "Address",
+  "description": "The address of the location",
+  "properties": {
+    "city": {
+      "description": "City",
+      "type": "string"
+    },
+    "country": {
+      "description": "Country",
+      "type": "string"
+    },
+    "postal_code": {
+      "description": "Postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+      "type": "string"
+    },
+    "region": {
+      "description": "Region",
+      "type": "string"
+    },
+    "street_address": {
+      "description": "The street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+      "type": "string"
+    },
+    "street_address__2": {
+      "description": "Additional street address",
+      "type": "string"
+    }
+  },
+  "required": [
+    "country",
+    "street_address"
+  ],
+  "type": "object"
+}

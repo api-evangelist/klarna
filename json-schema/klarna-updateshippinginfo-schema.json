@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateShippingInfo",
+  "title": "UpdateShippingInfo",
+  "properties": {
+    "shipping_info": {
+      "description": "New shipping info. Maximum: 500 items.",
+      "items": {
+        "$ref": "#/components/schemas/shipping_info"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "shipping_info"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/card",
+  "title": "card",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "type": "string",
+      "example": "yPGw6i4lR0GTcyxGpS3Q6Q==",
+      "description": "Identifier to reference order line."
+    },
+    "card_id": {
+      "type": "string",
+      "example": "b846430c-3656-43a1-812e-2ccff4531b7d",
+      "description": "Unique card identifier."
+    },
+    "amount": {
+      "type": "integer",
+      "format": "int64",
+      "example": 10000,
+      "description": "The total amount available on the card. In minor units. The number of decimals are controlled by the currency."
+    },
+    "currency": {
+      "type": "string",
+      "example": "USD",
+      "description": "The ISO 4217 code states which currency it is and how many decimals the amount has."
+    },
+    "pci_data": {
+      "type": "string",
+      "description": "Encrypted, PCI compliant card data."
+    },
+    "iv": {
+      "type": "string",
+      "description": "Initialization vector for symmetric decryption with the AES key."
+    },
+    "aes_key": {
+      "type": "string",
+      "description": "The symmetric key complying the Advanced Encryption Standard."
+    },
+    "brand": {
+      "type": "string",
+      "example": "VISA",
+      "description": "The brand of the card."
+    },
+    "holder": {
+      "type": "string",
+      "example": "Jane Doe",
+      "description": "Card holder name on the card."
+    }
+  }
+}

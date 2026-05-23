@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/subscription",
+  "title": "subscription",
+  "description": "Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.",
+  "properties": {
+    "interval": {
+      "description": "The cadence unit. Matches: DAY|WEEK|MONTH|YEAR",
+      "example": "MONTH",
+      "pattern": "DAY|WEEK|MONTH|YEAR",
+      "type": "string"
+    },
+    "interval_count": {
+      "description": "The number of intervals.",
+      "format": "int32",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "name": {
+      "description": "The name of the subscription product. Maximum 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    }
+  },
+  "required": [
+    "interval",
+    "interval_count",
+    "name"
+  ],
+  "type": "object"
+}

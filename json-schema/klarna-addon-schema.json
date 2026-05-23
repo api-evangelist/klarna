@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Addon",
+  "title": "Addon",
+  "description": "Array consisting of add-ons selected by the consumer, may be empty",
+  "properties": {
+    "external_id": {
+      "description": "The ID provided by the TMS",
+      "type": "string"
+    },
+    "price": {
+      "description": "The price of the add-on",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "type": {
+      "description": "The type of the add-on, e.g. sms or entry-code",
+      "type": "string"
+    },
+    "user_input": {
+      "description": "The text provided by the user",
+      "type": "string"
+    }
+  },
+  "required": [
+    "price",
+    "type"
+  ],
+  "type": "object"
+}

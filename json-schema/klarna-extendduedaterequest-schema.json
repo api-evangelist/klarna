@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExtendDueDateRequest",
+  "title": "ExtendDueDateRequest",
+  "properties": {
+    "number_of_days": {
+      "description": "Number of days to extend the due date.",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "number_of_days"
+  ],
+  "type": "object"
+}

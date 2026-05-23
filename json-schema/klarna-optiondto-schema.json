@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OptionDto",
+  "title": "OptionDto",
+  "description": "The available options and corresponding fees for extending the due date",
+  "properties": {
+    "amount": {
+      "description": "The fee for extending the due date this many days. In minor units.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "number_of_days": {
+      "description": "How many days to extend the due date with",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "type": "object"
+}

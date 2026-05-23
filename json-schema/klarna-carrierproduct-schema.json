@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CarrierProduct",
+  "title": "CarrierProduct",
+  "description": "The chosen timeslot of the selected shipping option",
+  "properties": {
+    "identifier": {
+      "description": "Id of carrier product",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of carrier product",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

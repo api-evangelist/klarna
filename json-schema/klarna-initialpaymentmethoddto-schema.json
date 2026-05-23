@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InitialPaymentMethodDto",
+  "title": "InitialPaymentMethodDto",
+  "description": "Initial payment method for this order",
+  "properties": {
+    "description": {
+      "description": "The description of the initial payment method.",
+      "example": "Slice it (Fixed Payments)",
+      "type": "string"
+    },
+    "number_of_installments": {
+      "description": "The number of installments (if applicable).",
+      "example": 3,
+      "format": "int32",
+      "type": "integer"
+    },
+    "type": {
+      "description": "The type of the initial payment method. One of ACCOUNT, ALTERNATIVE_PAYMENT_METHOD, BANK_TRANSFER, CARD, DEFERRED_INTEREST, DIRECT_DEBIT, FIXED_AMOUNT_BY_CARD, FIXED_AMOUNT, FIXED_SUM_CREDIT, INVOICE_BUSINESS, INVOICE, MOBILEPAY, PAY_BY_CARD, PAY_IN_X, PAY_LATER_BY_CARD, PAY_LATER_IN_PARTS, SWISH, OTHER",
+      "example": "FIXED_AMOUNT",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

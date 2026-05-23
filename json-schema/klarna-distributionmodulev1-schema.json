@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DistributionModuleV1",
+  "title": "DistributionModuleV1",
+  "type": "object",
+  "properties": {
+    "generation_url": {
+      "type": "string"
+    },
+    "standalone_url": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/cancel_order_request_status_pending",
+  "title": "cancel_order_request_status_pending",
+  "type": "object",
+  "required": [
+    "status",
+    "check_after"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "PENDING",
+      "enum": [
+        "PENDING"
+      ],
+      "description": "The status of the order cancellation request."
+    },
+    "check_after": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2018-12-04T10:26:06.000Z",
+      "description": "Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)"
+    }
+  }
+}

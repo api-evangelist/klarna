@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Update merchant references",
+  "title": "Update merchant references",
+  "properties": {
+    "merchant_reference1": {
+      "description": "New merchant reference 1. Old reference will be overwritten if this field is present.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "merchant_reference2": {
+      "description": "New merchant reference 2. Old reference will be overwritten if this field is present.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

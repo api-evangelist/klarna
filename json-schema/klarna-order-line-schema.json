@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/order_line",
+  "title": "order_line",
+  "description": "List of order lines for the capture shown to the customer.",
+  "properties": {
+    "image_url": {
+      "description": "URL to an image that can be embedded in communications between Klarna and the customer.",
+      "example": "https://yourstore.example/product/headphones.png",
+      "maxLength": 1024,
+      "minLength": 0,
+      "type": "string"
+    },
+    "merchant_data": {
+      "description": "Data about the order line.",
+      "example": "Some metadata",
+      "maxLength": 1024,
+      "minLength": 0,
+      "type": "string"
+    },
+    "name": {
+      "description": "Descriptive item name.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "product_identifiers": {
+      "$ref": "#/components/schemas/ProductIdentifiers"
+    },
+    "product_url": {
+      "description": "URL to the product that can be used in communications between Klarna and the customer.",
+      "example": "https://yourstore.example/product/headphones",
+      "maxLength": 1024,
+      "minLength": 0,
+      "type": "string"
+    },
+    "quantity": {
+      "description": "Item quantity.",
+      "example": 1,
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "quantity_unit": {
+      "description": "Unit used to describe the quantity.",
+      "example": "pcs.",
+      "maxLength": 10,
+      "minLength": 0,
+      "type": "string"
+    },
+    "reference": {
+      "description": "Article number, SKU, or similar identifier on the product variant level.",
+      "example": "75001",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "subscription": {
+      "$ref": "#/components/schemas/subscription"
+    },
+    "tax_rate": {
+      "description": "The tax rate in percent with two implicit decimals.",
+      "format": "int32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "total_amount": {
+      "description": "Total amount including tax and discounts (`quantity * unit_price - total_discount_amount`).",
+      "format": "int64",
+      "maximum": 200000000,
+      "type": "integer"
+    },
+    "total_discount_amount": {
+      "description": "The discount amount in minor units. Includes tax. Example: 1200 = $12. Max value: 200000000",
+      "example": 0,
+      "format": "int64",
+      "maximum": 200000000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "total_tax_amount": {
+      "description": "The total tax amount in minor units.",
+      "format": "int64",
+      "maximum": 200000000,
+      "type": "integer"
+    },
+    "type": {
+      "description": "Order line type.",
+      "enum": [
+        "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee"
+      ],
+      "example": "physical",
+      "pattern": "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee",
+      "type": "string"
+    },
+    "unit_price": {
+      "description": "Unit price including tax without applying discounts in minor units.",
+      "format": "int64",
+      "maximum": 200000000,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "name",
+    "quantity",
+    "total_amount",
+    "unit_price"
+  ],
+  "type": "object"
+}

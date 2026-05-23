@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Refund",
+  "title": "Refund",
+  "properties": {
+    "credit_invoice": {
+      "description": "Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.",
+      "type": "boolean"
+    },
+    "description": {
+      "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+      "example": "The item was returned and the order refunded.",
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+      "items": {
+        "$ref": "#/components/schemas/order_line"
+      },
+      "type": "array"
+    },
+    "reference": {
+      "description": "Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.",
+      "type": "string"
+    },
+    "refund_id": {
+      "description": "The refund id. Generated when the refund is created.",
+      "example": "b2cb4f2e-2781-4359-80ad-555735ebb8d8",
+      "type": "string"
+    },
+    "refunded_amount": {
+      "description": "Refunded amount in minor units.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "refunded_at": {
+      "description": "The time of the refund. ISO 8601.",
+      "example": "2015-12-04T15:17:40Z",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

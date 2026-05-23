@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/cancel_order_request_status_cancelled",
+  "title": "cancel_order_request_status_cancelled",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "CANCELLED",
+      "enum": [
+        "CANCELLED"
+      ],
+      "description": "The status of the order cancellation request."
+    }
+  }
+}

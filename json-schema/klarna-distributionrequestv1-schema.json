@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DistributionRequestV1",
+  "title": "DistributionRequestV1",
+  "type": "object",
+  "required": [
+    "contact_information",
+    "method"
+  ],
+  "properties": {
+    "contact_information": {
+      "$ref": "#/components/schemas/DistributionContactV1"
+    },
+    "method": {
+      "type": "string",
+      "example": "sms",
+      "description": "Method used for distribution",
+      "enum": [
+        "sms",
+        "email",
+        "token"
+      ]
+    },
+    "template": {
+      "type": "string",
+      "example": "INSTORE_PURCHASE",
+      "description": "Template to use for distribution. In the current version this value is not used and might be removed in the future.",
+      "enum": [
+        "INSTORE_PURCHASE"
+      ]
+    }
+  }
+}

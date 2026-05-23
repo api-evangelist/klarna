@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/settlement_request",
+  "title": "settlement_request",
+  "type": "object",
+  "required": [
+    "key_id",
+    "order_id"
+  ],
+  "properties": {
+    "promise_id": {
+      "type": "string",
+      "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+      "description": "Unique identifier for the promise associated to the settlement."
+    },
+    "order_id": {
+      "type": "string",
+      "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+      "description": "Unique identifier for the order associated to the settlement."
+    },
+    "key_id": {
+      "type": "string",
+      "example": "16e4b85e-899b-4427-a39f-07a496e9515b",
+      "description": "Unique identifier for the public key to be used for encryption of the card data."
+    }
+  }
+}

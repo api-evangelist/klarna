@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Timeslot",
+  "title": "Timeslot",
+  "description": "The chosen timeslot of the selected shipping option",
+  "properties": {
+    "cutoff": {
+      "description": "Cutoff time for delivery",
+      "type": "string"
+    },
+    "end": {
+      "description": "End of the timeslot",
+      "type": "string"
+    },
+    "id": {
+      "description": "The timeslot id",
+      "type": "string"
+    },
+    "price": {
+      "description": "Price",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "type": "integer"
+    },
+    "start": {
+      "description": "Start of the timeslot",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

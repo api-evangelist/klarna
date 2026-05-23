@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProductIdentifiers",
+  "title": "ProductIdentifiers",
+  "description": "product_identifiers",
+  "properties": {
+    "brand": {
+      "description": "The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel",
+      "example": "Intel",
+      "maxLength": 70,
+      "minLength": 0,
+      "type": "string"
+    },
+    "category_path": {
+      "description": "The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops",
+      "example": "Electronics Store > Computers & Tablets > Desktops",
+      "maxLength": 750,
+      "minLength": 0,
+      "type": "string"
+    },
+    "color": {
+      "description": "Color to be shown to the end customer (max 64 characters). Example: Denim blue",
+      "example": "Denim blue",
+      "maxLength": 64,
+      "minLength": 0,
+      "type": "string"
+    },
+    "global_trade_item_number": {
+      "description": "The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167",
+      "example": "735858293167",
+      "maxLength": 50,
+      "minLength": 0,
+      "type": "string"
+    },
+    "manufacturer_part_number": {
+      "description": "The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH",
+      "example": "BOXNUC5CPYH",
+      "maxLength": 70,
+      "minLength": 0,
+      "type": "string"
+    },
+    "size": {
+      "description": "Size to be shown to the end customer (max 64 characters). Example: 4",
+      "example": "4",
+      "maxLength": 64,
+      "minLength": 0,
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

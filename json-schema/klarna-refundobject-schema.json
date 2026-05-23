@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RefundObject",
+  "title": "RefundObject",
+  "properties": {
+    "description": {
+      "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+      "items": {
+        "$ref": "#/components/schemas/order_line"
+      },
+      "maxItems": 1000,
+      "minItems": 0,
+      "type": "array"
+    },
+    "reference": {
+      "description": "Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "refunded_amount": {
+      "description": "Refunded amount in minor units.",
+      "format": "int64",
+      "maximum": 200000000,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "refunded_amount"
+  ],
+  "type": "object"
+}

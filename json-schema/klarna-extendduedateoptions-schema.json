@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExtendDueDateOptions",
+  "title": "ExtendDueDateOptions",
+  "properties": {
+    "currency": {
+      "description": "The currency for the fees. Specified in ISO 4217 format.",
+      "example": "usd",
+      "type": "string"
+    },
+    "options": {
+      "description": "The available options and corresponding fees for extending the due date",
+      "items": {
+        "$ref": "#/components/schemas/OptionDto"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

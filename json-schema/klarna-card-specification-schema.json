@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/card_specification",
+  "title": "card_specification",
+  "type": "object",
+  "required": [
+    "amount",
+    "currency",
+    "reference"
+  ],
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "format": "int64",
+      "example": 10000,
+      "description": "The total purchase amount on a card",
+      "minimum": 1
+    },
+    "currency": {
+      "type": "string",
+      "example": "USD",
+      "description": "The amount currency"
+    },
+    "fund_amount": {
+      "type": "integer",
+      "format": "int64",
+      "example": 10000,
+      "description": "The funded amount that will be on a card"
+    },
+    "reference": {
+      "type": "string",
+      "example": "yPGw6i4lR0GTcyxGpS3Q6Q==",
+      "description": "Your reference on the card",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  }
+}

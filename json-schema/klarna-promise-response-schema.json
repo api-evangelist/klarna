@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/promise_response",
+  "title": "promise_response",
+  "type": "object",
+  "properties": {
+    "promise_id": {
+      "type": "string",
+      "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+      "description": "The unique promise ID",
+      "readOnly": true
+    },
+    "order_id": {
+      "type": "string",
+      "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+      "description": "The order id of the promise",
+      "readOnly": true
+    },
+    "cards": {
+      "type": "array",
+      "description": "The list of card specifications ",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/components/schemas/card_specification"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2018-12-03T10:26:06.000Z",
+      "description": "The time when the promise was created",
+      "readOnly": true
+    },
+    "expire_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2018-12-04T10:26:06.000Z",
+      "description": "The time when the promise expires",
+      "readOnly": true
+    }
+  }
+}

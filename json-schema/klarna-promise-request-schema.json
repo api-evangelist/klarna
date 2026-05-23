@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/promise_request",
+  "title": "promise_request",
+  "type": "object",
+  "required": [
+    "cards",
+    "order_id"
+  ],
+  "properties": {
+    "order_id": {
+      "type": "string",
+      "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+      "description": "A valid order id"
+    },
+    "cards": {
+      "type": "array",
+      "description": "The cards you would like to issue (max 1000)",
+      "items": {
+        "$ref": "#/components/schemas/card_specification"
+      },
+      "maxItems": 1000,
+      "minItems": 1
+    }
+  }
+}

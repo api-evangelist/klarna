@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SessionCreationResponseV1",
+  "title": "SessionCreationResponseV1",
+  "type": "object",
+  "properties": {
+    "distribution_module": {
+      "$ref": "#/components/schemas/DistributionModuleV1"
+    },
+    "distribution_url": {
+      "type": "string",
+      "example": "https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436/distribution",
+      "description": "Endpoint for link distribution"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2038-01-19T03:14:07.000Z",
+      "description": "Session expiration time"
+    },
+    "manual_identification_check_url": {
+      "example": "https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436/manual-id-check",
+      "description": "Endpoint for manual identification check",
+      "type": "string"
+    },
+    "qr_code_url": {
+      "type": "string",
+      "example": "https://pay.klarna.com/eu/hpp/payments/a94e7760-d135-2721-a538-d6294ea254ed/qr",
+      "description": "HPP url to download qr code image"
+    },
+    "redirect_url": {
+      "type": "string",
+      "example": "https://pay.klarna.com/eu/hpp/payments/2OCkffK",
+      "description": "HPP url to redirect the consumer to. ECOMMERCE only"
+    },
+    "session_id": {
+      "type": "string",
+      "example": "9cbc9884-1fdb-45a8-9694-9340340d0436",
+      "description": "HPP session id"
+    },
+    "session_url": {
+      "type": "string",
+      "example": "https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436",
+      "description": "Endpoint to get the session"
+    }
+  }
+}

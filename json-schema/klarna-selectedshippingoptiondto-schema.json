@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SelectedShippingOptionDto",
+  "title": "SelectedShippingOptionDto",
+  "description": "The shipping option selected by the user.",
+  "properties": {
+    "carrier": {
+      "description": "The carrier for the selected shipping option",
+      "type": "string"
+    },
+    "carrier_product": {
+      "$ref": "#/components/schemas/CarrierProduct"
+    },
+    "class": {
+      "description": "The class of the selected shipping option",
+      "type": "string"
+    },
+    "id": {
+      "description": "The id of the selected shipping option as provided by the TMS",
+      "type": "string"
+    },
+    "location": {
+      "$ref": "#/components/schemas/Location"
+    },
+    "method": {
+      "description": "The method of the selected shipping option",
+      "type": "string"
+    },
+    "name": {
+      "description": "The display name of the selected shipping option",
+      "type": "string"
+    },
+    "price": {
+      "description": "The price of the selected shipping option",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "type": "integer"
+    },
+    "selected_addons": {
+      "description": "Array consisting of add-ons selected by the consumer, may be empty",
+      "items": {
+        "$ref": "#/components/schemas/Addon"
+      },
+      "type": "array"
+    },
+    "tax_amount": {
+      "description": "The tax amount of the selected shipping option",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "type": "integer"
+    },
+    "tax_rate": {
+      "description": "The tax rate of the selected shipping option",
+      "enum": [
+        null
+      ],
+      "format": "int64",
+      "type": "integer"
+    },
+    "timeslot": {
+      "$ref": "#/components/schemas/Timeslot"
+    },
+    "tms_reference": {
+      "description": "The shipment_id provided by the TMS",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of the selected shipping option",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

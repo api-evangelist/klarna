@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Payout",
+  "title": "Payout",
+  "type": "object",
+  "properties": {
+    "totals": {
+      "$ref": "#/components/schemas/Totals"
+    },
+    "payment_reference": {
+      "description": "The reference id of the payout",
+      "example": "XISA93DJ",
+      "type": "string"
+    },
+    "payout_date": {
+      "description": "ISO 8601 formatted date-time string",
+      "example": "2016-12-14T07:52:26Z",
+      "type": "string",
+      "format": "date-time"
+    },
+    "currency_code": {
+      "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+      "example": "USD",
+      "type": "string"
+    },
+    "currency_code_of_registration_country": {
+      "type": "string",
+      "description": "ISO 4217 Currency Code of the country you are registered in.",
+      "example": "EUR"
+    },
+    "merchant_settlement_type": {
+      "description": "Whether the amounts are net or gross",
+      "example": "NET",
+      "type": "string",
+      "enum": [
+        "GROSS",
+        "NET",
+        "GROSS_FEE"
+      ]
+    },
+    "merchant_id": {
+      "description": "The merchant id",
+      "type": "string"
+    },
+    "transactions": {
+      "description": "Link to the transactions that are part of this payout",
+      "example": "https://{settlements_api}/transactions?payment_reference=XISA93DJ",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "totals",
+    "payment_reference",
+    "payout_date",
+    "currency_code",
+    "merchant_settlement_type",
+    "merchant_id"
+  ]
+}

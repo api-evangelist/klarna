@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MerchantManualIdentificationV1",
+  "title": "MerchantManualIdentificationV1",
+  "type": "object",
+  "properties": {
+    "challenge": {
+      "type": "string",
+      "example": "A78",
+      "description": "Identification challenge"
+    },
+    "customer": {
+      "$ref": "#/components/schemas/CustomerV1"
+    },
+    "customer_obfuscated": {
+      "$ref": "#/components/schemas/CustomerV1"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2038-01-19T03:14:07.000Z",
+      "description": "Session identification expiry time (YYYY-MM-ddThh:mm:ss.fffZ)"
+    }
+  }
+}

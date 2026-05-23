@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PayoutCollection",
+  "title": "PayoutCollection",
+  "type": "object",
+  "properties": {
+    "payouts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Payout"
+      }
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/Pagination"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "payouts",
+    "pagination"
+  ]
+}

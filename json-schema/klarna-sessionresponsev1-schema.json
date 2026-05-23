@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SessionResponseV1",
+  "title": "SessionResponseV1",
+  "type": "object",
+  "properties": {
+    "authorization_token": {
+      "type": "string",
+      "example": "70850a20-a2a0-5c70-810c-096fa6f850bb",
+      "description": "Authorization token (only for KP Sessions)"
+    },
+    "customer": {
+      "$ref": "#/components/schemas/CustomerV1"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2038-01-19T03:14:07.000Z",
+      "description": "Session expiration time"
+    },
+    "klarna_reference": {
+      "type": "string",
+      "example": "ffc25786",
+      "description": "Klarna reference provided by MoOD"
+    },
+    "manual_identification": {
+      "$ref": "#/components/schemas/MerchantManualIdentificationV1"
+    },
+    "order_id": {
+      "type": "string",
+      "example": "93d644a2-43f3-11e9-b210-d663bd873d93",
+      "description": "Order id of the payment session"
+    },
+    "session_id": {
+      "type": "string",
+      "example": "a15b228c-02ad-11e9-8eb2-f2801f1b9fd1",
+      "description": "The id of the HPP Session"
+    },
+    "status": {
+      "type": "string",
+      "example": "COMPLETED",
+      "description": "Current HPP Session status",
+      "enum": [
+        "WAITING",
+        "BACK",
+        "IN_PROGRESS",
+        "MANUAL_ID_CHECK",
+        "COMPLETED",
+        "CANCELLED",
+        "FAILED",
+        "DISABLED",
+        "ERROR"
+      ]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2038-01-19T03:14:07.000Z",
+      "description": "Latest status update time"
+    }
+  }
+}

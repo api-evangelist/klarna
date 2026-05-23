@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorMessageDto",
+  "title": "ErrorMessageDto",
+  "properties": {
+    "correlation_id": {
+      "type": "string"
+    },
+    "error_code": {
+      "type": "string"
+    },
+    "error_messages": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

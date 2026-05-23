@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MerchantUrlsV1",
+  "title": "MerchantUrlsV1",
+  "type": "object",
+  "properties": {
+    "back": {
+      "type": "string",
+      "example": "https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}",
+      "description": "Back URL"
+    },
+    "cancel": {
+      "type": "string",
+      "example": "https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}",
+      "description": "Cancel URL"
+    },
+    "error": {
+      "type": "string",
+      "example": "https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}",
+      "description": "System error URL"
+    },
+    "failure": {
+      "type": "string",
+      "example": "https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}",
+      "description": "Failure URL"
+    },
+    "status_update": {
+      "type": "string",
+      "example": "https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}",
+      "description": "Status update URL"
+    },
+    "success": {
+      "type": "string",
+      "example": "https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}",
+      "description": "Success URL"
+    }
+  }
+}

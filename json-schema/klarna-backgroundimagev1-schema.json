@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackgroundImageV1",
+  "title": "BackgroundImageV1",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "Url for the image"
+    },
+    "width": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Width of the image"
+    }
+  }
+}

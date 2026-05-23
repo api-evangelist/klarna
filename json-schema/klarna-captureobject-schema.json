@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CaptureObject",
+  "title": "CaptureObject",
+  "description": "Capture request data",
+  "properties": {
+    "captured_amount": {
+      "description": "The captured amount in minor units.",
+      "format": "int64",
+      "maximum": 200000000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "description": {
+      "description": "Description of the capture shown to the customer. Maximum 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "Order lines for this capture. Maximum 1000 items.",
+      "items": {
+        "$ref": "#/components/schemas/order_line"
+      },
+      "maxItems": 1000,
+      "minItems": 0,
+      "type": "array"
+    },
+    "reference": {
+      "description": "Internal reference to the capture. This will be included in the settlement files. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "shipping_delay": {
+      "description": "Delay before the order will be shipped. Use for improving the customer experience regarding payments. This field is currently not returned when reading the order. Minimum: 0. Please note: to be able to submit values larger than 0, this has to be enabled in your merchant account. Please contact Klarna for further information.",
+      "format": "int64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "shipping_info": {
+      "description": "Shipping information for this capture. Maximum 500 items.",
+      "items": {
+        "$ref": "#/components/schemas/shipping_info"
+      },
+      "maxItems": 500,
+      "minItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_amount"
+  ],
+  "type": "object"
+}

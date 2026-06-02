@@ -1,0 +1,373 @@
+asyncapi: 2.6.0
+info:
+  title: Klarna Push Notifications
+  version: '1.0.0'
+  description: |-
+    AsyncAPI 2.6 description of Klarna's outbound HTTP push surface — the set of
+    server-to-server callbacks that Klarna issues to merchant-hosted endpoints
+    when payment, checkout, and order lifecycle events occur.
+
+    Klarna does not ship a single unified webhook product. Instead, every push
+    surface is activated by the merchant supplying a fully-qualified HTTPS URL
+    on a `merchant_urls` (or equivalent) object during session/order creation.
+    Klarna then issues an HTTP POST to that URL when the relevant event fires.
+
+    The push surfaces modelled below are the ones publicly documented on
+    docs.klarna.com:
+
+      1. Klarna Payments authorization callback
+         - merchant_urls.authorization (Klarna Payments session)
+         - Delivered after a customer authorizes a payment so the merchant can
+           reliably obtain the authorization_token even if the browser
+           round-trip fails.
+         - Source: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/other-actions/authorization-callback/
+
+      2. Hosted Payment Page (HPP) status_update callback
+         - merchant_urls.status_update (HPP session)
+         - Delivered whenever the HPP session transitions between
+           IN_PROGRESS / COMPLETED / FAILED / BACK / CANCELLED / TIMEOUT.
+         - Source: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/
+
+      3. Klarna Checkout (KCO) / Kustom Checkout push URL
+         - merchant_urls.push (Checkout order)
+         - Called when a checkout order is completed so the merchant can read
+           the order from the Order Management API and acknowledge it.
+         - Source: https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/
+         - Source: https://docs.klarna.com/api/pages/checkout/
+
+      4. Pending-order / fraud-decision notification URL
+         - merchant_urls.notification (Klarna Payments / KCO)
+         - Called when an asynchronously-evaluated order moves out of the
+           PENDING state (fraud accepted, fraud rejected, or other final
+           assessment).
+         - Source: https://docs.klarna.com/payments/after-payments/order-management/more-actions/pending-orders/
+
+    Delivery semantics (documented):
+      - Transport is HTTPS POST initiated by Klarna against the merchant URL.
+      - Connection + read timeout is approximately 2 seconds each; the
+        merchant should respond inside the documented retry window.
+      - Non-2xx responses trigger up to 3 retries with exponentially increasing
+        backoff starting at 1 second.
+      - Delivery is at-least-once — successful 2xx responses may still be
+        retried if Klarna fails to record receipt, so merchants must treat
+        every push as idempotent.
+
+    Authentication:
+      - Klarna does not publish an HMAC signature header for these callbacks.
+      - The documented practice is for merchants to embed a one-time secret
+        token in the callback URL itself (as a query parameter) when they
+        create the session/order, then verify it on receipt. That pattern is
+        modelled in `components.securitySchemes.urlSecretToken` below.
+  contact:
+    name: Klarna Merchant Support
+    url: https://docs.klarna.com/
+  license:
+    name: Klarna Developer Terms
+    url: https://www.klarna.com/
+
+defaultContentType: application/json
+
+servers:
+  merchant:
+    url: '{merchantBaseUrl}'
+    protocol: https
+    description: |-
+      Merchant-hosted HTTPS host that Klarna calls. The exact path is supplied
+      per-session via the relevant `merchant_urls` field (authorization,
+      status_update, push, or notification). All Klarna push URLs are required
+      to use HTTPS.
+    variables:
+      merchantBaseUrl:
+        default: https://merchant.example.com
+        description: Fully-qualified HTTPS origin of the merchant endpoint.
+    security:
+      - urlSecretToken: []
+
+channels:
+  payments/authorization-callback:
+    description: |-
+      Server-side authorization callback for Klarna Payments. Configured as
+      `merchant_urls.authorization` on the Payments session. Klarna POSTs the
+      `authorization_token` and `session_id` so the merchant can place the
+      order even if the front-end loses the token (for example after a bank
+      app switch).
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receivePaymentsAuthorizationCallback
+      summary: Receive a Klarna Payments authorization callback
+      description: |-
+        Delivered after the consumer authorizes the Klarna Payments session.
+        The authorization_token is valid for 60 minutes and is used to call
+        POST /payments/v1/authorizations/{authorizationToken}/order. Retries
+        run up to 3 times with exponential backoff starting at 1 second on
+        non-2xx responses.
+      message:
+        $ref: '#/components/messages/PaymentsAuthorization'
+
+  payments/hpp-status-update:
+    description: |-
+      Hosted Payment Page session status callback. Configured as
+      `merchant_urls.status_update` on the HPP session. Klarna POSTs an
+      `event_id` plus the current `session` object whenever the HPP session
+      transitions state.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receiveHppStatusUpdate
+      summary: Receive an HPP session status update
+      description: |-
+        Delivered whenever the HPP session transitions between IN_PROGRESS,
+        COMPLETED, FAILED, BACK, CANCELLED, or TIMEOUT. Merchants must reply
+        with a 2xx within roughly 3 seconds; Klarna retries up to 3 times
+        (4 attempts total) before giving up. The `event_id` is a unique
+        identifier provided for deduplication.
+      message:
+        $ref: '#/components/messages/HppStatusUpdate'
+
+  checkout/push:
+    description: |-
+      Klarna Checkout (KCO) / Kustom Checkout completion push. Configured as
+      `merchant_urls.push` on the checkout order. Klarna calls the URL after
+      the order is completed so the merchant can read the order via the
+      Order Management API and acknowledge it. The documented URL convention
+      uses a `{checkout.order.id}` placeholder which Klarna substitutes with
+      the Klarna order id before issuing the request (commonly exposed by
+      merchants as a `klarna_order_id` path or query parameter).
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receiveCheckoutPush
+      summary: Receive a Klarna Checkout completion push
+      description: |-
+        Delivered when a Klarna Checkout order is completed. The merchant is
+        expected to (1) read the order from
+        GET /ordermanagement/v1/orders/{order_id}, then (2) acknowledge it
+        via POST /ordermanagement/v1/orders/{order_id}/acknowledge. The push
+        request body is not documented as carrying a structured payload; the
+        Klarna order id is conveyed in the URL substitution.
+      message:
+        $ref: '#/components/messages/CheckoutPush'
+
+  payments/pending-order-notification:
+    description: |-
+      Asynchronous fraud / risk decision notification. Configured as
+      `merchant_urls.notification` on the Klarna Payments or KCO order. Klarna
+      POSTs the final decision after an order that initially resolved as
+      PENDING has been assessed.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receivePendingOrderNotification
+      summary: Receive a pending-order risk decision
+      description: |-
+        Delivered when Klarna reaches a final risk assessment for an order
+        that was initially returned as PENDING. The merchant should look the
+        order up by `order_id` and proceed with capture or cancellation
+        depending on the resolution.
+      message:
+        $ref: '#/components/messages/PendingOrderNotification'
+
+components:
+  securitySchemes:
+    urlSecretToken:
+      type: httpApiKey
+      description: |-
+        Per-session one-time token embedded in the callback URL as a query
+        parameter (for example `?secretToken=...` or `?hppSessionId=...`).
+        Klarna documents this as the recommended authentication pattern for
+        all push surfaces because no signature header is sent. The token is
+        chosen by the merchant when the session/order is created and is
+        validated on each inbound POST.
+      name: secretToken
+      in: query
+
+  messages:
+    PaymentsAuthorization:
+      name: PaymentsAuthorizationCallback
+      title: Klarna Payments Authorization Callback
+      summary: Delivered after Klarna Payments authorizes a session.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/PaymentsAuthorizationPayload'
+
+    HppStatusUpdate:
+      name: HppStatusUpdate
+      title: HPP Status Update Callback
+      summary: Delivered when a Hosted Payment Page session changes state.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/HppStatusUpdatePayload'
+
+    CheckoutPush:
+      name: CheckoutPush
+      title: Klarna Checkout Completion Push
+      summary: Delivered when a Klarna Checkout order is completed.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/CheckoutPushPayload'
+
+    PendingOrderNotification:
+      name: PendingOrderNotification
+      title: Pending Order Risk Decision Notification
+      summary: Delivered when a PENDING order receives a final risk decision.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/PendingOrderNotificationPayload'
+
+  schemas:
+    PaymentsAuthorizationPayload:
+      type: object
+      description: |-
+        JSON body POSTed to `merchant_urls.authorization` for Klarna Payments.
+      required:
+        - authorization_token
+        - session_id
+      properties:
+        authorization_token:
+          type: string
+          format: uuid
+          description: |-
+            Token used to place an order against the authorized session. Valid
+            for 60 minutes from issuance.
+          example: 1eddf502-f3a0-45bf-b1fd-f2e3a2758200
+        session_id:
+          type: string
+          format: uuid
+          description: Klarna Payments session identifier.
+          example: e4b81ca2-0aae-4c16-bcb2-29a0a088a35b
+
+    HppStatusUpdatePayload:
+      type: object
+      description: |-
+        JSON body POSTed to `merchant_urls.status_update` for Hosted Payment
+        Page sessions. The `session` object mirrors the read-session response.
+      required:
+        - event_id
+        - session
+      properties:
+        event_id:
+          type: string
+          description: Unique event identifier supplied for deduplication.
+        session:
+          type: object
+          description: Current HPP session snapshot.
+          required:
+            - session_id
+            - status
+          properties:
+            session_id:
+              type: string
+              description: HPP session identifier.
+            status:
+              type: string
+              description: Current HPP session state.
+              enum:
+                - IN_PROGRESS
+                - COMPLETED
+                - FAILED
+                - BACK
+                - CANCELLED
+                - TIMEOUT
+            authorization_token:
+              type: string
+              description: |-
+                Present when status is COMPLETED and the HPP session is not
+                configured in PLACE_ORDER / CAPTURE_ORDER mode.
+            order_id:
+              type: string
+              description: |-
+                Present when status is COMPLETED with PLACE_ORDER or
+                CAPTURE_ORDER mode.
+            klarna_reference:
+              type: string
+              description: Klarna's human-readable order reference.
+            updated_at:
+              type: string
+              format: date-time
+              description: Timestamp the session status changed.
+            expires_at:
+              type: string
+              format: date-time
+              description: Timestamp at which the session expires.
+
+    CheckoutPushPayload:
+      type: object
+      description: |-
+        Body posted to `merchant_urls.push` for a completed Klarna Checkout
+        order. Klarna's public documentation describes this surface as a
+        notification-only POST; the Klarna order id is conveyed via the URL
+        template (`{checkout.order.id}`) rather than a documented JSON body.
+        Merchants typically expose the substituted id as `klarna_order_id`
+        and immediately call the Order Management API to read full order
+        detail. This schema is intentionally permissive so undocumented
+        fields are not asserted.
+      additionalProperties: true
+
+    PendingOrderNotificationPayload:
+      type: object
+      description: |-
+        Body posted to `merchant_urls.notification` once a PENDING order has
+        been finally assessed. The exact field set is determined by Klarna at
+        delivery time; the merchant uses `order_id` to look the order up via
+        the Order Management API.
+      properties:
+        order_id:
+          type: string
+          description: Klarna order identifier.
+        event_type:
+          type: string
+          description: |-
+            Final risk decision delivered with the notification. Modelled as
+            a free-form string because the public docs do not enumerate the
+            full set; commonly observed values include FRAUD_RISK_ACCEPTED
+            and FRAUD_RISK_REJECTED.
+      additionalProperties: true

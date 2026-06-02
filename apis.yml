@@ -12,7 +12,7 @@ tags:
   - Cards
   - Shopping
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
   - name: Klarna Payments API
@@ -64,6 +64,24 @@ apis:
     properties:
     - type: Documentation
       url: https://docs.klarna.com/settlements/
+  - name: Klarna Push Notifications
+    description: Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP status updates, Checkout push, and pending-order risk decisions.
+    humanURL: https://docs.klarna.com/
+    baseURL: https://merchant.example.com
+    tags:
+    - Webhooks
+    - Push Notifications
+    - Callbacks
+    - Events
+    properties:
+    - type: AsyncAPI
+      url: asyncapi/klarna-push-notifications-asyncapi.yml
+    - type: Documentation
+      url: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/other-actions/authorization-callback/
+    - type: Documentation
+      url: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/
+    - type: Documentation
+      url: https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/
 common:
   - type: GitHubOrganization
     url: https://github.com/klarna

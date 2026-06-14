@@ -1,0 +1,843 @@
+"""
+Klarna Payments and BNPL GraphQL Schema
+Covers: payment sessions, authorizations, order management,
+customer tokens, settlements, disputes, and webhooks.
+Source: https://docs.klarna.com/
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum SessionStatus {
+  INCOMPLETE
+  COMPLETE
+  DISABLED
+}
+
+enum OrderStatus {
+  AUTHORIZED
+  PART_CAPTURED
+  CAPTURED
+  CANCELLED
+  EXPIRED
+  CLOSED
+}
+
+enum ItemType {
+  PHYSICAL
+  DIGITAL
+  SHIPPING_FEE
+  SALES_TAX
+  DISCOUNT
+  STORE_CREDIT
+  GIFT_CARD
+  SURCHARGE
+}
+
+enum PaymentMethodType {
+  INVOICE
+  DIRECT_DEBIT
+  DIRECT_BANK_TRANSFER
+  CARD
+  PAYLATER
+  SLICE_IT
+  SLICE_IT_BY_CARD
+  PAY_NOW
+  PAY_OVER_TIME
+}
+
+enum DisputeStatus {
+  OPEN
+  PENDING_EVIDENCE
+  RESOLVED
+  LOST
+  WON
+}
+
+enum SettlementType {
+  INVOICE
+  CREDIT_NOTE
+  CORRECTION
+}
+
+enum FraudStatus {
+  ACCEPTED
+  PENDING
+  REJECTED
+}
+
+enum CustomerTokenStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum WebhookEventType {
+  ORDER_CAPTURED
+  ORDER_CANCELLED
+  ORDER_REFUNDED
+  SESSION_CREATED
+  SESSION_COMPLETED
+  DISPUTE_OPENED
+  DISPUTE_RESOLVED
+  CHARGEBACK_CREATED
+  SETTLEMENT_CREATED
+  CUSTOMER_TOKEN_CREATED
+}
+
+# ─── Address Types ───────────────────────────────────────────────────────────
+
+type BillingAddress {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  streetAddress: String
+  streetAddress2: String
+  postalCode: String
+  city: String
+  region: String
+  country: String!
+  title: String
+  attentionName: String
+  organizationName: String
+}
+
+input BillingAddressInput {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  streetAddress: String
+  streetAddress2: String
+  postalCode: String
+  city: String
+  region: String
+  country: String!
+  title: String
+  attentionName: String
+  organizationName: String
+}
+
+type ShippingAddress {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  streetAddress: String
+  streetAddress2: String
+  postalCode: String
+  city: String
+  region: String
+  country: String!
+  title: String
+  attentionName: String
+  organizationName: String
+}
+
+input ShippingAddressInput {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  streetAddress: String
+  streetAddress2: String
+  postalCode: String
+  city: String
+  region: String
+  country: String!
+  title: String
+  attentionName: String
+  organizationName: String
+}
+
+# ─── Image and URL Types ─────────────────────────────────────────────────────
+
+type ImageURL {
+  url: URL!
+  width: Int
+  height: Int
+  altText: String
+}
+
+type AssetURLs {
+  descriptive: URL
+  standard: URL
+}
+
+# ─── Line Item Types ─────────────────────────────────────────────────────────
+
+type LineItemDetails {
+  brand: String
+  colorCode: String
+  globalTradeItemNumber: String
+  manufacturerPartNumber: String
+  productCategories: [String!]
+  productUrl: URL
+  imageUrl: ImageURL
+  subscriptionDetails: JSON
+}
+
+type LineItem {
+  reference: String
+  name: String!
+  quantity: Int!
+  quantityUnit: String
+  unitPrice: Int!
+  taxRate: Int
+  totalAmount: Int!
+  totalDiscountAmount: Int
+  totalTaxAmount: Int
+  merchantData: String
+  productIdentifiers: LineItemDetails
+  type: ItemType
+}
+
+input LineItemInput {
+  reference: String
+  name: String!
+  quantity: Int!
+  quantityUnit: String
+  unitPrice: Int!
+  taxRate: Int
+  totalAmount: Int!
+  totalDiscountAmount: Int
+  totalTaxAmount: Int
+  merchantData: String
+  type: ItemType
+}
+
+# ─── Discount Types ──────────────────────────────────────────────────────────
+
+type PromotionCode {
+  code: String!
+  description: String
+  type: String
+}
+
+type DiscountDetails {
+  title: String
+  description: String
+  discountType: String
+  promotionCode: PromotionCode
+}
+
+type Discount {
+  discountId: ID!
+  amount: Int!
+  currency: String!
+  details: DiscountDetails
+  appliedAt: DateTime
+}
+
+# ─── Shipping Types ──────────────────────────────────────────────────────────
+
+type Carrier {
+  name: String!
+  code: String
+  url: URL
+}
+
+type TrackingNumber {
+  trackingNumber: String!
+  carrier: Carrier
+  trackingUrl: URL
+}
+
+type ShippingDetails {
+  returnShippingCompany: String
+  returnTrackingNumber: String
+  returnTrackingUri: URL
+  shippingCompany: String
+  shippingMethod: String
+  trackingNumbers: [TrackingNumber!]
+}
+
+type Shipping {
+  shippingId: ID!
+  orderId: ID!
+  captureId: ID!
+  carrier: Carrier
+  trackingNumber: TrackingNumber
+  details: ShippingDetails
+  createdAt: DateTime
+}
+
+# ─── Payment Method Types ────────────────────────────────────────────────────
+
+type InterestRate {
+  annualPercentageRate: Float!
+  effectiveAnnualPercentageRate: Float
+  nominalAnnualRate: Float
+}
+
+type InstallmentDetails {
+  numberOfInstallments: Int!
+  monthlyAmount: Int!
+  firstInstallmentAmount: Int
+  lastInstallmentAmount: Int
+  totalAmount: Int!
+  totalInterestAmount: Int
+  startDate: String
+}
+
+type Plan {
+  planId: ID!
+  name: String!
+  monthlyAmount: Int!
+  numberOfInstallments: Int!
+  totalAmount: Int!
+  interestRate: InterestRate
+}
+
+type PaymentPlan {
+  paymentPlanId: ID!
+  planType: String!
+  installmentDetails: InstallmentDetails
+  interestRate: InterestRate
+  plans: [Plan!]
+}
+
+type FinancingOption {
+  financingOptionId: ID!
+  label: String!
+  description: String
+  startFee: Int
+  monthlyFee: Int
+  interestRate: InterestRate
+  numberOfInstallments: Int
+  totalAmount: Int
+  paymentPlan: PaymentPlan
+}
+
+type PaymentMethod {
+  identifier: String!
+  name: String!
+  type: PaymentMethodType!
+  assetUrls: AssetURLs
+  financingOptions: [FinancingOption!]
+}
+
+# ─── Customer Types ──────────────────────────────────────────────────────────
+
+type CustomerDetails {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  dateOfBirth: String
+  vatId: String
+  type: String
+  organizationEntityType: String
+  organizationRegistrationId: String
+}
+
+type Customer {
+  customerId: ID!
+  details: CustomerDetails
+  billingAddress: BillingAddress
+  shippingAddress: ShippingAddress
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CustomerToken {
+  tokenId: ID!
+  customerId: ID
+  status: CustomerTokenStatus!
+  paymentMethodType: PaymentMethodType!
+  billingAddress: BillingAddress
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+# ─── Merchant Types ──────────────────────────────────────────────────────────
+
+type MerchantReference {
+  orderid1: String
+  orderid2: String
+}
+
+type MerchantDetails {
+  name: String
+  country: String
+  termsUrl: URL
+  privacyPolicyUrl: URL
+  checkoutTermsUrl: URL
+  logoUrl: URL
+}
+
+type Merchant {
+  merchantId: ID!
+  details: MerchantDetails
+  reference: MerchantReference
+}
+
+# ─── Session Types ───────────────────────────────────────────────────────────
+
+type SessionDetails {
+  locale: String!
+  purchaseCountry: String!
+  purchaseCurrency: String!
+  merchantData: String
+  merchantReference1: String
+  merchantReference2: String
+  acquiringChannel: String
+  merchantUrls: JSON
+  options: JSON
+  customPaymentMethodIds: [String!]
+}
+
+type Session {
+  sessionId: ID!
+  clientToken: String
+  status: SessionStatus!
+  paymentMethodCategories: [PaymentMethod!]
+  details: SessionDetails
+  customer: CustomerDetails
+  billingAddress: BillingAddress
+  shippingAddress: ShippingAddress
+  lineItems: [LineItem!]
+  orderAmount: Int!
+  orderTaxAmount: Int
+  currency: String!
+  expiresAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Authorization Types ─────────────────────────────────────────────────────
+
+type AuthorizationDetails {
+  authorizationToken: String!
+  approved: Boolean!
+  fraudStatus: FraudStatus!
+  expiresAt: DateTime
+  customerToken: CustomerToken
+  authorizedPaymentMethod: PaymentMethod
+}
+
+type Authorization {
+  authorizationId: ID!
+  sessionId: ID!
+  details: AuthorizationDetails
+  createdAt: DateTime!
+}
+
+# ─── Capture Types ───────────────────────────────────────────────────────────
+
+type CaptureDetails {
+  capturedAmount: Int!
+  capturedAt: DateTime!
+  description: String
+  lineItems: [LineItem!]
+  shippingDetails: ShippingDetails
+  shippingInfo: [ShippingDetails!]
+}
+
+type Capture {
+  captureId: ID!
+  orderId: ID!
+  details: CaptureDetails
+  createdAt: DateTime!
+}
+
+# ─── Refund Types ────────────────────────────────────────────────────────────
+
+type RefundDetails {
+  refundedAmount: Int!
+  description: String
+  lineItems: [LineItem!]
+  merchantReference: String
+}
+
+type Refund {
+  refundId: ID!
+  orderId: ID!
+  captureId: ID
+  details: RefundDetails
+  createdAt: DateTime!
+}
+
+# ─── Order Types ─────────────────────────────────────────────────────────────
+
+type OrderDetails {
+  fraudStatus: FraudStatus
+  initialPaymentMethod: PaymentMethod
+  purchaseCountry: String
+  purchaseCurrency: String
+  locale: String
+  merchantData: String
+  merchantReference1: String
+  merchantReference2: String
+  customer: CustomerDetails
+  billingAddress: BillingAddress
+  shippingAddress: ShippingAddress
+  externalPaymentMethods: [JSON]
+  externalCheckouts: [JSON]
+}
+
+type Order {
+  orderId: ID!
+  status: OrderStatus!
+  orderAmount: Int!
+  capturedAmount: Int!
+  remainingAuthorizedAmount: Int!
+  refundedAmount: Int!
+  lineItems: [LineItem!]!
+  captures: [Capture!]
+  refunds: [Refund!]
+  details: OrderDetails
+  merchantReference: MerchantReference
+  expiresAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Payout and Settlement Types ─────────────────────────────────────────────
+
+type PayoutDetails {
+  amount: Int!
+  currency: String!
+  reference: String
+  bankAccountNumber: String
+}
+
+type Payout {
+  payoutId: ID!
+  merchantId: ID!
+  details: PayoutDetails
+  payoutDate: String!
+  createdAt: DateTime!
+}
+
+type SettlementDetails {
+  statementPeriodStart: String!
+  statementPeriodEnd: String!
+  netAmount: Int!
+  grossSaleAmount: Int
+  refundAmount: Int
+  feeAmount: Int
+  currency: String!
+  transactions: [JSON]
+  summary: JSON
+}
+
+type Settlement {
+  settlementId: ID!
+  merchantId: ID!
+  settlementType: SettlementType!
+  details: SettlementDetails
+  payout: Payout
+  createdAt: DateTime!
+}
+
+# ─── Dispute and Chargeback Types ────────────────────────────────────────────
+
+type DisputeDetails {
+  reason: String!
+  reasonCode: String
+  purchaseDate: String
+  merchantReference: String
+  evidenceDeadline: DateTime
+  evidenceFiles: [URL]
+  resolutionReason: String
+  resolutionDate: DateTime
+}
+
+type Dispute {
+  disputeId: ID!
+  orderId: ID!
+  captureId: ID
+  status: DisputeStatus!
+  details: DisputeDetails
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type ChargebackDetails {
+  amount: Int!
+  currency: String!
+  reasonCode: String!
+  reasonDescription: String
+  orderId: ID!
+  captureId: ID
+  cardNetwork: String
+  merchantReference: String
+}
+
+type Chargeback {
+  chargebackId: ID!
+  details: ChargebackDetails
+  createdAt: DateTime!
+}
+
+# ─── Webhook Types ───────────────────────────────────────────────────────────
+
+type WebhookEvent {
+  eventId: ID!
+  eventType: WebhookEventType!
+  webhookId: ID!
+  merchantId: ID!
+  orderId: ID
+  sessionId: ID
+  payload: JSON!
+  deliveredAt: DateTime
+  createdAt: DateTime!
+}
+
+type Webhook {
+  webhookId: ID!
+  merchantId: ID!
+  url: URL!
+  eventTypes: [WebhookEventType!]!
+  secret: String
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Auth Types ──────────────────────────────────────────────────────────────
+
+type APIKey {
+  keyId: ID!
+  merchantId: ID!
+  username: String!
+  environment: String!
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+type Token {
+  tokenValue: String!
+  tokenType: String!
+  expiresIn: Int
+  createdAt: DateTime!
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input CreateSessionInput {
+  purchaseCountry: String!
+  purchaseCurrency: String!
+  locale: String!
+  orderAmount: Int!
+  orderTaxAmount: Int
+  orderLines: [LineItemInput!]!
+  customer: CustomerDetailsInput
+  billingAddress: BillingAddressInput
+  shippingAddress: ShippingAddressInput
+  merchantReference1: String
+  merchantReference2: String
+  merchantData: String
+  customPaymentMethodIds: [String!]
+  options: JSON
+}
+
+input CustomerDetailsInput {
+  givenName: String
+  familyName: String
+  email: String
+  phone: String
+  dateOfBirth: String
+  vatId: String
+  type: String
+}
+
+input AuthorizationInput {
+  autoFinalize: Boolean
+  billingAddress: BillingAddressInput
+  shippingAddress: ShippingAddressInput
+  customer: CustomerDetailsInput
+  orderLines: [LineItemInput!]
+  orderAmount: Int
+  orderTaxAmount: Int
+}
+
+input CreateOrderInput {
+  authorizationToken: String!
+  purchaseCountry: String!
+  purchaseCurrency: String!
+  locale: String!
+  orderAmount: Int!
+  orderTaxAmount: Int
+  orderLines: [LineItemInput!]!
+  billingAddress: BillingAddressInput
+  shippingAddress: ShippingAddressInput
+  merchantReference1: String
+  merchantReference2: String
+  merchantData: String
+}
+
+input CaptureInput {
+  capturedAmount: Int!
+  description: String
+  orderLines: [LineItemInput!]
+  shippingInfo: [ShippingInput!]
+}
+
+input ShippingInput {
+  shippingCompany: String
+  shippingMethod: String
+  trackingNumber: String
+  trackingUri: String
+  returnShippingCompany: String
+  returnTrackingNumber: String
+  returnTrackingUri: String
+}
+
+input RefundInput {
+  refundedAmount: Int!
+  description: String
+  orderLines: [LineItemInput!]
+  merchantReference: String
+}
+
+input CustomerTokenInput {
+  purchaseCountry: String!
+  purchaseCurrency: String!
+  locale: String!
+  billingAddress: BillingAddressInput!
+  customer: CustomerDetailsInput!
+  description: String
+  intendedUse: String
+}
+
+input RegisterWebhookInput {
+  url: URL!
+  eventTypes: [WebhookEventType!]!
+  secret: String
+}
+
+# ─── Root Types ──────────────────────────────────────────────────────────────
+
+type Query {
+  "Retrieve a payment session by ID."
+  session(id: ID!): Session
+
+  "Retrieve an authorization by token."
+  authorization(token: String!): Authorization
+
+  "Retrieve an order by Klarna order ID."
+  order(id: ID!): Order
+
+  "List orders for a merchant with optional filters."
+  orders(
+    merchantId: ID!
+    status: OrderStatus
+    fromDate: String
+    toDate: String
+    limit: Int
+    offset: Int
+  ): [Order!]
+
+  "Retrieve a capture by ID."
+  capture(orderId: ID!, captureId: ID!): Capture
+
+  "List captures for an order."
+  captures(orderId: ID!): [Capture!]
+
+  "Retrieve a refund by ID."
+  refund(orderId: ID!, refundId: ID!): Refund
+
+  "List refunds for an order."
+  refunds(orderId: ID!): [Refund!]
+
+  "Retrieve a customer token."
+  customerToken(tokenId: ID!): CustomerToken
+
+  "Retrieve merchant information."
+  merchant(merchantId: ID!): Merchant
+
+  "List settlement reports for a merchant."
+  settlements(
+    merchantId: ID!
+    startDate: String
+    endDate: String
+    settlementType: SettlementType
+    limit: Int
+    offset: Int
+  ): [Settlement!]
+
+  "Retrieve a single settlement."
+  settlement(settlementId: ID!): Settlement
+
+  "List payouts for a merchant."
+  payouts(merchantId: ID!, startDate: String, endDate: String): [Payout!]
+
+  "Retrieve a payout."
+  payout(payoutId: ID!): Payout
+
+  "List disputes for a merchant."
+  disputes(merchantId: ID!, status: DisputeStatus): [Dispute!]
+
+  "Retrieve a dispute."
+  dispute(disputeId: ID!): Dispute
+
+  "List chargebacks for a merchant."
+  chargebacks(merchantId: ID!): [Chargeback!]
+
+  "List registered webhooks."
+  webhooks(merchantId: ID!): [Webhook!]
+
+  "Retrieve a single webhook."
+  webhook(webhookId: ID!): Webhook
+
+  "List recent webhook events."
+  webhookEvents(webhookId: ID!, limit: Int): [WebhookEvent!]
+
+  "List API keys for a merchant."
+  apiKeys(merchantId: ID!): [APIKey!]
+}
+
+type Mutation {
+  "Create a new Klarna payment session."
+  createSession(input: CreateSessionInput!): Session!
+
+  "Update an existing payment session."
+  updateSession(sessionId: ID!, input: CreateSessionInput!): Session!
+
+  "Authorize an order against a session."
+  authorizeOrder(sessionId: ID!, input: AuthorizationInput!): AuthorizationDetails!
+
+  "Create a Klarna order from an authorization token."
+  createOrder(input: CreateOrderInput!): Order!
+
+  "Acknowledge a Checkout order (required within 10 minutes)."
+  acknowledgeOrder(orderId: ID!): Boolean!
+
+  "Capture a full or partial order amount."
+  captureOrder(orderId: ID!, input: CaptureInput!): Capture!
+
+  "Refund a captured order."
+  refundCapture(orderId: ID!, captureId: ID!, input: RefundInput!): Refund!
+
+  "Cancel an authorized but uncaptured order."
+  cancelOrder(orderId: ID!): Boolean!
+
+  "Extend the authorization period of an order."
+  extendAuthorization(orderId: ID!): DateTime
+
+  "Update shipping on a capture."
+  updateShipping(orderId: ID!, captureId: ID!, shippingInfo: [ShippingInput!]!): Capture!
+
+  "Create a customer token from an authorization."
+  createCustomerToken(authorizationToken: String!, input: CustomerTokenInput!): CustomerToken!
+
+  "Create an order using a customer token (recurring)."
+  createTokenOrder(tokenId: ID!, input: CreateOrderInput!): Order!
+
+  "Register a new webhook endpoint."
+  registerWebhook(merchantId: ID!, input: RegisterWebhookInput!): Webhook!
+
+  "Update an existing webhook."
+  updateWebhook(webhookId: ID!, input: RegisterWebhookInput!): Webhook!
+
+  "Delete a webhook."
+  deleteWebhook(webhookId: ID!): Boolean!
+}

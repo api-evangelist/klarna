@@ -1,0 +1,528 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna Order Management API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Get order details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id",
+            "headers": [
+              {
+                "name": "Klarna-Integrator",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "An order that has the given order id. Read more on [Retrieving order details](https://docs.klarna.com/order-management/pre-delivery/order-details/)"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a Klarna checkout order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/acknowledge",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "Acknowledge order. Read more on [Acknowledging orders](https://docs.klarna.com/order-management/pre-delivery/acknowledge-kco-order/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Update the order amount and order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/authorization",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set new order amount and order lines. Read more on [Updating orders](https://docs.klarna.com/order-management/pre-delivery/update-order-amount/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Update customer addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/customer-details",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update shipping address. Read more on [Updating customer addresses](https://docs.klarna.com/order-management/pre-delivery/update-customer-address/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Extend the authorization time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/extend-authorization-time",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "Extend authorization time. Read more on [Extending order authorization time](https://docs.klarna.com/order-management/pre-delivery/extend-order-authorization-time/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Update merchant references",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/merchant-references",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update merchant references. Read more on [Updating merchant references](https://docs.klarna.com/order-management/pre-delivery/update-merchant-references/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Release an authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/release-remaining-authorization",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "Release remaining authorization. Read more on [Releasing remaining authorization](https://docs.klarna.com/order-management/post-delivery/release-remaining-authorization/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Add shipping information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/shipping-info",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add shipping info to an order. Read more on [Adding shipping info](https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/add-shipping-information/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/cancel",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "Cancel order. Read more on [Cancelling an order](https://docs.klarna.com/order-management/pre-delivery/cancel-order/)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Captures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna List all order captures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "List all order captures"
+        },
+        {
+          "info": {
+            "name": "Klarna Capture an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create capture. Read more on [Capturing an order](https://docs.klarna.com/order-management/delivery/full-capture/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Get capture details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a capture. To learn more, refer to the [Retrieving capture details](https://docs.klarna.com/order-management/post-delivery/capture-details/) article."
+        },
+        {
+          "info": {
+            "name": "Klarna Extend payment due date",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/extend-due-date",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extend the customer's payment due date. Read more on [Extending customer due dates](https://docs.klarna.com/order-management/post-delivery/extend-customer-due-date/)"
+        },
+        {
+          "info": {
+            "name": "Klarna List options for extension of payment due date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/extend-due-date-options",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Get merchant fees for extension of due date due date"
+        },
+        {
+          "info": {
+            "name": "Klarna Add shipping information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/shipping-info",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add shipping info to a capture. Read more on [Adding shipping info](https://docs.klarna.com/order-management/post-delivery/add-capture-shipping-details/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Send customer communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/trigger-send-out",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Trigger resend of customer communication. Read more on [Resending customer communication](https://docs.klarna.com/order-management/post-delivery/trigger-customer-send-out/)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Refund an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/refunds",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a refund. Read more on [Refunds](https://docs.klarna.com/order-management/post-delivery/refund/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Get refund details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/refunds/:refund_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "refund_id",
+                "value": "",
+                "type": "path",
+                "description": "Refund id"
+              }
+            ]
+          },
+          "docs": "Get refund. "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

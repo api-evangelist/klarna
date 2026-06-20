@@ -4,7 +4,7 @@ name: Klarna
 kind: company
 description: Klarna is a Swedish fintech offering BNPL, banking, cards, and a shopping
   app to 150M+ consumers. Merchant API supports Pay-in-3, Pay-in-30, and financing.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Fintech
 - BNPL

@@ -100,7 +100,7 @@ common:
   url: rate-limits/klarna-rate-limits.yml
 - type: FinOps
   url: finops/klarna-finops.yml
-- type: LLMsTxt
+- type: LlmsText
   url: https://docs.klarna.com/llms.txt
 maintainers:
 - FN: Kin Lane

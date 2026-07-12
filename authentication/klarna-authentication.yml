@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/klarna-settlements-api-openapi.yml, openapi/order-management-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basic_auth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/klarna-settlements-api-openapi.yml
+  - openapi/order-management-api-openapi.yml

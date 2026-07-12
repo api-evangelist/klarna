@@ -88,6 +88,12 @@ apis:
   - type: Documentation
     url: https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/
 common:
+- type: VulnerabilityDisclosure
+  url: security/klarna-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/klarna-domain-security.yml
+- type: Authentication
+  url: authentication/klarna-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/klarna
 - type: LinkedIn

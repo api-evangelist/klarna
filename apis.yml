@@ -88,6 +88,8 @@ apis:
   - type: Documentation
     url: https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/
 common:
+- type: AgenticAccess
+  url: agentic-access/klarna-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/klarna-vulnerability-disclosure.yml
 - type: DomainSecurity

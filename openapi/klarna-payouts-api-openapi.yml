@@ -1,0 +1,454 @@
+openapi: 3.0.0
+info:
+  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
+  version: '1.1'
+  title: Klarna HPP Captures Payouts API
+  license:
+    name: Klarna Bank AB
+servers:
+- url: https://api.klarna.com
+tags:
+- name: Payouts
+paths:
+  /payouts/summary:
+    get:
+      parameters:
+      - in: query
+        name: start_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: end_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full datetime like 2020-01-23T23:59:59Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: currency_code
+        description: An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payout summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PayoutSummary'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getPayoutSummary
+      summary: Klarna Payout summary
+      description: Returns a summary of payouts for each currency code in a date range.
+      tags:
+      - Payouts
+  /payouts/{payment_reference}:
+    get:
+      parameters:
+      - in: path
+        name: payment_reference
+        description: The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A payout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getPayout
+      summary: Klarna Payout details
+      description: Returns a specific payout based on a given payment reference.
+      tags:
+      - Payouts
+  /payouts:
+    get:
+      parameters:
+      - in: query
+        name: start_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: end_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: currency_code
+        description: An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: size
+        description: How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set
+        required: false
+        schema:
+          type: integer
+          format: int64
+          maximum: 500
+          default: 20
+      - in: query
+        name: offset
+        description: The current offset. Describes "where" in a collection the current starts.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      responses:
+        '200':
+          description: A collection of payouts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutCollection'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getPayouts
+      summary: Klarna List all payouts
+      description: Returns a collection of payouts.
+      tags:
+      - Payouts
+components:
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id
+    PayoutSummary:
+      type: object
+      properties:
+        summary_total_fee_correction_amount:
+          description: The total amount of fee correction, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_payout_date_start:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        summary_total_release_amount:
+          description: The total amount of money released from holdback by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_settlement_currency:
+          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
+          example: USD
+          type: string
+        summary_payout_date_end:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        summary_total_tax_amount:
+          description: The total amount of tax, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_settlement_amount:
+          description: The total amount of the settlement in question, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_holdback_amount:
+          description: The total amount of money withheld by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_reversal_amount:
+          description: The total amount of reversals, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_return_amount:
+          description: The total amount of returns, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_fee_amount:
+          description: The total amount of fees, in minor units
+          example: 500
+          type: integer
+          format: int64
+        summary_total_commission_amount:
+          description: The total amount of commissions, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_sale_amount:
+          description: The total amount of sales, in minor units
+          example: 500
+          type: integer
+          format: int64
+        summary_total_repay_amount:
+          description: The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - summary_total_fee_correction_amount
+      - summary_payout_date_start
+      - summary_total_release_amount
+      - summary_settlement_currency
+      - summary_payout_date_end
+      - summary_total_tax_amount
+      - summary_total_settlement_amount
+      - summary_total_holdback_amount
+      - summary_total_reversal_amount
+      - summary_total_return_amount
+      - summary_total_fee_amount
+      - summary_total_commission_amount
+      - summary_total_sale_amount
+      - summary_total_repay_amount
+    PayoutCollection:
+      type: object
+      properties:
+        payouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payout'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      additionalProperties: false
+      required:
+      - payouts
+      - pagination
+    Totals:
+      type: object
+      properties:
+        commission_amount:
+          description: The total amount of commissions, in minor units
+          example: 550
+          type: integer
+          format: int64
+        repay_amount:
+          description: The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        sale_amount:
+          description: The total amount of sales, in minor units
+          example: 500
+          type: integer
+          format: int64
+        holdback_amount:
+          description: The total amount of money withheld by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        tax_amount:
+          description: The total amount of tax, in minor units
+          example: 550
+          type: integer
+          format: int64
+        settlement_amount:
+          description: The total amount of the settlement in question, in minor units
+          example: 550
+          type: integer
+          format: int64
+        fee_correction_amount:
+          description: The total amount of fee correction, in minor units
+          example: 550
+          type: integer
+          format: int64
+        reversal_amount:
+          description: The total amount of reversals, in minor units
+          example: 550
+          type: integer
+          format: int64
+        release_amount:
+          description: The total amount of money released from holdback by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        return_amount:
+          description: The total amount of returns, in minor units
+          example: 550
+          type: integer
+          format: int64
+        fee_amount:
+          description: The total amount of fees, in minor units
+          example: 500
+          type: integer
+          format: int64
+        charge_amount:
+          description: The total amount of charges, in minor units. The additional field detailed_type contains the purpose of the charge
+          example: 500
+          type: integer
+          format: int64
+        credit_amount:
+          description: The total amount of credits, in minor units. The additional field detailed_type contains the purpose of the credit
+          example: 500
+          type: integer
+          format: int64
+        fee_refund_amount:
+          description: The total amount of refunded fees in a given settlement, in minor units.
+          example: 500
+          type: integer
+          format: int64
+        tax_refund_amount:
+          description: The total amount of refunded tax in a given settlement, in minor units.
+          example: 500
+          type: integer
+          format: int64
+        deposit_amount:
+          description: The increase of your debt balance with Klarna if your returns, fees, and other charges exceed your sales within this settlement period. This debt will be deducted from your next settlements and describes the amount that is increasing your debt balance, to be seen in the closing_debt_balance. In minor units.
+          example: 500
+          type: integer
+          format: int64
+        opening_debt_balance_amount:
+          description: Your negative balance with Klarna from previous settlements, if your returns, fees, and other charges exceeded your sales. This amount equals the closing_debt_balance of your last settlement unless Klarna has invoiced you separately for the amount. In minor units.
+          example: 500
+          type: integer
+          format: int64
+        closing_debt_balance_amount:
+          description: Your debt balance after the settlement. This amount will be the opening debt balance of your next settlement and helps you understand which amounts will be deducted from your next settlements. In minor units.
+          example: 500
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - commission_amount
+      - repay_amount
+      - sale_amount
+      - holdback_amount
+      - settlement_amount
+      - reversal_amount
+      - release_amount
+      - return_amount
+      - fee_amount
+      - charge_amount
+      - credit_amount
+      - fee_refund_amount
+      - tax_refund_amount
+      - deposit_amount
+      - opening_debt_balance_amount
+      - closing_debt_balance_amount
+    Payout:
+      type: object
+      properties:
+        totals:
+          $ref: '#/components/schemas/Totals'
+        payment_reference:
+          description: The reference id of the payout
+          example: XISA93DJ
+          type: string
+        payout_date:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        currency_code:
+          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
+          example: USD
+          type: string
+        currency_code_of_registration_country:
+          type: string
+          description: ISO 4217 Currency Code of the country you are registered in.
+          example: EUR
+        merchant_settlement_type:
+          description: Whether the amounts are net or gross
+          example: NET
+          type: string
+          enum:
+          - GROSS
+          - NET
+          - GROSS_FEE
+        merchant_id:
+          description: The merchant id
+          type: string
+        transactions:
+          description: Link to the transactions that are part of this payout
+          example: https://{settlements_api}/transactions?payment_reference=XISA93DJ
+          type: string
+      additionalProperties: false
+      required:
+      - totals
+      - payment_reference
+      - payout_date
+      - currency_code
+      - merchant_settlement_type
+      - merchant_id

@@ -1,0 +1,346 @@
+openapi: 3.0.0
+info:
+  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
+  version: '1.1'
+  title: Klarna HPP Captures Refunds API
+  license:
+    name: Klarna Bank AB
+servers:
+- url: https://api.klarna.com
+tags:
+- name: Refunds
+paths:
+  /ordermanagement/v1/orders/{order_id}/refunds:
+    post:
+      description: Create a refund. Read more on [Refunds](https://docs.klarna.com/order-management/post-delivery/refund/)
+      operationId: refundOrder
+      parameters:
+      - description: Order id
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+      - description: This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.
+        in: header
+        name: Klarna-Idempotency-Key
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundObject'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Refund created
+          headers:
+            Location:
+              description: The URI at which the created refund can be found
+              style: simple
+            Refund-Id:
+              description: The id of the created refund
+              style: simple
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund not allowed error message'
+          description: Refund not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Not found error message'
+          description: Order not found.
+      security:
+      - basicAuth: []
+      summary: Klarna Refund an order
+      tags:
+      - Refunds
+  /ordermanagement/v1/orders/{order_id}/refunds/{refund_id}:
+    get:
+      description: 'Get refund. '
+      operationId: get
+      parameters:
+      - description: Order id
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+      - description: Refund id
+        in: path
+        name: refund_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+          description: Refund found.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Not found error message'
+          description: Order or refund not found.
+      security:
+      - basicAuth: []
+      summary: Klarna Get refund details
+      tags:
+      - Refunds
+components:
+  schemas:
+    Refund not allowed error message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: REFUND_NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    ProductIdentifiers:
+      description: product_identifiers
+      properties:
+        brand:
+          description: 'The product''s brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel'
+          example: Intel
+          maxLength: 70
+          minLength: 0
+          type: string
+        category_path:
+          description: 'The product''s category path as used in the merchant''s webshop. Include the full and most detailed category and separate the segments with '' > ''. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops'
+          example: Electronics Store > Computers & Tablets > Desktops
+          maxLength: 750
+          minLength: 0
+          type: string
+        color:
+          description: 'Color to be shown to the end customer (max 64 characters). Example: Denim blue'
+          example: Denim blue
+          maxLength: 64
+          minLength: 0
+          type: string
+        global_trade_item_number:
+          description: 'The product''s Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167'
+          example: '735858293167'
+          maxLength: 50
+          minLength: 0
+          type: string
+        manufacturer_part_number:
+          description: 'The product''s Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH'
+          example: BOXNUC5CPYH
+          maxLength: 70
+          minLength: 0
+          type: string
+        size:
+          description: 'Size to be shown to the end customer (max 64 characters). Example: 4'
+          example: '4'
+          maxLength: 64
+          minLength: 0
+          type: string
+      type: object
+    Refund:
+      properties:
+        credit_invoice:
+          description: Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.
+          type: boolean
+        description:
+          description: Description of the refund shown to the customer. Max length is 255 characters.
+          example: The item was returned and the order refunded.
+          type: string
+        order_lines:
+          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.
+          type: string
+        refund_id:
+          description: The refund id. Generated when the refund is created.
+          example: b2cb4f2e-2781-4359-80ad-555735ebb8d8
+          type: string
+        refunded_amount:
+          description: Refunded amount in minor units.
+          format: int64
+          type: integer
+        refunded_at:
+          description: The time of the refund. ISO 8601.
+          example: '2015-12-04T15:17:40Z'
+          format: date-time
+          type: string
+      type: object
+    RefundObject:
+      properties:
+        description:
+          description: Description of the refund shown to the customer. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        order_lines:
+          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
+          items:
+            $ref: '#/components/schemas/order_line'
+          maxItems: 1000
+          minItems: 0
+          type: array
+        reference:
+          description: Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        refunded_amount:
+          description: Refunded amount in minor units.
+          format: int64
+          maximum: 200000000
+          minimum: 0
+          type: integer
+      required:
+      - refunded_amount
+      type: object
+    Not found error message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NOT_FOUND
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    subscription:
+      description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
+      properties:
+        interval:
+          description: 'The cadence unit. Matches: DAY|WEEK|MONTH|YEAR'
+          example: MONTH
+          pattern: DAY|WEEK|MONTH|YEAR
+          type: string
+        interval_count:
+          description: The number of intervals.
+          format: int32
+          minimum: 1
+          type: integer
+        name:
+          description: The name of the subscription product. Maximum 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+      - interval
+      - interval_count
+      - name
+      type: object
+    order_line:
+      description: List of order lines for the capture shown to the customer.
+      properties:
+        image_url:
+          description: URL to an image that can be embedded in communications between Klarna and the customer.
+          example: https://yourstore.example/product/headphones.png
+          maxLength: 1024
+          minLength: 0
+          type: string
+        merchant_data:
+          description: Data about the order line.
+          example: Some metadata
+          maxLength: 1024
+          minLength: 0
+          type: string
+        name:
+          description: Descriptive item name.
+          maxLength: 255
+          minLength: 0
+          type: string
+        product_identifiers:
+          $ref: '#/components/schemas/ProductIdentifiers'
+        product_url:
+          description: URL to the product that can be used in communications between Klarna and the customer.
+          example: https://yourstore.example/product/headphones
+          maxLength: 1024
+          minLength: 0
+          type: string
+        quantity:
+          description: Item quantity.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        quantity_unit:
+          description: Unit used to describe the quantity.
+          example: pcs.
+          maxLength: 10
+          minLength: 0
+          type: string
+        reference:
+          description: Article number, SKU, or similar identifier on the product variant level.
+          example: '75001'
+          maxLength: 255
+          minLength: 0
+          type: string
+        subscription:
+          $ref: '#/components/schemas/subscription'
+        tax_rate:
+          description: The tax rate in percent with two implicit decimals.
+          format: int32
+          minimum: 0
+          type: integer
+        total_amount:
+          description: Total amount including tax and discounts (`quantity * unit_price - total_discount_amount`).
+          format: int64
+          maximum: 200000000
+          type: integer
+        total_discount_amount:
+          description: 'The discount amount in minor units. Includes tax. Example: 1200 = $12. Max value: 200000000'
+          example: 0
+          format: int64
+          maximum: 200000000
+          minimum: 0
+          type: integer
+        total_tax_amount:
+          description: The total tax amount in minor units.
+          format: int64
+          maximum: 200000000
+          type: integer
+        type:
+          description: Order line type.
+          enum:
+          - physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee
+          example: physical
+          pattern: physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee
+          type: string
+        unit_price:
+          description: Unit price including tax without applying discounts in minor units.
+          format: int64
+          maximum: 200000000
+          type: integer
+      required:
+      - name
+      - quantity
+      - total_amount
+      - unit_price
+      type: object

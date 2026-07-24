@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
+  version: '1.1'
+  title: Klarna HPP Captures Reports API
+  license:
+    name: Klarna Bank AB
+servers:
+- url: https://api.klarna.com
+tags:
+- name: Reports
+paths:
+  /reports/payout-with-transactions:
+    get:
+      parameters:
+      - in: query
+        name: payment_reference
+        description: The reference id of the payout
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A payout
+        '400':
+          description: Bad request
+          content:
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getPayoutReportWithTransactions
+      summary: Klarna Get a payouts summary (CSV)
+      description: "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      tags:
+      - Reports
+  /reports/payout:
+    get:
+      parameters:
+      - in: query
+        name: payment_reference
+        description: The reference id of the payout
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A payout
+        '400':
+          description: Bad request
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: payout
+      summary: Klarna Get a payouts summary (PDF)
+      description: A single settlement summed up in pdf format
+      tags:
+      - Reports
+  /reports/payouts-summary-with-transactions:
+    get:
+      parameters:
+      - in: query
+        name: start_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: end_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A summary of payouts
+        '400':
+          description: Bad request
+          content:
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getPayoutsSummaryReportWithTransactions
+      summary: Klarna Get a payouts summary with transactions (CSV)
+      description: "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      tags:
+      - Reports
+  /reports/payouts-summary:
+    get:
+      parameters:
+      - in: query
+        name: start_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: end_date
+        description: ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A summary of payouts
+        '400':
+          description: Bad request
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: payoutsSummary
+      summary: Klarna Get a payouts summary with transactions (PDF)
+      description: Returns a summary for all payouts between the given dates
+      tags:
+      - Reports
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id

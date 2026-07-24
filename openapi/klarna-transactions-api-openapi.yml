@@ -1,0 +1,304 @@
+openapi: 3.0.0
+info:
+  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
+  version: '1.1'
+  title: Klarna HPP Captures Transactions API
+  license:
+    name: Klarna Bank AB
+servers:
+- url: https://api.klarna.com
+tags:
+- name: Transactions
+paths:
+  /transactions:
+    get:
+      parameters:
+      - in: query
+        name: payment_reference
+        description: The reference id of the payout
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: order_id
+        description: The Klarna assigned order id reference
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: size
+        description: How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          maximum: 500
+          default: 20
+      - in: query
+        name: offset
+        description: The current offset. Describes "where" in a collection the current starts.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      responses:
+        '200':
+          description: A collection of payouts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCollection'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      operationId: getTransactions
+      summary: Klarna List transactions in a payout
+      description: Returns a collection of transactions.
+      tags:
+      - Transactions
+components:
+  schemas:
+    TransactionCollection:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      additionalProperties: false
+      required:
+      - transactions
+      - pagination
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id
+    Transaction:
+      type: object
+      properties:
+        amount:
+          description: Total amount of the specific transaction, in minor units
+          example: 2000
+          type: integer
+          format: int64
+        capture_id:
+          description: Each capture on an order is assigned a unique identifier, referred to as the capture_id, which is provided exclusively for sale and fee transactions. In instances of partial shipments, an order may undergo multiple captures, each of which is reflected as a separate transaction with its own unique capture_id. It's important to note that for certain transaction types such as RETURNS and REVERSALS, where captures do not exist, the API will return empty strings for the capture_ID field.
+          example: 33db6f16-9f43-43fa-a587-cc51411c98e4
+          type: string
+        merchant_reference1:
+          description: Merchant assigned reference, typically a reference to an order management system id
+          type: string
+        sale_date:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        type:
+          description: The type of transaction.
+          example: SALE
+          type: string
+          enum:
+          - COMMISSION
+          - SALE
+          - REVERSAL
+          - RETURN
+          - TAX
+          - FEE
+          - FEE_REFUND
+          - CORRECTION
+          - REVERSAL_MERCHANT_PROTECTION
+          - CHARGE
+          - CREDIT
+          - HOLDBACK
+          - RELEASE
+        capture_date:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        payment_reference:
+          description: Reference to the specific payout the transaction is part of, if available.
+          example: XISA93DJ
+          type: string
+        order_id:
+          description: The Klarna assigned order id reference
+          example: ce17b4cb-147f-48b7-b8e6-dde2fa397f04
+          type: string
+          format: uuid
+        payout:
+          description: Link to the payout that this transaction is part of
+          example: https://{settlements_api}/payouts/XISA93DJ
+          type: string
+        refund_id:
+          description: The Klarna assigned id reference of a specific refund
+          example: ef1baa1f-b42e-44be-b9e4-4b94510b53e5
+          type: string
+        short_order_id:
+          description: The Klarna assigned short order id reference
+          example: shortrid
+          type: string
+        merchant_reference2:
+          description: Merchant assigned reference, typically a reference to an order management system id
+          type: string
+        currency_code:
+          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
+          example: USD
+          type: string
+        purchase_country:
+          type: string
+          description: ISO Alpha-2 Country Code
+          example: PL
+        vat_rate:
+          type: integer
+          description: VAT (Value added tax) rate on Klarna fees
+          example: 2000
+        vat_amount:
+          type: integer
+          description: VAT (Value added tax) amount on Klarna fees, in minor units
+          example: 1000
+        shipping_country:
+          type: string
+          description: ISO Alpha-2 Country Code
+          example: PL
+        initial_payment_method_type:
+          type: string
+          description: Payment method the consumer chose during checkout
+          example: direct_debit
+        initial_number_of_installments:
+          type: integer
+          description: Number of installments the consumer chose during checkout in case of installment payments
+          example: 3
+        initial_payment_method_monthly_downpayments:
+          type: integer
+          description: Number of monthly downpayments that were chosen during the checkout in case of installment payments.
+          example: 12
+        merchant_capture_reference:
+          type: string
+          description: Your internal reference to the capture, that has been submitted during capturing an order via API
+        merchant_refund_reference:
+          type: string
+          description: Your internal reference to the refund, that has been submitted during refunding an order via API
+        detailed_type:
+          type: string
+          description: Detailed description of the transaction type
+          example: PURCHASE
+          enum:
+          - COMMISSION
+          - CREDITED_CORRECTION
+          - PURCHASE_FEE_PERCENTAGE
+          - PURCHASE_FEE_PERCENTAGE_REFUND
+          - LATE_RETURN_FEE
+          - PURCHASE_FEE_FIXED
+          - EXPIRY_FEE_GROSS
+          - EXPIRY_FEE
+          - SERVICING_FEE
+          - RETURN_FEE
+          - EXTRA_INVOICE_FEE
+          - PURCHASE_RETURN
+          - COMMISSION_RETURN
+          - REVERSAL
+          - FRAUD_POLICY_CHARGE
+          - COMMISSION_RETURN_GROSS
+          - FRAUD_POLICY_CREDIT_NET
+          - PURCHASE
+          - MANUAL_ENTRY
+          - LOAN_PAYOUT
+          - LOAN_AMORTISATION
+          - LOAN_FEE
+          - FEE_REFUND
+          - PURCHASE_COMMISSION_PERCENTAGE
+          - EXTEND_DUE_DATE_FEE
+          - TRANSFER_FROM_LEGACY_INTEGRATION
+          - FIXED_FEE_CORRECTION_UK
+          - PERCENTAGE_FEE_CORRECTION_UK
+          - VAT_ON_FEE_CORRECTION_UK
+          - FIXED_FEE_CORRECTION_SE
+          - PERCENTAGE_FEE_CORRECTION_SE
+          - PERCENTAGE_FEE_CORRECTION
+          - FIXED_FEE_CORRECTION
+          - ROLLING_RESERVE
+          - PERCENTAGE_FEES
+          - PAYMENT_REMINDER
+          - CORRECTION
+          - UNDER_REVIEW
+          - INSUFFICIENT_BANK_ACCOUNT_DETAILS
+          - DISPUTE_FEE
+          - DISPUTE_FEE_REFUND
+          - CORRECTION_DISPUTE
+          - PAYMENT_DEFAULT
+        tax_in_currency_of_registration_country:
+          type: integer
+          description: The tax amount on the respective fee, converted into the currency of your registration country. In case you are a German merchant selling in another currency then EUR or a Swedish merchant selling in another currency then SEK, we convert the VAT amount on the Klarna fees into the currency of the country you are registered in, based on the exchange rate of the capture date.
+          example: 1000
+        currency_code_of_registration_country:
+          type: string
+          description: ISO 4217 Currency Code of the country you are registered in.
+          example: EUR
+        klarna_comment:
+          type: string
+          description: Any additional information necessary to provide more context about the transaction.
+          example: Loan Amortisation 2022-12-01
+        reversal_reference:
+          type: string
+          description: Unique internal identifier, known as DisputeKRN, assigned to each dispute by Klarna. This identifier includes a dispute category and a numeric code, enabling efficient tracking and management of the dispute's status.
+          example: krn:klarna:eu1:dispute:goods_not_received:263099944398666
+      additionalProperties: false
+      required:
+      - amount
+      - sale_date
+      - type
+      - capture_date
+      - order_id
+      - currency_code
+      - purchase_country
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count

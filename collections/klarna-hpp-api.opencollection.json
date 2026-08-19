@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna Captures Hpp API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hpp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Create an HPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/hpp/v1/sessions",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to create an HPP session after creating a payment session.\nRead more on **[Create a new HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/create-session/)**."
+        },
+        {
+          "info": {
+            "name": "Klarna Get details of an HPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/hpp/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "HPP session id"
+              }
+            ]
+          },
+          "docs": "Use this API to read an HPP session content and it's status.\nRead more on **[Read HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/read-session/)**."
+        },
+        {
+          "info": {
+            "name": "Klarna Disable an HPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.klarna.com/hpp/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "HPP session id"
+              }
+            ]
+          },
+          "docs": "Use this API to disable an HPP session if payment session had to be cancelled for any reason.\nRead more on **[Disable HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/disable-session/)**."
+        },
+        {
+          "info": {
+            "name": "Klarna Distribute an HPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/hpp/v1/sessions/:session_id/distribution",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "HPP session id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to distribute to the Consumer a link to the Hosted Payment Page either by e-mail or SMS after you have created an HPP session.\nRead more on **[Distribute link to the HPP Session to the Consumer](https://docs.klarna.com/hosted-payment-page/api-documentation/distribute-session/)**."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

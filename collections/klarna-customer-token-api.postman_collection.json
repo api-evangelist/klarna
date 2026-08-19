@@ -1,0 +1,815 @@
+{
+  "item": [
+    {
+      "id": "ca77515a-3d27-4f85-b68e-c9ed2bc359da",
+      "name": "Customer Token",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "047e0b6b-33eb-4ce2-bbe7-4a76a883bb6e",
+          "name": "Get customer token",
+          "request": {
+            "name": "Get customer token",
+            "description": {
+              "content": "Use this API request to retrieve the content of a Klarna customer token. The request will return the status of the token as well as payment method details. To learn more, refer to the **[Read customer tokens details article](https://docs.klarna.com/klarna-payments/other-actions/check-the-details-of-a-customer-token/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-token",
+                "v1",
+                "tokens",
+                ":customerToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8277b8c9-1f67-4483-a8b7-1ead751af982",
+              "name": "Token was successfully read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payment_method_type\": \"INVOICE\",\n  \"status\": \"ACTIVE\",\n  \"card\": {\n    \"brand\": \"VISA\",\n    \"expiry_date\": \"12/2020\",\n    \"masked_number\": \"************1234\"\n  },\n  \"direct_debit\": {\n    \"masked_number\": \"**********124\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4191c92-989f-4df2-8a7c-6dc3c0dfda9c",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6e55efe-fe68-4797-8ba3-40e94f502795",
+              "name": "The token does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e678e66a-1876-46e7-bde3-0fc2fb723dd8",
+          "name": "Create an order with a customer token",
+          "request": {
+            "name": "Create an order with a customer token",
+            "description": {
+              "content": "Use this API call to create an order using a Klarna Customer Token. Make sure you use the correct token ID when placing an order, to ensure that the right consumer gets billed. Read more on **[Create a new order using the customer token](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-3-create-an-order/set-up-a-recurring-payment-order/#create-an-order-with-a-customer-token)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-token",
+                "v1",
+                "tokens",
+                ":customerToken",
+                "order"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Klarna-Idempotency-Key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"tax_rate\": \"<long>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"<string>\",\n  \"attachment\": {\n    \"body\": \"<string>\",\n    \"content_type\": \"<string>\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"<string>\",\n  \"merchant_reference1\": \"<string>\",\n  \"merchant_reference2\": \"<string>\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2254fc95-ac12-41a1-8e67-baebde683b5d",
+              "name": "Order was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2500,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 1900,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 475,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"GBP\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"ON4711\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fraud_status\": \"string\",\n  \"order_id\": \"string\",\n  \"redirect_url\": \"https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect\",\n  \"authorized_payment_method\": {\n    \"type\": \"fixed_amount\",\n    \"number_of_days\": 318,\n    \"number_of_installments\": 1954\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4afadbfc-3124-401f-af22-a05eb2cb598c",
+              "name": "We were unable to create an order with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2500,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 1900,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 475,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"GBP\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"ON4711\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorized_payment_method\": {\n    \"type\": \"deferred_interest\",\n    \"number_of_days\": 1540,\n    \"number_of_installments\": 698\n  },\n  \"correlation_id\": \"string\",\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fraud_status\": \"string\",\n  \"reason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9545f54f-b15b-4a6a-9cf4-3a7064eff4dc",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2500,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 1900,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 475,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"GBP\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"ON4711\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8e3317f-7fe4-493a-be1e-9633f3cd1ce9",
+              "name": "The token does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2500,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 1900,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 475,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"GBP\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"ON4711\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e257c4a-130e-42fe-8cf3-9630cd649e7b",
+              "name": "The data in the request does not match the session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2500,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 1900,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 475,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_currency\": \"GBP\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"auto_capture\": false,\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"ON4711\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"push\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30b88b66-72ce-43f7-a596-b1406db60965",
+          "name": "Update customer token status",
+          "request": {
+            "name": "Update customer token status",
+            "description": {
+              "content": "Use this API call to update the status of a Klarna Customer Token. This should be used if you want to cancel a specific customer token. Read more on **[Update the status of a customer token](https://docs.klarna.com/klarna-payments/other-actions/cancel-a-customer-token/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-token",
+                "v1",
+                "tokens",
+                ":customerToken",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f42ddfcc-0950-47bb-9208-cd093ba67315",
+              "name": "Token patch request has been accepted and is being processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"CANCELLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53c258eb-3a5d-4e92-9ba9-82eaed55e323",
+              "name": "Unable to patch the token with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"CANCELLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f85c118-2b0a-452c-b84d-ae26e8118f71",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"CANCELLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1fd6c3ee-3754-415a-a343-36e31ef61fd4",
+              "name": "The token does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-token",
+                    "v1",
+                    "tokens",
+                    ":customerToken",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"CANCELLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7233a0b4-b2ac-4d62-b34f-e84cdc5d86ca",
+    "name": "Klarna HPP Captures Customer Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

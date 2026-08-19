@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Transactions API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna List transactions in a payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/transactions",
+            "params": [
+              {
+                "name": "payment_reference",
+                "value": "",
+                "type": "query",
+                "description": "The reference id of the payout"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "The Klarna assigned order id reference"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The current offset. Describes \"where\" in a collection the current starts."
+              }
+            ]
+          },
+          "docs": "Returns a collection of transactions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

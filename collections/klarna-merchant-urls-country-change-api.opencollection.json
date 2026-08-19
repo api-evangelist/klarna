@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Merchant Urls.country Change API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Urls.country Change",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Country change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchant_urls.country_change",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Will be called whenever the consumer changes  billing address country. The order will be updated according to the response received by Checkout."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

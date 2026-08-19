@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Payouts API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Payout summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/payouts/summary",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full datetime like 2020-01-23T23:59:59Z."
+              },
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP."
+              }
+            ]
+          },
+          "docs": "Returns a summary of payouts for each currency code in a date range."
+        },
+        {
+          "info": {
+            "name": "Klarna Payout details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/payouts/:payment_reference",
+            "params": [
+              {
+                "name": "payment_reference",
+                "value": "",
+                "type": "path",
+                "description": "The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank."
+              }
+            ]
+          },
+          "docs": "Returns a specific payout based on a given payment reference."
+        },
+        {
+          "info": {
+            "name": "Klarna List all payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/payouts",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z."
+              },
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The current offset. Describes \"where\" in a collection the current starts."
+              }
+            ]
+          },
+          "docs": "Returns a collection of payouts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

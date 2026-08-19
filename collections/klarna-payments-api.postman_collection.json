@@ -1,0 +1,1412 @@
+{
+  "item": [
+    {
+      "id": "9aff78f6-f423-43b6-b65a-f8f3d7e1df7e",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae97d00f-bb82-48ec-b1d1-d2ad22afdbc0",
+          "name": "Create a session",
+          "request": {
+            "name": "Create a session",
+            "description": {
+              "content": "Use this API call to create a Klarna Payments session.<br/>When a session is created you will receive the available `payment_method_categories` for the session, a `session_id` and a `client_token`. The `session_id` can be used to read or update the session using the REST API. The `client_token` should be passed to the browser.\nRead more on **[Create a new payment session](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-1-initiate-a-payment/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"tax_rate\": \"<long>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"<string>\",\n  \"purchase_currency\": \"<string>\",\n  \"acquiring_channel\": \"<string>\",\n  \"attachment\": {\n    \"body\": \"<string>\",\n    \"content_type\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"merchant_data\": \"<string>\",\n  \"merchant_reference1\": \"<string>\",\n  \"merchant_reference2\": \"<string>\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"notification\": \"<string>\",\n    \"push\": \"<string>\",\n    \"authorization\": \"<string>\"\n  },\n  \"options\": {\n    \"color_border\": \"<string>\",\n    \"color_border_selected\": \"<string>\",\n    \"color_details\": \"<string>\",\n    \"color_text\": \"<string>\",\n    \"radius_border\": \"<string>\"\n  },\n  \"order_tax_amount\": \"<long>\",\n  \"shipping_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"intent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b47d622a-4514-4c93-bcb4-2b6ff7d30c4a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-US\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw\",\n  \"session_id\": \"0b1d9815-165e-42e2-8867-35bc03789e00\",\n  \"payment_method_categories\": [\n    {\n      \"asset_urls\": {\n        \"descriptive\": \"https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg\",\n        \"standard\": \"https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg\"\n      },\n      \"identifier\": \"klarna\",\n      \"name\": \"Pay with Klarna\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df7e8ed9-5421-4526-872b-5a66dc532b6e",
+              "name": "We were unable to create a session with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-US\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54d03533-c7e4-4a56-8ae4-ef6d5e1a8dfb",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-US\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f01ab7a-f103-43e6-a452-1b607ef04f3a",
+          "name": "Update a session",
+          "request": {
+            "name": "Update a session",
+            "description": {
+              "content": "Use this API call to update a Klarna Payments session with new details, in case something in the order has changed and the checkout has been reloaded. Including if the consumer adds a new item to the cart or if consumer details are updated.\nRead more on **[Update an existing payment session](https://docs.klarna.com/klarna-payments/other-actions/update-the-cart/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) session_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"acquiring_channel\": \"<string>\",\n  \"attachment\": {\n    \"body\": \"<string>\",\n    \"content_type\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"merchant_data\": \"<string>\",\n  \"merchant_reference1\": \"<string>\",\n  \"merchant_reference2\": \"<string>\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"notification\": \"<string>\",\n    \"push\": \"<string>\",\n    \"authorization\": \"<string>\"\n  },\n  \"options\": {\n    \"color_border\": \"<string>\",\n    \"color_border_selected\": \"<string>\",\n    \"color_details\": \"<string>\",\n    \"color_text\": \"<string>\",\n    \"radius_border\": \"<string>\"\n  },\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"tax_rate\": \"<long>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": \"<long>\",\n  \"purchase_country\": \"<string>\",\n  \"purchase_currency\": \"<string>\",\n  \"shipping_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"intent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c17e4564-bdf9-4983-a088-6eb9065cf92c",
+              "name": "The session was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": 333,\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7b2e2f6-140e-4b7b-b58a-c63cb9d9830b",
+              "name": "We were unable to update the session with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": 333,\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54c5aee3-8764-48fa-a73b-dc2c04b2d377",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": 333,\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6945f515-b735-4a5a-9aa8-e1856e60a21e",
+              "name": "The session does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"design\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": 333,\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"intent\": \"buy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4c2ef72-9b6f-4e86-9026-94258eb2d6c2",
+          "name": "Get details about a session",
+          "request": {
+            "name": "Get details about a session",
+            "description": {
+              "content": "Use this API call to get a Klarna Payments session. You can read the Klarna Payments session at any time after it has been created, to get information about it. This will return all data that has been collected during the session.\nRead more on **[Read an existing payment session](https://docs.klarna.com/klarna-payments/other-actions/check-the-details-of-a-payment-session/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) session_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd796adf-318d-460f-a807-b09aa98983f7",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"acquiring_channel\": \"ECOMMERCE\",\n  \"attachment\": {\n    \"body\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n    \"content_type\": \"application/vnd.klarna.internal.emd-v2+json\"\n  },\n  \"authorization_token\": \"string\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"client_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzZXNzaW9uX2lkIiA6ICIw\",\n  \"custom_payment_method_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"organization_entity_type\": \"REGISTERED_SOLE_TRADER\",\n    \"organization_registration_id\": \"string\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"string\"\n  },\n  \"design\": \"string\",\n  \"expires_at\": \"2038-01-19T03:14:07.000Z\",\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"options\": {\n    \"color_border\": \"#FF9900\",\n    \"color_border_selected\": \"#FF9900\",\n    \"color_details\": \"#FF9900\",\n    \"color_text\": \"#FF9900\",\n    \"radius_border\": \"5px\"\n  },\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"order_tax_amount\": 333,\n  \"payment_method_categories\": [\n    {\n      \"asset_urls\": {\n        \"descriptive\": \"https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg\",\n        \"standard\": \"https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg\"\n      },\n      \"identifier\": \"klarna\",\n      \"name\": \"Pay with Klarna\"\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"status\": \"complete\",\n  \"intent\": \"buy\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5ede65b-9558-4320-b6db-c78442797008",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28e00a03-039b-4b86-89a2-7e8fabef117b",
+              "name": "The session does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) session_id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f246da7-a8d7-4cec-ac93-3dff5bd0b0fe",
+          "name": "Cancel an authorization",
+          "request": {
+            "name": "Cancel an authorization",
+            "description": {
+              "content": "Use this API call to cancel/release an authorization. If the `authorization_token` received during a Klarna Payments wont be used to place an order immediately you could release the authorization.\nRead more on **[Cancel an existing authorization](https://docs.klarna.com/klarna-payments/other-actions/cancel-an-authorization/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "authorizations",
+                ":authorizationToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b469c5ff-7a35-40b3-9d2b-5a237b893a32",
+              "name": "The authorization was cancelled successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b61dda27-c567-42d0-824d-8ff71f111dec",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0627ddad-f38d-4a97-8518-97442bd67dfb",
+              "name": "The authorization does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08e699b7-37bc-4064-a39e-e3b23580e30f",
+          "name": "Create an order",
+          "request": {
+            "name": "Create an order",
+            "description": {
+              "content": "Use this API call to create a new order. Placing an order towards Klarna means that the Klarna Payments session will be closed and that an order will be created in Klarna's system.<br/>When you have received the `authorization_token` for a successful authorization you can place the order. Among the other order details in this request, you include a URL to the confirmation page for the customer.<br/>When the Order has been successfully placed at Klarna, you need to handle it either through the Merchant Portal or using [Klarnas Order Management API](#order-management-api).\nRead more on **[Create a new order](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-3-create-an-order/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "authorizations",
+                ":authorizationToken",
+                "order"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_amount\": \"<long>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"tax_rate\": \"<long>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"<string>\",\n  \"purchase_currency\": \"<string>\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"merchant_data\": \"<string>\",\n  \"merchant_reference1\": \"<string>\",\n  \"merchant_reference2\": \"<string>\",\n  \"merchant_urls\": {\n    \"confirmation\": \"<string>\",\n    \"notification\": \"<string>\",\n    \"push\": \"<string>\",\n    \"authorization\": \"<string>\"\n  },\n  \"order_tax_amount\": \"<long>\",\n  \"shipping_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d97c3b2-62b1-4063-8beb-4ddd281ac4db",
+              "name": "Order was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_id\": \"string\",\n  \"authorized_payment_method\": {\n    \"type\": \"direct_debit\",\n    \"number_of_days\": 3916,\n    \"number_of_installments\": 5864\n  },\n  \"fraud_status\": \"string\",\n  \"redirect_url\": \"https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf7f9ba5-6c58-4038-b4c0-59c04ca25604",
+              "name": "We were unable to create an order with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3cc40e75-cbe6-493f-9c35-0acd6c0810c7",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "434f8f57-7de9-49c6-b01b-fbc2216fbc47",
+              "name": "The authorization does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f9fb4e5-7b33-4268-9c6e-d118613ac540",
+              "name": "The data in the request does not match the session for the authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_amount\": 2000,\n  \"order_lines\": [\n    {\n      \"name\": \"Running shoe\",\n      \"quantity\": 1,\n      \"total_amount\": 2000,\n      \"unit_price\": 2500,\n      \"image_url\": \"https://www.exampleobjects.com/logo.png\",\n      \"merchant_data\": \"{\\\"customer_account_info\\\":[{\\\"unique_account_identifier\\\":\\\"test@gmail.com\\\",\\\"account_registration_date\\\":\\\"2017-02-13T10:49:20Z\\\",\\\"account_last_modified\\\":\\\"2019-03-13T11:45:27Z\\\"}]}\",\n      \"product_identifiers\": {\n        \"brand\": \"shoe-brand\",\n        \"category_path\": \"Shoes > Running\",\n        \"global_trade_item_number\": \"4912345678904\",\n        \"manufacturer_part_number\": \"AD6654412-334.22\",\n        \"color\": \"white\",\n        \"size\": \"small\"\n      },\n      \"product_url\": \"https://.../AD6654412.html\",\n      \"quantity_unit\": \"pcs\",\n      \"reference\": \"AD6654412\",\n      \"tax_rate\": 2000,\n      \"total_discount_amount\": 500,\n      \"total_tax_amount\": 333,\n      \"type\": \"physical\",\n      \"subscription\": {\n        \"name\": \"<string>\",\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\"\n      }\n    }\n  ],\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"auto_capture\": false,\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"custom_payment_method_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  },\n  \"locale\": \"en-GB\",\n  \"merchant_data\": \"{\\\"order_specific\\\":[{\\\"substore\\\":\\\"Women's Fashion\\\",\\\"product_name\\\":\\\"Women Sweatshirt\\\"}]}\",\n  \"merchant_reference1\": \"ON4711\",\n  \"merchant_reference2\": \"hdt53h-zdgg6-hdaff2\",\n  \"merchant_urls\": {\n    \"confirmation\": \"https://www.example-url.com/confirmation\",\n    \"notification\": \"https://www.example-url.com/notification\",\n    \"push\": \"https://www.example-url.com/push\",\n    \"authorization\": \"https://www.example-url.com/authorization\"\n  },\n  \"order_tax_amount\": 333,\n  \"shipping_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee7fbdf6-b239-46d0-81d6-e4fb4cd18979",
+          "name": "Generate a customer token",
+          "request": {
+            "name": "Generate a customer token",
+            "description": {
+              "content": "Use this API call to create a Klarna Customer Token.<br/>After having obtained an `authorization_token` for a successful authorization, this can be used to create a purchase token instead of placing the order. Creating a Klarna Customer Token results in Klarna storing customer and payment method details.\nRead more on **[Generate a costumer token](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-token/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "v1",
+                "authorizations",
+                ":authorizationToken",
+                "customer-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"purchase_country\": \"<string>\",\n  \"purchase_currency\": \"<string>\",\n  \"billing_address\": {\n    \"attention\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"region\": \"<string>\",\n    \"street_address\": \"<string>\",\n    \"street_address2\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb2bcb7a-d16a-4c4a-b021-004e356450f2",
+              "name": "Token was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "customer-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token_id\": \"0b1d9815-165e-42e2-8867-35bc03789e00\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\"\n  },\n  \"payment_method_reference\": \"0b1d9815-165e-42e2-8867-35bc03789e00\",\n  \"redirect_url\": \"https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c33b8138-7932-49ca-822c-57f9e271d385",
+              "name": "We were unable to create a customer token with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "customer-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"string\",\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e27548c-a638-4d24-b184-40334926dbd8",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "customer-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "083cc6c0-27c1-42f7-8c5d-57c903f53b67",
+              "name": "The authorization does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "customer-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89edef8f-9c09-4b4a-968d-2e65e35dd407",
+              "name": "The data in the request does not match the session for the authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "v1",
+                    "authorizations",
+                    ":authorizationToken",
+                    "customer-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"intended_use\": \"<string>\",\n  \"locale\": \"en-GB\",\n  \"purchase_country\": \"GB\",\n  \"purchase_currency\": \"GBP\",\n  \"billing_address\": {\n    \"attention\": \"Attn\",\n    \"city\": \"London\",\n    \"country\": \"GB\",\n    \"email\": \"test.sam@test.com\",\n    \"family_name\": \"Andersson\",\n    \"given_name\": \"Adam\",\n    \"organization_name\": \"<string>\",\n    \"phone\": \"+44795465131\",\n    \"postal_code\": \"W1G 0PW\",\n    \"region\": \"OH\",\n    \"street_address\": \"33 Cavendish Square\",\n    \"street_address2\": \"Floor 22 / Flat 2\",\n    \"title\": \"Mr.\"\n  },\n  \"customer\": {\n    \"date_of_birth\": \"1978-12-31\",\n    \"gender\": \"male\",\n    \"last_four_ssn\": \"<string>\",\n    \"national_identification_number\": \"<string>\",\n    \"organization_entity_type\": \"<string>\",\n    \"organization_registration_id\": \"<string>\",\n    \"title\": \"Mr.\",\n    \"type\": \"organization\",\n    \"vat_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "568f7253-c4f7-4e42-a48e-c06e2c016330",
+    "name": "Klarna HPP Captures Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

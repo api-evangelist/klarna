@@ -1,0 +1,1562 @@
+{
+  "item": [
+    {
+      "id": "0d4a2235-3406-4f35-be6a-52e71e7623e0",
+      "name": "Merchantcard",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e287746-f81f-4362-9e39-d340617d8956",
+          "name": "Klarna Create a card promise",
+          "request": {
+            "name": "Klarna Create a card promise",
+            "description": {
+              "content": "To create promise provide a purchase currency and the cards to be created. The old promise is automatically invalidated if a new promise is created for an order",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "promises"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cards\": [\n    {\n      \"amount\": \"<long>\",\n      \"currency\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"fund_amount\": \"<long>\"\n    }\n  ],\n  \"order_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e791d78-522c-458d-abe6-f0f543045653",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cards\": [\n    {\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"fund_amount\": 10000\n    }\n  ],\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expires_at\": \"1959-01-03T16:32:49.477Z\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ee95fe1-62cf-439f-8624-d299db533918",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cards\": [\n    {\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"fund_amount\": 10000\n    }\n  ],\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45124593-9019-4f8e-a967-b0b12a0d2b3b",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cards\": [\n    {\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"fund_amount\": 10000\n    }\n  ],\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1be2f467-fc0c-4d89-bb48-40fe6d10e3a6",
+          "name": "Klarna Get details of a card promise",
+          "request": {
+            "name": "Klarna Get details of a card promise",
+            "description": {
+              "content": "To get the promise resource simply provide a promise identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "promises",
+                ":promise_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promise_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90f16efe-fe20-437f-97dc-f07d5345e42b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises",
+                    ":promise_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promise_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"cards\": [\n    {\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"fund_amount\": 10000\n    },\n    {\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"fund_amount\": 10000\n    }\n  ],\n  \"created_at\": \"2018-12-03T10:26:06.000Z\",\n  \"expire_at\": \"2018-12-04T10:26:06.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e4d8ca2-0da7-48b5-a764-b879f0011ca7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises",
+                    ":promise_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promise_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "686f797b-bd78-4cd7-8851-01edcd17a766",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "promises",
+                    ":promise_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promise_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f329915-fca8-4836-93fd-fa59b5dc56ac",
+          "name": "Klarna Create a card settlement",
+          "request": {
+            "name": "Klarna Create a card settlement",
+            "description": {
+              "content": "To create a settlement resource provide a completed order identifier and (optionally) a promise identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_id\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"promise_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d2747d5-3bf7-4037-a3cf-a85546d3949c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_id\": \"16e4b85e-899b-4427-a39f-07a496e9515b\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_id\": \"b0ec0bbd-534c-4b1c-b28a-628bf33c3324\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"cards\": [\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    },\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    }\n  ],\n  \"created_at\": \"2018-12-03T10:26:06.000Z\",\n  \"expires_at\": \"2018-12-04T10:26:06.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33efd8f3-17d4-48d0-9401-b3200908a49d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_id\": \"16e4b85e-899b-4427-a39f-07a496e9515b\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f740d106-dba8-4901-b4ec-9f3c3cec5354",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_id\": \"16e4b85e-899b-4427-a39f-07a496e9515b\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c958a24-5613-4785-bd24-280dcec6d103",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_id\": \"16e4b85e-899b-4427-a39f-07a496e9515b\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2322393-bfc6-435d-b1f5-0e759d6cdcd4",
+          "name": "Klarna Get details of card  settlement",
+          "request": {
+            "name": "Klarna Get details of card  settlement",
+            "description": {
+              "content": "To get the settlement resource provide the settlement identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "settlements",
+                ":settlement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) Unique settlement identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                "key": "KeyId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57405299-09c5-4d1c-b159-14d41ccf9d36",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) Unique settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_id\": \"b0ec0bbd-534c-4b1c-b28a-628bf33c3324\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"cards\": [\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    },\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    }\n  ],\n  \"created_at\": \"2018-12-03T10:26:06.000Z\",\n  \"expires_at\": \"2018-12-04T10:26:06.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d47d7b-21d4-472b-a548-7a16aba895a5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) Unique settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "848e6973-6823-40e2-8b42-3d92cf4f0e47",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) Unique settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b9e8766-214d-47a6-90d4-998cb8ebb949",
+          "name": "Klarna Get card settlement details for an order",
+          "request": {
+            "name": "Klarna Get card settlement details for an order",
+            "description": {
+              "content": "To get the order's settlement resource provide the order identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "settlements",
+                "order",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Unique identifier for the order associated to the settlement."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                "key": "KeyId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22ca2950-aac3-422a-b152-83927d14c8cf",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    "order",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Unique identifier for the order associated to the settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_id\": \"b0ec0bbd-534c-4b1c-b28a-628bf33c3324\",\n  \"promise_id\": \"ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c\",\n  \"order_id\": \"f3392f8b-6116-4073-ab96-e330819e2c07\",\n  \"cards\": [\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    },\n    {\n      \"reference\": \"yPGw6i4lR0GTcyxGpS3Q6Q==\",\n      \"card_id\": \"b846430c-3656-43a1-812e-2ccff4531b7d\",\n      \"amount\": 10000,\n      \"currency\": \"USD\",\n      \"pci_data\": \"string\",\n      \"iv\": \"string\",\n      \"aes_key\": \"string\",\n      \"brand\": \"VISA\",\n      \"holder\": \"Jane Doe\"\n    }\n  ],\n  \"created_at\": \"2018-12-03T10:26:06.000Z\",\n  \"expires_at\": \"2018-12-04T10:26:06.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ba45e56-0a7c-4709-b9de-235f0975c6a2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    "order",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Unique identifier for the order associated to the settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9535b838-f71c-4ebc-bfb1-ce6bfb0950b2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "settlements",
+                    "order",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Unique identifier for the order associated to the settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for the public key used for encryption of the card data.",
+                    "key": "KeyId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60cb0e80-3e48-499c-a43d-76039157778a",
+          "name": "Klarna Request order cancellation",
+          "request": {
+            "name": "Klarna Request order cancellation",
+            "description": {
+              "content": "Request cancellation for an order. If the order is already cancelled, a `200` status is returned.\n\nOtherwise, the order will be queued for cancellation with a `202` status. Actual order cancellation will happen asynchronously at a later time. You can call the corresponding GET endpoint to view the status of the request.\n\nThis cancellation endpoint is limited to the scope of the Virtual Credit Cards product. Therefore the order provided must have an associated Virtual Card Settlement, otherwise the call will fail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "orders",
+                ":order_id",
+                "cancel-request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7ef19c5-f94f-4d58-9337-21629972d5de",
+              "name": "Order is already cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"CANCELLED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65f2bc4a-6387-40e2-a356-e99e3bd1a0f4",
+              "name": "Order was successfully queued for cancellation.\n\nThe `check_after` field indicates when you should expect a decision to be made regarding cancellation. You can call the corresponding GET endpoint after this timestamp to see the resulting status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"PENDING\",\n  \"check_after\": \"2018-12-04T10:26:06.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f47e92aa-ea7e-4083-8f96-b44d6f41332b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2a4aa9c-d80a-4436-8819-783db82b22c3",
+              "name": "You do not have permission to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2e494a8-68c6-43c5-891b-3084151a9961",
+              "name": "Order does not exist or does not have an associated Virtual Credit Card Settlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fcffb49-2f02-4e9c-b398-8a5514d5eaca",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bce9cc61-3fd3-4e30-aee8-99018bb51215",
+          "name": "Klarna Get order cancellation status",
+          "request": {
+            "name": "Klarna Get order cancellation status",
+            "description": {
+              "content": "Get the status of an order cancellation request. The order must have an associated Virtual Credit Card Settlement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchantcard",
+                "v3",
+                "orders",
+                ":order_id",
+                "cancel-request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "30613a51-a87f-49a1-92b9-35a1d03ef480",
+              "name": "Successfully retrieved the status of the cancellation request for this order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"PENDING\",\n  \"check_after\": \"2018-12-04T10:26:06.000Z\",\n  \"reason_code\": \"CARD_IN_USE\",\n  \"reason_message\": \"Cancellation request was rejected because the virtual credit card linked to this order is in use.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50b9c5bc-b40c-48f9-a1d3-dd630bcf2672",
+              "name": "Bad Request, or the order was not previously requested for cancellation by calling the POST endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"NO_REQUEST_FOUND\",\n  \"reason_code\": \"NO_REQUEST_FOUND\",\n  \"reason_message\": \"No cancellation request found for this order.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "454362a0-f0fe-4f28-a6e0-b12e895229fc",
+              "name": "You do not have permission to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fee6e92e-eef7-4b0f-b4b6-5f40991388f6",
+              "name": "Order does not exist or does not have an associated Virtual Credit Card Settlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa296c70-1cfc-4d1e-b0fb-7e94210925e0",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchantcard",
+                    "v3",
+                    "orders",
+                    ":order_id",
+                    "cancel-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f2f6757-0330-4a47-877d-37f62757fbb1",
+    "name": "Klarna HPP Captures Merchantcard API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Captures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna List all order captures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ]
+          },
+          "docs": "List all order captures"
+        },
+        {
+          "info": {
+            "name": "Klarna Capture an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create capture. Read more on [Capturing an order](https://docs.klarna.com/order-management/delivery/full-capture/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Get capture details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a capture. To learn more, refer to the [Retrieving capture details](https://docs.klarna.com/order-management/post-delivery/capture-details/) article."
+        },
+        {
+          "info": {
+            "name": "Klarna Extend payment due date",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/extend-due-date",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extend the customer's payment due date. Read more on [Extending customer due dates](https://docs.klarna.com/order-management/post-delivery/extend-customer-due-date/)"
+        },
+        {
+          "info": {
+            "name": "Klarna List options for extension of payment due date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/extend-due-date-options",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Get merchant fees for extension of due date due date"
+        },
+        {
+          "info": {
+            "name": "Klarna Add shipping information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/shipping-info",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add shipping info to a capture. Read more on [Adding shipping info](https://docs.klarna.com/order-management/post-delivery/add-capture-shipping-details/)"
+        },
+        {
+          "info": {
+            "name": "Klarna Send customer communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/ordermanagement/v1/orders/:order_id/captures/:capture_id/trigger-send-out",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Order id"
+              },
+              {
+                "name": "capture_id",
+                "value": "",
+                "type": "path",
+                "description": "Capture id"
+              }
+            ]
+          },
+          "docs": "Trigger resend of customer communication. Read more on [Resending customer communication](https://docs.klarna.com/order-management/post-delivery/trigger-customer-send-out/)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

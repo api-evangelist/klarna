@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Merchant Urls.validation API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Urls.validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Order validation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchant_urls.validation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Will be called before completing the purchase to validate the information provided by the consumer in Klarna's Checkout iframe."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

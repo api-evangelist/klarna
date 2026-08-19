@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Merchant Urls.shipping Option Update API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Urls.shipping Option Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shipping option update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchant_urls.shipping_option_update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Will be called whenever the consumer selects  a shipping option. The order will be updated according to the response received by Checkout."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

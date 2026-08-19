@@ -1,0 +1,1178 @@
+{
+  "item": [
+    {
+      "id": "0d731083-7cc5-4012-9800-3f958204aca9",
+      "name": "Hpp",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc544458-83c6-4b13-b64b-9580b0d2a521",
+          "name": "Klarna Create an HPP session",
+          "request": {
+            "name": "Klarna Create an HPP session",
+            "description": {
+              "content": "Use this API to create an HPP session after creating a payment session.\nRead more on **[Create a new HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/create-session/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hpp",
+                "v1",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "User-Agent",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_session_url\": \"<string>\",\n  \"merchant_urls\": {\n    \"back\": \"<string>\",\n    \"cancel\": \"<string>\",\n    \"error\": \"<string>\",\n    \"failure\": \"<string>\",\n    \"status_update\": \"<string>\",\n    \"success\": \"<string>\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"<string>\",\n    \"page_title\": \"<string>\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"<string>\",\n    \"purchase_type\": \"<string>\",\n    \"show_subtotal_detail\": \"<string>\"\n  },\n  \"profile_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9743fa33-7bcf-41fa-a3c6-cf295c804a7e",
+              "name": "Successfully created HPP session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "User-Agent",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_session_url\": \"One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af\",\n  \"merchant_urls\": {\n    \"back\": \"https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"cancel\": \"https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"error\": \"https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"failure\": \"https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"status_update\": \"https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}\",\n    \"success\": \"https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"https://example.com/logo.jpg\",\n    \"page_title\": \"Complete your purchase\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"PLACE_ORDER\",\n    \"purchase_type\": \"BUY\",\n    \"show_subtotal_detail\": \"HIDE\"\n  },\n  \"profile_id\": \"87ab3565-5e06-4006-9ada-8eedc6926703\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distribution_module\": {\n    \"generation_url\": \"string\",\n    \"standalone_url\": \"string\",\n    \"token\": \"string\"\n  },\n  \"distribution_url\": \"https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436/distribution\",\n  \"expires_at\": \"2038-01-19T03:14:07.000Z\",\n  \"manual_identification_check_url\": \"https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436/manual-id-check\",\n  \"qr_code_url\": \"https://pay.klarna.com/eu/hpp/payments/a94e7760-d135-2721-a538-d6294ea254ed/qr\",\n  \"redirect_url\": \"https://pay.klarna.com/eu/hpp/payments/2OCkffK\",\n  \"session_id\": \"9cbc9884-1fdb-45a8-9694-9340340d0436\",\n  \"session_url\": \"https://api.klarna.com/hpp/v1/sessions/9cbc9884-1fdb-45a8-9694-9340340d0436\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efd5ac92-1332-443a-bcb2-c162dcbea6b4",
+              "name": "We were unable to create a session with the provided data. Some field constraint was violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "User-Agent",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_session_url\": \"One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af\",\n  \"merchant_urls\": {\n    \"back\": \"https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"cancel\": \"https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"error\": \"https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"failure\": \"https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"status_update\": \"https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}\",\n    \"success\": \"https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"https://example.com/logo.jpg\",\n    \"page_title\": \"Complete your purchase\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"PLACE_ORDER\",\n    \"purchase_type\": \"BUY\",\n    \"show_subtotal_detail\": \"HIDE\"\n  },\n  \"profile_id\": \"87ab3565-5e06-4006-9ada-8eedc6926703\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a98af1f0-5e64-4d19-9005-4c34ebe55712",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "User-Agent",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_session_url\": \"One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af\",\n  \"merchant_urls\": {\n    \"back\": \"https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"cancel\": \"https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"error\": \"https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"failure\": \"https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"status_update\": \"https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}\",\n    \"success\": \"https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"https://example.com/logo.jpg\",\n    \"page_title\": \"Complete your purchase\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"PLACE_ORDER\",\n    \"purchase_type\": \"BUY\",\n    \"show_subtotal_detail\": \"HIDE\"\n  },\n  \"profile_id\": \"87ab3565-5e06-4006-9ada-8eedc6926703\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1206f27d-c8e8-4f0a-a814-27340c1a0e07",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "User-Agent",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_session_url\": \"One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af\",\n  \"merchant_urls\": {\n    \"back\": \"https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"cancel\": \"https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"error\": \"https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"failure\": \"https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"status_update\": \"https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}\",\n    \"success\": \"https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"https://example.com/logo.jpg\",\n    \"page_title\": \"Complete your purchase\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"PLACE_ORDER\",\n    \"purchase_type\": \"BUY\",\n    \"show_subtotal_detail\": \"HIDE\"\n  },\n  \"profile_id\": \"87ab3565-5e06-4006-9ada-8eedc6926703\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2f3c937f-bd08-42c4-bf53-8380d62cb8ce",
+              "name": "Payment session has expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "User-Agent",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_session_url\": \"One of https://api.klarna.com/payments/v1/sessions/92d97f60-7a78-46a5-8f68-c56fe52dc4af or https://api.klarna.com/checkout/v3/orders/92d97f60-7a78-46a5-8f68-c56fe52dc4af\",\n  \"merchant_urls\": {\n    \"back\": \"https://example.com/back?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"cancel\": \"https://example.com/cancel?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"error\": \"https://example.com/error?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"failure\": \"https://example.com/fail?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}\",\n    \"status_update\": \"https://example.com/status_update?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&secret=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy&hppId={{session_id}}\",\n    \"success\": \"https://example.com/success?sid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&hppId={{session_id}}&token={{authorization_token}}\"\n  },\n  \"options\": {\n    \"background_images\": [\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      },\n      {\n        \"url\": \"<string>\",\n        \"width\": \"<long>\"\n      }\n    ],\n    \"logo_url\": \"https://example.com/logo.jpg\",\n    \"page_title\": \"Complete your purchase\",\n    \"payment_method_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"payment_method_category\": \"<string>\",\n    \"place_order_mode\": \"PLACE_ORDER\",\n    \"purchase_type\": \"BUY\",\n    \"show_subtotal_detail\": \"HIDE\"\n  },\n  \"profile_id\": \"87ab3565-5e06-4006-9ada-8eedc6926703\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7a46c67-e3ae-4111-ac13-c3401f0447d7",
+          "name": "Klarna Get details of an HPP session",
+          "request": {
+            "name": "Klarna Get details of an HPP session",
+            "description": {
+              "content": "Use this API to read an HPP session content and it's status.\nRead more on **[Read HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/read-session/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hpp",
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) HPP session id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1bf4409-b1c8-4544-abe9-a53e0eb5fba9",
+              "name": "Session found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorization_token\": \"70850a20-a2a0-5c70-810c-096fa6f850bb\",\n  \"customer\": {\n    \"date_of_birth\": \"1987-08-15\",\n    \"family_name\": \"string\",\n    \"given_name\": \"string\",\n    \"national_identification_number\": \"19870815-84932\",\n    \"title\": \"Mr\"\n  },\n  \"expires_at\": \"2038-01-19T03:14:07.000Z\",\n  \"klarna_reference\": \"ffc25786\",\n  \"manual_identification\": {\n    \"challenge\": \"A78\",\n    \"customer\": {\n      \"date_of_birth\": \"1987-08-15\",\n      \"family_name\": \"string\",\n      \"given_name\": \"string\",\n      \"national_identification_number\": \"19870815-84932\",\n      \"title\": \"Mr\"\n    },\n    \"customer_obfuscated\": {\n      \"date_of_birth\": \"1987-08-15\",\n      \"family_name\": \"string\",\n      \"given_name\": \"string\",\n      \"national_identification_number\": \"19870815-84932\",\n      \"title\": \"Mr\"\n    },\n    \"expires_at\": \"2038-01-19T03:14:07.000Z\"\n  },\n  \"order_id\": \"93d644a2-43f3-11e9-b210-d663bd873d93\",\n  \"session_id\": \"a15b228c-02ad-11e9-8eb2-f2801f1b9fd1\",\n  \"status\": \"COMPLETED\",\n  \"updated_at\": \"2038-01-19T03:14:07.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "015d5f43-b111-45e7-a687-9894182566b5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1cb252e-b362-4896-92c2-b7125ffd97bd",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f744c7e4-6bd0-4441-bda1-60351ad2a2aa",
+              "name": "HPP session has expired or could not be found by provided id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9867d9a-aa1f-4048-9ad9-0aa84dcd2aef",
+          "name": "Klarna Disable an HPP session",
+          "request": {
+            "name": "Klarna Disable an HPP session",
+            "description": {
+              "content": "Use this API to disable an HPP session if payment session had to be cancelled for any reason.\nRead more on **[Disable HPP session](https://docs.klarna.com/hosted-payment-page/api-documentation/disable-session/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hpp",
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) HPP session id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa51fd06-d05c-4061-9915-1b8f0eeb3db4",
+              "name": "Session was disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cb9a6a7-d3e7-43e9-b994-4ae012cdbdbc",
+              "name": "HPP session has already been successfully completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "686b143a-d2c2-4dc7-81c9-b97bd46658b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b90ecfcb-4046-4153-804b-0c5454b9a26b",
+              "name": "You were not authorized to execute this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6835547-9483-494a-8960-c3f2d2a6af33",
+              "name": "HPP session has expired or could not be found by provided id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42bec93d-97f9-41f1-b67d-9786ef522b4f",
+          "name": "Klarna Distribute an HPP session",
+          "request": {
+            "name": "Klarna Distribute an HPP session",
+            "description": {
+              "content": "Use this API to distribute to the Consumer a link to the Hosted Payment Page either by e-mail or SMS after you have created an HPP session.\nRead more on **[Distribute link to the HPP Session to the Consumer](https://docs.klarna.com/hosted-payment-page/api-documentation/distribute-session/)**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hpp",
+                "v1",
+                "sessions",
+                ":session_id",
+                "distribution"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) HPP session id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"phone_country\": \"<string>\"\n  },\n  \"method\": \"<string>\",\n  \"template\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "892dea71-8588-4aae-a627-6ad455e3472d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "107927f6-70ac-444c-8928-c31dcffccdd9",
+              "name": "Successfully distributed the HPP Session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30671aac-9032-4e77-955a-668691ad76fc",
+              "name": "We were unable to distribute the link with the provided data. Some field constraint was violated. Or session is disabled by merchant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f1890f8-9843-4803-85a2-d365ccda5b17",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e942b44-8cdc-4ec9-adc1-722600e1229c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8867b14-cf12-4196-9c13-e684ba6058fe",
+              "name": "HPP session not found or access token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a82722d3-db2b-4142-afe2-e04fa8cb6e04",
+              "name": "We were unable to distribute the link due to an internal error. Please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hpp",
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "distribution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) HPP session id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact_information\": {\n    \"access_id\": \"<string>\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"07000212345\",\n    \"phone_country\": \"SE\"\n  },\n  \"method\": \"sms\",\n  \"template\": \"INSTORE_PURCHASE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e8c6103e-5d5a-487a-8f2c-f1add8e335ee",
+    "name": "Klarna Captures Hpp API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

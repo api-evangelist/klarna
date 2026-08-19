@@ -1,0 +1,539 @@
+{
+  "item": [
+    {
+      "id": "fc195e0c-67ce-4722-ac96-7ee31fa6bd18",
+      "name": "Payouts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf89ca7c-0bb7-498b-ad01-34e388b55b8a",
+          "name": "Klarna Payout summary",
+          "request": {
+            "name": "Klarna Payout summary",
+            "description": {
+              "content": "Returns a summary of payouts for each currency code in a date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full datetime like 2020-01-23T23:59:59Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "265b8992-ab18-48a4-9444-5bf37f595937",
+              "name": "Payout summaries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"summary_total_fee_correction_amount\": 550,\n    \"summary_payout_date_start\": \"2016-12-14T07:52:26Z\",\n    \"summary_total_release_amount\": 550,\n    \"summary_settlement_currency\": \"USD\",\n    \"summary_payout_date_end\": \"2016-12-14T07:52:26Z\",\n    \"summary_total_tax_amount\": 550,\n    \"summary_total_settlement_amount\": 550,\n    \"summary_total_holdback_amount\": 550,\n    \"summary_total_reversal_amount\": 550,\n    \"summary_total_return_amount\": 550,\n    \"summary_total_fee_amount\": 500,\n    \"summary_total_commission_amount\": 550,\n    \"summary_total_sale_amount\": 500,\n    \"summary_total_repay_amount\": 550\n  },\n  {\n    \"summary_total_fee_correction_amount\": 550,\n    \"summary_payout_date_start\": \"2016-12-14T07:52:26Z\",\n    \"summary_total_release_amount\": 550,\n    \"summary_settlement_currency\": \"USD\",\n    \"summary_payout_date_end\": \"2016-12-14T07:52:26Z\",\n    \"summary_total_tax_amount\": 550,\n    \"summary_total_settlement_amount\": 550,\n    \"summary_total_holdback_amount\": 550,\n    \"summary_total_reversal_amount\": 550,\n    \"summary_total_return_amount\": 550,\n    \"summary_total_fee_amount\": 500,\n    \"summary_total_commission_amount\": 550,\n    \"summary_total_sale_amount\": 500,\n    \"summary_total_repay_amount\": 550\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b71ad7b8-7520-4391-a523-c8c29a4a0f69",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"correlation_id\": \"2fe0311b-adc5-45e5-ac2b-963dac83c88b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "716a3b66-a44c-4be7-83ed-8909dc447e44",
+          "name": "Klarna Payout details",
+          "request": {
+            "name": "Klarna Payout details",
+            "description": {
+              "content": "Returns a specific payout based on a given payment reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                ":payment_reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_reference",
+                  "description": "(Required) The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5eec35c7-9412-43ae-9be4-c453e2bb427a",
+              "name": "A payout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payment_reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_reference",
+                      "description": "(Required) The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totals\": {\n    \"commission_amount\": 550,\n    \"repay_amount\": 550,\n    \"sale_amount\": 500,\n    \"holdback_amount\": 550,\n    \"settlement_amount\": 550,\n    \"reversal_amount\": 550,\n    \"release_amount\": 550,\n    \"return_amount\": 550,\n    \"fee_amount\": 500,\n    \"charge_amount\": 500,\n    \"credit_amount\": 500,\n    \"fee_refund_amount\": 500,\n    \"tax_refund_amount\": 500,\n    \"deposit_amount\": 500,\n    \"opening_debt_balance_amount\": 500,\n    \"closing_debt_balance_amount\": 500,\n    \"tax_amount\": 550,\n    \"fee_correction_amount\": 550\n  },\n  \"payment_reference\": \"XISA93DJ\",\n  \"payout_date\": \"2016-12-14T07:52:26Z\",\n  \"currency_code\": \"USD\",\n  \"merchant_settlement_type\": \"NET\",\n  \"merchant_id\": \"string\",\n  \"currency_code_of_registration_country\": \"EUR\",\n  \"transactions\": \"https://{settlements_api}/transactions?payment_reference=XISA93DJ\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b07e5c29-1207-489d-953b-ce6dade68c91",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payment_reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_reference",
+                      "description": "(Required) The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"correlation_id\": \"2fe0311b-adc5-45e5-ac2b-963dac83c88b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05ff881c-72df-4176-818b-a362538b2126",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payment_reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_reference",
+                      "description": "(Required) The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"correlation_id\": \"2fe0311b-adc5-45e5-ac2b-963dac83c88b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82d94a1a-1a5c-41d5-a464-5b8f301d6d25",
+          "name": "Klarna List all payouts",
+          "request": {
+            "name": "Klarna List all payouts",
+            "description": {
+              "content": "Returns a collection of payouts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20",
+                  "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The current offset. Describes \"where\" in a collection the current starts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca1b26b4-9a0f-4fae-9bd0-71cfb6ab90d3",
+              "name": "A collection of payouts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payouts\": [\n    {\n      \"totals\": {\n        \"commission_amount\": 550,\n        \"repay_amount\": 550,\n        \"sale_amount\": 500,\n        \"holdback_amount\": 550,\n        \"settlement_amount\": 550,\n        \"reversal_amount\": 550,\n        \"release_amount\": 550,\n        \"return_amount\": 550,\n        \"fee_amount\": 500,\n        \"charge_amount\": 500,\n        \"credit_amount\": 500,\n        \"fee_refund_amount\": 500,\n        \"tax_refund_amount\": 500,\n        \"deposit_amount\": 500,\n        \"opening_debt_balance_amount\": 500,\n        \"closing_debt_balance_amount\": 500,\n        \"tax_amount\": 550,\n        \"fee_correction_amount\": 550\n      },\n      \"payment_reference\": \"XISA93DJ\",\n      \"payout_date\": \"2016-12-14T07:52:26Z\",\n      \"currency_code\": \"USD\",\n      \"merchant_settlement_type\": \"NET\",\n      \"merchant_id\": \"string\",\n      \"currency_code_of_registration_country\": \"EUR\",\n      \"transactions\": \"https://{settlements_api}/transactions?payment_reference=XISA93DJ\"\n    },\n    {\n      \"totals\": {\n        \"commission_amount\": 550,\n        \"repay_amount\": 550,\n        \"sale_amount\": 500,\n        \"holdback_amount\": 550,\n        \"settlement_amount\": 550,\n        \"reversal_amount\": 550,\n        \"release_amount\": 550,\n        \"return_amount\": 550,\n        \"fee_amount\": 500,\n        \"charge_amount\": 500,\n        \"credit_amount\": 500,\n        \"fee_refund_amount\": 500,\n        \"tax_refund_amount\": 500,\n        \"deposit_amount\": 500,\n        \"opening_debt_balance_amount\": 500,\n        \"closing_debt_balance_amount\": 500,\n        \"tax_amount\": 550,\n        \"fee_correction_amount\": 550\n      },\n      \"payment_reference\": \"XISA93DJ\",\n      \"payout_date\": \"2016-12-14T07:52:26Z\",\n      \"currency_code\": \"USD\",\n      \"merchant_settlement_type\": \"NET\",\n      \"merchant_id\": \"string\",\n      \"currency_code_of_registration_country\": \"EUR\",\n      \"transactions\": \"https://{settlements_api}/transactions?payment_reference=XISA93DJ\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 10,\n    \"total\": 42,\n    \"next\": \"http://example.com/collection?offset=21&size=10\",\n    \"prev\": \"http://example.com/collection?offset=0&size=10\",\n    \"offset\": 10\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db9f9282-4b3d-4755-8605-7d7589274e30",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"correlation_id\": \"2fe0311b-adc5-45e5-ac2b-963dac83c88b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5ae509d9-e697-4e09-9d3a-fbe400a7bc5a",
+    "name": "Klarna HPP Captures Payouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

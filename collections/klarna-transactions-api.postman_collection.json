@@ -1,0 +1,196 @@
+{
+  "item": [
+    {
+      "id": "8e05ba8a-0a51-41a5-b297-bb4e71031927",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3786b2e5-e546-4ce0-a7a3-39e54de4f3cc",
+          "name": "Klarna List transactions in a payout",
+          "request": {
+            "name": "Klarna List transactions in a payout",
+            "description": {
+              "content": "Returns a collection of transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "payment_reference",
+                  "value": "<string>",
+                  "description": "The reference id of the payout"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "The Klarna assigned order id reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20",
+                  "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The current offset. Describes \"where\" in a collection the current starts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a68e2cc1-821e-4c7c-976f-bdb785bcc10d",
+              "name": "A collection of payouts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "payment_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"amount\": 2000,\n      \"sale_date\": \"2016-12-14T07:52:26Z\",\n      \"type\": \"SALE\",\n      \"capture_date\": \"2016-12-14T07:52:26Z\",\n      \"order_id\": \"ce17b4cb-147f-48b7-b8e6-dde2fa397f04\",\n      \"currency_code\": \"USD\",\n      \"purchase_country\": \"PL\",\n      \"capture_id\": \"33db6f16-9f43-43fa-a587-cc51411c98e4\",\n      \"merchant_reference1\": \"string\",\n      \"payment_reference\": \"XISA93DJ\",\n      \"payout\": \"https://{settlements_api}/payouts/XISA93DJ\",\n      \"refund_id\": \"ef1baa1f-b42e-44be-b9e4-4b94510b53e5\",\n      \"short_order_id\": \"shortrid\",\n      \"merchant_reference2\": \"string\",\n      \"vat_rate\": 2000,\n      \"vat_amount\": 1000,\n      \"shipping_country\": \"PL\",\n      \"initial_payment_method_type\": \"direct_debit\",\n      \"initial_number_of_installments\": 3,\n      \"initial_payment_method_monthly_downpayments\": 12,\n      \"merchant_capture_reference\": \"string\",\n      \"merchant_refund_reference\": \"string\",\n      \"detailed_type\": \"PURCHASE\",\n      \"tax_in_currency_of_registration_country\": 1000,\n      \"currency_code_of_registration_country\": \"EUR\",\n      \"klarna_comment\": \"Loan Amortisation 2022-12-01\",\n      \"reversal_reference\": \"krn:klarna:eu1:dispute:goods_not_received:263099944398666\"\n    },\n    {\n      \"amount\": 2000,\n      \"sale_date\": \"2016-12-14T07:52:26Z\",\n      \"type\": \"SALE\",\n      \"capture_date\": \"2016-12-14T07:52:26Z\",\n      \"order_id\": \"ce17b4cb-147f-48b7-b8e6-dde2fa397f04\",\n      \"currency_code\": \"USD\",\n      \"purchase_country\": \"PL\",\n      \"capture_id\": \"33db6f16-9f43-43fa-a587-cc51411c98e4\",\n      \"merchant_reference1\": \"string\",\n      \"payment_reference\": \"XISA93DJ\",\n      \"payout\": \"https://{settlements_api}/payouts/XISA93DJ\",\n      \"refund_id\": \"ef1baa1f-b42e-44be-b9e4-4b94510b53e5\",\n      \"short_order_id\": \"shortrid\",\n      \"merchant_reference2\": \"string\",\n      \"vat_rate\": 2000,\n      \"vat_amount\": 1000,\n      \"shipping_country\": \"PL\",\n      \"initial_payment_method_type\": \"direct_debit\",\n      \"initial_number_of_installments\": 3,\n      \"initial_payment_method_monthly_downpayments\": 12,\n      \"merchant_capture_reference\": \"string\",\n      \"merchant_refund_reference\": \"string\",\n      \"detailed_type\": \"PURCHASE\",\n      \"tax_in_currency_of_registration_country\": 1000,\n      \"currency_code_of_registration_country\": \"EUR\",\n      \"klarna_comment\": \"Loan Amortisation 2022-12-01\",\n      \"reversal_reference\": \"krn:klarna:eu1:dispute:goods_not_received:263099944398666\"\n    }\n  ],\n  \"pagination\": {\n    \"count\": 10,\n    \"total\": 42,\n    \"next\": \"http://example.com/collection?offset=21&size=10\",\n    \"prev\": \"http://example.com/collection?offset=0&size=10\",\n    \"offset\": 10\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17a16819-388b-42be-8d6d-dc6abd203ee9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "payment_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"correlation_id\": \"2fe0311b-adc5-45e5-ac2b-963dac83c88b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b3bfa8c8-e7c1-4775-834d-66af2cf77883",
+    "name": "Klarna HPP Captures Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

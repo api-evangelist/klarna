@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Merchantcard API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchantcard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Create a card promise",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchantcard/v3/promises",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To create promise provide a purchase currency and the cards to be created. The old promise is automatically invalidated if a new promise is created for an order"
+        },
+        {
+          "info": {
+            "name": "Klarna Get details of a card promise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/merchantcard/v3/promises/:promise_id",
+            "params": [
+              {
+                "name": "promise_id",
+                "value": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "To get the promise resource simply provide a promise identifier."
+        },
+        {
+          "info": {
+            "name": "Klarna Create a card settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchantcard/v3/settlements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To create a settlement resource provide a completed order identifier and (optionally) a promise identifier."
+        },
+        {
+          "info": {
+            "name": "Klarna Get details of card  settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/merchantcard/v3/settlements/:settlement_id",
+            "headers": [
+              {
+                "name": "KeyId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "b0ec0bbd-534c-4b1c-b28a-628bf33c3324",
+                "type": "path",
+                "description": "Unique settlement identifier."
+              }
+            ]
+          },
+          "docs": "To get the settlement resource provide the settlement identifier."
+        },
+        {
+          "info": {
+            "name": "Klarna Get card settlement details for an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/merchantcard/v3/settlements/order/:order_id",
+            "headers": [
+              {
+                "name": "KeyId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "f3392f8b-6116-4073-ab96-e330819e2c07",
+                "type": "path",
+                "description": "Unique identifier for the order associated to the settlement."
+              }
+            ]
+          },
+          "docs": "To get the order's settlement resource provide the order identifier."
+        },
+        {
+          "info": {
+            "name": "Klarna Get order cancellation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/merchantcard/v3/orders/:order_id/cancel-request",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "f3392f8b-6116-4073-ab96-e330819e2c07",
+                "type": "path",
+                "description": "Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement."
+              }
+            ]
+          },
+          "docs": "Get the status of an order cancellation request. The order must have an associated Virtual Credit Card Settlement."
+        },
+        {
+          "info": {
+            "name": "Klarna Request order cancellation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/merchantcard/v3/orders/:order_id/cancel-request",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "f3392f8b-6116-4073-ab96-e330819e2c07",
+                "type": "path",
+                "description": "Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement."
+              }
+            ]
+          },
+          "docs": "Request cancellation for an order. If the order is already cancelled, a `200` status is returned.\n\nOtherwise, the order will be queued for cancellation with a `202` status. Actual order cancellation will happen asynchronously at a later time. You can call the corresponding GET endpoint to view the status of the request.\n\nThis cancellation endpoint is limited to the scope of the Virtual Credit Cards product. Therefore the order provided must have an associated Virtual Card Settlement, otherwise t"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

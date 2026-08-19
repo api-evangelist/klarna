@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Customer Token API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get customer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/customer-token/v1/tokens/:customerToken",
+            "params": [
+              {
+                "name": "customerToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this API request to retrieve the content of a Klarna customer token. The request will return the status of the token as well as payment method details. To learn more, refer to the **[Read customer tokens details article](https://docs.klarna.com/klarna-payments/other-actions/check-the-details-of-a-customer-token/)**."
+        },
+        {
+          "info": {
+            "name": "Create an order with a customer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klarna.com/customer-token/v1/tokens/:customerToken/order",
+            "headers": [
+              {
+                "name": "Klarna-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerToken",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API call to create an order using a Klarna Customer Token. Make sure you use the correct token ID when placing an order, to ensure that the right consumer gets billed. Read more on **[Create a new order using the customer token](https://docs.klarna.com/klarna-payments/integrate-with-klarna-payments/step-3-create-an-order/set-up-a-recurring-payment-order/#create-an-order-with-a-customer-token)**."
+        },
+        {
+          "info": {
+            "name": "Update customer token status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.klarna.com/customer-token/v1/tokens/:customerToken/status",
+            "params": [
+              {
+                "name": "customerToken",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API call to update the status of a Klarna Customer Token. This should be used if you want to cancel a specific customer token. Read more on **[Update the status of a customer token](https://docs.klarna.com/klarna-payments/other-actions/cancel-a-customer-token/)**."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

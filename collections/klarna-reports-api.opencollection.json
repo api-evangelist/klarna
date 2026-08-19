@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klarna HPP Captures Reports API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Klarna Get a payouts summary (CSV)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/reports/payout-with-transactions",
+            "params": [
+              {
+                "name": "payment_reference",
+                "value": "",
+                "type": "query",
+                "description": "The reference id of the payout"
+              }
+            ]
+          },
+          "docs": "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+        },
+        {
+          "info": {
+            "name": "Klarna Get a payouts summary (PDF)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/reports/payout",
+            "params": [
+              {
+                "name": "payment_reference",
+                "value": "",
+                "type": "query",
+                "description": "The reference id of the payout"
+              }
+            ]
+          },
+          "docs": "A single settlement summed up in pdf format"
+        },
+        {
+          "info": {
+            "name": "Klarna Get a payouts summary with transactions (CSV)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/reports/payouts-summary-with-transactions",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z."
+              }
+            ]
+          },
+          "docs": "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+        },
+        {
+          "info": {
+            "name": "Klarna Get a payouts summary with transactions (PDF)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klarna.com/reports/payouts-summary",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z."
+              }
+            ]
+          },
+          "docs": "Returns a summary for all payouts between the given dates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

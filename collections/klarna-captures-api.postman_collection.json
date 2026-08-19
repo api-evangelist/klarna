@@ -1,0 +1,1562 @@
+{
+  "item": [
+    {
+      "id": "4dc7ac66-41b6-4a52-8f40-daa5e81c0974",
+      "name": "Captures",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afaec147-31d4-4059-8b89-bcb552f1232b",
+          "name": "Klarna Capture an order",
+          "request": {
+            "name": "Klarna Capture an order",
+            "description": {
+              "content": "Create capture. Read more on [Capturing an order](https://docs.klarna.com/order-management/delivery/full-capture/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                "key": "Klarna-Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"captured_amount\": \"<long>\",\n  \"description\": \"<string>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\",\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"<string>\",\n      \"merchant_data\": \"<string>\",\n      \"product_identifiers\": {\n        \"brand\": \"<string>\",\n        \"category_path\": \"<string>\",\n        \"color\": \"<string>\",\n        \"global_trade_item_number\": \"<string>\",\n        \"manufacturer_part_number\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"product_url\": \"<string>\",\n      \"quantity_unit\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"subscription\": {\n        \"interval\": \"<string>\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": \"<long>\",\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"reference\": \"<string>\",\n  \"shipping_delay\": \"<long>\",\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    },\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "471776da-8584-431d-b934-35f11f5144ba",
+              "name": "Capture created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"captured_amount\": \"<long>\",\n  \"description\": \"<string>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"reference\": \"<string>\",\n  \"shipping_delay\": \"<long>\",\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The id of the created capture",
+                  "key": "Capture-Id",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "description": "The URI at which the created capture can be found.",
+                  "key": "Location",
+                  "value": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78ed1dac-e926-4a5d-b263-88ad6d1a978c",
+              "name": "Capture not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"captured_amount\": \"<long>\",\n  \"description\": \"<string>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"reference\": \"<string>\",\n  \"shipping_delay\": \"<long>\",\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"CAPTURE_NOT_ALLOWED\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "981718c0-8f35-4bae-abe7-ed37f663bb9b",
+              "name": "Order not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"captured_amount\": \"<long>\",\n  \"description\": \"<string>\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"reference\": \"<string>\",\n  \"shipping_delay\": \"<long>\",\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NO_SUCH_ORDER\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a22517e-102c-40ad-8687-f2e909a46396",
+          "name": "Klarna List all order captures",
+          "request": {
+            "name": "Klarna List all order captures",
+            "description": {
+              "content": "List all order captures",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "065724ff-ad71-41e8-b89e-d211d14fa21f",
+              "name": "Captures found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billing_address\": {\n      \"attention\": \"John Smith\",\n      \"city\": \"Knoxville\",\n      \"country\": \"us\",\n      \"email\": \"klara.joyce@klarna.com\",\n      \"family_name\": \"Joyce\",\n      \"given_name\": \"Klara\",\n      \"organization_name\": \"Klarna\",\n      \"phone\": \"1-555-555-5555\",\n      \"postal_code\": \"12345\",\n      \"region\": \"TN\",\n      \"street_address\": \"Apartment 10\",\n      \"street_address2\": \"1 Safeway\",\n      \"title\": \"Mrs\"\n    },\n    \"capture_id\": \"4ba29b50-be7b-44f5-a492-113e6a865e22\",\n    \"captured_amount\": 3533,\n    \"captured_at\": \"2015-11-19T01:51:17Z\",\n    \"description\": \"Order has been shipped\",\n    \"klarna_reference\": \"K4MADNY-1\",\n    \"order_lines\": [\n      {\n        \"name\": \"<string>\",\n        \"quantity\": 1,\n        \"total_amount\": \"<long>\",\n        \"unit_price\": \"<long>\",\n        \"image_url\": \"https://yourstore.example/product/headphones.png\",\n        \"merchant_data\": \"Some metadata\",\n        \"product_identifiers\": {\n          \"brand\": \"Intel\",\n          \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n          \"color\": \"Denim blue\",\n          \"global_trade_item_number\": \"735858293167\",\n          \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n          \"size\": \"4\"\n        },\n        \"product_url\": \"https://yourstore.example/product/headphones\",\n        \"quantity_unit\": \"pcs.\",\n        \"reference\": \"75001\",\n        \"subscription\": {\n          \"interval\": \"MONTH\",\n          \"interval_count\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        \"tax_rate\": \"<integer>\",\n        \"total_discount_amount\": 0,\n        \"total_tax_amount\": \"<long>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"quantity\": 1,\n        \"total_amount\": \"<long>\",\n        \"unit_price\": \"<long>\",\n        \"image_url\": \"https://yourstore.example/product/headphones.png\",\n        \"merchant_data\": \"Some metadata\",\n        \"product_identifiers\": {\n          \"brand\": \"Intel\",\n          \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n          \"color\": \"Denim blue\",\n          \"global_trade_item_number\": \"735858293167\",\n          \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n          \"size\": \"4\"\n        },\n        \"product_url\": \"https://yourstore.example/product/headphones\",\n        \"quantity_unit\": \"pcs.\",\n        \"reference\": \"75001\",\n        \"subscription\": {\n          \"interval\": \"MONTH\",\n          \"interval_count\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        \"tax_rate\": \"<integer>\",\n        \"total_discount_amount\": 0,\n        \"total_tax_amount\": \"<long>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"reference\": \"string\",\n    \"refunded_amount\": 0,\n    \"shipping_address\": {\n      \"attention\": \"John Smith\",\n      \"city\": \"Knoxville\",\n      \"country\": \"us\",\n      \"email\": \"klara.joyce@klarna.com\",\n      \"family_name\": \"Joyce\",\n      \"given_name\": \"Klara\",\n      \"organization_name\": \"Klarna\",\n      \"phone\": \"1-555-555-5555\",\n      \"postal_code\": \"12345\",\n      \"region\": \"TN\",\n      \"street_address\": \"Apartment 10\",\n      \"street_address2\": \"1 Safeway\",\n      \"title\": \"Mrs\"\n    },\n    \"shipping_info\": [\n      {\n        \"return_shipping_company\": \"DHL US\",\n        \"return_tracking_number\": \"93456415674545679888\",\n        \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n        \"shipping_company\": \"DHL US\",\n        \"shipping_method\": \"Home\",\n        \"tracking_number\": \"63456415674545679874\",\n        \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n      },\n      {\n        \"return_shipping_company\": \"DHL US\",\n        \"return_tracking_number\": \"93456415674545679888\",\n        \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n        \"shipping_company\": \"DHL US\",\n        \"shipping_method\": \"Home\",\n        \"tracking_number\": \"63456415674545679874\",\n        \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n      }\n    ]\n  },\n  {\n    \"billing_address\": {\n      \"attention\": \"John Smith\",\n      \"city\": \"Knoxville\",\n      \"country\": \"us\",\n      \"email\": \"klara.joyce@klarna.com\",\n      \"family_name\": \"Joyce\",\n      \"given_name\": \"Klara\",\n      \"organization_name\": \"Klarna\",\n      \"phone\": \"1-555-555-5555\",\n      \"postal_code\": \"12345\",\n      \"region\": \"TN\",\n      \"street_address\": \"Apartment 10\",\n      \"street_address2\": \"1 Safeway\",\n      \"title\": \"Mrs\"\n    },\n    \"capture_id\": \"4ba29b50-be7b-44f5-a492-113e6a865e22\",\n    \"captured_amount\": 7099,\n    \"captured_at\": \"2015-11-19T01:51:17Z\",\n    \"description\": \"Order has been shipped\",\n    \"klarna_reference\": \"K4MADNY-1\",\n    \"order_lines\": [\n      {\n        \"name\": \"<string>\",\n        \"quantity\": 1,\n        \"total_amount\": \"<long>\",\n        \"unit_price\": \"<long>\",\n        \"image_url\": \"https://yourstore.example/product/headphones.png\",\n        \"merchant_data\": \"Some metadata\",\n        \"product_identifiers\": {\n          \"brand\": \"Intel\",\n          \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n          \"color\": \"Denim blue\",\n          \"global_trade_item_number\": \"735858293167\",\n          \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n          \"size\": \"4\"\n        },\n        \"product_url\": \"https://yourstore.example/product/headphones\",\n        \"quantity_unit\": \"pcs.\",\n        \"reference\": \"75001\",\n        \"subscription\": {\n          \"interval\": \"MONTH\",\n          \"interval_count\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        \"tax_rate\": \"<integer>\",\n        \"total_discount_amount\": 0,\n        \"total_tax_amount\": \"<long>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"quantity\": 1,\n        \"total_amount\": \"<long>\",\n        \"unit_price\": \"<long>\",\n        \"image_url\": \"https://yourstore.example/product/headphones.png\",\n        \"merchant_data\": \"Some metadata\",\n        \"product_identifiers\": {\n          \"brand\": \"Intel\",\n          \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n          \"color\": \"Denim blue\",\n          \"global_trade_item_number\": \"735858293167\",\n          \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n          \"size\": \"4\"\n        },\n        \"product_url\": \"https://yourstore.example/product/headphones\",\n        \"quantity_unit\": \"pcs.\",\n        \"reference\": \"75001\",\n        \"subscription\": {\n          \"interval\": \"MONTH\",\n          \"interval_count\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        \"tax_rate\": \"<integer>\",\n        \"total_discount_amount\": 0,\n        \"total_tax_amount\": \"<long>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"reference\": \"string\",\n    \"refunded_amount\": 0,\n    \"shipping_address\": {\n      \"attention\": \"John Smith\",\n      \"city\": \"Knoxville\",\n      \"country\": \"us\",\n      \"email\": \"klara.joyce@klarna.com\",\n      \"family_name\": \"Joyce\",\n      \"given_name\": \"Klara\",\n      \"organization_name\": \"Klarna\",\n      \"phone\": \"1-555-555-5555\",\n      \"postal_code\": \"12345\",\n      \"region\": \"TN\",\n      \"street_address\": \"Apartment 10\",\n      \"street_address2\": \"1 Safeway\",\n      \"title\": \"Mrs\"\n    },\n    \"shipping_info\": [\n      {\n        \"return_shipping_company\": \"DHL US\",\n        \"return_tracking_number\": \"93456415674545679888\",\n        \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n        \"shipping_company\": \"DHL US\",\n        \"shipping_method\": \"Home\",\n        \"tracking_number\": \"63456415674545679874\",\n        \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n      },\n      {\n        \"return_shipping_company\": \"DHL US\",\n        \"return_tracking_number\": \"93456415674545679888\",\n        \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n        \"shipping_company\": \"DHL US\",\n        \"shipping_method\": \"Home\",\n        \"tracking_number\": \"63456415674545679874\",\n        \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f4e8d67-2d09-4b03-92ba-b924c9c0091f",
+              "name": "Order not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NO_SUCH_ORDER\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4639f1f-d5c2-4bc4-b703-e1ec6fa029c4",
+          "name": "Klarna Get capture details",
+          "request": {
+            "name": "Klarna Get capture details",
+            "description": {
+              "content": "Retrieve the details of a capture. To learn more, refer to the [Retrieving capture details](https://docs.klarna.com/order-management/post-delivery/capture-details/) article.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures",
+                ":capture_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "capture_id",
+                  "description": "(Required) Capture id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "11890740-c6f9-451c-88f8-f6a448f14b60",
+              "name": "Capture found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billing_address\": {\n    \"attention\": \"John Smith\",\n    \"city\": \"Knoxville\",\n    \"country\": \"us\",\n    \"email\": \"klara.joyce@klarna.com\",\n    \"family_name\": \"Joyce\",\n    \"given_name\": \"Klara\",\n    \"organization_name\": \"Klarna\",\n    \"phone\": \"1-555-555-5555\",\n    \"postal_code\": \"12345\",\n    \"region\": \"TN\",\n    \"street_address\": \"Apartment 10\",\n    \"street_address2\": \"1 Safeway\",\n    \"title\": \"Mrs\"\n  },\n  \"capture_id\": \"4ba29b50-be7b-44f5-a492-113e6a865e22\",\n  \"captured_amount\": 5798,\n  \"captured_at\": \"2015-11-19T01:51:17Z\",\n  \"description\": \"Order has been shipped\",\n  \"klarna_reference\": \"K4MADNY-1\",\n  \"order_lines\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": 1,\n      \"total_amount\": \"<long>\",\n      \"unit_price\": \"<long>\",\n      \"image_url\": \"https://yourstore.example/product/headphones.png\",\n      \"merchant_data\": \"Some metadata\",\n      \"product_identifiers\": {\n        \"brand\": \"Intel\",\n        \"category_path\": \"Electronics Store > Computers & Tablets > Desktops\",\n        \"color\": \"Denim blue\",\n        \"global_trade_item_number\": \"735858293167\",\n        \"manufacturer_part_number\": \"BOXNUC5CPYH\",\n        \"size\": \"4\"\n      },\n      \"product_url\": \"https://yourstore.example/product/headphones\",\n      \"quantity_unit\": \"pcs.\",\n      \"reference\": \"75001\",\n      \"subscription\": {\n        \"interval\": \"MONTH\",\n        \"interval_count\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"tax_rate\": \"<integer>\",\n      \"total_discount_amount\": 0,\n      \"total_tax_amount\": \"<long>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"reference\": \"string\",\n  \"refunded_amount\": 0,\n  \"shipping_address\": {\n    \"attention\": \"John Smith\",\n    \"city\": \"Knoxville\",\n    \"country\": \"us\",\n    \"email\": \"klara.joyce@klarna.com\",\n    \"family_name\": \"Joyce\",\n    \"given_name\": \"Klara\",\n    \"organization_name\": \"Klarna\",\n    \"phone\": \"1-555-555-5555\",\n    \"postal_code\": \"12345\",\n    \"region\": \"TN\",\n    \"street_address\": \"Apartment 10\",\n    \"street_address2\": \"1 Safeway\",\n    \"title\": \"Mrs\"\n  },\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    },\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3dcf463-77aa-41ce-b45b-e00578c247d2",
+              "name": "Order or capture not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NO_SUCH_ORDER\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "feb2cc58-53ba-4449-8501-913db53ee823",
+          "name": "Klarna Extend payment due date",
+          "request": {
+            "name": "Klarna Extend payment due date",
+            "description": {
+              "content": "Extend the customer's payment due date. Read more on [Extending customer due dates](https://docs.klarna.com/order-management/post-delivery/extend-customer-due-date/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures",
+                ":capture_id",
+                "extend-due-date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "capture_id",
+                  "description": "(Required) Capture id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                "key": "Klarna-Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number_of_days\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acc2855e-3211-40fe-ac81-e76957cc6744",
+              "name": "Due date was extended.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "extend-due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number_of_days\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e406e3f-dc1f-46ab-9cd2-29f5f4dbb103",
+              "name": "Extension of due date is not possible.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "extend-due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number_of_days\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"string\",\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f763c2ec-9461-4743-b7c5-475b6ed8017d",
+              "name": "Order or capture not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "extend-due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number_of_days\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"string\",\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a28ee557-c3e6-4a17-8253-4de6984fa936",
+          "name": "Klarna List options for extension of payment due date",
+          "request": {
+            "name": "Klarna List options for extension of payment due date",
+            "description": {
+              "content": "Get merchant fees for extension of due date due date",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures",
+                ":capture_id",
+                "extend-due-date-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "capture_id",
+                  "description": "(Required) Capture id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "de762e88-0381-46b3-9777-8ee8c833f6a2",
+              "name": "Available options found for capture.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "extend-due-date-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currency\": \"usd\",\n  \"options\": [\n    {\n      \"amount\": 2314,\n      \"number_of_days\": 971\n    },\n    {\n      \"amount\": 7057,\n      \"number_of_days\": 3553\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e295898-ad6c-46fd-a312-a0b8899b02cc",
+              "name": "Order or capture not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "extend-due-date-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"string\",\n  \"error_code\": \"string\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35f51274-fb9d-4e9f-9de4-ce8f96edcff2",
+          "name": "Klarna Add shipping information",
+          "request": {
+            "name": "Klarna Add shipping information",
+            "description": {
+              "content": "Add shipping info to a capture. Read more on [Adding shipping info](https://docs.klarna.com/order-management/post-delivery/add-capture-shipping-details/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures",
+                ":capture_id",
+                "shipping-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "capture_id",
+                  "description": "(Required) Capture id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                "key": "Klarna-Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"<string>\",\n      \"return_tracking_number\": \"<string>\",\n      \"return_tracking_uri\": \"<string>\",\n      \"shipping_company\": \"<string>\",\n      \"shipping_method\": \"<string>\",\n      \"tracking_number\": \"<string>\",\n      \"tracking_uri\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6621991-a9e0-45d8-88f0-2b6250d95731",
+              "name": "Shipping information was appended.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "shipping-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0803d1ea-7f2a-4662-927b-c4cd1383ab86",
+              "name": "Order has no captures.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "shipping-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NOT_ALLOWED\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2da60cee-7a16-431d-96e0-44f4cc758505",
+              "name": "Order or capture not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "shipping-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipping_info\": [\n    {\n      \"return_shipping_company\": \"DHL US\",\n      \"return_tracking_number\": \"93456415674545679888\",\n      \"return_tracking_uri\": \"http://shipping.example/findmypackage?93456415674545679888\",\n      \"shipping_company\": \"DHL US\",\n      \"shipping_method\": \"Home\",\n      \"tracking_number\": \"63456415674545679874\",\n      \"tracking_uri\": \"http://shipping.example/findmypackage?63456415674545679874\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NO_SUCH_ORDER\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95dd0d5e-7e9d-491a-be7a-820704e53a52",
+          "name": "Klarna Send customer communication",
+          "request": {
+            "name": "Klarna Send customer communication",
+            "description": {
+              "content": "Trigger resend of customer communication. Read more on [Resending customer communication](https://docs.klarna.com/order-management/post-delivery/trigger-customer-send-out/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ordermanagement",
+                "v1",
+                "orders",
+                ":order_id",
+                "captures",
+                ":capture_id",
+                "trigger-send-out"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Order id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "capture_id",
+                  "description": "(Required) Capture id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                "key": "Klarna-Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "bc50d72f-4d62-41b9-88db-c91cb6dcb739",
+              "name": "Send out was triggered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "trigger-send-out"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "593422eb-a1e9-4cce-8459-4aa957c4443a",
+              "name": "Order has no captures.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "trigger-send-out"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NOT_ALLOWED\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d64db06-08b4-4596-b9b6-2e04fe3a7d26",
+              "name": "Order or capture not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ordermanagement",
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "captures",
+                    ":capture_id",
+                    "trigger-send-out"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Order id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "capture_id",
+                      "description": "(Required) Capture id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+                    "key": "Klarna-Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlation_id\": \"66782175-ae05-44fc-9eb3-eeceadbad271\",\n  \"error_code\": \"NO_SUCH_CAPTURE\",\n  \"error_messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klarna.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a4896e52-dd28-4073-829e-c3a8656050e1",
+    "name": "Klarna HPP Captures API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.",
+      "type": "text/plain"
+    }
+  }
+}

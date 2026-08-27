@@ -2,8 +2,18 @@ aid: klarna
 url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/apis.yml
 name: Klarna
 kind: company
-description: Klarna is a Swedish fintech offering BNPL, banking, cards, and a shopping
-  app to 150M+ consumers. Merchant API supports Pay-in-3, Pay-in-30, and financing.
+description: >-
+  Klarna Bank AB is a Swedish licensed bank and payments network serving 150M+ consumers and
+  600k+ merchants with buy-now-pay-later, financing, cards, banking and a shopping app. For
+  developers Klarna publishes a merchant API estate covering payment sessions and authorization
+  (Klarna Payments), hosted checkout (Klarna Checkout and the Hosted Payment Page), post-purchase
+  order management (capture, refund, cancel, extend due date), customer tokens for recurring
+  purchases, settlement payouts and transaction reporting, the Merchant Card Service, and a PSD2
+  XS2A open-banking API for licensed TPPs. Authentication is HTTP Basic with a Klarna-issued API
+  key; Sign in with Klarna adds a full OAuth 2.0 / OpenID Connect consumer-identity surface.
+  Klarna publishes rate limits, a six-month deprecation policy, public service-level objectives,
+  a self-serve playground with market-specific sample data, and an llms.txt — but no fetchable
+  OpenAPI, no server-side SDK in any language, and no MCP server.
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -24,8 +34,16 @@ tags:
 - Payments
 - Cards
 - Shopping
+- Banking
+- Checkout
+- Order Management
+- Settlement
+- Open Banking
+- PSD2
+- Consumer Credit
+- Sweden
 created: '2026-05-08'
-modified: '2026-05-30'
+modified: '2026-08-27'
 specificationVersion: '0.23'
 apis:
 - name: Klarna Payments API
@@ -38,40 +56,43 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.klarna.com/klarna-payments/
-  - url: graphql/klarna-graphql.md
-    type: GraphQL
 - name: Klarna Checkout API
-  description: Hosted Klarna Checkout (KCO) for full-funnel checkout experience.
-  humanURL: https://docs.klarna.com/klarna-checkout/
+  description: >-
+    Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout
+    product and it now trades as Kustom; as of 2026-08-27 Klarna no longer publishes a dedicated
+    Klarna Checkout reference on docs.klarna.com (https://docs.klarna.com/klarna-checkout/ returns
+    404) and lists Kustom among its acquiring partners instead. The checkout/v3 OpenAPI in this
+    repo remains served from api.klarna.com.
+  humanURL: https://docs.klarna.com/
   baseURL: https://api.klarna.com
   tags:
   - Checkout
   - Hosted
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/klarna-checkout/
+    url: https://docs.klarna.com/
 - name: Klarna Order Management API
   description: Capture, refund, cancel and update orders post-authorization.
-  humanURL: https://docs.klarna.com/order-management/
+  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
   baseURL: https://api.klarna.com
   tags:
   - Order Management
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/order-management/
+    url: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
 - name: Klarna Customer Token API
   description: Persist a payment authorization as a customer token for repeat purchases.
-  humanURL: https://docs.klarna.com/customer-token/
+  humanURL: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
   baseURL: https://api.klarna.com
   tags:
   - Tokens
   - Recurring
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/customer-token/
+    url: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
 - name: Klarna Settlements API
   description: Read merchant settlement reports and transactions.
-  humanURL: https://docs.klarna.com/settlements/
+  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
   baseURL: https://api.klarna.com
   tags:
   - Settlement
@@ -81,7 +102,7 @@ apis:
   - Reporting
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/settlements/
+    url: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
 - name: Klarna Push Notifications
   description: >-
     Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP
@@ -109,7 +130,7 @@ apis:
       https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/
   - type: Documentation
     url: >-
-      https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/
+      https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
 - aid: klarna:klarna-captures-api
   name: Klarna Captures API
   description: The Captures API from Klarna — 6 operation(s) for captures.
@@ -122,6 +143,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-captures-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-captures-overlay.yaml
 - aid: klarna:klarna-checkout-api
   name: Klarna Checkout API
   description: The Checkout API from Klarna — 3 operation(s) for checkout.
@@ -132,6 +155,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-checkout-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-checkout-overlay.yaml
 - aid: klarna:klarna-customer-token-api
   name: Klarna Customer Token API
   description: The Customer Token API from Klarna — 3 operation(s) for customer token.
@@ -142,6 +167,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-customer-token-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-customer-token-overlay.yaml
 - aid: klarna:klarna-hpp-api
   name: Klarna Hpp API
   description: The Hpp API from Klarna — 3 operation(s) for hpp.
@@ -152,6 +179,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-hpp-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-hpp-overlay.yaml
 - aid: klarna:klarna-merchant-urls-address-update-api
   name: Klarna Merchant Urls.address Update API
   description: >-
@@ -163,6 +192,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-merchant-urls-address-update-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-merchant-urls-address-update-overlay.yaml
 - aid: klarna:klarna-merchant-urls-country-change-api
   name: Klarna Merchant Urls.country Change API
   description: >-
@@ -174,6 +205,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-merchant-urls-country-change-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-merchant-urls-country-change-overlay.yaml
 - aid: klarna:klarna-merchant-urls-shipping-option-update-api
   name: Klarna Merchant Urls.shipping Option Update API
   description: >-
@@ -186,6 +219,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-merchant-urls-shipping-option-update-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-merchant-urls-shipping-option-update-overlay.yaml
 - aid: klarna:klarna-merchant-urls-validation-api
   name: Klarna Merchant Urls.validation API
   description: >-
@@ -197,6 +232,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-merchant-urls-validation-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-merchant-urls-validation-overlay.yaml
 - aid: klarna:klarna-merchantcard-api
   name: Klarna Merchantcard API
   description: The Merchantcard API from Klarna — 6 operation(s) for merchantcard.
@@ -209,6 +246,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-merchantcard-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-merchantcard-overlay.yaml
 - aid: klarna:klarna-orders-api
   name: Klarna Orders API
   description: The Orders API from Klarna — 9 operation(s) for orders.
@@ -221,6 +260,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-orders-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-orders-overlay.yaml
 - aid: klarna:klarna-payments-api
   name: Klarna Payments API
   description: The Payments API from Klarna — 5 operation(s) for payments.
@@ -231,6 +272,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-payments-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-payments-overlay.yaml
 - aid: klarna:klarna-payouts-api
   name: Klarna Payouts API
   description: The Payouts API from Klarna — 3 operation(s) for payouts.
@@ -241,6 +284,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-payouts-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-payouts-overlay.yaml
 - aid: klarna:klarna-refunds-api
   name: Klarna Refunds API
   description: The Refunds API from Klarna — 2 operation(s) for refunds.
@@ -251,6 +296,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-refunds-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-refunds-overlay.yaml
 - aid: klarna:klarna-reports-api
   name: Klarna Reports API
   description: The Reports API from Klarna — 4 operation(s) for reports.
@@ -261,6 +308,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-reports-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-reports-overlay.yaml
 - aid: klarna:klarna-transactions-api
   name: Klarna Transactions API
   description: The Transactions API from Klarna — 1 operation(s) for transactions.
@@ -273,29 +322,95 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/klarna-transactions-api-openapi.yml
+  - type: Overlay
+    url: overlays/klarna-transactions-overlay.yaml
 common:
-- type: AgenticAccess
-  url: agentic-access/klarna-agentic-access.yml
-- type: VulnerabilityDisclosure
-  url: security/klarna-vulnerability-disclosure.yml
-- type: DomainSecurity
-  url: security/klarna-domain-security.yml
-- type: Authentication
-  url: authentication/klarna-authentication.yml
+- type: Website
+  url: https://www.klarna.com/
+- type: DeveloperPortal
+  url: https://docs.klarna.com/
+- type: Documentation
+  url: https://docs.klarna.com/
+- type: APIReference
+  url: https://docs.klarna.com/api/kn/introduction/
+- type: GettingStarted
+  url: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/before-you-test/
+- type: Support
+  url: https://www.klarna.com/us/help/
+- type: Blog
+  url: https://www.klarna.com/international/press/category/blog/
 - type: GitHubOrganization
   url: https://github.com/klarna
 - type: LinkedIn
   url: https://www.linkedin.com/company/klarna
-- type: Website
-  url: https://www.klarna.com/
+- type: Pricing
+  url: https://x.klarnacdn.net/mepo/onboarding/pricing-annexes/pricing-annex-kp-CA-US-en-20230905.pdf
+- type: SignUp
+  url: https://portal.playground.klarna.com/
+- type: Login
+  url: https://portal.klarna.com/
+- type: TermsOfService
+  url: https://www.klarna.com/us/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.klarna.com/us/privacy-policy/
+- type: StatusPage
+  url: https://status.klarna.com/
+- type: Deprecation
+  url: https://docs.klarna.com/acquirer/klarna/resources/legal-and-compliance/policies-and-term-of-service/deprecation-policy/
+- type: Security
+  url: https://www.klarna.com/international/responsible-disclosure/
+- type: LlmsText
+  url: https://docs.klarna.com/llms.txt
+- type: AgenticAccess
+  url: agentic-access/klarna-agentic-access.yml
+- type: Authentication
+  url: authentication/klarna-authentication.yml
+- type: OAuthScopes
+  url: scopes/klarna-scopes.yml
+- type: VulnerabilityDisclosure
+  url: security/klarna-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/klarna-domain-security.yml
+- type: Packages
+  url: packages/klarna-packages.yml
+- type: SDKs
+  url: packages/klarna-packages.yml
+- type: Conventions
+  url: conventions/klarna-conventions.yml
+- type: Idempotency
+  url: conventions/klarna-conventions.yml
+- type: ErrorCatalog
+  url: errors/klarna-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/klarna-lifecycle.yml
+- type: ChangeLog
+  url: changelog/klarna-changelog.yml
+- type: Sandbox
+  url: sandbox/klarna-sandbox.yml
+- type: Components
+  url: components/klarna-components.yml
+- type: DataModel
+  url: data-model/klarna-data-model.yml
+- type: Conformance
+  url: conformance/klarna-conformance.yml
+- type: WellKnown
+  url: well-known/klarna-well-known.yml
+- type: Webhooks
+  url: asyncapi/klarna-push-notifications-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Plans
   url: plans/klarna-plans-pricing.yml
 - type: RateLimits
   url: rate-limits/klarna-rate-limits.yml
 - type: FinOps
   url: finops/klarna-finops.yml
-- type: LlmsText
-  url: https://docs.klarna.com/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-27'
+  status: enriched
+  artifacts_added: 34
+  pass: local-v1

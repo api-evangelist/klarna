@@ -337,6 +337,9 @@ apis:
   - type: Overlay
     url: overlays/klarna-transactions-overlay.yaml
 common:
+- type: CapabilityMap
+  url: capabilities/klarna-capability-edges.yml
+  name: Klarna Business Capability Map
 - type: Website
   url: https://www.klarna.com/
 - type: DeveloperPortal

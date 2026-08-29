@@ -1,0 +1,73 @@
+slug: klarna
+provider: Klarna
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Payments
+  spec_file: klarna-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /payments/v1/sessions createCreditSession Create a session; DELETE /payments/v1/authorizations/{authorizationToken}
+    cancelAuthorization
+  reason: Payment session creation and authorisation token lifecycle is plainly payment instruction capture,
+    validation and authorisation.
+- tag: Checkout
+  spec_file: klarna-checkout-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /checkout/v3/orders createOrderMerchant Create an order; hosted checkout that "manages
+    the client side of Klarna Payments"
+  reason: Hosted checkout order creation/update/abort is capture and authorisation of a payment instruction
+    at the point of sale, i.e. payment initiation.
+- tag: Orders
+  spec_file: klarna-orders-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: PATCH /ordermanagement/v1/orders/{order_id}/authorization updateAuthorization; POST .../release-remaining-authorization
+    releaseRemainingAuthorization; POST .../cancel cancelOrder
+  reason: Post-purchase management of payment authorisations (extend, update, release, cancel) is payment
+    instruction/authorisation management.
+- tag: Hpp
+  spec_file: klarna-hpp-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.72
+  evidence: POST /hpp/v1/sessions createHppSession Klarna Create an HPP session
+  reason: Hosted Payment Page session lifecycle exists to collect and authorise a consumer payment, so
+    payment initiation is the closest fit; slightly generic session plumbing lowers confidence.
+- tag: Merchantcard
+  spec_file: klarna-merchantcard-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.7
+  evidence: POST /merchantcard/v3/promises createPromise Klarna Create a card promise; POST /merchantcard/v3/settlements
+    settlePromise Klarna Create a card settlement; schemas card_specification, card
+  reason: Card promise (authorisation reservation) and card settlement operations are card transaction
+    authorisation/processing; not card production or issuance.
+- tag: Refunds
+  spec_file: klarna-refunds-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.7
+  evidence: POST /ordermanagement/v1/orders/{order_id}/refunds refundOrder Klarna Refund an order
+  reason: Refund creation and retrieval is processing of a reverse payment against an order, within payment
+    processing.

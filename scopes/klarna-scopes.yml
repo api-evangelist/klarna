@@ -1,0 +1,257 @@
+generated: '2026-08-27'
+method: searched
+source: https://login.klarna.com/.well-known/openid-configuration
+docs: https://docs.klarna.com/conversion-boosters/sign-in-with-klarna/before-you-start/
+description: OAuth 2.0 / OIDC scopes for Sign in with Klarna, read verbatim from Klarna's own OpenID Connect
+  discovery document at login.klarna.com. Klarna's server-to-server REST APIs (Payments, Order Management,
+  Settlements) do NOT use OAuth — they authenticate with HTTP Basic and an API key, so no scope surface
+  exists there. Every scope below belongs to the consumer-authorization surface.
+applies_to: Sign in with Klarna (consumer OAuth/OIDC), not the merchant REST APIs
+schemes:
+- name: SignInWithKlarna
+  type: openIdConnect
+  source: https://login.klarna.com/.well-known/openid-configuration
+  issuer: https://login.klarna.com
+  jwks_uri: https://login.klarna.com/.well-known/jwks.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.klarna.com/oauth2/auth
+    tokenUrl: https://login.klarna.com/oauth2/token
+    revocationUrl: https://login.klarna.com/oauth2/revoke
+    userinfoUrl: https://login.klarna.com/userinfo
+    pkce:
+    - S256
+    grant_types:
+    - authorization_code
+    - refresh_token
+    token_endpoint_auth_methods:
+    - client_secret_post
+    - client_secret_basic
+    - private_key_jwt
+    - none
+claims_supported:
+- sub
+- email
+- email_verified
+- phone
+- phone_verified
+- given_name
+- family_name
+- date_of_birth
+- date_of_birth_verified
+- name_verified
+- country
+- billing_address
+- shipping_address
+- locale
+- national_identification_number
+- national_identification_number_country
+scope_count: 34
+scopes:
+- scope: openid
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Required OIDC scope; issues an ID token identifying the Klarna consumer.
+- scope: offline_access
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Issue a refresh token so the merchant can act after the browser session ends.
+- scope: default
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Klarna default scope bundle.
+- scope: profile
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Basic consumer profile claims.
+- scope: email
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Consumer email address (email, email_verified claims).
+- scope: phone
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Consumer phone number (phone, phone_verified claims).
+- scope: billing_address
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Consumer billing address claim.
+- scope: national_identification_number
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: National identification number (and its issuing country).
+- scope: create_payment_session
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Create a Klarna payment session on behalf of the signed-in consumer.
+- scope: profile:name
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: given_name / family_name claims.
+- scope: profile:date_of_birth
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: date_of_birth claim.
+- scope: profile:locale
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: locale claim.
+- scope: profile:email
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Email claim, granular form.
+- scope: profile:phone
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Phone claim, granular form.
+- scope: profile:billing_address
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Billing address claim, granular form.
+- scope: profile:shipping_address
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Shipping address claim.
+- scope: profile:national_id
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: National identification number, granular form.
+- scope: profile:national_identification
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: National identification, granular form.
+- scope: profile:country
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: country claim.
+- scope: profile:gender
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Gender claim.
+- scope: profile:customer_id
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Klarna customer identifier.
+- scope: profile:verified:name
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Name claim with Klarna verification status (name_verified).
+- scope: profile:verified:date_of_birth
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Date of birth with Klarna verification status (date_of_birth_verified).
+- scope: personalization:interests
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Consumer interest signals for personalization.
+- scope: payment:request:create
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Create a payment request for the signed-in consumer.
+- scope: payment:recurring
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Initiate recurring / merchant-initiated payments.
+- scope: payment:authorization:list
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: List the consumer payment authorizations.
+- scope: customer:purchase_power
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Read the consumer purchase power / spending capacity.
+- scope: customer:account_management
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Manage the consumer Klarna account.
+- scope: customer:purchase_management
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Manage the consumer purchases.
+- scope: customer:prequalified_offers
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Read prequalified financing offers for the consumer.
+- scope: customer:login
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Authenticate the consumer (Sign in with Klarna).
+- scope: payment:customer_present
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Customer-present payment flow.
+- scope: payment:customer_not_present
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.klarna.com/.well-known/openid-configuration
+  description: Customer-not-present (off-session) payment flow.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

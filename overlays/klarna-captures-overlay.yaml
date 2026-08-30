@@ -1,0 +1,63 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Klarna HPP Captures API
+  version: 1.0.0
+extends: openapi/klarna-captures-api-openapi.yml
+x-generated: '2026-08-27'
+x-method: generated
+x-source: Klarna published documentation (docs.klarna.com) + artifacts in this repo
+x-note: 'Additive only. Records cross-cutting semantics Klarna documents in prose but does not express in the specification:
+  idempotency header, error envelope shape, rate-limit headers, regional base URLs and the idle timeout. The original
+  OpenAPI is never mutated.'
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: klarna
+    x-apievangelist-artifacts:
+      authentication: authentication/klarna-authentication.yml
+      conventions: conventions/klarna-conventions.yml
+      errors: errors/klarna-problem-types.yml
+      lifecycle: lifecycle/klarna-lifecycle.yml
+      rate-limits: rate-limits/klarna-rate-limits.yml
+      sandbox: sandbox/klarna-sandbox.yml
+      data-model: data-model/klarna-data-model.yml
+      conformance: conformance/klarna-conformance.yml
+    x-klarna-base-urls:
+      live:
+        europe: https://api.klarna.com/
+        north_america: https://api-na.klarna.com/
+        oceania: https://api-oc.klarna.com/
+      playground:
+        europe: https://api.playground.klarna.com/
+        north_america: https://api-na.playground.klarna.com/
+        oceania: https://api-oc.playground.klarna.com/
+- target: $.info
+  update:
+    x-error-envelope:
+      format: custom-json
+      fields:
+      - correlation_id
+      - error_code
+      - error_messages
+      rfc9457: false
+    x-rate-limit-headers:
+    - X-Ratelimit-Limit
+    - X-Ratelimit-Remaining
+    - X-Ratelimit-Reset
+    x-idle-timeout-seconds: 59
+    x-request-body-max: 1MB
+- target: $.info
+  update:
+    x-idempotency:
+      header: Klarna-Idempotency-Key
+      methods:
+      - POST
+      - PATCH
+      key_format: UUIDv5
+      retention: 24 hours
+      required_for:
+      - appendShippingInfo
+      - captureOrder
+      - extendDueDate
+      - triggerSendOut
+      docs: https://docs.klarna.com/api-reference/direct-partner/integration-resilience/

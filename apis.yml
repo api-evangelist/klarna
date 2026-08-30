@@ -252,7 +252,7 @@ apis:
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
-  - Merchant Card
+  - Merchantcard
   tags_raw:
   - Merchantcard
   properties:

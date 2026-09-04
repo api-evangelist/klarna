@@ -184,7 +184,7 @@ apis:
 - aid: klarna:klarna-hpp-api
   name: Klarna Hpp API
   description: The Hpp API from Klarna — 3 operation(s) for hpp.
-  humanURL: https://docs.klarna.com/klarna-payments/
+  humanURL: https://docs.klarna.com/hosted-payment-page/
   baseURL: https://api.klarna.com
   tags:
   - Hpp
@@ -193,6 +193,10 @@ apis:
     url: openapi/klarna-hpp-api-openapi.yml
   - type: Overlay
     url: overlays/klarna-hpp-overlay.yaml
+  - type: Documentation
+    url: https://docs.klarna.com/hosted-payment-page/
+  - type: APIReference
+    url: https://docs.klarna.com/acquirer/klarna/api/hpp-merchant/
 - aid: klarna:klarna-merchant-urls-address-update-api
   name: Klarna Merchant Urls.address Update API
   description: >-
@@ -336,6 +340,18 @@ apis:
     url: openapi/klarna-transactions-api-openapi.yml
   - type: Overlay
     url: overlays/klarna-transactions-overlay.yaml
+- name: Klarna Agentic Product Protocol (KAPP) API
+  description: >-
+    Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to
+    query. Registered 2026-09-04 from the same declined submission.
+  humanURL: https://docs.klarna.com/klarna-search/klarna-agentic-product-protocol/
+  baseURL: https://api.klarna.com
+  tags:
+  - Agentic Commerce
+  - AI Agents
+  properties:
+  - type: Documentation
+    url: https://docs.klarna.com/klarna-search/klarna-agentic-product-protocol/
 common:
 - type: CapabilityMap
   url: capabilities/klarna-capability-edges.yml

@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
   version: '1.1'
@@ -50,13 +50,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Refund not allowed error message'
+                $ref: '#/components/schemas/Refund_not_allowed_error_message'
           description: Refund not allowed
         '404':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Not found error message'
+                $ref: '#/components/schemas/Not_found_error_message'
           description: Order not found.
       security:
       - basicAuth: []
@@ -91,7 +91,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Not found error message'
+                $ref: '#/components/schemas/Not_found_error_message'
           description: Order or refund not found.
       security:
       - basicAuth: []
@@ -100,23 +100,6 @@ paths:
       - Refunds
 components:
   schemas:
-    Refund not allowed error message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: REFUND_NOT_ALLOWED
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
     ProductIdentifiers:
       description: product_identifiers
       properties:
@@ -157,66 +140,7 @@ components:
           minLength: 0
           type: string
       type: object
-    Refund:
-      properties:
-        credit_invoice:
-          description: Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.
-          type: boolean
-        description:
-          description: Description of the refund shown to the customer. Max length is 255 characters.
-          example: The item was returned and the order refunded.
-          type: string
-        order_lines:
-          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
-          items:
-            $ref: '#/components/schemas/order_line'
-          type: array
-        reference:
-          description: Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.
-          type: string
-        refund_id:
-          description: The refund id. Generated when the refund is created.
-          example: b2cb4f2e-2781-4359-80ad-555735ebb8d8
-          type: string
-        refunded_amount:
-          description: Refunded amount in minor units.
-          format: int64
-          type: integer
-        refunded_at:
-          description: The time of the refund. ISO 8601.
-          example: '2015-12-04T15:17:40Z'
-          format: date-time
-          type: string
-      type: object
-    RefundObject:
-      properties:
-        description:
-          description: Description of the refund shown to the customer. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        order_lines:
-          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
-          items:
-            $ref: '#/components/schemas/order_line'
-          maxItems: 1000
-          minItems: 0
-          type: array
-        reference:
-          description: Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        refunded_amount:
-          description: Refunded amount in minor units.
-          format: int64
-          maximum: 200000000
-          minimum: 0
-          type: integer
-      required:
-      - refunded_amount
-      type: object
-    Not found error message:
+    Not_found_error_message:
       properties:
         correlation_id:
           description: Correlation id. For searching logs.
@@ -255,6 +179,82 @@ components:
       - interval
       - interval_count
       - name
+      type: object
+    RefundObject:
+      properties:
+        description:
+          description: Description of the refund shown to the customer. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        order_lines:
+          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
+          items:
+            $ref: '#/components/schemas/order_line'
+          maxItems: 1000
+          minItems: 0
+          type: array
+        reference:
+          description: Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        refunded_amount:
+          description: Refunded amount in minor units.
+          format: int64
+          maximum: 200000000
+          minimum: 0
+          type: integer
+      required:
+      - refunded_amount
+      type: object
+    Refund:
+      properties:
+        credit_invoice:
+          description: Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.
+          type: boolean
+        description:
+          description: Description of the refund shown to the customer. Max length is 255 characters.
+          example: The item was returned and the order refunded.
+          type: string
+        order_lines:
+          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.
+          type: string
+        refund_id:
+          description: The refund id. Generated when the refund is created.
+          example: b2cb4f2e-2781-4359-80ad-555735ebb8d8
+          type: string
+        refunded_amount:
+          description: Refunded amount in minor units.
+          format: int64
+          type: integer
+        refunded_at:
+          description: The time of the refund. ISO 8601.
+          example: '2015-12-04T15:17:40Z'
+          format: date-time
+          type: string
+      type: object
+    Refund_not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: REFUND_NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
       type: object
     order_line:
       description: List of order lines for the capture shown to the customer.

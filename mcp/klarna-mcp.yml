@@ -1,0 +1,345 @@
+generated: '2026-08-27'
+method: derived
+status: candidate
+source: openapi/ — 49 operations across 13 refined Klarna OpenAPI documents
+description: 'Klarna publishes NO MCP server. Searched 2026-08-27: no server in Klarna''s own documentation,
+  no @klarna scoped MCP package on npm, no mcp.klarna.com host (DNS does not resolve), and no reference
+  to Model Context Protocol anywhere in Klarna''s 79 KB llms.txt. The only Klarna MCP servers in circulation
+  are third-party auto-generations from the Klarna Payments spec (e.g. github.com/ag2-mcp-servers/klarna-payments-api-v1)
+  and are NOT operated by Klarna. The tools below are a CANDIDATE surface derived from the OpenAPI in
+  this repo, one tool per real operationId, so an agent builder has a starting point. Nobody ships this
+  server.'
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  auth_note: If Klarna were to ship one, the underlying REST calls authenticate with HTTP Basic and a
+    klarna_<live|test>_api_<random> key — see authentication/klarna-authentication.yml.
+  verified: derived
+search_evidence:
+- url: https://docs.klarna.com/llms.txt
+  status: 200
+  finding: 309 documentation links; no MCP, no agent server, no tools manifest.
+- url: https://mcp.klarna.com/mcp
+  status: no response
+  finding: Host does not resolve (curl exit 6). Probed 2026-08-27.
+- url: https://www.klarna.com/.well-known/ai-plugin.json
+  status: 404
+  finding: Klarna's 2023 ChatGPT plugin manifest is gone.
+server:
+  name: klarna
+  transport: null
+  url: null
+  note: No server exists. Fields left null deliberately — never guess an MCP endpoint URL.
+tool_count: 50
+tools:
+- name: capture_order
+  description: Capture all or part of an authorized order.
+  source_operation: openapi/klarna-captures-api-openapi.yml#captureOrder
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/captures
+  write: true
+- name: list_captures
+  description: List the captures on an order.
+  source_operation: openapi/klarna-captures-api-openapi.yml#getCaptures
+  method: GET
+  path: /ordermanagement/v1/orders/{order_id}/captures
+  write: false
+- name: read_capture
+  description: Read one capture.
+  source_operation: openapi/klarna-captures-api-openapi.yml#getCapture
+  method: GET
+  path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}
+  write: false
+- name: extend_due_date
+  description: Extend the payment due date on a capture.
+  source_operation: openapi/klarna-captures-api-openapi.yml#extendDueDate
+  method: PATCH
+  path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date
+  write: true
+- name: read_extend_due_date_options
+  description: Read the available due-date extension options.
+  source_operation: openapi/klarna-captures-api-openapi.yml#getOptionsForExtendDueDate
+  method: GET
+  path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date-options
+  write: false
+- name: append_capture_shipping_info
+  description: Attach shipping/tracking information to a capture.
+  source_operation: openapi/klarna-captures-api-openapi.yml#appendShippingInfo
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/shipping-info
+  write: true
+- name: trigger_capture_send_out
+  description: Trigger Klarna to send the consumer invoice for a capture.
+  source_operation: openapi/klarna-captures-api-openapi.yml#triggerSendOut
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/trigger-send-out
+  write: true
+- name: create_checkout_order
+  description: Create a Klarna Checkout order.
+  source_operation: openapi/klarna-checkout-api-openapi.yml#createOrderMerchant
+  method: POST
+  path: /checkout/v3/orders
+  write: true
+- name: update_checkout_order
+  description: Update a Klarna Checkout order.
+  source_operation: openapi/klarna-checkout-api-openapi.yml#updateOrderMerchant
+  method: POST
+  path: /checkout/v3/orders/{order_id}
+  write: true
+- name: read_checkout_order
+  description: Read a Klarna Checkout order.
+  source_operation: openapi/klarna-checkout-api-openapi.yml#readOrderMerchant
+  method: GET
+  path: /checkout/v3/orders/{order_id}
+  write: false
+- name: abort_checkout_order
+  description: Abort a Klarna Checkout order.
+  source_operation: openapi/klarna-checkout-api-openapi.yml#abortOrder
+  method: POST
+  path: /checkout/v3/orders/{order_id}/abort
+  write: true
+- name: read_customer_token
+  description: Read the status and payment method behind a customer token.
+  source_operation: openapi/klarna-customer-token-api-openapi.yml#readCustomerToken
+  method: GET
+  path: /customer-token/v1/tokens/{customerToken}
+  write: false
+- name: create_order
+  description: Create a Klarna order against an authorization token or a customer token.
+  source_operation: openapi/klarna-customer-token-api-openapi.yml#createOrder
+  method: POST
+  path: /customer-token/v1/tokens/{customerToken}/order
+  write: true
+- name: update_customer_token_status
+  description: Change a customer token status, e.g. cancel it.
+  source_operation: openapi/klarna-customer-token-api-openapi.yml#patchCustomerToken
+  method: PATCH
+  path: /customer-token/v1/tokens/{customerToken}/status
+  write: true
+- name: create_hosted_payment_page_session
+  description: Create a Klarna-hosted payment page session.
+  source_operation: openapi/klarna-hpp-api-openapi.yml#createHppSession
+  method: POST
+  path: /hpp/v1/sessions
+  write: true
+- name: read_hosted_payment_page_session
+  description: Read a hosted payment page session.
+  source_operation: openapi/klarna-hpp-api-openapi.yml#getSessionById
+  method: GET
+  path: /hpp/v1/sessions/{session_id}
+  write: false
+- name: disable_hosted_payment_page_session
+  description: Disable a hosted payment page session.
+  source_operation: openapi/klarna-hpp-api-openapi.yml#disableHppSession
+  method: DELETE
+  path: /hpp/v1/sessions/{session_id}
+  write: true
+- name: distribute_hosted_payment_page_session
+  description: Have Klarna send the hosted payment page link to the shopper.
+  source_operation: openapi/klarna-hpp-api-openapi.yml#distributeHppSession
+  method: POST
+  path: /hpp/v1/sessions/{session_id}/distribution
+  write: true
+- name: create_merchant_card_promise
+  description: Create a Klarna merchant-card promise.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#createPromise
+  method: POST
+  path: /merchantcard/v3/promises
+  write: true
+- name: read_merchant_card_promise
+  description: Read a merchant-card promise.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#readPromise
+  method: GET
+  path: /merchantcard/v3/promises/{promise_id}
+  write: false
+- name: settle_merchant_card_promise
+  description: Settle a merchant-card promise and receive card details.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#settlePromise
+  method: POST
+  path: /merchantcard/v3/settlements
+  write: true
+- name: read_merchant_card_settlement
+  description: Read a merchant-card settlement.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#readSettlement
+  method: GET
+  path: /merchantcard/v3/settlements/{settlement_id}
+  write: false
+- name: read_merchant_card_settlement_by_order
+  description: Read a merchant-card settlement by order id.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#readSettlementByOrderId
+  method: GET
+  path: /merchantcard/v3/settlements/order/{order_id}
+  write: false
+- name: request_merchant_card_order_cancellation
+  description: Request cancellation of a merchant-card order.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#postcancelorder
+  method: POST
+  path: /merchantcard/v3/orders/{order_id}/cancel-request
+  write: true
+- name: read_merchant_card_cancel_request
+  description: Read the state of a merchant-card cancel request.
+  source_operation: openapi/klarna-merchantcard-api-openapi.yml#getcancelorder
+  method: GET
+  path: /merchantcard/v3/orders/{order_id}/cancel-request
+  write: false
+- name: read_order
+  description: Read a Klarna order.
+  source_operation: openapi/klarna-orders-api-openapi.yml#getOrder
+  method: GET
+  path: /ordermanagement/v1/orders/{order_id}
+  write: false
+- name: acknowledge_order
+  description: Acknowledge a Klarna Checkout order so Klarna stops re-sending the push.
+  source_operation: openapi/klarna-orders-api-openapi.yml#acknowledgeOrder
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/acknowledge
+  write: true
+- name: update_authorization
+  description: Change the authorized amount and order lines.
+  source_operation: openapi/klarna-orders-api-openapi.yml#updateAuthorization
+  method: PATCH
+  path: /ordermanagement/v1/orders/{order_id}/authorization
+  write: true
+- name: update_consumer_details
+  description: Update the shopper details on an order.
+  source_operation: openapi/klarna-orders-api-openapi.yml#updateConsumerDetails
+  method: PATCH
+  path: /ordermanagement/v1/orders/{order_id}/customer-details
+  write: true
+- name: extend_authorization_time
+  description: Extend how long an authorization stays valid.
+  source_operation: openapi/klarna-orders-api-openapi.yml#extendAuthorizationTime
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/extend-authorization-time
+  write: true
+- name: update_merchant_references
+  description: Update merchant reference fields on an order.
+  source_operation: openapi/klarna-orders-api-openapi.yml#updateMerchantReferences
+  method: PATCH
+  path: /ordermanagement/v1/orders/{order_id}/merchant-references
+  write: true
+- name: release_remaining_authorization
+  description: Release the uncaptured part of an authorization.
+  source_operation: openapi/klarna-orders-api-openapi.yml#releaseRemainingAuthorization
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/release-remaining-authorization
+  write: true
+- name: append_order_shipping_info
+  description: Attach shipping/tracking information to an order.
+  source_operation: openapi/klarna-orders-api-openapi.yml#appendOrderShippingInfo
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/shipping-info
+  write: true
+- name: cancel_order
+  description: Cancel an order that has no captures.
+  source_operation: openapi/klarna-orders-api-openapi.yml#cancelOrder
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/cancel
+  write: true
+- name: create_payment_session
+  description: Create a Klarna payment session for a shopper basket.
+  source_operation: openapi/klarna-payments-api-openapi.yml#createCreditSession
+  method: POST
+  path: /payments/v1/sessions
+  write: true
+- name: update_payment_session
+  description: Update an existing Klarna payment session.
+  source_operation: openapi/klarna-payments-api-openapi.yml#updateCreditSession
+  method: POST
+  path: /payments/v1/sessions/{session_id}
+  write: true
+- name: read_payment_session
+  description: Read the current state of a Klarna payment session.
+  source_operation: openapi/klarna-payments-api-openapi.yml#readCreditSession
+  method: GET
+  path: /payments/v1/sessions/{session_id}
+  write: false
+- name: cancel_authorization
+  description: Cancel an unused payment authorization and clear the shopper debt.
+  source_operation: openapi/klarna-payments-api-openapi.yml#cancelAuthorization
+  method: DELETE
+  path: /payments/v1/authorizations/{authorizationToken}
+  write: true
+- name: create_order_payments
+  description: Create a Klarna order against an authorization token or a customer token.
+  source_operation: openapi/klarna-payments-api-openapi.yml#createOrder
+  method: POST
+  path: /payments/v1/authorizations/{authorizationToken}/order
+  write: true
+- name: create_customer_token
+  description: Persist an authorization as a reusable customer token.
+  source_operation: openapi/klarna-payments-api-openapi.yml#purchaseToken
+  method: POST
+  path: /payments/v1/authorizations/{authorizationToken}/customer-token
+  write: true
+- name: read_payout_summary
+  description: Read the aggregated payout summary for a date range.
+  source_operation: openapi/klarna-payouts-api-openapi.yml#getPayoutSummary
+  method: GET
+  path: /payouts/summary
+  write: false
+- name: read_payout
+  description: Read a single settlement payout.
+  source_operation: openapi/klarna-payouts-api-openapi.yml#getPayout
+  method: GET
+  path: /payouts/{payment_reference}
+  write: false
+- name: list_payouts
+  description: List settlement payouts in a date range.
+  source_operation: openapi/klarna-payouts-api-openapi.yml#getPayouts
+  method: GET
+  path: /payouts
+  write: false
+- name: refund_order
+  description: Refund all or part of a captured order.
+  source_operation: openapi/klarna-refunds-api-openapi.yml#refundOrder
+  method: POST
+  path: /ordermanagement/v1/orders/{order_id}/refunds
+  write: true
+- name: read_refund
+  description: Read one refund.
+  source_operation: openapi/klarna-refunds-api-openapi.yml#get
+  method: GET
+  path: /ordermanagement/v1/orders/{order_id}/refunds/{refund_id}
+  write: false
+- name: read_payout_report_with_transactions
+  description: Download a payout report including transactions.
+  source_operation: openapi/klarna-reports-api-openapi.yml#getPayoutReportWithTransactions
+  method: GET
+  path: /reports/payout-with-transactions
+  write: false
+- name: read_payout_report
+  description: Download a payout report.
+  source_operation: openapi/klarna-reports-api-openapi.yml#payout
+  method: GET
+  path: /reports/payout
+  write: false
+- name: read_payouts_summary_report_with_transactions
+  description: Download a payouts summary report including transactions.
+  source_operation: openapi/klarna-reports-api-openapi.yml#getPayoutsSummaryReportWithTransactions
+  method: GET
+  path: /reports/payouts-summary-with-transactions
+  write: false
+- name: read_payouts_summary_report
+  description: Download a payouts summary report.
+  source_operation: openapi/klarna-reports-api-openapi.yml#payoutsSummary
+  method: GET
+  path: /reports/payouts-summary
+  write: false
+- name: list_transactions
+  description: List settlement transactions.
+  source_operation: openapi/klarna-transactions-api-openapi.yml#getTransactions
+  method: GET
+  path: /transactions
+  write: false
+input_schemas: Each candidate tool inherits its real input contract from the referenced operation parameters
+  + requestBody in the linked OpenAPI file. No schema is invented here.
+agent_readiness_note: The write tools in this list move real money. Any MCP exposure of them should carry
+  the Klarna-Idempotency-Key header (conventions/klarna-conventions.yml), respect the reversibility windows
+  recorded there, and bind the x-agentic-access contracts in agentic-access/klarna-agentic-access.yml.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

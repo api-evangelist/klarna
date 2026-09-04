@@ -1,0 +1,85 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/
+sources:
+  - https://docs.klarna.com/api/kn/direct-partner/security/
+  - https://docs.klarna.com/klarna-network-distribution/web-sdk/
+  - https://docs.klarna.com/conversion-boosters/on-site-messaging/
+  - https://docs.klarna.com/conversion-boosters/sign-in-with-klarna/before-you-start/
+description: >-
+  Klarna's client-side surface is larger than its server-side one. Where Klarna ships no
+  server-side REST SDK in any language, it ships several browser-loaded JavaScript libraries and
+  native mobile in-app SDKs, all authenticated with a non-secret client-id
+  (klarna_<live|test>_client_<random>) rather than an API key. Every loader below was probed live
+  on 2026-08-27.
+authentication: client-id (not the API key) — see authentication/klarna-authentication.yml
+
+families:
+  - name: Klarna Payments widget
+    kind: hosted-iframe
+    loader: https://x.klarnacdn.net/kp/lib/v1/api.js
+    probed: {date: '2026-08-27', status: 200, bytes: 484379, content_type: application/javascript}
+    pinned: false
+    description: >-
+      Loads the Klarna payment-method widget into the merchant checkout against a client_token
+      returned by createCreditSession, then produces an authorization token via authorize().
+    api_surface: [Klarna.Payments.init, Klarna.Payments.load, Klarna.Payments.authorize]
+    docs: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/
+  - name: Klarna Web SDK
+    kind: javascript-sdk
+    loader: https://js.klarna.com/web-sdk/v1/klarna.js
+    probed: {date: '2026-08-27', status: 200, bytes: 75766, content_type: application/javascript}
+    pinned: false
+    description: >-
+      The newer unified browser SDK for the Klarna Network surface, covering payment buttons,
+      messaging placements, identity/sign-in and integration metadata. Documented as an SDK
+      reference (Config, IntegrationMetadata, Payment, Messaging, Identity namespaces) alongside
+      the REST APIs in the Klarna Network documentation.
+    docs: https://docs.klarna.com/klarna-network-distribution/web-sdk/
+  - name: On-site Messaging
+    kind: web-component
+    loader: https://osm.klarnaservices.com/lib.js
+    probed: {date: '2026-08-27', status: 200, bytes: 57696, content_type: application/javascript}
+    pinned: false
+    element: <klarna-placement data-key="..." data-locale="...">
+    description: >-
+      Promotional placements rendered on product, cart and checkout pages showing the shopper the
+      available Klarna payment options before checkout. Customisable through the Merchant Portal
+      for merchants without CSS access.
+    docs: https://docs.klarna.com/conversion-boosters/on-site-messaging/
+  - name: Express Checkout
+    kind: hosted-button
+    description: >-
+      A Klarna-hosted express-purchase button placed on product and cart pages that collects
+      shopper details from the Klarna account and short-circuits the checkout form.
+    docs: https://docs.klarna.com/conversion-boosters/express-checkout/
+  - name: Sign in with Klarna
+    kind: hosted-button + OIDC
+    description: >-
+      Consumer identity button backed by the OAuth 2.0 / OIDC authorization-code flow at
+      login.klarna.com. Returns verified profile claims (including verified name and date of
+      birth) under the scopes catalogued in scopes/klarna-scopes.yml.
+    docs: https://docs.klarna.com/conversion-boosters/sign-in-with-klarna/before-you-start/
+  - name: Hosted Payment Page (HPP)
+    kind: hosted-page
+    description: >-
+      A fully Klarna-hosted checkout page created via createHppSession and optionally distributed
+      to the shopper by Klarna over email or SMS (distributeHppSession). Requires no client-side
+      library at all — the merchant redirects or shares a URL.
+    spec: openapi/klarna-hpp-api-openapi.yml
+    docs: https://docs.klarna.com/payments/other-products/hosted-payment-page/
+  - name: Klarna Mobile SDK
+    kind: native-sdk
+    platforms: [android, ios, react-native, flutter]
+    packages: packages/klarna-packages.yml
+    description: >-
+      In-app rendering of the same payment, messaging and sign-in surfaces for native apps.
+    docs: https://docs.klarna.com/payments/mobile-payments/integrate-with-mobile-sdk/
+
+pinning_finding: >-
+  All three browser loaders are served from unpinned major-line URLs (…/v1/…). A merchant cannot
+  determine, and cannot lock, the build being executed in their checkout page. Klarna's versioning
+  policy covers the REST APIs and the SDK packages; it does not cover these CDN-delivered scripts.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

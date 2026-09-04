@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
   version: '1.1'
@@ -227,6 +227,23 @@ paths:
       - Merchantcard
 components:
   schemas:
+    promise_request:
+      type: object
+      required:
+      - cards
+      - order_id
+      properties:
+        order_id:
+          type: string
+          example: f3392f8b-6116-4073-ab96-e330819e2c07
+          description: A valid order id
+        cards:
+          type: array
+          description: The cards you would like to issue (max 1000)
+          items:
+            $ref: '#/components/schemas/card_specification'
+          maxItems: 1000
+          minItems: 1
     card_specification:
       type: object
       required:
@@ -255,29 +272,6 @@ components:
           description: Your reference on the card
           minLength: 1
           maxLength: 255
-    cancel_order_request_status_no_request_found:
-      type: object
-      required:
-      - status
-      - reason_code
-      - reason_message
-      properties:
-        status:
-          type: string
-          example: NO_REQUEST_FOUND
-          enum:
-          - NO_REQUEST_FOUND
-          description: The status of the order cancellation request.
-        reason_code:
-          type: string
-          example: NO_REQUEST_FOUND
-          enum:
-          - NO_REQUEST_FOUND
-          description: Reason code for the bad request.
-        reason_message:
-          type: string
-          example: No cancellation request found for this order.
-          description: Human-readable message for the bad request.
     card:
       type: object
       properties:
@@ -315,6 +309,17 @@ components:
           type: string
           example: Jane Doe
           description: Card holder name on the card.
+    cancel_order_request_status_cancelled:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          example: CANCELLED
+          enum:
+          - CANCELLED
+          description: The status of the order cancellation request.
     promise_response:
       type: object
       properties:
@@ -346,97 +351,6 @@ components:
           example: '2018-12-04T10:26:06.000Z'
           description: The time when the promise expires
           readOnly: true
-    settlement_request:
-      type: object
-      required:
-      - key_id
-      - order_id
-      properties:
-        promise_id:
-          type: string
-          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
-          description: Unique identifier for the promise associated to the settlement.
-        order_id:
-          type: string
-          example: f3392f8b-6116-4073-ab96-e330819e2c07
-          description: Unique identifier for the order associated to the settlement.
-        key_id:
-          type: string
-          example: 16e4b85e-899b-4427-a39f-07a496e9515b
-          description: Unique identifier for the public key to be used for encryption of the card data.
-    promise_created_response:
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date-time
-        promise_id:
-          type: string
-          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
-          description: The unique promise id
-          readOnly: true
-    settlement_response:
-      type: object
-      properties:
-        settlement_id:
-          type: string
-          example: b0ec0bbd-534c-4b1c-b28a-628bf33c3324
-          description: Unique settlement identifier.
-        promise_id:
-          type: string
-          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
-          description: Unique identifier for the promise associated to the settlement.
-        order_id:
-          type: string
-          example: f3392f8b-6116-4073-ab96-e330819e2c07
-          description: Unique identifier for the order associated to the settlement.
-        cards:
-          type: array
-          description: An array of Card objects.
-          items:
-            $ref: '#/components/schemas/card'
-        created_at:
-          type: string
-          example: '2018-12-03T10:26:06.000Z'
-          description: Settlement creation datetime (ISO 8601).
-        expires_at:
-          type: string
-          example: '2018-12-04T10:26:06.000Z'
-          description: Settlement expiration datetime (ISO 8601).
-    promise_request:
-      type: object
-      required:
-      - cards
-      - order_id
-      properties:
-        order_id:
-          type: string
-          example: f3392f8b-6116-4073-ab96-e330819e2c07
-          description: A valid order id
-        cards:
-          type: array
-          description: The cards you would like to issue (max 1000)
-          items:
-            $ref: '#/components/schemas/card_specification'
-          maxItems: 1000
-          minItems: 1
-    cancel_order_request_status_pending:
-      type: object
-      required:
-      - status
-      - check_after
-      properties:
-        status:
-          type: string
-          example: PENDING
-          enum:
-          - PENDING
-          description: The status of the order cancellation request.
-        check_after:
-          type: string
-          format: date-time
-          example: '2018-12-04T10:26:06.000Z'
-          description: Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)
     cancel_order_request_status:
       type: object
       required:
@@ -475,14 +389,100 @@ components:
 
 
             This field is only populated if status is `REJECTED`.'
-    cancel_order_request_status_cancelled:
+    cancel_order_request_status_pending:
       type: object
       required:
       - status
+      - check_after
       properties:
         status:
           type: string
-          example: CANCELLED
+          example: PENDING
           enum:
-          - CANCELLED
+          - PENDING
           description: The status of the order cancellation request.
+        check_after:
+          type: string
+          format: date-time
+          example: '2018-12-04T10:26:06.000Z'
+          description: Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)
+    settlement_request:
+      type: object
+      required:
+      - key_id
+      - order_id
+      properties:
+        promise_id:
+          type: string
+          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
+          description: Unique identifier for the promise associated to the settlement.
+        order_id:
+          type: string
+          example: f3392f8b-6116-4073-ab96-e330819e2c07
+          description: Unique identifier for the order associated to the settlement.
+        key_id:
+          type: string
+          example: 16e4b85e-899b-4427-a39f-07a496e9515b
+          description: Unique identifier for the public key to be used for encryption of the card data.
+    settlement_response:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+          example: b0ec0bbd-534c-4b1c-b28a-628bf33c3324
+          description: Unique settlement identifier.
+        promise_id:
+          type: string
+          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
+          description: Unique identifier for the promise associated to the settlement.
+        order_id:
+          type: string
+          example: f3392f8b-6116-4073-ab96-e330819e2c07
+          description: Unique identifier for the order associated to the settlement.
+        cards:
+          type: array
+          description: An array of Card objects.
+          items:
+            $ref: '#/components/schemas/card'
+        created_at:
+          type: string
+          example: '2018-12-03T10:26:06.000Z'
+          description: Settlement creation datetime (ISO 8601).
+        expires_at:
+          type: string
+          example: '2018-12-04T10:26:06.000Z'
+          description: Settlement expiration datetime (ISO 8601).
+    promise_created_response:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+        promise_id:
+          type: string
+          example: ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c
+          description: The unique promise id
+          readOnly: true
+    cancel_order_request_status_no_request_found:
+      type: object
+      required:
+      - status
+      - reason_code
+      - reason_message
+      properties:
+        status:
+          type: string
+          example: NO_REQUEST_FOUND
+          enum:
+          - NO_REQUEST_FOUND
+          description: The status of the order cancellation request.
+        reason_code:
+          type: string
+          example: NO_REQUEST_FOUND
+          enum:
+          - NO_REQUEST_FOUND
+          description: Reason code for the bad request.
+        reason_message:
+          type: string
+          example: No cancellation request found for this order.
+          description: Human-readable message for the bad request.

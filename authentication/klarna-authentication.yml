@@ -1,13 +1,102 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-08-27'
+method: searched
 source: openapi/klarna-settlements-api-openapi.yml, openapi/order-management-api-openapi.yml
+docs: https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/authentication/
+docs_additional:
+  - https://docs.klarna.com/api/kn/direct-partner/security/
+  - https://login.klarna.com/.well-known/openid-configuration
+description: >-
+  Klarna runs three distinct authentication surfaces. Server-to-server REST APIs use HTTP Basic
+  with a Klarna-issued API key as the credential. Browser-side libraries (Web SDK, Klarna Payments
+  JS, On-site Messaging) use a non-secret client-id bound to an allow-list of origins. Sign in with
+  Klarna is a full OAuth 2.0 / OpenID Connect authorization-code flow at login.klarna.com. The
+  OpenAPI files in this repo only declare the first of the three.
 summary:
   types:
-  - http
+    - http
+    - openIdConnect
+  http_schemes:
+    - basic
+  api_key_in: []
+  oauth2_flows:
+    - authorizationCode
 schemes:
-- name: basic_auth
-  type: http
-  scheme: basic
-  sources:
-  - openapi/klarna-settlements-api-openapi.yml
-  - openapi/order-management-api-openapi.yml
+  - name: basic_auth
+    type: http
+    scheme: basic
+    sources:
+      - openapi/klarna-settlements-api-openapi.yml
+      - openapi/order-management-api-openapi.yml
+    credential_format: "klarna_<live|test>_api_<random>"
+    header: "Authorization: Basic <API key>"
+    note: >-
+      Klarna documents the API key as the Basic credential directly — `Authorization: Basic <API key>`
+      — either raw or base64-encoded. Clients that can only send a username/password pair may use the
+      UUID username shown alongside the key in the Merchant Portal:
+      `Authorization: Basic <UUID>:<API key>`. Keys are bound to a Merchant ID (MID); one MID may hold
+      several keys.
+    environments:
+      live_prefix: klarna_live_api_
+      test_prefix: klarna_test_api_
+    failure: 401 Unauthorized when credentials are missing or incorrect
+    lifecycle: >-
+      Klarna disables API credentials after two months of inactivity and deletes them after ten
+      months of inactivity. A disabled credential can be reactivated before deletion.
+    issued_from: Merchant Portal (portal.klarna.com / portal.playground.klarna.com)
+  - name: client_id
+    type: apiKey
+    in: script-attribute
+    parameter_name: data-client-id
+    sources:
+      - https://docs.klarna.com/api/kn/direct-partner/security/
+    credential_format: "klarna_<live|test>_client_<random>"
+    secret: false
+    note: >-
+      Used by the browser-loaded Klarna Web SDK, Klarna Payments JS library and On-site Messaging.
+      Klarna states the client-id is not secret in itself and must be configured with a list of
+      approved websites from which it may be used. Both API keys and client-ids are signed tokens
+      the platform verifies.
+  - name: SignInWithKlarna
+    type: openIdConnect
+    openIdConnectUrl: https://login.klarna.com/.well-known/openid-configuration
+    sources:
+      - https://login.klarna.com/.well-known/openid-configuration
+    issuer: https://login.klarna.com
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://login.klarna.com/oauth2/auth
+        tokenUrl: https://login.klarna.com/oauth2/token
+        revocationUrl: https://login.klarna.com/oauth2/revoke
+        userinfoUrl: https://login.klarna.com/userinfo
+        pkce: [S256]
+        scope_count: 34
+    scopes_artifact: scopes/klarna-scopes.yml
+    note: >-
+      Klarna's own security page states Sign in with Klarna authenticates with "OAuth using client-id
+      and API-key". The discovery document supports client_secret_post, client_secret_basic,
+      private_key_jwt and none for token-endpoint auth, and requires PKCE S256.
+  - name: eIDAS-mTLS
+    type: mutualTLS
+    scope: Klarna XS2A (PSD2 open banking) API only
+    sources:
+      - https://docs.klarna.com/api/xs2a/authentication/
+      - https://docs.klarna.com/api/xs2a/requirements/
+    note: >-
+      The XS2A API at xs2a.banking.klarna.com is protected with mutual TLS and requires a valid
+      eIDAS certificate from an approved Trust Centre. Klarna validates the certificate and extracts
+      the TPP roles (AIS, PIS, PIIS); an invalid certificate or insufficient role returns 403.
+      Production access additionally requires a PSD2 TPP licence.
+transport:
+  tls_minimum: TLS 1.2
+  sni_required: true
+  note: >-
+    Klarna requires Server Name Indication in the TLS handshake. Certificates at the API endpoints
+    are issued by AWS Certificate Manager and rotate automatically; Klarna advises pinning the root
+    CA rather than specific certificate details.
+not_supported:
+  - >-
+    No OAuth 2.0 client-credentials flow for the merchant REST APIs. Machine-to-machine calls to
+    Payments, Order Management, Settlements, Customer Token and HPP are API-key Basic auth only.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

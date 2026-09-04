@@ -1,0 +1,88 @@
+generated: '2026-08-27'
+method: searched
+source: live HTTP probes of every Klarna host named in apis.yml and in the OpenAPI servers[] blocks
+description: >-
+  /.well-known/ discovery surface across Klarna's hosts. One real document was found:
+  the OpenID Connect discovery document for "Sign in with Klarna" at login.klarna.com.
+  Klarna's API host (api.klarna.com), corporate site (www.klarna.com) and documentation host
+  (docs.klarna.com) serve nothing under /.well-known/ — including no security.txt, despite
+  Klarna running a published responsible-disclosure programme at
+  https://www.klarna.com/international/responsible-disclosure/.
+hit_count: 1
+hosts:
+  - host: https://login.klarna.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: klarna-openid-configuration.json
+        content_type: application/json
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.klarna.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.klarna.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://docs.klarna.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+notes:
+  - >-
+    docs.klarna.com answers 404 for unknown paths with a 63 KB HTML shell (its Next.js 404
+    page), so every miss there is a genuine 404 status, not a soft-200 catch-all.
+  - >-
+    www.klarna.com answers /.well-known/* misses with an application/xml 404 body of ~300
+    bytes; api.klarna.com answers with a 57-byte application/json 404. Neither is a catch-all.
+  - >-
+    Klarna's ChatGPT plugin manifest, historically at
+    https://www.klarna.com/.well-known/ai-plugin.json (Klarna shipped one of the first
+    ChatGPT plugins in 2023), is GONE — probed 2026-08-27, HTTP 404.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,281 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/api/kn/direct-partner/integration-resilience/
+sources:
+  - https://docs.klarna.com/api/kn/direct-partner/integration-resilience/
+  - https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/authentication/
+  - https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/api-urls/
+  - https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/api-updates/
+  - https://docs.klarna.com/api/kn/direct-partner/rate-limiting/
+  - https://docs.klarna.com/api/kn/direct-partner/request-limits/
+  - https://docs.klarna.com/api/kn/direct-partner/request-timeout/
+  - https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages/
+  - openapi/
+description: >-
+  Cross-cutting request/response semantics for the Klarna merchant APIs, read from Klarna's own
+  integration-resilience and API-reference documentation and cross-checked against the OpenAPI in
+  this repo.
+
+authentication:
+  style: HTTP Basic with an API key as the credential
+  header: 'Authorization: Basic <API key>'
+  credential_format: "klarna_<live|test>_api_<random>"
+  browser_credential: "klarna_<live|test>_client_<random> (client-id, not secret)"
+  artifact: authentication/klarna-authentication.yml
+
+idempotency:
+  supported: true
+  header: Klarna-Idempotency-Key
+  applies_to:
+    - POST
+    - PATCH
+  key_format: UUIDv5
+  key_format_note: >-
+    Klarna's integration-resilience page specifies UUIDv5. The Order Management refund guide
+    recommends UUID version 4 for the same header — the two Klarna pages disagree, and both are
+    quoted here rather than reconciled by us.
+  retention: 24 hours
+  retention_note: >-
+    "An idempotency key ... is valid for 24 hours — outside of that window Klarna cannot guarantee
+    the idempotency key will be honored with respect to an action."
+  duplicate_behaviour: >-
+    Klarna recognises and ignores repeat requests, responding with the initial result rather than
+    processing a new one.
+  scope: per action that could change a transaction's status
+  requirement_level: required
+  requirement_note: >-
+    Klarna states it "requires idempotent integration of its systems for actions that could change
+    a transaction's status".
+  retry_guidance: >-
+    Timed-out requests (HTTP 500 / error_code TIMEOUT) are documented as safe to retry when an
+    idempotency key is used, as are network, socket and timeout failures on refunds.
+  docs: https://docs.klarna.com/api/kn/direct-partner/integration-resilience/
+
+reversibility:
+  grade: documented
+  grade_rationale: >-
+    Every write surface has a named reversal operation with a real operationId, and Klarna states
+    the STATE conditions under which each reversal is allowed (cancel only before any capture;
+    refund only after a capture; release only against the unused authorized amount). Klarna does
+    NOT publish a TIME window for refunds — no "refund within N days" statement exists in the
+    public documentation — so this grades `documented` rather than `verified`. The single
+    time-bounded guarantee Klarna publishes on this surface is the 24-hour idempotency-key window,
+    which is a de-duplication guarantee, not a reversal window.
+  read_only: false
+  surfaces:
+    - action: Create an order against an authorization
+      operation: createOrder
+      spec: openapi/klarna-payments-api-openapi.yml
+      reversal: cancelOrder
+      reversal_spec: openapi/klarna-orders-api-openapi.yml
+      reversal_operation_path: POST /ordermanagement/v1/orders/{order_id}/cancel
+      window_stated: true
+      window: >-
+        Only before any capture exists on the order. Klarna returns 403 CANCEL_NOT_ALLOWED with
+        "Order has previous captures. Cancel not possible" once the order has been captured.
+      window_source: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages-for-order-management/
+      time_window: null
+    - action: Authorize a payment session
+      operation: createCreditSession / authorize()
+      spec: openapi/klarna-payments-api-openapi.yml
+      reversal: cancelAuthorization
+      reversal_operation_path: DELETE /payments/v1/authorizations/{authorizationToken}
+      window_stated: true
+      window: >-
+        Any time before the authorization token is consumed to create an order. Returns 204 on
+        success. Klarna warns that cancelling an authorization "might impact our credit assessment
+        when attempting to generate a new one". An expired token cannot be cancelled.
+      window_source: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/other-actions/cancel-an-authorization/
+      time_window: null
+    - action: Capture an order
+      operation: captureOrder
+      spec: openapi/klarna-captures-api-openapi.yml
+      reversal: refundOrder
+      reversal_spec: openapi/klarna-refunds-api-openapi.yml
+      reversal_operation_path: POST /ordermanagement/v1/orders/{order_id}/refunds
+      window_stated: true
+      window: >-
+        A refund requires a prior capture — Klarna returns 403 REFUND_NOT_ALLOWED with "Order has no
+        captures. Refund not possible" otherwise — and refunded_amount must be less than or equal to
+        the captured_amount. Partial refunds are supported. NO calendar deadline is published.
+      window_source: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/refund-orders-and-manage-authorizations/
+      time_window: null
+    - action: Reserve unused authorized amount
+      operation: (implicit on authorization)
+      reversal: releaseRemainingAuthorization
+      reversal_spec: openapi/klarna-orders-api-openapi.yml
+      reversal_operation_path: POST /ordermanagement/v1/orders/{order_id}/release-remaining-authorization
+      window_stated: true
+      window: >-
+        Releases the not-yet-captured part of an authorization. Returns 403 NOT_ALLOWED when the
+        resulting authorization amount would fall below the already-captured amount.
+      time_window: null
+    - action: Create a hosted payment page session
+      operation: createHppSession
+      spec: openapi/klarna-hpp-api-openapi.yml
+      reversal: disableHppSession
+      reversal_operation_path: DELETE /hpp/v1/sessions/{session_id}
+      window_stated: false
+      time_window: null
+    - action: Create a checkout order
+      operation: createOrderMerchant
+      spec: openapi/klarna-checkout-api-openapi.yml
+      reversal: abortOrder
+      reversal_operation_path: POST /checkout/v3/orders/{order_id}/abort
+      window_stated: false
+      time_window: null
+    - action: Tokenize a customer for recurring purchases
+      operation: purchaseToken
+      spec: openapi/klarna-payments-api-openapi.yml
+      reversal: patchCustomerToken
+      reversal_spec: openapi/klarna-customer-token-api-openapi.yml
+      reversal_operation_path: PATCH /customer-token/v1/tokens/{customerToken}/status
+      window_stated: false
+      note: Sets the token status (e.g. CANCELLED); returns 202.
+      time_window: null
+    - action: Issue a merchant-card promise
+      operation: createPromise
+      spec: openapi/klarna-merchantcard-api-openapi.yml
+      reversal: postcancelorder
+      reversal_operation_path: POST /merchantcard/v3/orders/{order_id}/cancel-request
+      window_stated: false
+      note: Asynchronous — returns 202 and a cancel-request resource readable via getcancelorder.
+      time_window: null
+  not_reversible:
+    - >-
+      appendShippingInfo / appendOrderShippingInfo / triggerSendOut — append-only, no delete
+      operation is published.
+    - >-
+      extendDueDate — Klarna publishes no operation to shorten a due date once extended; the
+      available extension options must be read first via getOptionsForExtendDueDate.
+
+dry_run_mode:
+  supported: false
+  note: >-
+    Klarna publishes no dry-run/preview/simulate flag on its merchant REST APIs. The nearest
+    equivalents are the full playground environment (see sandbox/klarna-sandbox.yml) and the
+    Notifications API's POST /v2/notification/webhooks/{webhook_id}/simulate operation on the
+    Klarna Network v2 surface, which fires a test webhook.
+
+pagination:
+  style: offset
+  applies_to:
+    - GET /payouts
+    - GET /transactions
+    - GET /reports/*
+  parameters:
+    - offset
+    - size
+  response_fields:
+    - pagination.count
+    - pagination.total
+    - pagination.offset
+  schema: json-schema/klarna-pagination-schema.json
+  note: >-
+    Only the Settlements surface paginates. The Payments, Order Management, Checkout, HPP,
+    Customer Token and Merchant Card surfaces are all single-resource reads with no collection
+    endpoints, so no pagination applies there. No cursor pagination is published anywhere.
+
+versioning:
+  scheme: uri-path
+  form: /v{major}/ in the path — e.g. /payments/v1/, /ordermanagement/v1/, /checkout/v3/, /merchantcard/v3/
+  network_gateway_form: >-
+    The newer Klarna Network Global API Gateway versions every API in unison under one number
+    (https://api-global.klarna.com/v1/...), with releases additionally denoted vX/rY (e.g. v1/r5).
+  release_cadence: >-
+    No more than two major version updates per year; minor releases monthly.
+  artifact: lifecycle/klarna-lifecycle.yml
+
+request_tracing:
+  correlation_header: Klarna-Correlation-Id
+  correlation_note: >-
+    Returned on responses (including 204s) and echoed in error bodies as correlation_id on the v1
+    APIs. The newer Klarna Network error envelope uses error_id for the same purpose.
+
+error_envelope:
+  format: custom-json
+  rfc9457: false
+  rfc9457_note: >-
+    Klarna does NOT use application/problem+json. Two proprietary envelopes are in production.
+  envelopes:
+    - name: v1 merchant APIs (Payments, Order Management, Checkout, HPP, Customer Token)
+      fields: [correlation_id, error_code, error_messages]
+      example_content_type: application/json
+    - name: Klarna Network v2 / Global API Gateway
+      fields: [error_id, error_type, error_code, error_message, "errors[]", doc_url]
+      error_types: [ACCESS_ERROR, TECHNICAL_ERROR, RESOURCE_ERROR, INPUT_ERROR]
+  artifact: errors/klarna-problem-types.yml
+
+rate_limit_signalling:
+  headers: [X-Ratelimit-Limit, X-Ratelimit-Remaining, X-Ratelimit-Reset]
+  status: 429
+  retry_after: false
+  artifact: rate-limits/klarna-rate-limits.yml
+
+field_expansion:
+  supported: false
+  note: No expand / fields / sparse-fieldset parameter is published on any Klarna surface.
+
+metadata:
+  supported: true
+  fields:
+    - merchant_reference1 / merchant_reference2 (order and capture level)
+    - merchant_data (free-form string on the order)
+    - order_lines[].merchant_data
+    - reference (on refunds; surfaced in settlement files)
+  note: >-
+    Klarna surfaces merchant references in settlement reports, so metadata here is a
+    reconciliation mechanism, not just a client-side label.
+
+hosts:
+  production:
+    europe: https://api.klarna.com/
+    north_america: https://api-na.klarna.com/
+    oceania: https://api-oc.klarna.com/
+  playground:
+    europe: https://api.playground.klarna.com/
+    north_america: https://api-na.playground.klarna.com/
+    oceania: https://api-oc.playground.klarna.com/
+  global_gateway: https://api-global.klarna.com/
+  xs2a_production: https://xs2a.banking.klarna.com
+  xs2a_sandbox: https://xs2a.banking.playground.klarna.com
+  note: >-
+    A test API key only works against the playground base URLs; region is chosen by the merchant's
+    Klarna account region, not by the shopper.
+
+transport:
+  tls_minimum: TLS 1.2
+  sni_required: true
+  http_versions: [HTTP/1.1, HTTP/2]
+  idle_timeout_seconds: 59
+  request_header_max: 6KB per header, 20KB total
+  request_body_max: 1MB
+  ddos_protection_status: 403 without an error object
+
+forward_compatibility:
+  non_breaking_changes:
+    - Addition of a response body where none previously existed
+    - Addition of optional or read-only fields
+    - Re-ordering of JSON fields
+    - Addition of HTTP headers
+    - Addition of new enum values where a default is defined
+    - Addition of new HTTP methods to existing resources
+    - Introduction of new webhook event types
+  client_guidance:
+    - Accept any 2xx as success; do not code for a specific success code
+    - Interpret any 4xx as a client error; do not code for a specific code
+    - Interpret any 5xx as a server error; do not code for a specific code
+    - Parse by key, never by property order
+    - Treat IDs as opaque strings whose format may change
+
+cross_links:
+  errors: errors/klarna-problem-types.yml
+  lifecycle: lifecycle/klarna-lifecycle.yml
+  authentication: authentication/klarna-authentication.yml
+  scopes: scopes/klarna-scopes.yml
+  rate_limits: rate-limits/klarna-rate-limits.yml
+  sandbox: sandbox/klarna-sandbox.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

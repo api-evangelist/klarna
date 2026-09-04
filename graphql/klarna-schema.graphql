@@ -1,4 +1,10 @@
 """
+NOT PUBLISHED BY KLARNA — conceptual schema authored by API Evangelist, verified
+2026-08-27. Klarna ships no GraphQL API; every Klarna merchant API is REST/JSON.
+Retained as a design exercise only. Do not treat as a Klarna contract.
+"""
+
+"""
 Klarna Payments and BNPL GraphQL Schema
 Covers: payment sessions, authorizations, order management,
 customer tokens, settlements, disputes, and webhooks.

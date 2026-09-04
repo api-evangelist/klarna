@@ -1,0 +1,146 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+sources:
+  - https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+  - https://docs.klarna.com/acquirer/klarna/resources/legal-and-compliance/policies-and-term-of-service/deprecation-policy/
+  - https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/api-updates/
+  - https://docs.klarna.com/api/kn/direct-partner/service-level/
+  - https://status.klarna.com/
+description: >-
+  Klarna publishes a written deprecation policy with a minimum six-month support window, a stated
+  release cadence, a lifecycle-stage vocabulary applied per operation and attribute, and public
+  service-level objectives — but no Sunset/Deprecation response headers and no single dated,
+  machine-readable changelog for the merchant APIs.
+
+versioning:
+  scheme: uri-path
+  current:
+    payments: v1
+    ordermanagement: v1
+    checkout: v3
+    hpp: v1
+    customer-token: v1
+    settlements: v1
+    merchantcard: v3
+    klarna-network-global-gateway: v2
+  docs: https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+  network_gateway:
+    note: >-
+      Every API under the Klarna Network Global API Gateway is versioned in unison and shares one
+      version number. Major versions appear as /vX/ in the path; individual releases are denoted
+      vX/rY (e.g. v1/r5) in the documentation.
+    example: https://api-global.klarna.com/v1/payment/request
+  release_cadence:
+    major_per_year_max: 2
+    minor: monthly
+  breaking_change_examples:
+    - Removal of enum values
+    - Removal of HTTP methods
+    - Removal of resources or endpoints
+    - Structural changes — object restructuring or parameter renames
+    - Changes to state-machine transitions, or introduction of new states
+  non_breaking_change_examples:
+    - Adding new API resources
+    - Adding new optional request parameters
+    - Adding new properties to responses
+    - Changing property order
+    - Adjustments to opaque strings such as IDs
+    - Introducing new webhook event types
+
+lifecycle_stages:
+  applied_to: operations and attributes, tagged in the API reference
+  stages:
+    - {name: Future release, meaning: Specified but not implemented; available for inquiry only.}
+    - {name: Early release, meaning: Under development or testing, may be incomplete, subject to change.}
+    - {name: General Availability, meaning: Fully available to Klarna partners.}
+    - {name: Deprecated, meaning: Will soon be decommissioned.}
+  availability_flags: [Availability in Test, Availability in Production]
+
+deprecation:
+  policy_url: https://docs.klarna.com/acquirer/klarna/resources/legal-and-compliance/policies-and-term-of-service/deprecation-policy/
+  minimum_support_window: 6 months
+  scope: [API versions, individual API calls, SDKs, platform modules]
+  statuses: [Full support, Legacy, Deprecated]
+  notification: >-
+    "Affected users will be informed." Klarna does not publish the notification channel or lead
+    time beyond the six-month minimum.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  header_note: >-
+    No RFC 8594 Sunset header and no Deprecation header is documented on any Klarna response. The
+    deprecation signal is out-of-band — documentation lifecycle tags plus direct notification.
+  semver: >-
+    Klarna states SDK versioning follows semantic versioning (semver.org). Confirmed against the
+    mobile SDK release lines (Android 2.13.2, iOS 2.9.0, React Native 2.8.2).
+  caveat: >-
+    The deprecation-policy page itself carries a Klarna banner reading "Page has been unpublished
+    on Jan 7th 2026", yet still serves HTTP 200 at both its HTML and .md URLs as of 2026-08-27.
+    Klarna has not published a replacement, so this remains the only written deprecation policy
+    the pipeline can cite — recorded with the caveat rather than treated as current or as absent.
+
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in any OpenAPI file in this repo carries `deprecated: true`. Klarna signals
+  deprecation in prose and lifecycle tags, not in the specification.
+
+sla:
+  url: https://docs.klarna.com/api/kn/direct-partner/service-level/
+  public: true
+  contractual: >-
+    Klarna states the published SLOs are "public and general guidelines for reference only"; a
+    binding SLA attachment can be added to a Partnership agreement on request.
+  availability_targets:
+    - {service_class: Transaction Critical Services, availability: '99%'}
+    - {service_class: Transaction Non-critical Services, availability: '99%'}
+    - {service_class: Additional Services, availability: '99%'}
+  availability_formula: >-
+    A% = (requests answered 2xx/3xx/4xx ÷ total requests) × 100, measured at the regional edge.
+  latency: >-
+    Measured at the 99th percentile at the regional edge, excluding internet network latency.
+    Targets vary per endpoint by processing complexity.
+  maintenance:
+    max_occasions_per_year: 5
+    max_hours_per_year: 15
+    notice_days: 7
+  support_hours: >-
+    Email, chat or telephone 09:00–17:00 local time, Monday to Friday. Weekend availability varies
+    by market.
+  slo_categories:
+    - Account Onboarding
+    - Account Operations
+    - Customer Token Charge
+    - Disputes
+    - Identity
+    - Read-Only Identity
+    - Personalized Message Placements
+    - Messaging Placements
+    - Payment Confirmation
+    - Payment Request
+    - Payment Transaction General
+    - Read-only Payment Transaction
+    - Settlements
+
+status_page: https://status.klarna.com/
+status_page_details:
+  vendor: Atlassian Statuspage
+  machine_readable: true
+  endpoints:
+    - https://status.klarna.com/api/v2/status.json
+    - https://status.klarna.com/api/v2/summary.json
+    - https://status.klarna.com/api/v2/components.json
+    - https://status.klarna.com/api/v2/incidents.json
+  components: 53
+  probed: '2026-08-27'
+  probe_result: 'HTTP 200 — "All Systems Operational", 53 components across regional groupings and Sign-in.'
+  subscriptions: email, SMS and RSS
+
+changelog:
+  artifact: changelog/klarna-changelog.yml
+  note: >-
+    Klarna publishes no consolidated dated changelog for the merchant APIs. See the changelog
+    artifact for what is published and what is not.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

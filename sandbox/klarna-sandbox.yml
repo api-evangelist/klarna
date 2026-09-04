@@ -1,0 +1,148 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/before-you-test/
+sources:
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/before-you-test/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/sample-data/sample-payment-data/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/sample-data/sample-customer-data/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/test-cases/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/go-live-checklist/
+  - https://docs.klarna.com/acquirer/klarna/get-started/integration-resilience/api-urls/
+description: >-
+  Klarna calls its sandbox the "playground". It is a full parallel environment — separate portal,
+  separate API hosts, separate API keys — and it is self-serve: anyone can create a playground
+  Merchant Portal account without a Klarna contract. Klarna states live systems do not process
+  playground purchases, so no invoices or fees result. All values below are published by Klarna
+  verbatim; nothing here is invented.
+name: Playground
+self_serve: true
+
+environments:
+  live:
+    portal: https://portal.klarna.com
+    key_prefix: klarna_live_api_
+    client_id_prefix: klarna_live_client_
+    api_hosts:
+      europe: https://api.klarna.com/
+      north_america: https://api-na.klarna.com/
+      oceania: https://api-oc.klarna.com/
+    xs2a: https://xs2a.banking.klarna.com
+  test:
+    portal: https://portal.playground.klarna.com
+    key_prefix: klarna_test_api_
+    client_id_prefix: klarna_test_client_
+    api_hosts:
+      europe: https://api.playground.klarna.com/
+      north_america: https://api-na.playground.klarna.com/
+      oceania: https://api-oc.playground.klarna.com/
+    xs2a: https://xs2a.banking.playground.klarna.com
+separation: >-
+  Test keys only work against the playground base URLs. Klarna states the products visible in
+  playground may differ from those in production, which depend on the merchant's contract.
+
+credentials:
+  how_to_obtain: >-
+    Playground Merchant Portal → Payment settings → Klarna API Keys → "Generate new Klarna API key",
+    then download the .txt file. The secret is displayed once and cannot be retrieved afterwards.
+  yields:
+    - Key ID (API username)
+    - Secret (API password)
+  signup: >-
+    Log in from the Klarna Docs navigation bar, pick a region, select "Playground" as the
+    environment, then Sign up with an email address and activate from the confirmation email.
+  inactivity_policy: >-
+    Credentials are disabled after two months of inactivity and deleted after ten months.
+
+test_payment_data:
+  credit_card:
+    number: '4111 1111 1111 1111'
+    cvc: '123'
+    expiry: 12/28 or any future MM/YY
+  card_3ds:
+    number: '4687388888888881'
+    note: Card number that triggers a 3-D Secure flow.
+  debit_card:
+    number: '4687 3888 8888 8881'
+    cvc: '123'
+    expiry: 12/28 or any future MM/YY
+    note: In the United States, use the debit card to test Financing.
+  ssn_us:
+    value: '123456789'
+    note: Sample Social Security Number when prompted in the US flow.
+  direct_debit_iban_de: 'DE1152 0513 7351 2071 0131'
+  direct_debit_personal_number_se: '19770111-6050'
+  direct_bank_transfer: Select "Demo Bank" in the loaded Klarna widget.
+  otp: Any valid 6-digit number other than 999999.
+
+magic_test_identities:
+  mechanism: >-
+    Klarna keys playground behaviour off the shopper email address. Replace ** with the two-letter
+    country code of the Klarna market being tested (e.g. customer+se@klarna.com for Sweden).
+  standard_flows:
+    - {email: 'customer+**@klarna.com', outcome: Purchase accepted; auth_token valid 60 minutes is returned for create_order}
+    - {email: 'customer+**+denied@klarna.com', outcome: Hard decline}
+  custom_flows:
+    - {email: 'customer+**+new_user@klarna.com', outcome: New-user sign-up flow; payment method details are stored to the user}
+    - {email: 'customer+**+disputed-return@klarna.com', outcome: Opens a dispute per capture, reason "return"}
+    - {email: 'customer+**+disputed-goods_not_received@klarna.com', outcome: Dispute, reason "goods not received"}
+    - {email: 'customer+**+disputed-already_paid@klarna.com', outcome: Dispute, reason "already paid"}
+    - {email: 'customer+**+disputed-faulty_goods@klarna.com', outcome: Dispute, reason "faulty goods"}
+    - {email: 'customer+**+disputed-incorrect_invoice@klarna.com', outcome: Dispute, reason "incorrect invoice"}
+    - {email: 'customer+**+disputed-high_risk_order@klarna.com', outcome: High-risk order at order level (formerly "stop request")}
+    - {email: 'customer+**+disputed-non_compliance@klarna.com', outcome: Non-compliance dispute}
+    - {email: 'customer+**+disputed-non_guaranteed_payment_program@klarna.com', outcome: Non-guaranteed-payment-program dispute}
+    - {email: 'customer+**+disputed-unauthorized_purchase@klarna.com', outcome: Dispute, reason "unauthorized_purchase"}
+    - {email: 'customer+**+disputed-return_not_possible@klarna.com', outcome: Return-not-possible dispute}
+  caveat: >-
+    Klarna notes the denied-payment flow may not be testable in some markets, naming Sweden and
+    Norway.
+
+sample_customers:
+  url: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/sample-data/sample-customer-data/
+  markets: 26
+  market_list: [Australia, Austria, Belgium, Canada, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Romania, Slovakia, Spain, Sweden, Switzerland, United Kingdom, United States]
+  shapes: [Private person (B2C), Company (B2B) — published for Denmark, Finland and Norway]
+  note: >-
+    Per-market sample identities (name, address, national identification number where the market
+    requires one) are published on Klarna's page. They are not copied into this repo: they are
+    market-specific, Klarna revises them, and the live page is the source of truth. One account is
+    valid in a single market only. B2B testing with Billie is redirected to Billie's own test data.
+  pii_policy: >-
+    Klarna substitutes any PII entered in playground with synthetically generated data to prevent
+    leaks, so values read back may differ from values sent.
+
+test_clock: false
+test_clock_note: >-
+  Klarna publishes no time-simulation or test-clock facility. Time-dependent behaviour (due dates,
+  extension options) can only be exercised through the extend-due-date operations
+  (getOptionsForExtendDueDate, extendDueDate), not by advancing a clock.
+
+fixtures_and_triggers:
+  - name: Dispute triggers
+    mechanism: shopper email address pattern (see magic_test_identities)
+  - name: Webhook simulation
+    mechanism: 'POST /v2/notification/webhooks/{webhook_id}/simulate on the Klarna Network Notifications API'
+    surface: Klarna Network Global API Gateway v2
+  - name: Developers Logs
+    mechanism: Merchant Portal app holding 7 days of playground request/response detail, filterable by date, service, order ID and direction.
+
+demo_store:
+  url: https://demo.klarna.dev/
+  probed: '2026-08-27'
+  status: 200
+  note: >-
+    Klarna's public demo store showing the shopper-side journey for Klarna payments, On-site
+    messaging and Express Checkout. Not linked to a merchant MID; orders created there are not
+    visible in the playground portal.
+
+performance_testing:
+  production: prohibited — no load, stress or denial-of-service testing in the live environment
+  playground: >-
+    Limited performance testing is permitted solely to verify integration behaviour when a rate
+    limit is hit. Playground rate limits are deliberately lower to make 429s easy to trigger.
+    Not to be used for capacity testing.
+
+go_live: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/go-live-checklist/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

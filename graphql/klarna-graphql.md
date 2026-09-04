@@ -1,5 +1,14 @@
 # Klarna GraphQL Schema
 
+> **NOT PUBLISHED BY KLARNA.** Verified 2026-08-27: Klarna ships no GraphQL API. There is no
+> `/graphql` endpoint on api.klarna.com, no GraphQL surface in Klarna's 79 KB `llms.txt`, and no
+> mention of GraphQL anywhere in docs.klarna.com. Every Klarna merchant API is REST/JSON.
+> This document and `klarna-schema.graphql` are a **conceptual re-modelling** authored by API
+> Evangelist, not a Klarna artifact. They are retained as a design exercise only. The
+> `type: GraphQL` pointer that previously advertised them in `apis.yml` has been REMOVED, because
+> it asserted on Klarna's behalf that Klarna publishes a GraphQL contract, which Klarna does not.
+
+
 This document describes a conceptual GraphQL schema for the Klarna payments and BNPL (Buy Now, Pay Later) platform. The schema covers the full merchant integration surface: payment sessions, authorizations, order management, customer tokens, settlements, disputes, and webhooks.
 
 ## Overview

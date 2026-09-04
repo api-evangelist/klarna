@@ -1,0 +1,61 @@
+generated: '2026-08-27'
+method: generated
+source: openapi/ + conventions/klarna-conventions.yml + errors/klarna-problem-types.yml
+description: Packaged Agent Skills for the Klarna merchant APIs. Klarna publishes no AGENTS.md and no
+  skill files of its own (searched 2026-08-27), so these are generated. Every step is grounded in an operationId
+  verified present in the referenced OpenAPI file; no operation is invented. Conventions, idempotency
+  and error rules are quoted from Klarna documentation.
+skill_count: 5
+skills:
+- file: klarna-authorize-and-create-order.md
+  name: Authorize a Klarna payment and create the order
+  api: openapi/klarna-payments-api-openapi.yml
+  operations:
+  - createCreditSession
+  - updateCreditSession
+  - readCreditSession
+  - createOrder
+  - cancelAuthorization
+- file: klarna-capture-and-fulfil.md
+  name: Capture a Klarna order and attach fulfilment
+  api: openapi/klarna-captures-api-openapi.yml
+  operations:
+  - captureOrder
+  - getCaptures
+  - getCapture
+  - appendShippingInfo
+  - appendOrderShippingInfo
+  - triggerSendOut
+  - releaseRemainingAuthorization
+  - extendAuthorizationTime
+- file: klarna-refund-and-reconcile.md
+  name: Refund a Klarna order and reconcile it to a payout
+  api: openapi/klarna-refunds-api-openapi.yml
+  operations:
+  - refundOrder
+  - get
+  - cancelOrder
+  - getTransactions
+  - getPayouts
+  - getPayout
+  - getPayoutSummary
+- file: klarna-hosted-payment-page.md
+  name: Sell without a checkout page using the Klarna Hosted Payment Page
+  api: openapi/klarna-hpp-api-openapi.yml
+  operations:
+  - createHppSession
+  - getSessionById
+  - distributeHppSession
+  - disableHppSession
+  - createCreditSession
+- file: klarna-recurring-with-customer-token.md
+  name: Set up recurring Klarna purchases with a customer token
+  api: openapi/klarna-customer-token-api-openapi.yml
+  operations:
+  - purchaseToken
+  - readCustomerToken
+  - createOrder
+  - patchCustomerToken
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

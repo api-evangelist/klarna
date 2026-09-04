@@ -1,0 +1,72 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/api/psp/changelog/
+sources:
+  - https://docs.klarna.com/api/psp/changelog/
+  - https://docs.klarna.com/api/psp/merchant-onboarding-native-partners-changelog/
+  - https://docs.klarna.com/platform/sap-commerce-cloud/get-started/changelog/
+  - https://docs.klarna.com/platform-solutions/e-commerce-platforms/salesforce-commerce-cloud/before-you-start/changelog/
+  - https://github.com/klarna/klarna-mobile-sdk-android/blob/master/CHANGELOG.md
+  - https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+description: >-
+  Klarna publishes NO consolidated, dated changelog for its merchant REST APIs. What exists is
+  fragmented: two thin PSP-onboarding changelogs on the docs site, per-platform module changelogs
+  for the Adobe Commerce / Salesforce / SAP cartridges, and per-repository CHANGELOG.md files for
+  the mobile SDKs on GitHub. Change communication for the APIs themselves is out-of-band —
+  documented lifecycle stages plus direct notification to affected partners.
+scheme: uri-path major versions plus vX/rY release identifiers on the Klarna Network gateway
+current_version:
+  payments: v1
+  ordermanagement: v1
+  checkout: v3
+  merchantcard: v3
+  klarna-network-global-gateway: v2
+cadence:
+  major_per_year_max: 2
+  minor: monthly
+consolidated_api_changelog: false
+
+published_changelogs:
+  - name: PSP API changelog
+    url: https://docs.klarna.com/api/psp/changelog/
+    dated: true
+    scope: PSP onboarding API
+    entry_count: 1
+    note: >-
+      The entire published changelog, fetched 2026-08-27, is a single 2022 entry. It has not been
+      updated in nearly four years.
+    entries:
+      - date: '2022-08-22'
+        breaking: false
+        additions:
+          - 'POST /onboarding-psp/v1/merchant/{merchant_id}/suspend — PSP partners can suspend a MID when a merchant has not passed the partner-side underwriting.'
+  - name: Merchant onboarding (native partners) changelog
+    url: https://docs.klarna.com/api/psp/merchant-onboarding-native-partners-changelog/
+    dated: true
+    scope: Native-partner merchant onboarding API
+    note: Fetched 2026-08-27 — 522 bytes; a stub page with no substantive dated entries.
+  - name: Salesforce Commerce Cloud cartridge changelog
+    url: https://docs.klarna.com/platform-solutions/e-commerce-platforms/salesforce-commerce-cloud/before-you-start/changelog/
+    scope: platform module, not the API
+  - name: SAP Commerce Cloud add-on changelog
+    url: https://docs.klarna.com/platform-solutions/e-commerce-platforms/sap-commerce-cloud/before-you-start/changelog/
+    scope: platform module, not the API
+  - name: Klarna Mobile SDK (Android) changelog
+    url: https://github.com/klarna/klarna-mobile-sdk-android/blob/master/CHANGELOG.md
+    scope: mobile SDK
+    latest_version: 2.13.2
+    latest_published: '2026-08-11'
+
+api_change_communication:
+  mechanism: >-
+    Lifecycle stages (Future release / Early release / General Availability / Deprecated) tagged
+    per operation and per attribute in the API reference, plus "Affected users will be informed"
+    under the deprecation policy's six-month minimum window.
+  docs: https://docs.klarna.com/api/kn/direct-partner/versioning-and-release-management/
+  gap: >-
+    An agent or an integrator cannot diff Klarna's API surface over time from anything Klarna
+    publishes. This is the single largest operational-transparency gap in Klarna's developer
+    surface, and it is the one most cheaply closed.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

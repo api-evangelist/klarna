@@ -1,0 +1,179 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org), Packagist (repo.packagist.org), pub.dev,
+  CocoaPods trunk, Klarna's own Maven repository at x.klarnacdn.net/mobile-sdk,
+  and the Klarna GitHub organization at https://github.com/klarna
+description: >-
+  First-party Klarna client libraries. Klarna publishes NO server-side REST SDK for the
+  Payments / Order Management / Settlements APIs in any language — the only maintained
+  first-party libraries are the mobile (Android / iOS / React Native / Flutter) in-app SDKs
+  and browser-loaded JavaScript libraries served from Klarna's own CDN. The one historical
+  server-side SDK, the PHP klarna/kco_rest library, is marked ABANDONED on Packagist and
+  its GitHub repository is archived as [DEPRECATED].
+packages:
+  - language: kotlin
+    platform: android
+    registry: maven
+    registry_note: >-
+      Not on Maven Central. Klarna hosts its own Maven repository at
+      https://x.klarnacdn.net/mobile-sdk/ — repo1.maven.org/maven2/com/klarna/mobile/sdk
+      returns 404.
+    name: com.klarna.mobile:sdk
+    url: https://github.com/klarna/klarna-mobile-sdk-android
+    install: "implementation 'com.klarna.mobile:sdk:2.13.2'"
+    version: 2.13.2
+    published: '2026-08-11'
+    version_source: https://x.klarnacdn.net/mobile-sdk/com/klarna/mobile/sdk/maven-metadata.xml
+    official: true
+  - language: swift
+    platform: ios
+    registry: cocoapods
+    name: KlarnaMobileSDK
+    url: https://github.com/klarna/klarna-mobile-sdk
+    install: "pod 'KlarnaMobileSDK'"
+    version: 2.9.0
+    published: '2025-10-22'
+    version_source: https://trunk.cocoapods.org/api/v1/pods/KlarnaMobileSDK
+    official: true
+    note: >-
+      A Swift Package Manager distribution of the same SDK is published separately at
+      https://github.com/klarna/klarna-mobile-sdk-spm; SPM has no version metadata endpoint,
+      so the CocoaPods trunk record above is the dated registry evidence.
+  - language: javascript
+    platform: react-native
+    registry: npm
+    name: react-native-klarna-inapp-sdk
+    url: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
+    install: npm install react-native-klarna-inapp-sdk
+    version: 2.8.2
+    published: '2026-08-10'
+    version_source: https://registry.npmjs.org/react-native-klarna-inapp-sdk
+    official: true
+  - language: javascript
+    platform: react-native
+    registry: npm
+    name: "@klarna/react-native-klarna-network-payment"
+    url: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
+    install: npm install @klarna/react-native-klarna-network-payment
+    version: 2.8.2
+    published: '2026-08-10'
+    version_source: https://registry.npmjs.org/@klarna/react-native-klarna-network-payment
+    official: true
+  - language: javascript
+    platform: react-native
+    registry: npm
+    name: "@klarna/react-native-klarna-network-messaging"
+    url: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
+    install: npm install @klarna/react-native-klarna-network-messaging
+    version: 2.8.2
+    published: '2026-08-10'
+    version_source: https://registry.npmjs.org/@klarna/react-native-klarna-network-messaging
+    official: true
+  - language: javascript
+    platform: react-native
+    registry: npm
+    name: "@klarna/react-native-klarna-network-core"
+    url: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+    install: npm install @klarna/react-native-klarna-network-core
+    version: 2.8.2
+    published: '2026-08-10'
+    version_source: https://registry.npmjs.org/@klarna/react-native-klarna-network-core
+    official: true
+  - language: dart
+    platform: flutter
+    registry: pub.dev
+    name: klarna_mobile_sdk_flutter
+    url: https://pub.dev/packages/klarna_mobile_sdk_flutter
+    install: "flutter pub add klarna_mobile_sdk_flutter"
+    version: 1.0.2
+    published: '2024-09-26'
+    version_source: https://pub.dev/api/packages/klarna_mobile_sdk_flutter
+    official: true
+    note: >-
+      The GitHub repository klarna/klarna-mobile-sdk-flutter is described by Klarna as being
+      in maintenance mode; the last pub.dev release predates the current mobile SDK line
+      (Android 2.13.2 / iOS 2.9.0) by nearly two years.
+  - language: javascript
+    platform: browser
+    registry: cdn
+    name: Klarna Payments JS library (kp/lib/v1)
+    url: https://x.klarnacdn.net/kp/lib/v1/api.js
+    install: '<script src="https://x.klarnacdn.net/kp/lib/v1/api.js" data-client-id="..." async></script>'
+    version: null
+    published: null
+    version_source: null
+    official: true
+    note: >-
+      Probed 2026-08-27, HTTP 200, 484 KB of application/javascript. The distribution is
+      UNPINNED — the URL names only the major line `v1` and floats to whatever Klarna has
+      deployed, so there is no version a consumer (or this pipeline) can read. That is the
+      finding, not a gap: an integrator cannot tell what build they are loading either.
+  - language: javascript
+    platform: browser
+    registry: cdn
+    name: Klarna Web SDK
+    url: https://js.klarna.com/web-sdk/v1/klarna.js
+    install: '<script src="https://js.klarna.com/web-sdk/v1/klarna.js" async></script>'
+    version: null
+    published: null
+    version_source: null
+    official: true
+    note: >-
+      Probed 2026-08-27, HTTP 200, 75 KB. Authenticated with a client-id
+      (`klarna_<live|test>_client_<random>`), not an API key. Unpinned at the `v1` major line.
+  - language: javascript
+    platform: browser
+    registry: cdn
+    name: Klarna On-site Messaging library
+    url: https://osm.klarnaservices.com/lib.js
+    install: '<script src="https://osm.klarnaservices.com/lib.js" data-client-id="..." async></script>'
+    version: null
+    published: null
+    version_source: null
+    official: true
+    note: Probed 2026-08-27, HTTP 200, 57 KB. Unpinned.
+  - language: php
+    registry: packagist
+    name: klarna/kco_rest
+    url: https://packagist.org/packages/klarna/kco_rest
+    install: composer require klarna/kco_rest
+    version: v4.2.3
+    published: '2020-02-14'
+    version_source: https://repo.packagist.org/p2/klarna/kco_rest.json
+    official: true
+    status: abandoned
+    note: >-
+      Flagged `abandoned` in Packagist metadata; the GitHub repository
+      https://github.com/klarna/kco_rest_php is titled "[DEPRECATED] Official PHP SDK library
+      for Klarna Services". Last release 2020-02-14 — more than six years behind the APIs it
+      wraps. Recorded as decay evidence, not as a recommended integration path.
+absent:
+  - language: python
+    note: No first-party Klarna package on PyPI. Searched 2026-08-27.
+  - language: ruby
+    note: No first-party Klarna gem on RubyGems.
+  - language: go
+    note: No first-party Klarna module on pkg.go.dev.
+  - language: dotnet
+    note: No first-party Klarna package on NuGet.
+  - language: java
+    scope: server-side
+    note: >-
+      No server-side Java SDK. The only com.klarna Maven artifact is the Android mobile SDK,
+      and it is not on Maven Central.
+other_first_party_repos:
+  - url: https://github.com/klarna/SAP-Commerce-klarna-payments
+    kind: platform-extension
+  - url: https://github.com/klarna/sfcc-klarna-payments
+    kind: platform-extension
+  - url: https://github.com/klarna/sfcc-order-management
+    kind: platform-extension
+third_party_excluded:
+  - name: klarna-checkout-sdk (npm, publisher romkin7)
+  - name: medusa-payment-klarna (npm, Medusa)
+  - name: "@frontend-sdk/klarna (npm, Shogun)"
+  - name: rn-klarna-osm / react-native-klarna-osm (npm, community)
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

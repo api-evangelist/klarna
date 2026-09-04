@@ -1,0 +1,118 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages/
+sources:
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages-for-klarna-payments/
+  - https://docs.klarna.com/acquirer/klarna/resources/developer-tools/error-handling/error-codes-and-messages-for-order-management/
+  - https://docs.klarna.com/api/kn/direct-partner/integration-resilience/
+  - https://docs.klarna.com/api/kn/direct-partner/request-timeout/
+  - openapi/
+format: custom-json
+rfc9457: false
+description: >-
+  Klarna does not emit application/problem+json. It publishes a named error-code registry per
+  product surface, wrapped in one of two proprietary envelopes. This catalog is searched from
+  Klarna's own error reference and cross-checked against the 4xx/5xx responses declared in the
+  OpenAPI files in this repo.
+
+envelopes:
+  - id: v1-merchant
+    applies_to: Payments, Order Management, Checkout, HPP, Customer Token, Merchant Card
+    content_type: application/json
+    fields:
+      correlation_id: Unique Klarna-generated request identifier; quote it to Klarna support.
+      error_code: Machine-readable code — build error handling on this.
+      error_messages: Array of human-readable messages, often naming the offending field.
+    example: |
+      {
+        "correlation_id": "6a9b1cb1-73a3-4936-a030-481ba4bb203b",
+        "error_code": "ERROR_CODE",
+        "error_messages": ["ERROR_MESSAGE"]
+      }
+  - id: network-v2
+    applies_to: Klarna Network Global API Gateway (api-global.klarna.com/v2)
+    content_type: application/json
+    fields:
+      error_id: Unique Klarna-generated identifier for the request.
+      error_type: One of ACCESS_ERROR, TECHNICAL_ERROR, RESOURCE_ERROR, INPUT_ERROR.
+      error_code: Further categorization — the field to build handling logic on.
+      error_message: Human-readable, for technical troubleshooting; not shopper-facing.
+      doc_url: Link to the Klarna docs page explaining the error, when available.
+    example: |
+      {
+        "error_id": "abcd1234-12ab-1234-abcd-abcd12345678",
+        "error_type": "INPUT_ERROR",
+        "error_code": "VALIDATION_ERROR",
+        "errors": [
+          {
+            "parameter": "line_items[0].quantity",
+            "error_message": "Parameter line_items[0].quantity must be greater than or equal to 1"
+          }
+        ]
+      }
+
+problem_count: 39
+problems:
+  # ---- Klarna Payments (v1) ----
+  - {status: 400, code: BAD_REQUEST, surface: klarna-payments, title: Malformed request, remediation: 'The server cannot or will not process the request due to a perceived client error.', source_operation: 'openapi/klarna-payments-api-openapi.yml#createCreditSession'}
+  - {status: 400, code: BAD_VALUE, surface: klarna-payments, title: Field validation failed, remediation: 'The error message names the property. Common cases: order_lines[X].tax_rate, order_lines[X].total_tax_amount, order_tax_amount, order_lines, purchase_currency, billing_address/shipping_address fields, attachment.attachment, locale.', source_operation: 'openapi/klarna-payments-api-openapi.yml#updateCreditSession'}
+  - {status: 401, code: UNAUTHORIZED, surface: klarna-payments, title: Credentials failed authentication, remediation: 'Verify the API key; if several credentials exist, confirm the latest one is in use.'}
+  - {status: 403, code: INVALID_OPERATION, surface: klarna-payments, title: Operation not allowed for this MID, remediation: 'Seen as "Authorization token already consumed" and "Not allowed to create customer token for intent buy" — not all payment methods permit tokenization.', source_operation: 'openapi/klarna-payments-api-openapi.yml#purchaseToken'}
+  - {status: 403, code: MERCHANT_INACTIVE, surface: klarna-payments, title: Merchant ID not activated, remediation: 'Contact the Klarna delivery manager or merchant support to activate the MID.'}
+  - {status: 403, code: REJECTED, surface: klarna-payments, title: Authorization declined by Klarna, remediation: 'Klarna did not approve the authorization. This is the BNPL equivalent of a card decline; Klarna publishes no further decline-reason breakdown to the merchant.'}
+  - {status: 404, code: NOT_FOUND, surface: klarna-payments, title: Session or authorization not found, remediation: '"Invalid session id" usually means the session expired — create a new one. "Invalid authorization token" means the token expired or was superseded — request a new authorization.', source_operation: 'openapi/klarna-payments-api-openapi.yml#readCreditSession'}
+  - {status: 404, code: SESSION_COMPLETED, surface: klarna-payments, title: Session already completed, remediation: 'An order already exists for the session; no pre-purchase operation (update_session, authorize, create_order) is permitted. Usually invisible to the shopper.'}
+  - {status: 409, code: BAD_VALUE, surface: klarna-payments, title: Request conflicts with earlier session data, remediation: 'Data shared in create_session / load() / authorize() was modified. Also raised as "The order has been already completed with different request body".', source_operation: 'openapi/klarna-payments-api-openapi.yml#createOrder'}
+  - {status: 500, code: INTERNAL_SERVER_ERROR, surface: klarna-payments, title: Internal error, remediation: 'Retry with the same Klarna-Idempotency-Key; escalate with the correlation_id if it persists.'}
+
+  # ---- Order Management (v1) ----
+  - {status: 400, code: NOT_FOUND, surface: order-management, title: Invalid request referencing a missing sub-resource, remediation: 'e.g. "Refund X cannot be found for order Y" — check validation rules for the operation.', source_operation: 'openapi/klarna-refunds-api-openapi.yml#get'}
+  - {status: 403, code: CAPTURE_NOT_ALLOWED, surface: order-management, title: Capture not allowed, remediation: 'The order may be cancelled or expired, or the capture amount exceeds the remaining authorized amount.', source_operation: 'openapi/klarna-captures-api-openapi.yml#captureOrder'}
+  - {status: 403, code: CANCEL_NOT_ALLOWED, surface: order-management, title: Cancel not allowed, remediation: 'Once an order has any capture it can no longer be cancelled — refund instead.', source_operation: 'openapi/klarna-orders-api-openapi.yml#cancelOrder'}
+  - {status: 403, code: REFUND_NOT_ALLOWED, surface: order-management, title: Refund not allowed, remediation: '"Order has no captures. Refund not possible" — refund only after a full or partial capture, and never above captured_amount.', source_operation: 'openapi/klarna-refunds-api-openapi.yml#refundOrder'}
+  - {status: 403, code: NOT_ALLOWED, surface: order-management, title: Operation not allowed in the current order state, remediation: 'Raised on release_authorization, extend_authorization_time, update_authorization, update_order_customer_details and update_merchant_references. A resulting authorization amount below the captured amount is rejected.', source_operation: 'openapi/klarna-orders-api-openapi.yml#releaseRemainingAuthorization'}
+  - {status: 404, code: NO_SUCH_ORDER, surface: order-management, title: Order not found, remediation: 'Verify the order_id.', source_operation: 'openapi/klarna-orders-api-openapi.yml#getOrder'}
+  - {status: 404, code: NO_SUCH_CAPTURE, surface: order-management, title: Capture not found, remediation: 'Verify the capture_id.', source_operation: 'openapi/klarna-captures-api-openapi.yml#getCapture'}
+  - {status: 404, code: NOT_FOUND, surface: order-management, title: Resource not found, remediation: 'Verify the order, capture or refund identifier.'}
+  - {status: 409, code: CONFLICT, surface: order-management, title: Concurrent modification, remediation: 'Retry with the same Klarna-Idempotency-Key.'}
+  - {status: 413, code: REQUEST_TOO_LARGE, surface: order-management, title: Payload too large, remediation: 'Default body limit is 1MB; reduce order_lines or split the request.'}
+  - {status: 422, code: UNPROCESSABLE_ENTITY, surface: order-management, title: Semantically invalid request}
+  - {status: 422, code: INVALID_ADDRESS, surface: order-management, title: Address failed validation, remediation: 'See Klarna customer-data requirements for the market.'}
+  - {status: 429, code: TOO_MANY_REQUESTS, surface: order-management, title: Rate limited, remediation: 'Read X-Ratelimit-* headers and retry with exponential back-off and jitter.'}
+  - {status: 500, code: INTERNAL_SERVER_ERROR, surface: order-management, title: Internal error}
+  - {status: 500, code: UNEXPECTED_ERROR, surface: order-management, title: Unexpected error}
+  - {status: 503, code: TEMPORARILY_UNAVAILABLE, surface: order-management, title: Temporarily unavailable, remediation: 'Also returned as 502 and 504. Retry with back-off and the same idempotency key.'}
+
+  # ---- Klarna Network v2 / Global API Gateway ----
+  - {status: 404, code: NOT_FOUND, surface: network-v2, error_type: null, title: API route does not exist, remediation: Verify the API route.}
+  - {status: 401, code: UNAUTHORIZED, surface: network-v2, error_type: ACCESS_ERROR, title: Credentials failed authentication, remediation: 'Verify the credentials, the authentication method, and the endpoint.'}
+  - {status: 429, code: RATE_LIMITED, surface: network-v2, error_type: ACCESS_ERROR, title: Caller rate limited, remediation: See rate-limits/klarna-rate-limits.yml.}
+  - {status: 404, code: RESOURCE_NOT_FOUND, surface: network-v2, error_type: RESOURCE_ERROR, title: Resource not found, remediation: 'Verify the token in the request path; also raised when updating an expired shopping session.'}
+  - {status: 409, code: RESOURCE_CONFLICT, surface: network-v2, error_type: RESOURCE_ERROR, title: Resource conflict, remediation: 'Transaction details conflict with the request; may indicate concurrent updates.'}
+  - {status: 403, code: OPERATION_FORBIDDEN, surface: network-v2, error_type: RESOURCE_ERROR, title: Insufficient privileges, remediation: 'The credential lacks permission for the operation.'}
+  - {status: 400, code: VALIDATION_ERROR, surface: network-v2, error_type: INPUT_ERROR, title: Input validation failed, remediation: 'errors[] names the offending parameter.'}
+  - {status: 400, code: INVALID_CONTENT_TYPE, surface: network-v2, error_type: INPUT_ERROR, title: Malformed content type, remediation: 'e.g. invalid JSON.'}
+  - {status: 500, code: INTERNAL_ERROR, surface: network-v2, error_type: TECHNICAL_ERROR, title: Unknown error, remediation: 'Escalate with error_id.'}
+  - {status: 500, code: SERVER_CONFIGURATION_ERROR, surface: network-v2, error_type: TECHNICAL_ERROR, title: System misconfigured, remediation: 'e.g. price plan misconfigured. Escalate with error_id.'}
+  - {status: 500, code: TIMEOUT, surface: network-v2, error_type: TECHNICAL_ERROR, title: Request processing timeout, remediation: 'Default idle timeout is 59s. Safe to retry with the same Klarna-Idempotency-Key.'}
+  - {status: 503, code: TEMPORARY_UNAVAILABLE, surface: network-v2, error_type: TECHNICAL_ERROR, title: Temporarily unavailable, remediation: 'Escalate with error_id if persistent.'}
+  - {status: 403, code: null, surface: network-v2, error_type: null, title: DDoS protection triggered, remediation: 'Returned WITHOUT the usual error object when a DDoS protection rule fires.'}
+
+decline_codes:
+  published: false
+  note: >-
+    Klarna is a payments provider but publishes NO card-style decline-code reference. The only
+    decline signal exposed to the merchant is the 403 REJECTED error on the Klarna Payments
+    authorize/create-order flow, which carries no reason breakdown. Klarna deliberately masks the
+    underwriting reason from the merchant; the shopper is told directly in the Klarna widget. No
+    errors/klarna-decline-codes.yml is written because there is nothing published to write.
+
+troubleshooting:
+  merchant_portal_logs: >-
+    Klarna surfaces a Developers Logs app in the Merchant Portal holding the previous 7 days of
+    request/response detail, filterable by date, service, order ID and direction.
+  docs: https://docs.klarna.com/acquirer/klarna/resources/developer-tools/merchant-portal-guide/payments/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -4,37 +4,183 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Klarna
 providerId: klarna
 created: '2026-05-08'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-08, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-08'
-reconciled: false
+modified: '2026-08-27'
+generated: '2026-08-27'
+method: searched
+source: https://docs.klarna.com/api/kn/direct-partner/rate-limiting/
+reconciled: true
 tags:
-- Fintech
-- BNPL
-- Payments
-- Cards
-- Shopping
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Klarna. Replace with real limits once researched.
-notes: "Initial scaffold \u2014 limits have not yet been reconciled."
-sources:
-- https://www.klarna.com/
-- https://docs.klarna.com/
-- https://docs.klarna.com/api/
+  - Fintech
+  - BNPL
+  - Payments
+  - Rate Limiting
+  - Quotas
+  - Throttling
+description: >-
+  Klarna publishes per-second rate limits for its Global API Gateway, broken down by API operation
+  category and enforced at two levels simultaneously — Partner and Acquiring Partner. The category
+  that applies to a given call is stated in that operation's description in the API reference. Quota
+  is enforced per data centre, so the same Partner calling from different regions can see different
+  rate-limit state.
+docs:
+  - https://docs.klarna.com/api/kn/direct-partner/rate-limiting/
+  - https://docs.klarna.com/api/kn/direct-partner/request-limits/
+  - https://docs.klarna.com/api/kn/direct-partner/request-timeout/
 responseCodes:
   throttled: 429
+  payload_too_large: 413
+  timeout: 500
+  ddos_protection: 403
+headers:
+  - name: X-Ratelimit-Limit
+    description: >-
+      The rate limits and metering interval. The first item is the quota closest to being exceeded,
+      followed by one or more quota policy descriptions in the form `40;w=1;name="ratelimit-name"`
+      where 40 is the units per interval, w=1 the interval length in seconds, and name an
+      informational label that can change without notice.
+    example: 'X-Ratelimit-Limit: 40, 40;w=1;name="account_payment-request-capture",100;w=1;name="psp_payment-request-capture"'
+  - name: X-Ratelimit-Remaining
+    description: Approximate remaining quota for the current interval.
+    example: 'X-Ratelimit-Remaining: 15'
+  - name: X-Ratelimit-Reset
+    description: Seconds until the current metering interval resets. Always 1 for per-second limits.
+    example: 'X-Ratelimit-Reset: 1'
+header_standard: >-
+  Klarna uses X-Ratelimit-* (the pre-standard prefixed form), not the IETF draft RateLimit-* fields.
+  The quota-policy value syntax `N;w=S;name="..."` does follow the IETF draft RateLimit-Policy shape.
+  Klarna does not document a Retry-After header on 429.
+limit_count: 14
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  - name: account-onboarding (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 0
+    timeFrame: second
+    notes: >-
+      Zero at Partner level — account onboarding is only callable at the Acquiring Partner level.
+  - name: account-onboarding (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 10
+    timeFrame: second
+  - name: payment-transaction-capture (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 50
+    timeFrame: second
+  - name: payment-transaction-capture (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 200
+    timeFrame: second
+  - name: payment-transaction-management (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 200
+    timeFrame: second
+  - name: payment-transaction-management (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 500
+    timeFrame: second
+  - name: dispute (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 20
+    timeFrame: second
+  - name: dispute (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 50
+    timeFrame: second
+  - name: settlement (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 0
+    timeFrame: second
+  - name: settlement (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 150
+    timeFrame: second
+  - name: partner-management (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 20
+    timeFrame: second
+  - name: partner-management (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 50
+    timeFrame: second
+  - name: on-site-messaging (production)
+    scope: partner
+    environment: production
+    metric: requests
+    limit: 200
+    timeFrame: second
+  - name: on-site-messaging (production)
+    scope: acquiring-partner
+    environment: production
+    metric: requests
+    limit: 500
+    timeFrame: second
+test_environment_limits:
+  note: >-
+    Klarna deliberately sets lower limits in the playground so integrators can trigger and test
+    429 handling. Limited performance testing is permitted in test only; any load, stress or
+    denial-of-service testing against production is prohibited.
+  limits:
+    - {name: account-onboarding, partner: 0, acquiring_partner: 5, timeFrame: second}
+    - {name: payment-transaction-capture, partner: 12, acquiring_partner: 50, timeFrame: second}
+    - {name: payment-transaction-management, partner: 50, acquiring_partner: 125, timeFrame: second}
+    - {name: dispute, partner: 5, acquiring_partner: 12, timeFrame: second}
+    - {name: settlement, partner: 0, acquiring_partner: 37, timeFrame: second}
+    - {name: partner-management, partner: 5, acquiring_partner: 12, timeFrame: second}
+    - {name: on-site-messaging, partner: 50, acquiring_partner: 125, timeFrame: second}
+request_limits:
+  header_individual_max: 6KB
+  headers_total_max: 20KB
+  body_max: 1MB
+  body_exceeded_status: 413
+  note: >-
+    Klarna asks integrators not to forward observability/tracing headers to its endpoints; some
+    endpoints document a body limit above 1MB in their own reference.
+timeouts:
+  idle_timeout_seconds: 59
+  timeout_status: 500
+  timeout_error_code: TIMEOUT
+  timeout_error_type: TECHNICAL_ERROR
+  retry_safe: true
+  note: >-
+    Klarna states timed-out requests can be safely retried when the Klarna-Idempotency-Key header
+    is used. Some operations define shorter timeouts, documented per operation.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  - name: Backoff Strategy
+    description: >-
+      Klarna requires exponential back-off with jitter on 429, and recommends a token-bucket
+      algorithm on the caller side to shape global request flow.
+  - name: Enforcement level
+    description: >-
+      Limits are tracked simultaneously at Acquiring Partner level (all operations including
+      sub-Partners) and Partner level. Hitting either limit rate-limits the request.
+  - name: Change management
+    description: >-
+      Rate-limit adjustments follow Klarna's versioning and deprecation process, but may change
+      without notice in response to abuse. Klarna instructs integrators to read the response
+      headers rather than hard-code the documented numbers.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

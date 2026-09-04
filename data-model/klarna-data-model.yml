@@ -1,0 +1,152 @@
+generated: '2026-08-27'
+method: derived
+source: openapi/ (15 refined OpenAPI documents, 105 component schemas)
+enriched_from:
+  - https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/
+  - https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+description: >-
+  Entity-relationship graph for the Klarna merchant APIs, derived from $ref links and
+  id-reference fields across the OpenAPI documents in this repo. Klarna's core is a strict
+  linear state machine — session becomes authorization, authorization becomes order, order
+  accrues captures, captures accrue refunds — with money movement reported through a parallel
+  settlement graph (payout, transaction) that keys back to the same order and capture ids.
+schema_count: 105
+entity_count: 12
+
+identifiers:
+  note: >-
+    Klarna ids are opaque UUID-shaped strings with no type prefix. Klarna explicitly warns that
+    the format of opaque strings such as ids may change without it being a breaking change, so
+    an integrator must never parse them.
+  fields:
+    - {name: session_id, entity: Session, surfaces: [payments, hpp, checkout]}
+    - {name: authorization_token, entity: Authorization, surfaces: [payments]}
+    - {name: order_id, entity: Order, surfaces: [payments, ordermanagement, checkout, merchantcard, settlements]}
+    - {name: short_order_id, entity: Order, surfaces: [settlements], note: Human-quotable form shown in the Merchant Portal.}
+    - {name: capture_id, entity: Capture, surfaces: [ordermanagement, settlements]}
+    - {name: refund_id, entity: Refund, surfaces: [ordermanagement, settlements]}
+    - {name: customer_token / token_id, entity: CustomerToken, surfaces: [customer-token]}
+    - {name: payment_reference, entity: Payout, surfaces: [settlements]}
+    - {name: promise_id, entity: Promise, surfaces: [merchantcard]}
+    - {name: settlement_id, entity: Settlement, surfaces: [merchantcard]}
+    - {name: card_id, entity: Card, surfaces: [merchantcard]}
+    - {name: correlation_id, entity: '(error envelope)', surfaces: [all v1 APIs]}
+
+entities:
+  - name: Session
+    schemas: [session, session_create, session_read, merchant_session, SessionCreationRequestV1, SessionCreationResponseV1, SessionResponseV1]
+    created_by: createCreditSession, createHppSession, createOrderMerchant
+    read_by: readCreditSession, getSessionById, readOrderMerchant
+    lifecycle: [INCOMPLETE, COMPLETE, DISABLED]
+    note: >-
+      Carries the shopper basket (order_line[]), addresses, attachment/EMD and merchant_urls. The
+      response returns a client_token consumed by the browser widget.
+  - name: Authorization
+    identifier: authorization_token
+    created_by: 'browser authorize() — not a REST operation'
+    reversed_by: cancelAuthorization
+    note: >-
+      Klarna's playground documentation states an auth_token is valid for 60 minutes. It is
+      consumed exactly once, by createOrder or purchaseToken.
+  - name: Order
+    schemas: [order, create_order_request, MerchantOrderDto]
+    created_by: createOrder (payments), createOrder (customer-token), createOrderMerchant (checkout)
+    read_by: getOrder, readOrderMerchant
+    updated_by: updateAuthorization, updateConsumerDetails, updateMerchantReferences, extendAuthorizationTime, acknowledgeOrder, appendOrderShippingInfo
+    reversed_by: cancelOrder, releaseRemainingAuthorization, abortOrder
+    lifecycle: [AUTHORIZED, PART_CAPTURED, CAPTURED, CANCELLED, EXPIRED, CLOSED]
+  - name: Capture
+    schemas: [Capture, CaptureObject]
+    identifier: capture_id
+    created_by: captureOrder
+    read_by: getCaptures, getCapture
+    updated_by: appendShippingInfo, extendDueDate, triggerSendOut
+    parent: Order
+  - name: Refund
+    schemas: [Refund, RefundObject]
+    identifier: refund_id
+    created_by: refundOrder
+    read_by: get
+    parent: Order
+    note: Allocates against a capture; Klarna recommends sending order_lines so the refund lands on the right consumer invoice.
+  - name: CustomerToken
+    schemas: [customer_token, customer_token_creation_request, customer_token_creation_response, customer_token_order]
+    created_by: purchaseToken
+    read_by: readCustomerToken
+    updated_by: patchCustomerToken
+    note: Persists an authorization as a reusable token for recurring and on-demand purchases.
+  - name: Customer
+    schemas: [customer, customer_read, customer_read_create_token, CustomerV1]
+    note: Embedded value object, not an addressable resource. B2B variants carry organization_registration_id and vat_id.
+  - name: Address
+    schemas: [address, AddressV1, Location]
+    note: Embedded value object; billing and shipping variants.
+  - name: OrderLine
+    schemas: [order_line, discount_line]
+    refs: [ProductIdentifiers, shipping_attributes, subscription]
+    note: The unit of money. Present on session, order, capture and refund; tax fields are validated by Klarna at every step.
+  - name: Payout
+    schemas: [Payout, PayoutCollection, PayoutSummary, Totals]
+    identifier: payment_reference
+    read_by: getPayout, getPayouts, getPayoutSummary
+    surface: settlements
+  - name: Transaction
+    schemas: [Transaction, TransactionCollection]
+    read_by: getTransactions
+    surface: settlements
+    note: >-
+      The join table of the settlement graph — carries order_id, short_order_id, capture_id,
+      refund_id and payment_reference simultaneously, which is what makes reconciliation possible.
+  - name: Promise / Settlement / Card
+    schemas: [promise_request, promise_response, promise_created_response, settlement_request, settlement_response, card, card_specification]
+    surface: merchantcard
+    created_by: createPromise, settlePromise
+    read_by: readPromise, readSettlement, readSettlementByOrderId
+    reversed_by: postcancelorder
+    note: Merchant Card Service — Klarna issues a virtual card the merchant charges through its existing acquirer.
+
+relationships:
+  - {from: Session, to: Authorization, type: has_one, via: authorization_token}
+  - {from: Authorization, to: Order, type: has_one, via: order_id, note: An authorization token is consumed exactly once.}
+  - {from: Order, to: Capture, type: has_many, via: capture_id}
+  - {from: Order, to: Refund, type: has_many, via: refund_id}
+  - {from: Capture, to: Refund, type: has_many, via: order_lines allocation}
+  - {from: Order, to: Customer, type: has_one, via: customer}
+  - {from: Order, to: Address, type: has_many, via: billing_address / shipping_address}
+  - {from: Order, to: OrderLine, type: has_many, via: order_lines}
+  - {from: Capture, to: OrderLine, type: has_many, via: order_lines}
+  - {from: Refund, to: OrderLine, type: has_many, via: order_lines}
+  - {from: Authorization, to: CustomerToken, type: has_one, via: token_id}
+  - {from: CustomerToken, to: Order, type: has_many, via: order_id, note: A token can create many orders — this is the recurring path.}
+  - {from: Transaction, to: Order, type: belongs_to, via: order_id}
+  - {from: Transaction, to: Capture, type: belongs_to, via: capture_id}
+  - {from: Transaction, to: Refund, type: belongs_to, via: refund_id}
+  - {from: Payout, to: Transaction, type: has_many, via: payment_reference}
+  - {from: PayoutCollection, to: Pagination, type: has_one, via: pagination}
+  - {from: TransactionCollection, to: Pagination, type: has_one, via: pagination}
+  - {from: Promise, to: Settlement, type: has_one, via: promise_id}
+  - {from: Settlement, to: Card, type: has_one, via: card}
+  - {from: Settlement, to: Order, type: belongs_to, via: order_id}
+  - {from: SelectedShippingOption, to: CarrierProduct, type: has_one, via: carrier_product}
+  - {from: SelectedShippingOption, to: Location, type: has_one, via: location}
+  - {from: Location, to: Address, type: has_one, via: address}
+
+state_machine:
+  order:
+    - {from: null, to: AUTHORIZED, via: createOrder}
+    - {from: AUTHORIZED, to: PART_CAPTURED, via: captureOrder (partial)}
+    - {from: AUTHORIZED, to: CAPTURED, via: captureOrder (full)}
+    - {from: PART_CAPTURED, to: CAPTURED, via: captureOrder}
+    - {from: AUTHORIZED, to: CANCELLED, via: cancelOrder, condition: only while no capture exists}
+    - {from: AUTHORIZED, to: EXPIRED, via: authorization expiry}
+    - {from: CAPTURED, to: CLOSED, via: settlement}
+  note: >-
+    Derived from the error-code documentation's stated transition rules
+    (CAPTURE_NOT_ALLOWED, CANCEL_NOT_ALLOWED, REFUND_NOT_ALLOWED), not from a Klarna-published
+    state diagram. Klarna publishes no formal state machine document.
+
+json_schemas: json-schema/
+render: null
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

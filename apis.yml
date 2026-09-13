@@ -42,6 +42,20 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/klarna.png
 tags:
 - Fintech
+- Buy Now Pay Later
+- Payments
+- Cards
+- Shopping
+- Banking
+- Checkout
+- Order Management
+- Settlement
+- Open Banking
+- PSD2
+- Consumer Credit
+- Sweden
+tags_raw:
+- Fintech
 - BNPL
 - Payments
 - Cards
@@ -63,6 +77,9 @@ apis:
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
+  - Payments
+  - Buy Now Pay Later
+  tags_raw:
   - Payments
   - BNPL
   properties:

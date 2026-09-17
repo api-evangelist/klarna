@@ -87,11 +87,10 @@ apis:
     url: https://docs.klarna.com/klarna-payments/
 - name: Klarna Checkout API
   description: >-
-    Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout
-    product and it now trades as Kustom; as of 2026-08-27 Klarna no longer publishes a dedicated
-    Klarna Checkout reference on docs.klarna.com (https://docs.klarna.com/klarna-checkout/ returns
-    404) and lists Kustom among its acquiring partners instead. The checkout/v3 OpenAPI in this
-    repo remains served from api.klarna.com.
+    Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout product
+    and it now trades as Kustom; as of 2026-08-27 Klarna no longer publishes a dedicated Klarna Checkout
+    reference on docs.klarna.com (https://docs.klarna.com/klarna-checkout/ returns 404) and lists Kustom
+    among its acquiring partners instead. The checkout/v3 OpenAPI in this repo remains served from api.klarna.com.
   humanURL: https://docs.klarna.com/
   baseURL: https://api.klarna.com
   tags:
@@ -102,26 +101,31 @@ apis:
     url: https://docs.klarna.com/
 - name: Klarna Order Management API
   description: Capture, refund, cancel and update orders post-authorization.
-  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
   baseURL: https://api.klarna.com
   tags:
   - Order Management
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
 - name: Klarna Customer Token API
   description: Persist a payment authorization as a customer token for repeat purchases.
-  humanURL: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
   baseURL: https://api.klarna.com
   tags:
   - Tokens
   - Recurring
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
 - name: Klarna Settlements API
   description: Read merchant settlement reports and transactions.
-  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
   baseURL: https://api.klarna.com
   tags:
   - Settlement
@@ -131,7 +135,8 @@ apis:
   - Reporting
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
 - name: Klarna Push Notifications
   description: >-
     Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP
@@ -267,20 +272,6 @@ apis:
     url: openapi/klarna-merchant-urls-validation-api-openapi.yml
   - type: Overlay
     url: overlays/klarna-merchant-urls-validation-overlay.yaml
-- aid: klarna:klarna-merchantcard-api
-  name: Klarna Merchantcard API
-  description: The Merchantcard API from Klarna — 6 operation(s) for merchantcard.
-  humanURL: https://docs.klarna.com/klarna-payments/
-  baseURL: https://api.klarna.com
-  tags:
-  - Merchant Card
-  tags_raw:
-  - Merchantcard
-  properties:
-  - type: OpenAPI
-    url: openapi/klarna-merchantcard-api-openapi.yml
-  - type: Overlay
-    url: overlays/klarna-merchantcard-overlay.yaml
 - aid: klarna:klarna-orders-api
   name: Klarna Orders API
   description: The Orders API from Klarna — 9 operation(s) for orders.
@@ -359,8 +350,8 @@ apis:
     url: overlays/klarna-transactions-overlay.yaml
 - name: Klarna Agentic Product Protocol (KAPP) API
   description: >-
-    Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to
-    query. Registered 2026-09-04 from the same declined submission.
+    Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to query.
+    Registered 2026-09-04 from the same declined submission.
   humanURL: https://docs.klarna.com/klarna-search/klarna-agentic-product-protocol/
   baseURL: https://api.klarna.com
   tags:
@@ -369,7 +360,19 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.klarna.com/klarna-search/klarna-agentic-product-protocol/
+- aid: klarna:klarna-merchant-card-api
+  name: Klarna Merchant Card API
+  description: The Merchant Card API from Klarna — 6 operation(s) for merchant card.
+  humanURL: https://docs.klarna.com/klarna-payments/
+  baseURL: https://api.klarna.com
+  tags:
+  - Merchant Card
+  properties:
+  - type: OpenAPI
+    url: openapi/klarna-merchant-card-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/klarna-merchantcard-overlay.yaml
 - type: CapabilityMap
   url: capabilities/klarna-capability-edges.yml
   name: Klarna Business Capability Map

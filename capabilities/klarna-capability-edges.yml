@@ -53,7 +53,8 @@ edges:
   reason: Hosted Payment Page session lifecycle exists to collect and authorise a consumer payment, so
     payment initiation is the closest fit; slightly generic session plumbing lowers confidence.
 - tag: Merchantcard
-  spec_file: klarna-merchantcard-api-openapi.yml
+  spec_file: klarna-merchant-card-api-openapi.yml
+  reanchored_from: klarna-merchantcard-api-openapi.yml
   capability_id: BC-1340.70
   capability_id_l1: BC-1340
   capability_name: Card Transaction Processing Management

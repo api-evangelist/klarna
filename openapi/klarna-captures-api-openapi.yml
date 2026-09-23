@@ -1,10 +1,17 @@
 openapi: 3.2.0
 info:
-  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
-  version: '1.1'
-  title: Klarna HPP Captures API
-  license:
-    name: Klarna Bank AB
+  description: 'The Order Management API is used for handling an order after the customer has completed the purchase. It is used for all actions you need to manage your orders. Examples being: updating, capturing, reading and refunding an order.
+
+
+    Read more on the Order management process.
+
+
+    # Authentication
+
+
+    -->'
+  title: Klarna Order Management Captures API
+  version: '1.0'
 servers:
 - url: https://api.klarna.com
 tags:
@@ -12,7 +19,7 @@ tags:
 paths:
   /ordermanagement/v1/orders/{order_id}/captures:
     post:
-      description: Create capture. Read more on [Capturing an order](https://docs.klarna.com/order-management/delivery/full-capture/)
+      description: Create capture. Read more on Capturing an order
       operationId: captureOrder
       parameters:
       - description: Order id
@@ -91,7 +98,7 @@ paths:
       - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}:
     get:
-      description: Retrieve the details of a capture. To learn more, refer to the [Retrieving capture details](https://docs.klarna.com/order-management/post-delivery/capture-details/) article.
+      description: Retrieve the details of a capture. To learn more, refer to the Retrieving capture details article.
       operationId: getCapture
       parameters:
       - description: Order id
@@ -126,7 +133,7 @@ paths:
       - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date:
     patch:
-      description: Extend the customer's payment due date. Read more on [Extending customer due dates](https://docs.klarna.com/order-management/post-delivery/extend-customer-due-date/)
+      description: Extend the customer's payment due date. Read more on Extending customer due dates
       operationId: extendDueDate
       parameters:
       - description: Order id
@@ -209,7 +216,7 @@ paths:
       - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/shipping-info:
     post:
-      description: Add shipping info to a capture. Read more on [Adding shipping info](https://docs.klarna.com/order-management/post-delivery/add-capture-shipping-details/)
+      description: Add shipping info to a capture. Read more on Adding shipping info
       operationId: appendShippingInfo
       parameters:
       - description: Order id
@@ -257,7 +264,7 @@ paths:
       - Captures
   /ordermanagement/v1/orders/{order_id}/captures/{capture_id}/trigger-send-out:
     post:
-      description: Trigger resend of customer communication. Read more on [Resending customer communication](https://docs.klarna.com/order-management/post-delivery/trigger-customer-send-out/)
+      description: Trigger resend of customer communication. Read more on Resending customer communication
       operationId: triggerSendOut
       parameters:
       - description: Order id
@@ -299,358 +306,6 @@ paths:
       - Captures
 components:
   schemas:
-    address:
-      description: Shipping address for the capture.
-      properties:
-        attention:
-          description: '''Attn.'' - optional parameter.'
-          example: John Smith
-          maxLength: 255
-          minLength: 0
-          type: string
-        city:
-          description: City.
-          example: Knoxville
-          maxLength: 200
-          minLength: 0
-          type: string
-        country:
-          description: Country. ISO 3166 alpha-2.
-          example: us
-          type: string
-        email:
-          description: E-mail address.
-          example: klara.joyce@klarna.com
-          maxLength: 100
-          minLength: 0
-          type: string
-        family_name:
-          description: Family name.
-          example: Joyce
-          maxLength: 100
-          minLength: 0
-          type: string
-        given_name:
-          description: Given name.
-          example: Klara
-          maxLength: 100
-          minLength: 0
-          type: string
-        organization_name:
-          description: Organization name (if applicable). Only applicable for B2B customers.
-          example: Klarna
-          maxLength: 255
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number.
-          example: 1-555-555-5555
-          maxLength: 100
-          minLength: 0
-          type: string
-        postal_code:
-          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
-          example: '12345'
-          maxLength: 10
-          minLength: 0
-          type: string
-        region:
-          description: State/Region. Required for US.
-          example: TN
-          maxLength: 200
-          minLength: 0
-          type: string
-        street_address:
-          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
-          example: Apartment 10
-          maxLength: 100
-          minLength: 0
-          type: string
-        street_address2:
-          description: Second line of street address.
-          example: 1 Safeway
-          maxLength: 100
-          minLength: 0
-          type: string
-        title:
-          description: Title.
-          example: Mrs
-          maxLength: 20
-          minLength: 0
-          type: string
-      type: object
-    UpdateShippingInfo:
-      properties:
-        shipping_info:
-          description: 'New shipping info. Maximum: 500 items.'
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          maxItems: 500
-          minItems: 1
-          type: array
-      required:
-      - shipping_info
-      type: object
-    shipping_info:
-      description: Shipping information for this capture.
-      properties:
-        return_shipping_company:
-          description: 'Name of the shipping company for the return shipment (as specific as possible). Maximum 100 characters. Example: ''DHL US'' and not only ''DHL'''
-          example: DHL US
-          maxLength: 100
-          minLength: 0
-          type: string
-        return_tracking_number:
-          description: Tracking number for the return shipment. Maximum 100 characters.
-          example: '93456415674545679888'
-          maxLength: 100
-          minLength: 0
-          type: string
-        return_tracking_uri:
-          description: URL where the customer can track the return shipment. Maximum 1024 characters.
-          example: http://shipping.example/findmypackage?93456415674545679888
-          maxLength: 1024
-          minLength: 0
-          type: string
-        shipping_company:
-          description: 'Name of the shipping company (as specific as possible). Maximum 100 characters. Example: ''DHL US'' and not only ''DHL'''
-          example: DHL US
-          maxLength: 100
-          minLength: 0
-          type: string
-        shipping_method:
-          description: Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)
-          example: Home
-          pattern: (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)
-          type: string
-        tracking_number:
-          description: Tracking number for the shipment. Maximum 100 characters.
-          example: '63456415674545679874'
-          maxLength: 100
-          minLength: 0
-          type: string
-        tracking_uri:
-          description: URI where the customer can track their shipment. Maximum 1024 characters.
-          example: http://shipping.example/findmypackage?63456415674545679874
-          maxLength: 1024
-          minLength: 0
-          type: string
-      type: object
-    ProductIdentifiers:
-      description: product_identifiers
-      properties:
-        brand:
-          description: 'The product''s brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel'
-          example: Intel
-          maxLength: 70
-          minLength: 0
-          type: string
-        category_path:
-          description: 'The product''s category path as used in the merchant''s webshop. Include the full and most detailed category and separate the segments with '' > ''. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops'
-          example: Electronics Store > Computers & Tablets > Desktops
-          maxLength: 750
-          minLength: 0
-          type: string
-        color:
-          description: 'Color to be shown to the end customer (max 64 characters). Example: Denim blue'
-          example: Denim blue
-          maxLength: 64
-          minLength: 0
-          type: string
-        global_trade_item_number:
-          description: 'The product''s Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167'
-          example: '735858293167'
-          maxLength: 50
-          minLength: 0
-          type: string
-        manufacturer_part_number:
-          description: 'The product''s Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH'
-          example: BOXNUC5CPYH
-          maxLength: 70
-          minLength: 0
-          type: string
-        size:
-          description: 'Size to be shown to the end customer (max 64 characters). Example: 4'
-          example: '4'
-          maxLength: 64
-          minLength: 0
-          type: string
-      type: object
-    OptionDto:
-      description: The available options and corresponding fees for extending the due date
-      properties:
-        amount:
-          description: The fee for extending the due date this many days. In minor units.
-          format: int64
-          type: integer
-        number_of_days:
-          description: How many days to extend the due date with
-          format: int32
-          type: integer
-      type: object
-    ErrorMessageDto:
-      properties:
-        correlation_id:
-          type: string
-        error_code:
-          type: string
-        error_messages:
-          items:
-            type: string
-          type: array
-      type: object
-    No_such_order_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NO_SUCH_ORDER
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    subscription:
-      description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
-      properties:
-        interval:
-          description: 'The cadence unit. Matches: DAY|WEEK|MONTH|YEAR'
-          example: MONTH
-          pattern: DAY|WEEK|MONTH|YEAR
-          type: string
-        interval_count:
-          description: The number of intervals.
-          format: int32
-          minimum: 1
-          type: integer
-        name:
-          description: The name of the subscription product. Maximum 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-      required:
-      - interval
-      - interval_count
-      - name
-      type: object
-    No_such_capture_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NO_SUCH_CAPTURE
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    Not_allowed_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NOT_ALLOWED
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    ExtendDueDateOptions:
-      properties:
-        currency:
-          description: The currency for the fees. Specified in ISO 4217 format.
-          example: usd
-          type: string
-        options:
-          description: The available options and corresponding fees for extending the due date
-          items:
-            $ref: '#/components/schemas/OptionDto'
-          type: array
-      type: object
-    Capture:
-      properties:
-        billing_address:
-          $ref: '#/components/schemas/address'
-        capture_id:
-          description: The capture id. Generated when the capture is created.
-          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
-          type: string
-        captured_amount:
-          description: The captured amount in minor units.
-          format: int64
-          minimum: 1
-          type: integer
-        captured_at:
-          description: The time of the capture. Specified in ISO 8601.
-          example: '2015-11-19T01:51:17Z'
-          format: date-time
-          type: string
-        description:
-          description: Description of the capture shown to the customer.
-          example: Order has been shipped
-          type: string
-        klarna_reference:
-          description: Customer friendly reference id, used as a reference when communicating with the customer.
-          example: K4MADNY-1
-          type: string
-        order_lines:
-          description: List of order lines for the capture shown to the customer.
-          items:
-            $ref: '#/components/schemas/order_line'
-          type: array
-        reference:
-          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        refunded_amount:
-          description: Refunded amount for this capture in minor units.
-          example: 0
-          format: int64
-          type: integer
-        shipping_address:
-          $ref: '#/components/schemas/address'
-        shipping_info:
-          description: Shipping information for this capture.
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          type: array
-      type: object
-    Capture_not_allowed_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: CAPTURE_NOT_ALLOWED
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
     order_line:
       description: List of order lines for the capture shown to the customer.
       properties:
@@ -739,6 +394,147 @@ components:
       - total_amount
       - unit_price
       type: object
+    address:
+      description: Shipping address for the capture.
+      properties:
+        attention:
+          description: '''Attn.'' - optional parameter.'
+          example: John Smith
+          maxLength: 255
+          minLength: 0
+          type: string
+        city:
+          description: City.
+          example: Knoxville
+          maxLength: 200
+          minLength: 0
+          type: string
+        country:
+          description: Country. ISO 3166 alpha-2.
+          example: us
+          type: string
+        email:
+          description: E-mail address.
+          example: klara.joyce@klarna.com
+          maxLength: 100
+          minLength: 0
+          type: string
+        family_name:
+          description: Family name.
+          example: Joyce
+          maxLength: 100
+          minLength: 0
+          type: string
+        given_name:
+          description: Given name.
+          example: Klara
+          maxLength: 100
+          minLength: 0
+          type: string
+        organization_name:
+          description: Organization name (if applicable). Only applicable for B2B customers.
+          example: Klarna
+          maxLength: 255
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number.
+          example: 1-555-555-5555
+          maxLength: 100
+          minLength: 0
+          type: string
+        postal_code:
+          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
+          example: '12345'
+          maxLength: 10
+          minLength: 0
+          type: string
+        region:
+          description: State/Region. Required for US.
+          example: TN
+          maxLength: 200
+          minLength: 0
+          type: string
+        street_address:
+          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
+          example: Apartment 10
+          maxLength: 100
+          minLength: 0
+          type: string
+        street_address2:
+          description: Second line of street address.
+          example: 1 Safeway
+          maxLength: 100
+          minLength: 0
+          type: string
+        title:
+          description: Title.
+          example: Mrs
+          maxLength: 20
+          minLength: 0
+          type: string
+      type: object
+    ExtendDueDateOptions:
+      properties:
+        currency:
+          description: The currency for the fees. Specified in ISO 4217 format.
+          example: usd
+          type: string
+        options:
+          description: The available options and corresponding fees for extending the due date
+          items:
+            $ref: '#/components/schemas/OptionDto'
+          type: array
+      type: object
+    Capture:
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/address'
+        capture_id:
+          description: The capture id. Generated when the capture is created.
+          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
+          type: string
+        captured_amount:
+          description: The captured amount in minor units.
+          format: int64
+          minimum: 1
+          type: integer
+        captured_at:
+          description: The time of the capture. Specified in ISO 8601.
+          example: '2015-11-19T01:51:17Z'
+          format: date-time
+          type: string
+        description:
+          description: Description of the capture shown to the customer.
+          example: Order has been shipped
+          type: string
+        klarna_reference:
+          description: Customer friendly reference id, used as a reference when communicating with the customer.
+          example: K4MADNY-1
+          type: string
+        order_lines:
+          description: List of order lines for the capture shown to the customer.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        refunded_amount:
+          description: Refunded amount for this capture in minor units.
+          example: 0
+          format: int64
+          type: integer
+        shipping_address:
+          $ref: '#/components/schemas/address'
+        shipping_info:
+          description: Shipping information for this capture.
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          type: array
+      type: object
     ExtendDueDateRequest:
       properties:
         number_of_days:
@@ -747,6 +543,115 @@ components:
           type: integer
       required:
       - number_of_days
+      type: object
+    Not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    No_such_order_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NO_SUCH_ORDER
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    UpdateShippingInfo:
+      properties:
+        shipping_info:
+          description: 'New shipping info. Maximum: 500 items.'
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          maxItems: 500
+          minItems: 1
+          type: array
+      required:
+      - shipping_info
+      type: object
+    No_such_capture_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NO_SUCH_CAPTURE
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    subscription:
+      description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
+      properties:
+        interval:
+          description: 'The cadence unit. Matches: DAY|WEEK|MONTH|YEAR'
+          example: MONTH
+          pattern: DAY|WEEK|MONTH|YEAR
+          type: string
+        interval_count:
+          description: The number of intervals.
+          format: int32
+          minimum: 1
+          type: integer
+        name:
+          description: The name of the subscription product. Maximum 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+      - interval
+      - interval_count
+      - name
+      type: object
+    ErrorMessageDto:
+      properties:
+        correlation_id:
+          type: string
+        error_code:
+          type: string
+        error_messages:
+          items:
+            type: string
+          type: array
+      type: object
+    OptionDto:
+      description: The available options and corresponding fees for extending the due date
+      properties:
+        amount:
+          description: The fee for extending the due date this many days. In minor units.
+          format: int64
+          type: integer
+        number_of_days:
+          description: How many days to extend the due date with
+          format: int32
+          type: integer
       type: object
     CaptureObject:
       description: Capture request data
@@ -789,3 +694,109 @@ components:
       required:
       - captured_amount
       type: object
+    ProductIdentifiers:
+      description: product_identifiers
+      properties:
+        brand:
+          description: 'The product''s brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel'
+          example: Intel
+          maxLength: 70
+          minLength: 0
+          type: string
+        category_path:
+          description: 'The product''s category path as used in the merchant''s webshop. Include the full and most detailed category and separate the segments with '' > ''. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops'
+          example: Electronics Store > Computers & Tablets > Desktops
+          maxLength: 750
+          minLength: 0
+          type: string
+        color:
+          description: 'Color to be shown to the end customer (max 64 characters). Example: Denim blue'
+          example: Denim blue
+          maxLength: 64
+          minLength: 0
+          type: string
+        global_trade_item_number:
+          description: 'The product''s Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167'
+          example: '735858293167'
+          maxLength: 50
+          minLength: 0
+          type: string
+        manufacturer_part_number:
+          description: 'The product''s Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH'
+          example: BOXNUC5CPYH
+          maxLength: 70
+          minLength: 0
+          type: string
+        size:
+          description: 'Size to be shown to the end customer (max 64 characters). Example: 4'
+          example: '4'
+          maxLength: 64
+          minLength: 0
+          type: string
+      type: object
+    Capture_not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: CAPTURE_NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    shipping_info:
+      description: Shipping information for this capture.
+      properties:
+        return_shipping_company:
+          description: 'Name of the shipping company for the return shipment (as specific as possible). Maximum 100 characters. Example: ''DHL US'' and not only ''DHL'''
+          example: DHL US
+          maxLength: 100
+          minLength: 0
+          type: string
+        return_tracking_number:
+          description: Tracking number for the return shipment. Maximum 100 characters.
+          example: '93456415674545679888'
+          maxLength: 100
+          minLength: 0
+          type: string
+        return_tracking_uri:
+          description: URL where the customer can track the return shipment. Maximum 1024 characters.
+          example: http://shipping.example/findmypackage?93456415674545679888
+          maxLength: 1024
+          minLength: 0
+          type: string
+        shipping_company:
+          description: 'Name of the shipping company (as specific as possible). Maximum 100 characters. Example: ''DHL US'' and not only ''DHL'''
+          example: DHL US
+          maxLength: 100
+          minLength: 0
+          type: string
+        shipping_method:
+          description: Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)
+          example: Home
+          pattern: (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)
+          type: string
+        tracking_number:
+          description: Tracking number for the shipment. Maximum 100 characters.
+          example: '63456415674545679874'
+          maxLength: 100
+          minLength: 0
+          type: string
+        tracking_uri:
+          description: URI where the customer can track their shipment. Maximum 1024 characters.
+          example: http://shipping.example/findmypackage?63456415674545679874
+          maxLength: 1024
+          minLength: 0
+          type: string
+      type: object
+  securitySchemes:
+    Basic-authorization:
+      scheme: basic
+      type: http

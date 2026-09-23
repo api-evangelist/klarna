@@ -1,12 +1,19 @@
 openapi: 3.2.0
 info:
-  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
-  version: '1.1'
-  title: Klarna HPP Captures Transactions API
-  license:
-    name: Klarna Bank AB
+  title: Klarna Settlements Transactions API
+  description: 'The Settlements API helps you with the reconciliation of payments, made by Klarna to your bank account. Every payment has a unique payment_reference that can be found in the settlement reports and on your bank statement.
+
+
+    Read more on Settlement reports.
+
+
+    # Authentication
+
+
+    -->'
+  version: 1.0.0-rc2
 servers:
-- url: https://api.klarna.com
+- url: https://api.klarna.com/settlements/v1
 tags:
 - name: Transactions
 paths:
@@ -62,6 +69,55 @@ paths:
       - Transactions
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id
     Transaction:
       type: object
       properties:
@@ -240,55 +296,6 @@ components:
       - order_id
       - currency_code
       - purchase_country
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          description: ERROR_CODE
-          type: string
-        error_messages:
-          description: Array of error messages
-          type: array
-          items:
-            type: string
-        correlation_id:
-          description: Unique id for this request used for troubleshooting.
-          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
-          type: string
-      additionalProperties: false
-      required:
-      - error_code
-      - error_messages
-      - correlation_id
-    Pagination:
-      type: object
-      properties:
-        count:
-          description: The amount of elements in the current result
-          example: 10
-          type: integer
-          format: int64
-        total:
-          description: The total amount of elements that are available
-          example: 42
-          type: integer
-          format: int64
-        next:
-          description: The URI to the next "page" of results.
-          example: http://example.com/collection?offset=21&size=10
-          type: string
-        prev:
-          description: The URI to the previous "page" of results.
-          example: http://example.com/collection?offset=0&size=10
-          type: string
-        offset:
-          description: The current offset. Describes "where" in a collection the current starts.
-          example: 10
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - count
     TransactionCollection:
       type: object
       properties:
@@ -302,3 +309,7 @@ components:
       required:
       - transactions
       - pagination
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

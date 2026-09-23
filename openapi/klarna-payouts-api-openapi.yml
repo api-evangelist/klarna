@@ -1,12 +1,19 @@
 openapi: 3.2.0
 info:
-  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
-  version: '1.1'
-  title: Klarna HPP Captures Payouts API
-  license:
-    name: Klarna Bank AB
+  title: Klarna Settlements Payouts API
+  description: 'The Settlements API helps you with the reconciliation of payments, made by Klarna to your bank account. Every payment has a unique payment_reference that can be found in the settlement reports and on your bank statement.
+
+
+    Read more on Settlement reports.
+
+
+    # Authentication
+
+
+    -->'
+  version: 1.0.0-rc2
 servers:
-- url: https://api.klarna.com
+- url: https://api.klarna.com/settlements/v1
 tags:
 - name: Payouts
 paths:
@@ -146,123 +153,6 @@ paths:
       - Payouts
 components:
   schemas:
-    PayoutSummary:
-      type: object
-      properties:
-        summary_total_fee_correction_amount:
-          description: The total amount of fee correction, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_payout_date_start:
-          description: ISO 8601 formatted date-time string
-          example: '2016-12-14T07:52:26Z'
-          type: string
-          format: date-time
-        summary_total_release_amount:
-          description: The total amount of money released from holdback by Klarna, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_settlement_currency:
-          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
-          example: USD
-          type: string
-        summary_payout_date_end:
-          description: ISO 8601 formatted date-time string
-          example: '2016-12-14T07:52:26Z'
-          type: string
-          format: date-time
-        summary_total_tax_amount:
-          description: The total amount of tax, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_settlement_amount:
-          description: The total amount of the settlement in question, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_holdback_amount:
-          description: The total amount of money withheld by Klarna, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_reversal_amount:
-          description: The total amount of reversals, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_return_amount:
-          description: The total amount of returns, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_fee_amount:
-          description: The total amount of fees, in minor units
-          example: 500
-          type: integer
-          format: int64
-        summary_total_commission_amount:
-          description: The total amount of commissions, in minor units
-          example: 550
-          type: integer
-          format: int64
-        summary_total_sale_amount:
-          description: The total amount of sales, in minor units
-          example: 500
-          type: integer
-          format: int64
-        summary_total_repay_amount:
-          description: The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units
-          example: 550
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - summary_total_fee_correction_amount
-      - summary_payout_date_start
-      - summary_total_release_amount
-      - summary_settlement_currency
-      - summary_payout_date_end
-      - summary_total_tax_amount
-      - summary_total_settlement_amount
-      - summary_total_holdback_amount
-      - summary_total_reversal_amount
-      - summary_total_return_amount
-      - summary_total_fee_amount
-      - summary_total_commission_amount
-      - summary_total_sale_amount
-      - summary_total_repay_amount
-    Pagination:
-      type: object
-      properties:
-        count:
-          description: The amount of elements in the current result
-          example: 10
-          type: integer
-          format: int64
-        total:
-          description: The total amount of elements that are available
-          example: 42
-          type: integer
-          format: int64
-        next:
-          description: The URI to the next "page" of results.
-          example: http://example.com/collection?offset=21&size=10
-          type: string
-        prev:
-          description: The URI to the previous "page" of results.
-          example: http://example.com/collection?offset=0&size=10
-          type: string
-        offset:
-          description: The current offset. Describes "where" in a collection the current starts.
-          example: 10
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - count
     Totals:
       type: object
       properties:
@@ -387,6 +277,55 @@ components:
       required:
       - payouts
       - pagination
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count
     Payout:
       type: object
       properties:
@@ -432,23 +371,95 @@ components:
       - currency_code
       - merchant_settlement_type
       - merchant_id
-    ErrorResponse:
+    PayoutSummary:
       type: object
       properties:
-        error_code:
-          description: ERROR_CODE
+        summary_total_fee_correction_amount:
+          description: The total amount of fee correction, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_payout_date_start:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
           type: string
-        error_messages:
-          description: Array of error messages
-          type: array
-          items:
-            type: string
-        correlation_id:
-          description: Unique id for this request used for troubleshooting.
-          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          format: date-time
+        summary_total_release_amount:
+          description: The total amount of money released from holdback by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_settlement_currency:
+          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
+          example: USD
           type: string
+        summary_payout_date_end:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        summary_total_tax_amount:
+          description: The total amount of tax, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_settlement_amount:
+          description: The total amount of the settlement in question, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_holdback_amount:
+          description: The total amount of money withheld by Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_reversal_amount:
+          description: The total amount of reversals, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_return_amount:
+          description: The total amount of returns, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_fee_amount:
+          description: The total amount of fees, in minor units
+          example: 500
+          type: integer
+          format: int64
+        summary_total_commission_amount:
+          description: The total amount of commissions, in minor units
+          example: 550
+          type: integer
+          format: int64
+        summary_total_sale_amount:
+          description: The total amount of sales, in minor units
+          example: 500
+          type: integer
+          format: int64
+        summary_total_repay_amount:
+          description: The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units
+          example: 550
+          type: integer
+          format: int64
       additionalProperties: false
       required:
-      - error_code
-      - error_messages
-      - correlation_id
+      - summary_total_fee_correction_amount
+      - summary_payout_date_start
+      - summary_total_release_amount
+      - summary_settlement_currency
+      - summary_payout_date_end
+      - summary_total_tax_amount
+      - summary_total_settlement_amount
+      - summary_total_holdback_amount
+      - summary_total_reversal_amount
+      - summary_total_return_amount
+      - summary_total_fee_amount
+      - summary_total_commission_amount
+      - summary_total_sale_amount
+      - summary_total_repay_amount
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

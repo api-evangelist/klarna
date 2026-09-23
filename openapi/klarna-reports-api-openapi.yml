@@ -1,12 +1,19 @@
 openapi: 3.2.0
 info:
-  description: Hosted Payment Page (HPP) API is a service that lets you integrate Klarna Payments without the need of hosting the web page that manages the client side of Klarna Payments.
-  version: '1.1'
-  title: Klarna HPP Captures Reports API
-  license:
-    name: Klarna Bank AB
+  title: Klarna Settlements Reports API
+  description: 'The Settlements API helps you with the reconciliation of payments, made by Klarna to your bank account. Every payment has a unique payment_reference that can be found in the settlement reports and on your bank statement.
+
+
+    Read more on Settlement reports.
+
+
+    # Authentication
+
+
+    -->'
+  version: 1.0.0-rc2
 servers:
-- url: https://api.klarna.com
+- url: https://api.klarna.com/settlements/v1
 tags:
 - name: Reports
 paths:
@@ -36,7 +43,9 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayoutReportWithTransactions
       summary: Klarna Get a payouts summary (CSV)
-      description: "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      description: 'More information about this CSV format is available at:
+
+        https://docs.klarna.com/settlement-reports'
       tags:
       - Reports
   /reports/payout:
@@ -96,7 +105,9 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       operationId: getPayoutsSummaryReportWithTransactions
       summary: Klarna Get a payouts summary with transactions (CSV)
-      description: "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      description: 'More information about this CSV format is available at:
+
+        https://docs.klarna.com/settlement-reports'
       tags:
       - Reports
   /reports/payouts-summary:
@@ -152,3 +163,7 @@ components:
       - error_code
       - error_messages
       - correlation_id
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

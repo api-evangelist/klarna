@@ -306,6 +306,245 @@ paths:
       - Captures
 components:
   schemas:
+    UpdateShippingInfo:
+      properties:
+        shipping_info:
+          description: 'New shipping info. Maximum: 500 items.'
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          maxItems: 500
+          minItems: 1
+          type: array
+      required:
+      - shipping_info
+      type: object
+    CaptureObject:
+      description: Capture request data
+      properties:
+        captured_amount:
+          description: The captured amount in minor units.
+          format: int64
+          maximum: 200000000
+          minimum: 0
+          type: integer
+        description:
+          description: Description of the capture shown to the customer. Maximum 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        order_lines:
+          description: Order lines for this capture. Maximum 1000 items.
+          items:
+            $ref: '#/components/schemas/order_line'
+          maxItems: 1000
+          minItems: 0
+          type: array
+        reference:
+          description: Internal reference to the capture. This will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        shipping_delay:
+          description: 'Delay before the order will be shipped. Use for improving the customer experience regarding payments. This field is currently not returned when reading the order. Minimum: 0. Please note: to be able to submit values larger than 0, this has to be enabled in your merchant account. Please contact Klarna for further information.'
+          format: int64
+          minimum: 0
+          type: integer
+        shipping_info:
+          description: Shipping information for this capture. Maximum 500 items.
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          maxItems: 500
+          minItems: 0
+          type: array
+      required:
+      - captured_amount
+      type: object
+    Capture:
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/address'
+        capture_id:
+          description: The capture id. Generated when the capture is created.
+          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
+          type: string
+        captured_amount:
+          description: The captured amount in minor units.
+          format: int64
+          minimum: 1
+          type: integer
+        captured_at:
+          description: The time of the capture. Specified in ISO 8601.
+          example: '2015-11-19T01:51:17Z'
+          format: date-time
+          type: string
+        description:
+          description: Description of the capture shown to the customer.
+          example: Order has been shipped
+          type: string
+        klarna_reference:
+          description: Customer friendly reference id, used as a reference when communicating with the customer.
+          example: K4MADNY-1
+          type: string
+        order_lines:
+          description: List of order lines for the capture shown to the customer.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        refunded_amount:
+          description: Refunded amount for this capture in minor units.
+          example: 0
+          format: int64
+          type: integer
+        shipping_address:
+          $ref: '#/components/schemas/address'
+        shipping_info:
+          description: Shipping information for this capture.
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          type: array
+      type: object
+    No_such_capture_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NO_SUCH_CAPTURE
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    Not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    subscription:
+      description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
+      properties:
+        interval:
+          description: 'The cadence unit. Matches: DAY|WEEK|MONTH|YEAR'
+          example: MONTH
+          pattern: DAY|WEEK|MONTH|YEAR
+          type: string
+        interval_count:
+          description: The number of intervals.
+          format: int32
+          minimum: 1
+          type: integer
+        name:
+          description: The name of the subscription product. Maximum 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+      - interval
+      - interval_count
+      - name
+      type: object
+    address:
+      description: Shipping address for the capture.
+      properties:
+        attention:
+          description: '''Attn.'' - optional parameter.'
+          example: John Smith
+          maxLength: 255
+          minLength: 0
+          type: string
+        city:
+          description: City.
+          example: Knoxville
+          maxLength: 200
+          minLength: 0
+          type: string
+        country:
+          description: Country. ISO 3166 alpha-2.
+          example: us
+          type: string
+        email:
+          description: E-mail address.
+          example: klara.joyce@klarna.com
+          maxLength: 100
+          minLength: 0
+          type: string
+        family_name:
+          description: Family name.
+          example: Joyce
+          maxLength: 100
+          minLength: 0
+          type: string
+        given_name:
+          description: Given name.
+          example: Klara
+          maxLength: 100
+          minLength: 0
+          type: string
+        organization_name:
+          description: Organization name (if applicable). Only applicable for B2B customers.
+          example: Klarna
+          maxLength: 255
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number.
+          example: 1-555-555-5555
+          maxLength: 100
+          minLength: 0
+          type: string
+        postal_code:
+          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
+          example: '12345'
+          maxLength: 10
+          minLength: 0
+          type: string
+        region:
+          description: State/Region. Required for US.
+          example: TN
+          maxLength: 200
+          minLength: 0
+          type: string
+        street_address:
+          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
+          example: Apartment 10
+          maxLength: 100
+          minLength: 0
+          type: string
+        street_address2:
+          description: Second line of street address.
+          example: 1 Safeway
+          maxLength: 100
+          minLength: 0
+          type: string
+        title:
+          description: Title.
+          example: Mrs
+          maxLength: 20
+          minLength: 0
+          type: string
+      type: object
     order_line:
       description: List of order lines for the capture shown to the customer.
       properties:
@@ -394,306 +633,6 @@ components:
       - total_amount
       - unit_price
       type: object
-    address:
-      description: Shipping address for the capture.
-      properties:
-        attention:
-          description: '''Attn.'' - optional parameter.'
-          example: John Smith
-          maxLength: 255
-          minLength: 0
-          type: string
-        city:
-          description: City.
-          example: Knoxville
-          maxLength: 200
-          minLength: 0
-          type: string
-        country:
-          description: Country. ISO 3166 alpha-2.
-          example: us
-          type: string
-        email:
-          description: E-mail address.
-          example: klara.joyce@klarna.com
-          maxLength: 100
-          minLength: 0
-          type: string
-        family_name:
-          description: Family name.
-          example: Joyce
-          maxLength: 100
-          minLength: 0
-          type: string
-        given_name:
-          description: Given name.
-          example: Klara
-          maxLength: 100
-          minLength: 0
-          type: string
-        organization_name:
-          description: Organization name (if applicable). Only applicable for B2B customers.
-          example: Klarna
-          maxLength: 255
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number.
-          example: 1-555-555-5555
-          maxLength: 100
-          minLength: 0
-          type: string
-        postal_code:
-          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
-          example: '12345'
-          maxLength: 10
-          minLength: 0
-          type: string
-        region:
-          description: State/Region. Required for US.
-          example: TN
-          maxLength: 200
-          minLength: 0
-          type: string
-        street_address:
-          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
-          example: Apartment 10
-          maxLength: 100
-          minLength: 0
-          type: string
-        street_address2:
-          description: Second line of street address.
-          example: 1 Safeway
-          maxLength: 100
-          minLength: 0
-          type: string
-        title:
-          description: Title.
-          example: Mrs
-          maxLength: 20
-          minLength: 0
-          type: string
-      type: object
-    ExtendDueDateOptions:
-      properties:
-        currency:
-          description: The currency for the fees. Specified in ISO 4217 format.
-          example: usd
-          type: string
-        options:
-          description: The available options and corresponding fees for extending the due date
-          items:
-            $ref: '#/components/schemas/OptionDto'
-          type: array
-      type: object
-    Capture:
-      properties:
-        billing_address:
-          $ref: '#/components/schemas/address'
-        capture_id:
-          description: The capture id. Generated when the capture is created.
-          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
-          type: string
-        captured_amount:
-          description: The captured amount in minor units.
-          format: int64
-          minimum: 1
-          type: integer
-        captured_at:
-          description: The time of the capture. Specified in ISO 8601.
-          example: '2015-11-19T01:51:17Z'
-          format: date-time
-          type: string
-        description:
-          description: Description of the capture shown to the customer.
-          example: Order has been shipped
-          type: string
-        klarna_reference:
-          description: Customer friendly reference id, used as a reference when communicating with the customer.
-          example: K4MADNY-1
-          type: string
-        order_lines:
-          description: List of order lines for the capture shown to the customer.
-          items:
-            $ref: '#/components/schemas/order_line'
-          type: array
-        reference:
-          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        refunded_amount:
-          description: Refunded amount for this capture in minor units.
-          example: 0
-          format: int64
-          type: integer
-        shipping_address:
-          $ref: '#/components/schemas/address'
-        shipping_info:
-          description: Shipping information for this capture.
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          type: array
-      type: object
-    ExtendDueDateRequest:
-      properties:
-        number_of_days:
-          description: Number of days to extend the due date.
-          format: int32
-          type: integer
-      required:
-      - number_of_days
-      type: object
-    Not_allowed_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NOT_ALLOWED
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    No_such_order_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NO_SUCH_ORDER
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    UpdateShippingInfo:
-      properties:
-        shipping_info:
-          description: 'New shipping info. Maximum: 500 items.'
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          maxItems: 500
-          minItems: 1
-          type: array
-      required:
-      - shipping_info
-      type: object
-    No_such_capture_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NO_SUCH_CAPTURE
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    subscription:
-      description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
-      properties:
-        interval:
-          description: 'The cadence unit. Matches: DAY|WEEK|MONTH|YEAR'
-          example: MONTH
-          pattern: DAY|WEEK|MONTH|YEAR
-          type: string
-        interval_count:
-          description: The number of intervals.
-          format: int32
-          minimum: 1
-          type: integer
-        name:
-          description: The name of the subscription product. Maximum 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-      required:
-      - interval
-      - interval_count
-      - name
-      type: object
-    ErrorMessageDto:
-      properties:
-        correlation_id:
-          type: string
-        error_code:
-          type: string
-        error_messages:
-          items:
-            type: string
-          type: array
-      type: object
-    OptionDto:
-      description: The available options and corresponding fees for extending the due date
-      properties:
-        amount:
-          description: The fee for extending the due date this many days. In minor units.
-          format: int64
-          type: integer
-        number_of_days:
-          description: How many days to extend the due date with
-          format: int32
-          type: integer
-      type: object
-    CaptureObject:
-      description: Capture request data
-      properties:
-        captured_amount:
-          description: The captured amount in minor units.
-          format: int64
-          maximum: 200000000
-          minimum: 0
-          type: integer
-        description:
-          description: Description of the capture shown to the customer. Maximum 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        order_lines:
-          description: Order lines for this capture. Maximum 1000 items.
-          items:
-            $ref: '#/components/schemas/order_line'
-          maxItems: 1000
-          minItems: 0
-          type: array
-        reference:
-          description: Internal reference to the capture. This will be included in the settlement files. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        shipping_delay:
-          description: 'Delay before the order will be shipped. Use for improving the customer experience regarding payments. This field is currently not returned when reading the order. Minimum: 0. Please note: to be able to submit values larger than 0, this has to be enabled in your merchant account. Please contact Klarna for further information.'
-          format: int64
-          minimum: 0
-          type: integer
-        shipping_info:
-          description: Shipping information for this capture. Maximum 500 items.
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          maxItems: 500
-          minItems: 0
-          type: array
-      required:
-      - captured_amount
-      type: object
     ProductIdentifiers:
       description: product_identifiers
       properties:
@@ -734,7 +673,30 @@ components:
           minLength: 0
           type: string
       type: object
-    Capture_not_allowed_error_message:
+    ErrorMessageDto:
+      properties:
+        correlation_id:
+          type: string
+        error_code:
+          type: string
+        error_messages:
+          items:
+            type: string
+          type: array
+      type: object
+    ExtendDueDateOptions:
+      properties:
+        currency:
+          description: The currency for the fees. Specified in ISO 4217 format.
+          example: usd
+          type: string
+        options:
+          description: The available options and corresponding fees for extending the due date
+          items:
+            $ref: '#/components/schemas/OptionDto'
+          type: array
+      type: object
+    No_such_order_error_message:
       properties:
         correlation_id:
           description: Correlation id. For searching logs.
@@ -742,7 +704,7 @@ components:
           type: string
         error_code:
           description: Error code
-          example: CAPTURE_NOT_ALLOWED
+          example: NO_SUCH_ORDER
           type: string
         error_messages:
           description: Error messages
@@ -750,6 +712,15 @@ components:
             description: Error messages
             type: string
           type: array
+      type: object
+    ExtendDueDateRequest:
+      properties:
+        number_of_days:
+          description: Number of days to extend the due date.
+          format: int32
+          type: integer
+      required:
+      - number_of_days
       type: object
     shipping_info:
       description: Shipping information for this capture.
@@ -795,6 +766,35 @@ components:
           maxLength: 1024
           minLength: 0
           type: string
+      type: object
+    OptionDto:
+      description: The available options and corresponding fees for extending the due date
+      properties:
+        amount:
+          description: The fee for extending the due date this many days. In minor units.
+          format: int64
+          type: integer
+        number_of_days:
+          description: How many days to extend the due date with
+          format: int32
+          type: integer
+      type: object
+    Capture_not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: CAPTURE_NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
       type: object
   securitySchemes:
     Basic-authorization:

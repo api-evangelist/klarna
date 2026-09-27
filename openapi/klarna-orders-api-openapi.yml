@@ -335,29 +335,44 @@ paths:
       - Orders
 components:
   schemas:
-    Timeslot:
-      description: The chosen timeslot of the selected shipping option
+    customer:
+      description: Information about the customer placing the order.
       properties:
-        cutoff:
-          description: Cutoff time for delivery
+        date_of_birth:
+          description: 'The customer date of birth. ISO 8601. '
+          example: '1981-09-06'
+          format: date
           type: string
-        end:
-          description: End of the timeslot
-          type: string
-        id:
-          description: The timeslot id
-          type: string
-        price:
-          description: Price
-          enum:
-          - null
-          format: int64
-          type: integer
-        start:
-          description: Start of the timeslot
+        national_identification_number:
+          description: The customer national identification number
           type: string
       type: object
-    Cancel_not_allowed_error_message:
+    Address:
+      description: The address of the location
+      properties:
+        city:
+          description: City
+          type: string
+        country:
+          description: Country
+          type: string
+        postal_code:
+          description: Postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
+          type: string
+        region:
+          description: Region
+          type: string
+        street_address:
+          description: The street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
+          type: string
+        street_address__2:
+          description: Additional street address
+          type: string
+      required:
+      - country
+      - street_address
+      type: object
+    No_such_order_error_message:
       properties:
         correlation_id:
           description: Correlation id. For searching logs.
@@ -365,13 +380,206 @@ components:
           type: string
         error_code:
           description: Error code
-          example: CANCEL_NOT_ALLOWED
+          example: NO_SUCH_ORDER
           type: string
         error_messages:
           description: Error messages
           items:
             description: Error messages
             type: string
+          type: array
+      type: object
+    UpdateConsumer:
+      properties:
+        shipping_address:
+          $ref: '#/components/schemas/address'
+      type: object
+    Not_allowed_error_message:
+      properties:
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
+          type: string
+        error_code:
+          description: Error code
+          example: NOT_ALLOWED
+          type: string
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
+      type: object
+    Addon:
+      description: Array consisting of add-ons selected by the consumer, may be empty
+      properties:
+        external_id:
+          description: The ID provided by the TMS
+          type: string
+        price:
+          description: The price of the add-on
+          enum:
+          - null
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          description: The type of the add-on, e.g. sms or entry-code
+          type: string
+        user_input:
+          description: The text provided by the user
+          type: string
+      required:
+      - price
+      - type
+      type: object
+    CarrierProduct:
+      description: The chosen timeslot of the selected shipping option
+      properties:
+        identifier:
+          description: Id of carrier product
+          type: string
+        name:
+          description: Name of carrier product
+          type: string
+      type: object
+    Update_merchant_references:
+      properties:
+        merchant_reference1:
+          description: New merchant reference 1. Old reference will be overwritten if this field is present.
+          maxLength: 255
+          minLength: 0
+          type: string
+        merchant_reference2:
+          description: New merchant reference 2. Old reference will be overwritten if this field is present.
+          maxLength: 255
+          minLength: 0
+          type: string
+      type: object
+    Update_authorization:
+      properties:
+        description:
+          description: Description of the change.
+          example: Added charger
+          maxLength: 255
+          minLength: 0
+          type: string
+        order_amount:
+          description: The new total order amount. Minor units.
+          format: int64
+          maximum: 200000000
+          minimum: 0
+          type: integer
+        order_lines:
+          description: New set of order lines for the order.
+          items:
+            $ref: '#/components/schemas/order_line'
+          maxItems: 1000
+          minItems: 0
+          type: array
+      required:
+      - order_amount
+      type: object
+    ProductIdentifiers:
+      description: product_identifiers
+      properties:
+        brand:
+          description: 'The product''s brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel'
+          example: Intel
+          maxLength: 70
+          minLength: 0
+          type: string
+        category_path:
+          description: 'The product''s category path as used in the merchant''s webshop. Include the full and most detailed category and separate the segments with '' > ''. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops'
+          example: Electronics Store > Computers & Tablets > Desktops
+          maxLength: 750
+          minLength: 0
+          type: string
+        color:
+          description: 'Color to be shown to the end customer (max 64 characters). Example: Denim blue'
+          example: Denim blue
+          maxLength: 64
+          minLength: 0
+          type: string
+        global_trade_item_number:
+          description: 'The product''s Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167'
+          example: '735858293167'
+          maxLength: 50
+          minLength: 0
+          type: string
+        manufacturer_part_number:
+          description: 'The product''s Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH'
+          example: BOXNUC5CPYH
+          maxLength: 70
+          minLength: 0
+          type: string
+        size:
+          description: 'Size to be shown to the end customer (max 64 characters). Example: 4'
+          example: '4'
+          maxLength: 64
+          minLength: 0
+          type: string
+      type: object
+    UpdateShippingInfo:
+      properties:
+        shipping_info:
+          description: 'New shipping info. Maximum: 500 items.'
+          items:
+            $ref: '#/components/schemas/shipping_info'
+          maxItems: 500
+          minItems: 1
+          type: array
+      required:
+      - shipping_info
+      type: object
+    Capture:
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/address'
+        capture_id:
+          description: The capture id. Generated when the capture is created.
+          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
+          type: string
+        captured_amount:
+          description: The captured amount in minor units.
+          format: int64
+          minimum: 1
+          type: integer
+        captured_at:
+          description: The time of the capture. Specified in ISO 8601.
+          example: '2015-11-19T01:51:17Z'
+          format: date-time
+          type: string
+        description:
+          description: Description of the capture shown to the customer.
+          example: Order has been shipped
+          type: string
+        klarna_reference:
+          description: Customer friendly reference id, used as a reference when communicating with the customer.
+          example: K4MADNY-1
+          type: string
+        order_lines:
+          description: List of order lines for the capture shown to the customer.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
+          maxLength: 255
+          minLength: 0
+          type: string
+        refunded_amount:
+          description: Refunded amount for this capture in minor units.
+          example: 0
+          format: int64
+          type: integer
+        shipping_address:
+          $ref: '#/components/schemas/address'
+        shipping_info:
+          description: Shipping information for this capture.
+          items:
+            $ref: '#/components/schemas/shipping_info'
           type: array
       type: object
     MerchantOrderDto:
@@ -505,318 +713,6 @@ components:
           example: FIXED_AMOUNT
           type: string
       type: object
-    No_such_order_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NO_SUCH_ORDER
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    UpdateShippingInfo:
-      properties:
-        shipping_info:
-          description: 'New shipping info. Maximum: 500 items.'
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          maxItems: 500
-          minItems: 1
-          type: array
-      required:
-      - shipping_info
-      type: object
-    UpdateConsumer:
-      properties:
-        shipping_address:
-          $ref: '#/components/schemas/address'
-      type: object
-    Not_allowed_error_message:
-      properties:
-        correlation_id:
-          description: Correlation id. For searching logs.
-          example: 66782175-ae05-44fc-9eb3-eeceadbad271
-          type: string
-        error_code:
-          description: Error code
-          example: NOT_ALLOWED
-          type: string
-        error_messages:
-          description: Error messages
-          items:
-            description: Error messages
-            type: string
-          type: array
-      type: object
-    address:
-      description: Shipping address for the capture.
-      properties:
-        attention:
-          description: '''Attn.'' - optional parameter.'
-          example: John Smith
-          maxLength: 255
-          minLength: 0
-          type: string
-        city:
-          description: City.
-          example: Knoxville
-          maxLength: 200
-          minLength: 0
-          type: string
-        country:
-          description: Country. ISO 3166 alpha-2.
-          example: us
-          type: string
-        email:
-          description: E-mail address.
-          example: klara.joyce@klarna.com
-          maxLength: 100
-          minLength: 0
-          type: string
-        family_name:
-          description: Family name.
-          example: Joyce
-          maxLength: 100
-          minLength: 0
-          type: string
-        given_name:
-          description: Given name.
-          example: Klara
-          maxLength: 100
-          minLength: 0
-          type: string
-        organization_name:
-          description: Organization name (if applicable). Only applicable for B2B customers.
-          example: Klarna
-          maxLength: 255
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number.
-          example: 1-555-555-5555
-          maxLength: 100
-          minLength: 0
-          type: string
-        postal_code:
-          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
-          example: '12345'
-          maxLength: 10
-          minLength: 0
-          type: string
-        region:
-          description: State/Region. Required for US.
-          example: TN
-          maxLength: 200
-          minLength: 0
-          type: string
-        street_address:
-          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
-          example: Apartment 10
-          maxLength: 100
-          minLength: 0
-          type: string
-        street_address2:
-          description: Second line of street address.
-          example: 1 Safeway
-          maxLength: 100
-          minLength: 0
-          type: string
-        title:
-          description: Title.
-          example: Mrs
-          maxLength: 20
-          minLength: 0
-          type: string
-      type: object
-    Capture:
-      properties:
-        billing_address:
-          $ref: '#/components/schemas/address'
-        capture_id:
-          description: The capture id. Generated when the capture is created.
-          example: 4ba29b50-be7b-44f5-a492-113e6a865e22
-          type: string
-        captured_amount:
-          description: The captured amount in minor units.
-          format: int64
-          minimum: 1
-          type: integer
-        captured_at:
-          description: The time of the capture. Specified in ISO 8601.
-          example: '2015-11-19T01:51:17Z'
-          format: date-time
-          type: string
-        description:
-          description: Description of the capture shown to the customer.
-          example: Order has been shipped
-          type: string
-        klarna_reference:
-          description: Customer friendly reference id, used as a reference when communicating with the customer.
-          example: K4MADNY-1
-          type: string
-        order_lines:
-          description: List of order lines for the capture shown to the customer.
-          items:
-            $ref: '#/components/schemas/order_line'
-          type: array
-        reference:
-          description: Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.
-          maxLength: 255
-          minLength: 0
-          type: string
-        refunded_amount:
-          description: Refunded amount for this capture in minor units.
-          example: 0
-          format: int64
-          type: integer
-        shipping_address:
-          $ref: '#/components/schemas/address'
-        shipping_info:
-          description: Shipping information for this capture.
-          items:
-            $ref: '#/components/schemas/shipping_info'
-          type: array
-      type: object
-    Refund:
-      properties:
-        credit_invoice:
-          description: Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.
-          type: boolean
-        description:
-          description: Description of the refund shown to the customer. Max length is 255 characters.
-          example: The item was returned and the order refunded.
-          type: string
-        order_lines:
-          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
-          items:
-            $ref: '#/components/schemas/order_line'
-          type: array
-        reference:
-          description: Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.
-          type: string
-        refund_id:
-          description: The refund id. Generated when the refund is created.
-          example: b2cb4f2e-2781-4359-80ad-555735ebb8d8
-          type: string
-        refunded_amount:
-          description: Refunded amount in minor units.
-          format: int64
-          type: integer
-        refunded_at:
-          description: The time of the refund. ISO 8601.
-          example: '2015-12-04T15:17:40Z'
-          format: date-time
-          type: string
-      type: object
-    SelectedShippingOptionDto:
-      description: The shipping option selected by the user.
-      properties:
-        carrier:
-          description: The carrier for the selected shipping option
-          type: string
-        carrier_product:
-          $ref: '#/components/schemas/CarrierProduct'
-        class:
-          description: The class of the selected shipping option
-          type: string
-        id:
-          description: The id of the selected shipping option as provided by the TMS
-          type: string
-        location:
-          $ref: '#/components/schemas/Location'
-        method:
-          description: The method of the selected shipping option
-          type: string
-        name:
-          description: The display name of the selected shipping option
-          type: string
-        price:
-          description: The price of the selected shipping option
-          enum:
-          - null
-          format: int64
-          type: integer
-        selected_addons:
-          description: Array consisting of add-ons selected by the consumer, may be empty
-          items:
-            $ref: '#/components/schemas/Addon'
-          type: array
-        tax_amount:
-          description: The tax amount of the selected shipping option
-          enum:
-          - null
-          format: int64
-          type: integer
-        tax_rate:
-          description: The tax rate of the selected shipping option
-          enum:
-          - null
-          format: int64
-          type: integer
-        timeslot:
-          $ref: '#/components/schemas/Timeslot'
-        tms_reference:
-          description: The shipment_id provided by the TMS
-          type: string
-        type:
-          description: The type of the selected shipping option
-          type: string
-      type: object
-    Update_authorization:
-      properties:
-        description:
-          description: Description of the change.
-          example: Added charger
-          maxLength: 255
-          minLength: 0
-          type: string
-        order_amount:
-          description: The new total order amount. Minor units.
-          format: int64
-          maximum: 200000000
-          minimum: 0
-          type: integer
-        order_lines:
-          description: New set of order lines for the order.
-          items:
-            $ref: '#/components/schemas/order_line'
-          maxItems: 1000
-          minItems: 0
-          type: array
-      required:
-      - order_amount
-      type: object
-    Update_merchant_references:
-      properties:
-        merchant_reference1:
-          description: New merchant reference 1. Old reference will be overwritten if this field is present.
-          maxLength: 255
-          minLength: 0
-          type: string
-        merchant_reference2:
-          description: New merchant reference 2. Old reference will be overwritten if this field is present.
-          maxLength: 255
-          minLength: 0
-          type: string
-      type: object
-    CarrierProduct:
-      description: The chosen timeslot of the selected shipping option
-      properties:
-        identifier:
-          description: Id of carrier product
-          type: string
-        name:
-          description: Name of carrier product
-          type: string
-      type: object
     order_line:
       description: List of order lines for the capture shown to the customer.
       properties:
@@ -905,65 +801,62 @@ components:
       - total_amount
       - unit_price
       type: object
-    Address:
-      description: The address of the location
+    Cancel_not_allowed_error_message:
       properties:
-        city:
-          description: City
+        correlation_id:
+          description: Correlation id. For searching logs.
+          example: 66782175-ae05-44fc-9eb3-eeceadbad271
           type: string
-        country:
-          description: Country
+        error_code:
+          description: Error code
+          example: CANCEL_NOT_ALLOWED
           type: string
-        postal_code:
-          description: Postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
-          type: string
-        region:
-          description: Region
-          type: string
-        street_address:
-          description: The street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
-          type: string
-        street_address__2:
-          description: Additional street address
-          type: string
-      required:
-      - country
-      - street_address
+        error_messages:
+          description: Error messages
+          items:
+            description: Error messages
+            type: string
+          type: array
       type: object
-    customer:
-      description: Information about the customer placing the order.
+    Location:
+      description: The location of the selected shipping option
       properties:
-        date_of_birth:
-          description: 'The customer date of birth. ISO 8601. '
-          example: '1981-09-06'
-          format: date
+        address:
+          $ref: '#/components/schemas/Address'
+        id:
+          description: The location id
           type: string
-        national_identification_number:
-          description: The customer national identification number
-          type: string
-      type: object
-    Addon:
-      description: Array consisting of add-ons selected by the consumer, may be empty
-      properties:
-        external_id:
-          description: The ID provided by the TMS
+        name:
+          description: The display name of the location
           type: string
         price:
-          description: The price of the add-on
+          description: The price for this location
           enum:
           - null
           format: int64
-          minimum: 0
           type: integer
-        type:
-          description: The type of the add-on, e.g. sms or entry-code
+      type: object
+    Timeslot:
+      description: The chosen timeslot of the selected shipping option
+      properties:
+        cutoff:
+          description: Cutoff time for delivery
           type: string
-        user_input:
-          description: The text provided by the user
+        end:
+          description: End of the timeslot
           type: string
-      required:
-      - price
-      - type
+        id:
+          description: The timeslot id
+          type: string
+        price:
+          description: Price
+          enum:
+          - null
+          format: int64
+          type: integer
+        start:
+          description: Start of the timeslot
+          type: string
       type: object
     subscription:
       description: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
@@ -988,63 +881,170 @@ components:
       - interval_count
       - name
       type: object
-    ProductIdentifiers:
-      description: product_identifiers
+    address:
+      description: Shipping address for the capture.
       properties:
-        brand:
-          description: 'The product''s brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel'
-          example: Intel
-          maxLength: 70
+        attention:
+          description: '''Attn.'' - optional parameter.'
+          example: John Smith
+          maxLength: 255
           minLength: 0
           type: string
-        category_path:
-          description: 'The product''s category path as used in the merchant''s webshop. Include the full and most detailed category and separate the segments with '' > ''. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops'
-          example: Electronics Store > Computers & Tablets > Desktops
-          maxLength: 750
+        city:
+          description: City.
+          example: Knoxville
+          maxLength: 200
           minLength: 0
           type: string
-        color:
-          description: 'Color to be shown to the end customer (max 64 characters). Example: Denim blue'
-          example: Denim blue
-          maxLength: 64
+        country:
+          description: Country. ISO 3166 alpha-2.
+          example: us
+          type: string
+        email:
+          description: E-mail address.
+          example: klara.joyce@klarna.com
+          maxLength: 100
           minLength: 0
           type: string
-        global_trade_item_number:
-          description: 'The product''s Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167'
-          example: '735858293167'
-          maxLength: 50
+        family_name:
+          description: Family name.
+          example: Joyce
+          maxLength: 100
           minLength: 0
           type: string
-        manufacturer_part_number:
-          description: 'The product''s Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH'
-          example: BOXNUC5CPYH
-          maxLength: 70
+        given_name:
+          description: Given name.
+          example: Klara
+          maxLength: 100
           minLength: 0
           type: string
-        size:
-          description: 'Size to be shown to the end customer (max 64 characters). Example: 4'
-          example: '4'
-          maxLength: 64
+        organization_name:
+          description: Organization name (if applicable). Only applicable for B2B customers.
+          example: Klarna
+          maxLength: 255
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number.
+          example: 1-555-555-5555
+          maxLength: 100
+          minLength: 0
+          type: string
+        postal_code:
+          description: Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).
+          example: '12345'
+          maxLength: 10
+          minLength: 0
+          type: string
+        region:
+          description: State/Region. Required for US.
+          example: TN
+          maxLength: 200
+          minLength: 0
+          type: string
+        street_address:
+          description: First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)
+          example: Apartment 10
+          maxLength: 100
+          minLength: 0
+          type: string
+        street_address2:
+          description: Second line of street address.
+          example: 1 Safeway
+          maxLength: 100
+          minLength: 0
+          type: string
+        title:
+          description: Title.
+          example: Mrs
+          maxLength: 20
           minLength: 0
           type: string
       type: object
-    Location:
-      description: The location of the selected shipping option
+    SelectedShippingOptionDto:
+      description: The shipping option selected by the user.
       properties:
-        address:
-          $ref: '#/components/schemas/Address'
+        carrier:
+          description: The carrier for the selected shipping option
+          type: string
+        carrier_product:
+          $ref: '#/components/schemas/CarrierProduct'
+        class:
+          description: The class of the selected shipping option
+          type: string
         id:
-          description: The location id
+          description: The id of the selected shipping option as provided by the TMS
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        method:
+          description: The method of the selected shipping option
           type: string
         name:
-          description: The display name of the location
+          description: The display name of the selected shipping option
           type: string
         price:
-          description: The price for this location
+          description: The price of the selected shipping option
           enum:
           - null
           format: int64
           type: integer
+        selected_addons:
+          description: Array consisting of add-ons selected by the consumer, may be empty
+          items:
+            $ref: '#/components/schemas/Addon'
+          type: array
+        tax_amount:
+          description: The tax amount of the selected shipping option
+          enum:
+          - null
+          format: int64
+          type: integer
+        tax_rate:
+          description: The tax rate of the selected shipping option
+          enum:
+          - null
+          format: int64
+          type: integer
+        timeslot:
+          $ref: '#/components/schemas/Timeslot'
+        tms_reference:
+          description: The shipment_id provided by the TMS
+          type: string
+        type:
+          description: The type of the selected shipping option
+          type: string
+      type: object
+    Refund:
+      properties:
+        credit_invoice:
+          description: Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.
+          type: boolean
+        description:
+          description: Description of the refund shown to the customer. Max length is 255 characters.
+          example: The item was returned and the order refunded.
+          type: string
+        order_lines:
+          description: Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.
+          items:
+            $ref: '#/components/schemas/order_line'
+          type: array
+        reference:
+          description: Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.
+          type: string
+        refund_id:
+          description: The refund id. Generated when the refund is created.
+          example: b2cb4f2e-2781-4359-80ad-555735ebb8d8
+          type: string
+        refunded_amount:
+          description: Refunded amount in minor units.
+          format: int64
+          type: integer
+        refunded_at:
+          description: The time of the refund. ISO 8601.
+          example: '2015-12-04T15:17:40Z'
+          format: date-time
+          type: string
       type: object
     shipping_info:
       description: Shipping information for this capture.

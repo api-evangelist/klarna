@@ -69,35 +69,6 @@ paths:
       - Transactions
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        count:
-          description: The amount of elements in the current result
-          example: 10
-          type: integer
-          format: int64
-        total:
-          description: The total amount of elements that are available
-          example: 42
-          type: integer
-          format: int64
-        next:
-          description: The URI to the next "page" of results.
-          example: http://example.com/collection?offset=21&size=10
-          type: string
-        prev:
-          description: The URI to the previous "page" of results.
-          example: http://example.com/collection?offset=0&size=10
-          type: string
-        offset:
-          description: The current offset. Describes "where" in a collection the current starts.
-          example: 10
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - count
     Transaction:
       type: object
       properties:
@@ -276,6 +247,35 @@ components:
       - order_id
       - currency_code
       - purchase_country
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count
     TransactionCollection:
       type: object
       properties:

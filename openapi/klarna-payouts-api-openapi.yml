@@ -153,113 +153,6 @@ paths:
       - Payouts
 components:
   schemas:
-    PayoutCollection:
-      type: object
-      properties:
-        payouts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payout'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      additionalProperties: false
-      required:
-      - payouts
-      - pagination
-    Pagination:
-      type: object
-      properties:
-        count:
-          description: The amount of elements in the current result
-          example: 10
-          type: integer
-          format: int64
-        total:
-          description: The total amount of elements that are available
-          example: 42
-          type: integer
-          format: int64
-        next:
-          description: The URI to the next "page" of results.
-          example: http://example.com/collection?offset=21&size=10
-          type: string
-        prev:
-          description: The URI to the previous "page" of results.
-          example: http://example.com/collection?offset=0&size=10
-          type: string
-        offset:
-          description: The current offset. Describes "where" in a collection the current starts.
-          example: 10
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - count
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          description: ERROR_CODE
-          type: string
-        error_messages:
-          description: Array of error messages
-          type: array
-          items:
-            type: string
-        correlation_id:
-          description: Unique id for this request used for troubleshooting.
-          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
-          type: string
-      additionalProperties: false
-      required:
-      - error_code
-      - error_messages
-      - correlation_id
-    Payout:
-      type: object
-      properties:
-        totals:
-          $ref: '#/components/schemas/Totals'
-        payment_reference:
-          description: The reference id of the payout
-          example: XISA93DJ
-          type: string
-        payout_date:
-          description: ISO 8601 formatted date-time string
-          example: '2016-12-14T07:52:26Z'
-          type: string
-          format: date-time
-        currency_code:
-          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
-          example: USD
-          type: string
-        currency_code_of_registration_country:
-          type: string
-          description: ISO 4217 Currency Code of the country you are registered in.
-          example: EUR
-        merchant_settlement_type:
-          description: Whether the amounts are net or gross
-          example: NET
-          type: string
-          enum:
-          - GROSS
-          - NET
-          - GROSS_FEE
-        merchant_id:
-          description: The merchant id
-          type: string
-        transactions:
-          description: Link to the transactions that are part of this payout
-          example: https://{settlements_api}/transactions?payment_reference=XISA93DJ
-          type: string
-      additionalProperties: false
-      required:
-      - totals
-      - payment_reference
-      - payout_date
-      - currency_code
-      - merchant_settlement_type
-      - merchant_id
     Totals:
       type: object
       properties:
@@ -371,6 +264,19 @@ components:
       - deposit_amount
       - opening_debt_balance_amount
       - closing_debt_balance_amount
+    PayoutCollection:
+      type: object
+      properties:
+        payouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payout'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      additionalProperties: false
+      required:
+      - payouts
+      - pagination
     PayoutSummary:
       type: object
       properties:
@@ -459,6 +365,100 @@ components:
       - summary_total_commission_amount
       - summary_total_sale_amount
       - summary_total_repay_amount
+    Payout:
+      type: object
+      properties:
+        totals:
+          $ref: '#/components/schemas/Totals'
+        payment_reference:
+          description: The reference id of the payout
+          example: XISA93DJ
+          type: string
+        payout_date:
+          description: ISO 8601 formatted date-time string
+          example: '2016-12-14T07:52:26Z'
+          type: string
+          format: date-time
+        currency_code:
+          description: ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.
+          example: USD
+          type: string
+        currency_code_of_registration_country:
+          type: string
+          description: ISO 4217 Currency Code of the country you are registered in.
+          example: EUR
+        merchant_settlement_type:
+          description: Whether the amounts are net or gross
+          example: NET
+          type: string
+          enum:
+          - GROSS
+          - NET
+          - GROSS_FEE
+        merchant_id:
+          description: The merchant id
+          type: string
+        transactions:
+          description: Link to the transactions that are part of this payout
+          example: https://{settlements_api}/transactions?payment_reference=XISA93DJ
+          type: string
+      additionalProperties: false
+      required:
+      - totals
+      - payment_reference
+      - payout_date
+      - currency_code
+      - merchant_settlement_type
+      - merchant_id
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          description: ERROR_CODE
+          type: string
+        error_messages:
+          description: Array of error messages
+          type: array
+          items:
+            type: string
+        correlation_id:
+          description: Unique id for this request used for troubleshooting.
+          example: 2fe0311b-adc5-45e5-ac2b-963dac83c88b
+          type: string
+      additionalProperties: false
+      required:
+      - error_code
+      - error_messages
+      - correlation_id
+    Pagination:
+      type: object
+      properties:
+        count:
+          description: The amount of elements in the current result
+          example: 10
+          type: integer
+          format: int64
+        total:
+          description: The total amount of elements that are available
+          example: 42
+          type: integer
+          format: int64
+        next:
+          description: The URI to the next "page" of results.
+          example: http://example.com/collection?offset=21&size=10
+          type: string
+        prev:
+          description: The URI to the previous "page" of results.
+          example: http://example.com/collection?offset=0&size=10
+          type: string
+        offset:
+          description: The current offset. Describes "where" in a collection the current starts.
+          example: 10
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - count
   securitySchemes:
     basic_auth:
       type: http

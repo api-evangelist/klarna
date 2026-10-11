@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-update-shipping-info-schema.json",
+  "title": "UpdateShippingInfo",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-captures-api-openapi.yml#/components/schemas/UpdateShippingInfo",
+  "properties": {
+    "shipping_info": {
+      "description": "New shipping info. Maximum: 500 items.",
+      "items": {
+        "$ref": "#/$defs/shipping_info"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "shipping_info"
+  ],
+  "type": "object",
+  "$defs": {
+    "shipping_info": {
+      "description": "Shipping information for this capture.",
+      "properties": {
+        "return_shipping_company": {
+          "description": "Name of the shipping company for the return shipment (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "return_tracking_number": {
+          "description": "Tracking number for the return shipment. Maximum 100 characters.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "return_tracking_uri": {
+          "description": "URL where the customer can track the return shipment. Maximum 1024 characters.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "shipping_company": {
+          "description": "Name of the shipping company (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "shipping_method": {
+          "description": "Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+          "pattern": "(PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+          "type": "string"
+        },
+        "tracking_number": {
+          "description": "Tracking number for the shipment. Maximum 100 characters.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "tracking_uri": {
+          "description": "URI where the customer can track their shipment. Maximum 1024 characters.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

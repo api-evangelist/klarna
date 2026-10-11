@@ -1,0 +1,482 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-create-order-request-schema.json",
+  "title": "create_order_request",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-payments-api-openapi.yml#/components/schemas/create_order_request",
+  "type": "object",
+  "required": [
+    "order_amount",
+    "order_lines",
+    "purchase_country",
+    "purchase_currency"
+  ],
+  "properties": {
+    "authorization_token": {
+      "type": "string",
+      "description": "Authorization token.",
+      "readOnly": true
+    },
+    "auto_capture": {
+      "type": "boolean",
+      "description": "Allow merchant to trigger auto capturing.",
+      "default": false
+    },
+    "billing_address": {
+      "$ref": "#/$defs/address"
+    },
+    "custom_payment_method_ids": {
+      "type": "array",
+      "description": "Promo codes - The array could be used to define which of the configured payment options within a payment category (pay_later, pay_over_time, etc.) should be shown for this purchase. Discuss with the delivery manager to know about the promo codes that will be configured for your account. The feature could also be used to provide promotional offers to specific customers (eg: 0% financing). Please be informed that the usage of this feature can have commercial implications. ",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customer": {
+      "$ref": "#/$defs/customer"
+    },
+    "locale": {
+      "type": "string",
+      "description": "Used to define the language and region of the customer. The locale follows the format of [RFC 1766](https://datatracker.ietf.org/doc/rfc1766/), meaning its value consists of language-country.\nRead more on **[Supported Locals and Currencies](https://docs.klarna.com/klarna-payments/in-depth-knowledge/puchase-countries-currencies-locales/)**.",
+      "pattern": "^[A-Za-z]{2,2}(?:-[A-Za-z]{2,2})*$"
+    },
+    "merchant_data": {
+      "type": "string",
+      "description": "Pass through field to send any information about the order to be used later for reference while retrieving the order details (max 6000 characters)",
+      "minLength": 0,
+      "maxLength": 6000
+    },
+    "merchant_reference1": {
+      "type": "string",
+      "description": "Used for storing merchant's internal order number or other reference.",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "merchant_reference2": {
+      "type": "string",
+      "description": "Used for storing merchant's internal order number or other reference. The value is available in the settlement files. (max 255 characters).",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "merchant_urls": {
+      "$ref": "#/$defs/merchant_urls"
+    },
+    "order_amount": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Total amount of the order including tax and any available discounts. The value should be in non-negative minor units. Eg: 25 Euros should be 2500.",
+      "minimum": 0
+    },
+    "order_lines": {
+      "type": "array",
+      "description": "The array containing list of line items that are part of this order. Maximum of 1000 line items could be processed in a single order.",
+      "items": {
+        "$ref": "#/$defs/order_line"
+      },
+      "maxItems": 1000,
+      "minItems": 1
+    },
+    "order_tax_amount": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Total tax amount of the order. The value should be in non-negative minor units. Eg: 25 Euros should be 2500.",
+      "minimum": 0
+    },
+    "payment_method_categories": {
+      "type": "array",
+      "description": "Available payment method categories",
+      "readOnly": true,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/payment_method_category"
+      }
+    },
+    "purchase_country": {
+      "type": "string",
+      "description": "The purchase country of the customer. The billing country always overrides purchase country if the values are different. Formatted according to ISO 3166 alpha-2 standard, e.g. GB, SE, DE, US, etc.",
+      "pattern": "^[A-Za-z]{2,2}$"
+    },
+    "purchase_currency": {
+      "type": "string",
+      "description": "The purchase currency of the order. Formatted according to ISO 4217 standard, e.g. USD, EUR, SEK, GBP, etc.",
+      "pattern": "^[A-Za-z]{3,3}$"
+    },
+    "shipping_address": {
+      "$ref": "#/$defs/address"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the session. Possible values: 'complete', 'incomplete' where 'complete' is set when the order has been placed.",
+      "readOnly": true,
+      "enum": [
+        "complete",
+        "incomplete"
+      ]
+    }
+  },
+  "$defs": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "attention": {
+          "type": "string",
+          "description": "Attn. (if applicable). Only applicable for B2B customers.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "city": {
+          "type": "string",
+          "description": "Customers city.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "country": {
+          "type": "string",
+          "description": "Customers country. This value overrides the purchase country if they are different. Should follow the standard of ISO 3166 alpha-2. E.g. GB, US, DE, SE.",
+          "pattern": "^[A-Za-z]{2,2}$"
+        },
+        "email": {
+          "type": "string",
+          "description": "Customers email address.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "family_name": {
+          "type": "string",
+          "description": "Customers family name in UTF-8 encoding.\nCannot be only numbers, must be more than 1 character.\nAllowed special characters: -'.\nMore information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "given_name": {
+          "type": "string",
+          "description": "Customers given name in UTF-8 encoding.\nCannot be only numbers, must be more than 1 character.\nAllowed special characters: -'.\nMore information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "organization_name": {
+          "type": "string",
+          "description": "Organization name (if applicable). Only applicable for B2B customers.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number. Preferably a mobile phone number.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Customers postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).\nE.g. 12345, W1G OPW.",
+          "minLength": 0,
+          "maxLength": 10
+        },
+        "region": {
+          "type": "string",
+          "description": "Customers region or state - Mandatory for US and AU market. Validations according to ISO 3166-2 format, e.g. OH, NJ, etc.",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "street_address": {
+          "type": "string",
+          "description": "Customers street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html). Regional formatting is required, as follows:\nUK/US/FR: 33 Cavendish Square\nRest of EU: De Ruijterkade 7",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "street_address2": {
+          "type": "string",
+          "description": "Customers street address. Second Line. ",
+          "minLength": 0,
+          "maxLength": 99
+        },
+        "title": {
+          "type": "string",
+          "description": "Customers Title. Allowed values per country:\nUK - \"Mr\", \"Ms\"\nDE - \"Herr\", \"Frau\"\nAT: \"Herr, \"Frau\"\nCH: de-CH: \"Herr, \"Frau\" it-CH: \"Sig.\", \"Sig.ra\" fr-CH: \"M\", \"Mme\" \nBE: \"Dhr.\", \"Mevr.\"\nNL: \"Dhr.\", \"Mevr.\"",
+          "minLength": 0,
+          "maxLength": 20
+        }
+      }
+    },
+    "asset_urls": {
+      "type": "object",
+      "properties": {
+        "descriptive": {
+          "type": "string",
+          "description": "URL of the descriptive asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated."
+        },
+        "standard": {
+          "type": "string",
+          "description": "URL of the standard asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated."
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "date_of_birth": {
+          "type": "string",
+          "description": "Customers date of birth. The format is yyyy-mm-dd"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Customers gender - male or female"
+        },
+        "last_four_ssn": {
+          "type": "string",
+          "description": "Last four digits of the customer's social security number. This value is available for US customers.",
+          "pattern": "^([0-9]{4}|[0-9]{9})$"
+        },
+        "national_identification_number": {
+          "type": "string",
+          "description": "The customer's national identification number. This value is available for EU customers utilizing national identification numbers."
+        },
+        "organization_entity_type": {
+          "type": "string",
+          "description": "Organization entity type. Only applicable for B2B customers.",
+          "enum": [
+            "LIMITED_COMPANY",
+            "PUBLIC_LIMITED_COMPANY",
+            "ENTREPRENEURIAL_COMPANY",
+            "LIMITED_PARTNERSHIP_LIMITED_COMPANY",
+            "LIMITED_PARTNERSHIP",
+            "GENERAL_PARTNERSHIP",
+            "REGISTERED_SOLE_TRADER",
+            "SOLE_TRADER",
+            "CIVIL_LAW_PARTNERSHIP",
+            "PUBLIC_INSTITUTION",
+            "OTHER"
+          ]
+        },
+        "organization_registration_id": {
+          "type": "string",
+          "description": "Organization registration id. Only applicable for B2B customers."
+        },
+        "title": {
+          "type": "string",
+          "description": "Customers Title. Allowed values per country:\nUK - \"Mr\", \"Ms\"\nDE - \"Herr\", \"Frau\"\nAT: \"Herr, \"Frau\"\nCH: de-CH: \"Herr, \"Frau\" it-CH: \"Sig.\", \"Sig.ra\" fr-CH: \"M\", \"Mme\" \nBE: \"Dhr.\", \"Mevr.\"\nNL: \"Dhr.\", \"Mevr.\""
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of customer in the session. If nothing is added, a B2C session will be the default. If it is a b2b-session, you should enter organization to trigger a B2B session.",
+          "pattern": "^(person|organization)$"
+        },
+        "vat_id": {
+          "type": "string",
+          "description": "VAT ID. Only applicable for B2B customers."
+        }
+      }
+    },
+    "merchant_urls": {
+      "type": "object",
+      "properties": {
+        "confirmation": {
+          "type": "string",
+          "description": "URL of the merchant confirmation page. The consumer will be redirected back to the confirmation page if the consumer is sent to the redirect URL after placing the order. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL(max 2000 characters).",
+          "minLength": 0,
+          "maxLength": 2000
+        },
+        "notification": {
+          "type": "string",
+          "description": "URL for notifications on pending orders. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL (max 2000 characters).",
+          "minLength": 0,
+          "maxLength": 2000
+        },
+        "push": {
+          "type": "string",
+          "description": "URL that will be requested when an order is completed. Should be different than checkout and confirmation URLs. Insert {session.id} and/or {order.id} as placeholder to connect either of those IDs to the URL (max 2000 characters).",
+          "minLength": 0,
+          "maxLength": 2000
+        },
+        "authorization": {
+          "description": "URL for receiving the authorization token when payment is completed. Used for Authorization Callback.",
+          "maxLength": 2000,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "order_line": {
+      "type": "object",
+      "required": [
+        "name",
+        "quantity",
+        "total_amount",
+        "unit_price"
+      ],
+      "properties": {
+        "image_url": {
+          "type": "string",
+          "description": "URL to an image that can be later embedded in communications between Klarna and the customer. (max 1024 characters).\n A minimum of 250x250 px resolution is recommended for the image to look good in the Klarna app, and below 50x50 px won't even show. We recommend using a good sized image (650x650 px or more), however the file size must not exceed 12MB.",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "merchant_data": {
+          "type": "string",
+          "description": "Used for storing merchant's internal order number or other reference. Pass through field. (max 1024 characters)",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "name": {
+          "type": "string",
+          "description": "Descriptive name of the order line item.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "product_identifiers": {
+          "$ref": "#/$defs/product_identifiers"
+        },
+        "product_url": {
+          "type": "string",
+          "description": "URL to the product in the merchants webshop that can be later used in communications between Klarna and the customer. (max 1024 characters)",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quantity of the order line item. Must be a non-negative number.",
+          "minimum": 0
+        },
+        "quantity_unit": {
+          "type": "string",
+          "description": "Unit used to describe the quantity, e.g. kg, pcs, etc. If defined the value has to be 1-8 characters.",
+          "minLength": 1,
+          "maxLength": 8
+        },
+        "reference": {
+          "type": "string",
+          "description": "Client facing article number, SKU or similar. Max length is 256 characters.",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "tax_rate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Tax rate of the order line. Non-negative value. The percentage value is represented with two implicit decimals. I.e 2000 = 20%.",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "total_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total amount of the order line. Must be defined as minor units. Includes tax and discount. Eg: 2000=20 euros\nValue = (quantity x unit_price) - total_discount_amount. \n(max value: 200000000)",
+          "maximum": 200000000
+        },
+        "total_discount_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Non-negative minor units. Includes tax. Eg: 500=5 euros",
+          "minimum": 0
+        },
+        "total_tax_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total tax amount of the order line. Must be within �1 of total_amount - total_amount 10000 / (10000 + tax_rate). Negative when type is discount."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the order line item. The possible values are:\n\nphysical\ndiscount\nshipping_fee\nsales_tax\ndigital\ngift_card\nstore_credit\nsurcharge"
+        },
+        "unit_price": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Price for a single unit of the order line. Must be defined as minor units. Includes tax, excludes discount. (max value: 200000000)",
+          "maximum": 200000000
+        },
+        "subscription": {
+          "$ref": "#/$defs/subscription"
+        }
+      }
+    },
+    "payment_method_category": {
+      "type": "object",
+      "properties": {
+        "asset_urls": {
+          "$ref": "#/$defs/asset_urls"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "ID of the payment method category to be used while loading the widget later.\nThe possible values are:<ul><li>klarna</li><li>pay_later</li><li>pay_now</li><li>pay_over_time</li><li>direct_bank_transfer</li><li>direct_debit</li></ul>"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the payment method category. These names are dynamic depending on what payment method is in the category. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated, or any updates of included payment methods by you."
+        }
+      }
+    },
+    "product_identifiers": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value.",
+          "minLength": 0,
+          "maxLength": 70
+        },
+        "category_path": {
+          "type": "string",
+          "description": "The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '",
+          "minLength": 0,
+          "maxLength": 750
+        },
+        "global_trade_item_number": {
+          "type": "string",
+          "description": "The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "manufacturer_part_number": {
+          "type": "string",
+          "description": "The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible",
+          "minLength": 0,
+          "maxLength": 70
+        },
+        "color": {
+          "type": "string",
+          "description": "Color to be shown to the end customer (max 64 characters).",
+          "minLength": 0,
+          "maxLength": 64
+        },
+        "size": {
+          "type": "string",
+          "description": "Size to be shown to the end customer (max 64 characters).",
+          "minLength": 0,
+          "maxLength": 64
+        }
+      }
+    },
+    "subscription": {
+      "type": "object",
+      "required": [
+        "name",
+        "interval",
+        "interval_count"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the subscription product",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "interval": {
+          "description": "The cadence unit for this.",
+          "type": "string",
+          "enum": [
+            "DAY",
+            "WEEK",
+            "MONTH",
+            "YEAR"
+          ]
+        },
+        "interval_count": {
+          "description": "The number of intervals",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

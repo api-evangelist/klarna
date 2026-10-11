@@ -1,0 +1,72 @@
+arazzo: 1.0.1
+info:
+  title: Klarna WooCommerce Refund Sync
+  summary: Refund a captured Klarna order and record the same refund on the WooCommerce order.
+  description: >-
+    Issues the refund at Klarna through Order Management, then records it on the WooCommerce order with
+    api_refund false so WooCommerce does not try to refund through a gateway a second time. Klarna takes
+    minor units and WooCommerce a decimal string, so both amounts are inputs.
+  version: 1.0.0
+x-integration:
+  partner: woocommerce
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/woocommerce/conversion-boosters/how-to-enable-sign-in-with-klarna-in-woocommerce
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: api-evangelist enrichment local-v5
+sourceDescriptions:
+  - name: klarnaRefunds
+    url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-refunds-api-openapi.yml
+    type: openapi
+  - name: wooOrderRefunds
+    url: https://raw.githubusercontent.com/api-evangelist/woocommerce/refs/heads/main/openapi/woocommerce-order-refunds-api-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: refund-klarna-and-record-in-woocommerce
+    summary: Refund at Klarna, then mirror the refund on WooCommerce.
+    description: >-
+      Refund the Klarna order with an idempotency key, then create a WooCommerce order refund carrying
+      the Klarna Refund-Id as its reason.
+    inputs:
+      type: object
+      required: [klarna_order_id, woo_order_id, refunded_amount, woo_amount, idempotency_key]
+      properties:
+        klarna_order_id: {type: string}
+        woo_order_id: {type: integer}
+        refunded_amount: {type: integer, description: Klarna amount in minor units}
+        woo_amount: {type: string, description: WooCommerce decimal amount}
+        idempotency_key: {type: string}
+    steps:
+      - stepId: refund-klarna-order
+        description: Refund the captured Klarna order.
+        operationId: $sourceDescriptions.klarnaRefunds.refundOrder
+        parameters:
+          - {name: order_id, in: path, value: $inputs.klarna_order_id}
+          - {name: Klarna-Idempotency-Key, in: header, value: $inputs.idempotency_key}
+        requestBody:
+          contentType: application/json
+          payload:
+            refunded_amount: $inputs.refunded_amount
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          refund_id: $response.header.Refund-Id
+      - stepId: record-woo-refund
+        description: Record the refund on the WooCommerce order without a second gateway refund.
+        operationId: $sourceDescriptions.wooOrderRefunds.createOrderRefund
+        parameters:
+          - {name: order_id, in: path, value: $inputs.woo_order_id}
+        requestBody:
+          contentType: application/json
+          payload:
+            amount: $inputs.woo_amount
+            reason: $steps.refund-klarna-order.outputs.refund_id
+            api_refund: false
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          woo_refund_id: $response.body#/id
+    outputs:
+      refund_id: $steps.refund-klarna-order.outputs.refund_id
+      woo_refund_id: $steps.record-woo-refund.outputs.woo_refund_id

@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-refund-object-schema.json",
+  "title": "RefundObject",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-refunds-api-openapi.yml#/components/schemas/RefundObject",
+  "properties": {
+    "description": {
+      "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+      "items": {
+        "$ref": "#/$defs/order_line"
+      },
+      "maxItems": 1000,
+      "minItems": 0,
+      "type": "array"
+    },
+    "reference": {
+      "description": "Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.",
+      "maxLength": 255,
+      "minLength": 0,
+      "type": "string"
+    },
+    "refunded_amount": {
+      "description": "Refunded amount in minor units.",
+      "format": "int64",
+      "maximum": 200000000,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "refunded_amount"
+  ],
+  "type": "object",
+  "$defs": {
+    "ProductIdentifiers": {
+      "description": "product_identifiers",
+      "properties": {
+        "brand": {
+          "description": "The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel",
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string"
+        },
+        "category_path": {
+          "description": "The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops",
+          "maxLength": 750,
+          "minLength": 0,
+          "type": "string"
+        },
+        "color": {
+          "description": "Color to be shown to the end customer (max 64 characters). Example: Denim blue",
+          "maxLength": 64,
+          "minLength": 0,
+          "type": "string"
+        },
+        "global_trade_item_number": {
+          "description": "The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "manufacturer_part_number": {
+          "description": "The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH",
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string"
+        },
+        "size": {
+          "description": "Size to be shown to the end customer (max 64 characters). Example: 4",
+          "maxLength": 64,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "order_line": {
+      "description": "List of order lines for the capture shown to the customer.",
+      "properties": {
+        "image_url": {
+          "description": "URL to an image that can be embedded in communications between Klarna and the customer.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "merchant_data": {
+          "description": "Data about the order line.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "name": {
+          "description": "Descriptive item name.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "product_identifiers": {
+          "$ref": "#/$defs/ProductIdentifiers"
+        },
+        "product_url": {
+          "description": "URL to the product that can be used in communications between Klarna and the customer.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Item quantity.",
+          "format": "int64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "quantity_unit": {
+          "description": "Unit used to describe the quantity.",
+          "maxLength": 10,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reference": {
+          "description": "Article number, SKU, or similar identifier on the product variant level.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "subscription": {
+          "$ref": "#/$defs/subscription"
+        },
+        "tax_rate": {
+          "description": "The tax rate in percent with two implicit decimals.",
+          "format": "int32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_amount": {
+          "description": "Total amount including tax and discounts (`quantity * unit_price - total_discount_amount`).",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        },
+        "total_discount_amount": {
+          "description": "The discount amount in minor units. Includes tax. Example: 1200 = $12. Max value: 200000000",
+          "format": "int64",
+          "maximum": 200000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_tax_amount": {
+          "description": "The total tax amount in minor units.",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Order line type.",
+          "enum": [
+            "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee"
+          ],
+          "pattern": "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee",
+          "type": "string"
+        },
+        "unit_price": {
+          "description": "Unit price including tax without applying discounts in minor units.",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "quantity",
+        "total_amount",
+        "unit_price"
+      ],
+      "type": "object"
+    },
+    "subscription": {
+      "description": "Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.",
+      "properties": {
+        "interval": {
+          "description": "The cadence unit. Matches: DAY|WEEK|MONTH|YEAR",
+          "pattern": "DAY|WEEK|MONTH|YEAR",
+          "type": "string"
+        },
+        "interval_count": {
+          "description": "The number of intervals.",
+          "format": "int32",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "The name of the subscription product. Maximum 255 characters.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "interval",
+        "interval_count",
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

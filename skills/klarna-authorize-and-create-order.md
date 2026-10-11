@@ -1,5 +1,5 @@
 ---
-name: Authorize a Klarna payment and create the order
+name: klarna-authorize-and-create-order
 description: >-
   Take a shopper basket from a Klarna payment session through browser authorization to a created
   order, using the Klarna Payments API. This is the entry point for every Klarna web checkout.

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-session-creation-response-v1-schema.json",
+  "title": "SessionCreationResponseV1",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-hpp-api-openapi.yml#/components/schemas/SessionCreationResponseV1",
+  "type": "object",
+  "properties": {
+    "distribution_module": {
+      "$ref": "#/$defs/DistributionModuleV1"
+    },
+    "distribution_url": {
+      "type": "string",
+      "description": "Endpoint for link distribution"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Session expiration time"
+    },
+    "manual_identification_check_url": {
+      "description": "Endpoint for manual identification check",
+      "type": "string"
+    },
+    "qr_code_url": {
+      "type": "string",
+      "description": "HPP url to download qr code image"
+    },
+    "redirect_url": {
+      "type": "string",
+      "description": "HPP url to redirect the consumer to. ECOMMERCE only"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "HPP session id"
+    },
+    "session_url": {
+      "type": "string",
+      "description": "Endpoint to get the session"
+    }
+  },
+  "$defs": {
+    "DistributionModuleV1": {
+      "type": "object",
+      "properties": {
+        "generation_url": {
+          "type": "string"
+        },
+        "standalone_url": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

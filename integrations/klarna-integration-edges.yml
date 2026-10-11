@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/klarna/integrations
 - https://n8n.io/integrations/klarna/
@@ -7,10 +7,142 @@ source:
 - https://monid.ai/tools/klarna
 checked:
 - https://composio.dev/toolkits/klarna
+- https://docs.klarna.com/llms.txt
 - https://monid.ai/tools/klarna
 - https://n8n.io/integrations/klarna/
 - https://zapier.com/apps/klarna/integrations
-summary: null
+summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
+  partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
+  extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Adobe Commerce
+  partner: adobe-commerce
+  type: claimed
+  direction: provider-built
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/adobe-commerce/payments/installation
+  use_case: Klarna documents its Adobe Commerce integration under docs.klarna.com/platform-solutions (page 200 on
+    2026-10-12).
+- partner_name: Shopify
+  partner: shopify
+  type: claimed
+  direction: provider-built
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/shopify/payments/payments-for-shopify
+  use_case: Klarna documents its Shopify integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: WooCommerce
+  partner: woocommerce
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/woocommerce/conversion-boosters/how-to-enable-sign-in-with-klarna-in-woocommerce
+  use_case: Klarna documents its WooCommerce integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: Salesforce Commerce Cloud
+  partner: salesforce-commerce-cloud
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/salesforce-commerce-cloud/before-you-start/user-guide
+  use_case: Klarna documents its Salesforce Commerce Cloud integration under docs.klarna.com/platform-solutions
+    (page 200 on 2026-10-12).
+- partner_name: SAP Commerce Cloud
+  partner: null
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/sap-commerce-cloud/before-you-start
+  use_case: Klarna documents its SAP Commerce Cloud integration under docs.klarna.com/platform-solutions (page 200
+    on 2026-10-12).
+- partner_name: PrestaShop
+  partner: prestashop
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/prestashop/before-you-start
+  use_case: Klarna documents its PrestaShop integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: Shopware
+  partner: null
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/shopware/payments-with-shopware
+  use_case: Klarna documents its Shopware integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: VTEX
+  partner: vtex
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/vtex/conversion-boosters/enable-on-site-messaging
+  use_case: Klarna documents its VTEX integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: Wix
+  partner: wix
+  type: claimed
+  direction: unknown
+  category: e-commerce-platform
+  evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/wix/before-you-start
+  use_case: Klarna documents its Wix integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: Billie
+  partner: billie
+  type: claimed
+  direction: unknown
+  category: issuing-partner
+  evidence: https://docs.klarna.com/platform-solutions/issuing-partners/billie/payments-with-billie.md
+  use_case: Klarna documents its Billie integration under docs.klarna.com/platform-solutions (page 200 on 2026-10-12).
+- partner_name: Adyen
+  partner: adyen
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/adyen/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Stripe
+  partner: stripe
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/stripe/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Mollie
+  partner: mollie
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/mollie/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Worldpay
+  partner: worldpay
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/worldpay/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Zettle
+  partner: zettle
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/zettle/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Nuvei
+  partner: nuvei
+  type: claimed
+  direction: partner-built
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/nuvei/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
+- partner_name: Kustom
+  partner: null
+  type: claimed
+  direction: unknown
+  category: acquiring-partner
+  evidence: https://docs.klarna.com/llms.txt
+  use_case: Listed under platform-solutions/acquiring-partners/kustom/ in Klarna's live llms.txt (200, 2026-10-12);
+    the linked pages returned 404 on 2026-10-12.
 templates: []

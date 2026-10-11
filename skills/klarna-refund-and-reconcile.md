@@ -1,5 +1,5 @@
 ---
-name: Refund a Klarna order and reconcile it to a payout
+name: klarna-refund-and-reconcile
 description: >-
   Refund a captured Klarna order, then trace the money through the Settlements API to the payout
   that carries it. The refund and reconciliation halves belong in one skill because Klarna keys

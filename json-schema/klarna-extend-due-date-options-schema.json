@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-extend-due-date-options-schema.json",
+  "title": "ExtendDueDateOptions",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-captures-api-openapi.yml#/components/schemas/ExtendDueDateOptions",
+  "properties": {
+    "currency": {
+      "description": "The currency for the fees. Specified in ISO 4217 format.",
+      "type": "string"
+    },
+    "options": {
+      "description": "The available options and corresponding fees for extending the due date",
+      "items": {
+        "$ref": "#/$defs/OptionDto"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "OptionDto": {
+      "description": "The available options and corresponding fees for extending the due date",
+      "properties": {
+        "amount": {
+          "description": "The fee for extending the due date this many days. In minor units.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "number_of_days": {
+          "description": "How many days to extend the due date with",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

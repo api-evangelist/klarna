@@ -1,5 +1,5 @@
 ---
-name: Capture a Klarna order and attach fulfilment
+name: klarna-capture-and-fulfil
 description: >-
   Capture all or part of an authorized Klarna order when goods ship, attach tracking, and release
   the amount you will not use. This is the money-taking step — it is what makes the shopper owe

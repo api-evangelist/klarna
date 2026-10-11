@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-customer-token-schema.json",
+  "title": "customer_token",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-customer-token-api-openapi.yml#/components/schemas/customer_token",
+  "type": "object",
+  "required": [
+    "payment_method_type",
+    "status"
+  ],
+  "properties": {
+    "card": {
+      "$ref": "#/$defs/card_information"
+    },
+    "direct_debit": {
+      "$ref": "#/$defs/direct_debit_information"
+    },
+    "payment_method_type": {
+      "type": "string",
+      "description": "Selected payment method"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of token, can be active, cancelled, suspended"
+    }
+  },
+  "$defs": {
+    "card_information": {
+      "type": "object",
+      "required": [
+        "brand",
+        "expiry_date",
+        "masked_number"
+      ],
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Card brand"
+        },
+        "expiry_date": {
+          "type": "string",
+          "description": "Card expiration date"
+        },
+        "masked_number": {
+          "type": "string",
+          "description": "Masked credit card number"
+        }
+      }
+    },
+    "direct_debit_information": {
+      "type": "object",
+      "required": [
+        "masked_number"
+      ],
+      "properties": {
+        "masked_number": {
+          "type": "string",
+          "description": "Masked bank account number"
+        }
+      }
+    }
+  }
+}

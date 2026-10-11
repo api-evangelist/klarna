@@ -1,0 +1,1162 @@
+{
+  "@context": {
+    "@vocab": "https://klarna.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "klarna": "https://klarna.com/schema#",
+    "ErrorMessageDto": "klarna:ErrorMessageDto",
+    "correlation_id": {
+      "@id": "klarna:correlation_id",
+      "@type": "xsd:string"
+    },
+    "error_code": {
+      "@id": "klarna:error_code",
+      "@type": "xsd:string"
+    },
+    "error_messages": {
+      "@id": "klarna:error_messages",
+      "@container": "@list"
+    },
+    "UpdateShippingInfo": "klarna:UpdateShippingInfo",
+    "shipping_info": {
+      "@id": "klarna:shipping_info",
+      "@container": "@list"
+    },
+    "Capture": "klarna:Capture",
+    "billing_address": {
+      "@id": "klarna:billing_address",
+      "@type": "@id"
+    },
+    "capture_id": {
+      "@id": "klarna:capture_id",
+      "@type": "xsd:string"
+    },
+    "captured_amount": {
+      "@id": "klarna:captured_amount",
+      "@type": "xsd:integer"
+    },
+    "captured_at": {
+      "@id": "klarna:captured_at",
+      "@type": "xsd:dateTime"
+    },
+    "description": {
+      "@id": "klarna:description",
+      "@type": "xsd:string"
+    },
+    "klarna_reference": {
+      "@id": "klarna:klarna_reference",
+      "@type": "xsd:string"
+    },
+    "order_lines": {
+      "@id": "klarna:order_lines",
+      "@container": "@list"
+    },
+    "reference": {
+      "@id": "klarna:reference",
+      "@type": "xsd:string"
+    },
+    "refunded_amount": {
+      "@id": "klarna:refunded_amount",
+      "@type": "xsd:integer"
+    },
+    "shipping_address": {
+      "@id": "klarna:shipping_address",
+      "@type": "@id"
+    },
+    "order_line": "klarna:order_line",
+    "image_url": {
+      "@id": "klarna:image_url",
+      "@type": "xsd:string"
+    },
+    "merchant_data": {
+      "@id": "klarna:merchant_data",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "klarna:name",
+      "@type": "xsd:string"
+    },
+    "product_identifiers": {
+      "@id": "klarna:product_identifiers",
+      "@type": "@id"
+    },
+    "product_url": {
+      "@id": "klarna:product_url",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "klarna:quantity",
+      "@type": "xsd:integer"
+    },
+    "quantity_unit": {
+      "@id": "klarna:quantity_unit",
+      "@type": "xsd:string"
+    },
+    "subscription": {
+      "@id": "klarna:subscription",
+      "@type": "@id"
+    },
+    "tax_rate": {
+      "@id": "klarna:tax_rate",
+      "@type": "xsd:integer"
+    },
+    "total_amount": {
+      "@id": "klarna:total_amount",
+      "@type": "xsd:integer"
+    },
+    "total_discount_amount": {
+      "@id": "klarna:total_discount_amount",
+      "@type": "xsd:integer"
+    },
+    "total_tax_amount": {
+      "@id": "klarna:total_tax_amount",
+      "@type": "xsd:integer"
+    },
+    "type": {
+      "@id": "klarna:type",
+      "@type": "xsd:string"
+    },
+    "unit_price": {
+      "@id": "klarna:unit_price",
+      "@type": "xsd:integer"
+    },
+    "Capture_not_allowed_error_message": "klarna:Capture_not_allowed_error_message",
+    "Not_allowed_error_message": "klarna:Not_allowed_error_message",
+    "ExtendDueDateOptions": "klarna:ExtendDueDateOptions",
+    "currency": {
+      "@id": "klarna:currency",
+      "@type": "xsd:string"
+    },
+    "options": {
+      "@id": "klarna:options",
+      "@container": "@list"
+    },
+    "No_such_order_error_message": "klarna:No_such_order_error_message",
+    "ProductIdentifiers": "klarna:ProductIdentifiers",
+    "brand": {
+      "@id": "klarna:brand",
+      "@type": "xsd:string"
+    },
+    "category_path": {
+      "@id": "klarna:category_path",
+      "@type": "xsd:string"
+    },
+    "color": {
+      "@id": "klarna:color",
+      "@type": "xsd:string"
+    },
+    "global_trade_item_number": {
+      "@id": "klarna:global_trade_item_number",
+      "@type": "xsd:string"
+    },
+    "manufacturer_part_number": {
+      "@id": "klarna:manufacturer_part_number",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "klarna:size",
+      "@type": "xsd:string"
+    },
+    "ExtendDueDateRequest": "klarna:ExtendDueDateRequest",
+    "number_of_days": {
+      "@id": "klarna:number_of_days",
+      "@type": "xsd:integer"
+    },
+    "address": "klarna:address",
+    "attention": {
+      "@id": "klarna:attention",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "klarna:city",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "klarna:country",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "klarna:email",
+      "@type": "xsd:string"
+    },
+    "family_name": {
+      "@id": "klarna:family_name",
+      "@type": "xsd:string"
+    },
+    "given_name": {
+      "@id": "klarna:given_name",
+      "@type": "xsd:string"
+    },
+    "organization_name": {
+      "@id": "klarna:organization_name",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "klarna:phone",
+      "@type": "xsd:string"
+    },
+    "postal_code": {
+      "@id": "klarna:postal_code",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "klarna:region",
+      "@type": "xsd:string"
+    },
+    "street_address": {
+      "@id": "klarna:street_address",
+      "@type": "xsd:string"
+    },
+    "street_address2": {
+      "@id": "klarna:street_address2",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "klarna:title",
+      "@type": "xsd:string"
+    },
+    "No_such_capture_error_message": "klarna:No_such_capture_error_message",
+    "OptionDto": "klarna:OptionDto",
+    "amount": {
+      "@id": "klarna:amount",
+      "@type": "xsd:integer"
+    },
+    "CaptureObject": "klarna:CaptureObject",
+    "shipping_delay": {
+      "@id": "klarna:shipping_delay",
+      "@type": "xsd:integer"
+    },
+    "discount_line": "klarna:discount_line",
+    "PickupLocationV1": "klarna:PickupLocationV1",
+    "id": {
+      "@id": "klarna:id",
+      "@type": "xsd:string"
+    },
+    "ProductV1": "klarna:ProductV1",
+    "identifier": {
+      "@id": "klarna:identifier",
+      "@type": "xsd:string"
+    },
+    "payment_provider": "klarna:payment_provider",
+    "fee": {
+      "@id": "klarna:fee",
+      "@type": "xsd:integer"
+    },
+    "countries": {
+      "@id": "klarna:countries",
+      "@container": "@list"
+    },
+    "label": {
+      "@id": "klarna:label",
+      "@type": "xsd:string"
+    },
+    "redirect_url": {
+      "@id": "klarna:redirect_url",
+      "@type": "xsd:string"
+    },
+    "DeliveryDetailsV1": "klarna:DeliveryDetailsV1",
+    "carrier": {
+      "@id": "klarna:carrier",
+      "@type": "xsd:string"
+    },
+    "class": {
+      "@id": "klarna:class",
+      "@type": "xsd:string"
+    },
+    "product": {
+      "@id": "klarna:product",
+      "@type": "@id"
+    },
+    "timeslot": {
+      "@id": "klarna:timeslot",
+      "@type": "@id"
+    },
+    "pickup_location": {
+      "@id": "klarna:pickup_location",
+      "@type": "@id"
+    },
+    "customer": "klarna:customer",
+    "gender": {
+      "@id": "klarna:gender",
+      "@type": "xsd:string"
+    },
+    "date_of_birth": {
+      "@id": "klarna:date_of_birth",
+      "@type": "xsd:string"
+    },
+    "organization_registration_id": {
+      "@id": "klarna:organization_registration_id",
+      "@type": "xsd:string"
+    },
+    "vat_id": {
+      "@id": "klarna:vat_id",
+      "@type": "xsd:string"
+    },
+    "checkbox": "klarna:checkbox",
+    "text": {
+      "@id": "klarna:text",
+      "@type": "xsd:string"
+    },
+    "checked": {
+      "@id": "klarna:checked",
+      "@type": "xsd:boolean"
+    },
+    "required": {
+      "@id": "klarna:required",
+      "@type": "xsd:boolean"
+    },
+    "checkbox-v2": "klarna:checkbox-v2",
+    "selected_addon": "klarna:selected_addon",
+    "price": {
+      "@id": "klarna:price",
+      "@type": "xsd:integer"
+    },
+    "external_id": {
+      "@id": "klarna:external_id",
+      "@type": "xsd:string"
+    },
+    "user_input": {
+      "@id": "klarna:user_input",
+      "@type": "xsd:string"
+    },
+    "order": "klarna:order",
+    "order_id": {
+      "@id": "klarna:order_id",
+      "@type": "xsd:string"
+    },
+    "purchase_country": {
+      "@id": "klarna:purchase_country",
+      "@type": "xsd:string"
+    },
+    "purchase_currency": {
+      "@id": "klarna:purchase_currency",
+      "@type": "xsd:string"
+    },
+    "locale": {
+      "@id": "klarna:locale",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "klarna:status",
+      "@type": "xsd:string"
+    },
+    "order_amount": {
+      "@id": "klarna:order_amount",
+      "@type": "xsd:integer"
+    },
+    "order_tax_amount": {
+      "@id": "klarna:order_tax_amount",
+      "@type": "xsd:integer"
+    },
+    "merchant_urls": {
+      "@id": "klarna:merchant_urls",
+      "@type": "@id"
+    },
+    "html_snippet": {
+      "@id": "klarna:html_snippet",
+      "@type": "xsd:string"
+    },
+    "merchant_reference1": {
+      "@id": "klarna:merchant_reference1",
+      "@type": "xsd:string"
+    },
+    "merchant_reference2": {
+      "@id": "klarna:merchant_reference2",
+      "@type": "xsd:string"
+    },
+    "started_at": {
+      "@id": "klarna:started_at",
+      "@type": "xsd:dateTime"
+    },
+    "completed_at": {
+      "@id": "klarna:completed_at",
+      "@type": "xsd:dateTime"
+    },
+    "last_modified_at": {
+      "@id": "klarna:last_modified_at",
+      "@type": "xsd:dateTime"
+    },
+    "attachment": {
+      "@id": "klarna:attachment",
+      "@type": "@id"
+    },
+    "external_payment_methods": {
+      "@id": "klarna:external_payment_methods",
+      "@container": "@list"
+    },
+    "external_checkouts": {
+      "@id": "klarna:external_checkouts",
+      "@container": "@list"
+    },
+    "shipping_countries": {
+      "@id": "klarna:shipping_countries",
+      "@container": "@list"
+    },
+    "shipping_options": {
+      "@id": "klarna:shipping_options",
+      "@container": "@list"
+    },
+    "gui": {
+      "@id": "klarna:gui",
+      "@type": "@id"
+    },
+    "merchant_requested": {
+      "@id": "klarna:merchant_requested",
+      "@type": "@id"
+    },
+    "selected_shipping_option": {
+      "@id": "klarna:selected_shipping_option",
+      "@type": "@id"
+    },
+    "recurring": {
+      "@id": "klarna:recurring",
+      "@type": "xsd:boolean"
+    },
+    "recurring_token": {
+      "@id": "klarna:recurring_token",
+      "@type": "xsd:string"
+    },
+    "recurring_description": {
+      "@id": "klarna:recurring_description",
+      "@type": "xsd:string"
+    },
+    "billing_countries": {
+      "@id": "klarna:billing_countries",
+      "@container": "@list"
+    },
+    "tags": {
+      "@id": "klarna:tags",
+      "@container": "@list"
+    },
+    "discount_lines": {
+      "@id": "klarna:discount_lines",
+      "@container": "@list"
+    },
+    "TimeslotV1": "klarna:TimeslotV1",
+    "start": {
+      "@id": "klarna:start",
+      "@type": "xsd:string"
+    },
+    "end": {
+      "@id": "klarna:end",
+      "@type": "xsd:string"
+    },
+    "shipping_attributes": "klarna:shipping_attributes",
+    "weight": {
+      "@id": "klarna:weight",
+      "@type": "xsd:integer"
+    },
+    "dimensions": {
+      "@id": "klarna:dimensions",
+      "@type": "@id"
+    },
+    "shipping_option": "klarna:shipping_option",
+    "promo": {
+      "@id": "klarna:promo",
+      "@type": "xsd:string"
+    },
+    "preselected": {
+      "@id": "klarna:preselected",
+      "@type": "xsd:boolean"
+    },
+    "tax_amount": {
+      "@id": "klarna:tax_amount",
+      "@type": "xsd:integer"
+    },
+    "shipping_method": {
+      "@id": "klarna:shipping_method",
+      "@type": "xsd:string"
+    },
+    "delivery_details": {
+      "@id": "klarna:delivery_details",
+      "@type": "@id"
+    },
+    "tms_reference": {
+      "@id": "klarna:tms_reference",
+      "@type": "xsd:string"
+    },
+    "selected_addons": {
+      "@id": "klarna:selected_addons",
+      "@container": "@list"
+    },
+    "merchant_requested_checkbox": "klarna:merchant_requested_checkbox",
+    "direct_debit_information": "klarna:direct_debit_information",
+    "masked_number": {
+      "@id": "klarna:masked_number",
+      "@type": "xsd:string"
+    },
+    "card_information": "klarna:card_information",
+    "expiry_date": {
+      "@id": "klarna:expiry_date",
+      "@type": "xsd:string"
+    },
+    "customer_token": "klarna:customer_token",
+    "card": {
+      "@id": "klarna:card",
+      "@type": "@id"
+    },
+    "direct_debit": {
+      "@id": "klarna:direct_debit",
+      "@type": "@id"
+    },
+    "payment_method_type": {
+      "@id": "klarna:payment_method_type",
+      "@type": "xsd:string"
+    },
+    "authorized_payment_method": "klarna:authorized_payment_method",
+    "number_of_installments": {
+      "@id": "klarna:number_of_installments",
+      "@type": "xsd:integer"
+    },
+    "customer_token_order": "klarna:customer_token_order",
+    "auto_capture": {
+      "@id": "klarna:auto_capture",
+      "@type": "xsd:boolean"
+    },
+    "usage": {
+      "@id": "klarna:usage",
+      "@type": "xsd:string"
+    },
+    "ErrorV2": "klarna:ErrorV2",
+    "fraud_status": {
+      "@id": "klarna:fraud_status",
+      "@type": "xsd:string"
+    },
+    "reason": {
+      "@id": "klarna:reason",
+      "@type": "xsd:string"
+    },
+    "customer_token_status_update_request": "klarna:customer_token_status_update_request",
+    "DistributionContactV1": "klarna:DistributionContactV1",
+    "access_id": {
+      "@id": "klarna:access_id",
+      "@type": "xsd:string"
+    },
+    "phone_country": {
+      "@id": "klarna:phone_country",
+      "@type": "xsd:string"
+    },
+    "DistributionRequestV1": "klarna:DistributionRequestV1",
+    "contact_information": {
+      "@id": "klarna:contact_information",
+      "@type": "@id"
+    },
+    "method": {
+      "@id": "klarna:method",
+      "@type": "xsd:string"
+    },
+    "template": {
+      "@id": "klarna:template",
+      "@type": "xsd:string"
+    },
+    "SessionCreationRequestV1": "klarna:SessionCreationRequestV1",
+    "payment_session_url": {
+      "@id": "klarna:payment_session_url",
+      "@type": "xsd:string"
+    },
+    "profile_id": {
+      "@id": "klarna:profile_id",
+      "@type": "xsd:string"
+    },
+    "SessionCreationResponseV1": "klarna:SessionCreationResponseV1",
+    "distribution_module": {
+      "@id": "klarna:distribution_module",
+      "@type": "@id"
+    },
+    "distribution_url": {
+      "@id": "klarna:distribution_url",
+      "@type": "xsd:string"
+    },
+    "expires_at": {
+      "@id": "klarna:expires_at",
+      "@type": "xsd:dateTime"
+    },
+    "manual_identification_check_url": {
+      "@id": "klarna:manual_identification_check_url",
+      "@type": "xsd:string"
+    },
+    "qr_code_url": {
+      "@id": "klarna:qr_code_url",
+      "@type": "xsd:string"
+    },
+    "session_id": {
+      "@id": "klarna:session_id",
+      "@type": "xsd:string"
+    },
+    "session_url": {
+      "@id": "klarna:session_url",
+      "@type": "xsd:string"
+    },
+    "MerchantUrlsV1": "klarna:MerchantUrlsV1",
+    "back": {
+      "@id": "klarna:back",
+      "@type": "xsd:string"
+    },
+    "cancel": {
+      "@id": "klarna:cancel",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "klarna:error",
+      "@type": "xsd:string"
+    },
+    "failure": {
+      "@id": "klarna:failure",
+      "@type": "xsd:string"
+    },
+    "status_update": {
+      "@id": "klarna:status_update",
+      "@type": "xsd:string"
+    },
+    "success": {
+      "@id": "klarna:success",
+      "@type": "xsd:string"
+    },
+    "CustomerV1": "klarna:CustomerV1",
+    "national_identification_number": {
+      "@id": "klarna:national_identification_number",
+      "@type": "xsd:string"
+    },
+    "MerchantManualIdentificationV1": "klarna:MerchantManualIdentificationV1",
+    "challenge": {
+      "@id": "klarna:challenge",
+      "@type": "xsd:string"
+    },
+    "customer_obfuscated": {
+      "@id": "klarna:customer_obfuscated",
+      "@type": "@id"
+    },
+    "SessionResponseV1": "klarna:SessionResponseV1",
+    "authorization_token": {
+      "@id": "klarna:authorization_token",
+      "@type": "xsd:string"
+    },
+    "manual_identification": {
+      "@id": "klarna:manual_identification",
+      "@type": "@id"
+    },
+    "updated_at": {
+      "@id": "klarna:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "BackgroundImageV1": "klarna:BackgroundImageV1",
+    "url": {
+      "@id": "klarna:url",
+      "@type": "xsd:string"
+    },
+    "width": {
+      "@id": "klarna:width",
+      "@type": "xsd:integer"
+    },
+    "DistributionModuleV1": "klarna:DistributionModuleV1",
+    "generation_url": {
+      "@id": "klarna:generation_url",
+      "@type": "xsd:string"
+    },
+    "standalone_url": {
+      "@id": "klarna:standalone_url",
+      "@type": "xsd:string"
+    },
+    "token": {
+      "@id": "klarna:token",
+      "@type": "xsd:string"
+    },
+    "OptionsV1": "klarna:OptionsV1",
+    "background_images": {
+      "@id": "klarna:background_images",
+      "@container": "@list"
+    },
+    "logo_url": {
+      "@id": "klarna:logo_url",
+      "@type": "xsd:string"
+    },
+    "page_title": {
+      "@id": "klarna:page_title",
+      "@type": "xsd:string"
+    },
+    "payment_method_categories": {
+      "@id": "klarna:payment_method_categories",
+      "@container": "@list"
+    },
+    "payment_method_category": {
+      "@id": "klarna:payment_method_category",
+      "@type": "xsd:string"
+    },
+    "place_order_mode": {
+      "@id": "klarna:place_order_mode",
+      "@type": "xsd:string"
+    },
+    "purchase_type": {
+      "@id": "klarna:purchase_type",
+      "@type": "xsd:string"
+    },
+    "show_subtotal_detail": {
+      "@id": "klarna:show_subtotal_detail",
+      "@type": "xsd:string"
+    },
+    "card_specification": "klarna:card_specification",
+    "fund_amount": {
+      "@id": "klarna:fund_amount",
+      "@type": "xsd:integer"
+    },
+    "settlement_response": "klarna:settlement_response",
+    "settlement_id": {
+      "@id": "klarna:settlement_id",
+      "@type": "xsd:string"
+    },
+    "promise_id": {
+      "@id": "klarna:promise_id",
+      "@type": "xsd:string"
+    },
+    "cards": {
+      "@id": "klarna:cards",
+      "@container": "@list"
+    },
+    "created_at": {
+      "@id": "klarna:created_at",
+      "@type": "xsd:string"
+    },
+    "cancel_order_request_status_cancelled": "klarna:cancel_order_request_status_cancelled",
+    "cancel_order_request_status_pending": "klarna:cancel_order_request_status_pending",
+    "check_after": {
+      "@id": "klarna:check_after",
+      "@type": "xsd:dateTime"
+    },
+    "cancel_order_request_status_no_request_found": "klarna:cancel_order_request_status_no_request_found",
+    "reason_code": {
+      "@id": "klarna:reason_code",
+      "@type": "xsd:string"
+    },
+    "reason_message": {
+      "@id": "klarna:reason_message",
+      "@type": "xsd:string"
+    },
+    "promise_created_response": "klarna:promise_created_response",
+    "cancel_order_request_status": "klarna:cancel_order_request_status",
+    "promise_response": "klarna:promise_response",
+    "expire_at": {
+      "@id": "klarna:expire_at",
+      "@type": "xsd:dateTime"
+    },
+    "promise_request": "klarna:promise_request",
+    "settlement_request": "klarna:settlement_request",
+    "key_id": {
+      "@id": "klarna:key_id",
+      "@type": "xsd:string"
+    },
+    "AddressV1": "klarna:AddressV1",
+    "street_name": {
+      "@id": "klarna:street_name",
+      "@type": "xsd:string"
+    },
+    "street_number": {
+      "@id": "klarna:street_number",
+      "@type": "xsd:string"
+    },
+    "house_extension": {
+      "@id": "klarna:house_extension",
+      "@type": "xsd:string"
+    },
+    "care_of": {
+      "@id": "klarna:care_of",
+      "@type": "xsd:string"
+    },
+    "shipping_service_response": "klarna:shipping_service_response",
+    "shipping_service_error_response": "klarna:shipping_service_error_response",
+    "error_type": {
+      "@id": "klarna:error_type",
+      "@type": "xsd:string"
+    },
+    "error_text": {
+      "@id": "klarna:error_text",
+      "@type": "xsd:string"
+    },
+    "shipping_service_request": "klarna:shipping_service_request",
+    "MerchantOrderDto": "klarna:MerchantOrderDto",
+    "captures": {
+      "@id": "klarna:captures",
+      "@container": "@list"
+    },
+    "initial_payment_method": {
+      "@id": "klarna:initial_payment_method",
+      "@type": "@id"
+    },
+    "original_order_amount": {
+      "@id": "klarna:original_order_amount",
+      "@type": "xsd:integer"
+    },
+    "refunds": {
+      "@id": "klarna:refunds",
+      "@container": "@list"
+    },
+    "remaining_authorized_amount": {
+      "@id": "klarna:remaining_authorized_amount",
+      "@type": "xsd:integer"
+    },
+    "Update_merchant_references": "klarna:Update_merchant_references",
+    "Update_authorization": "klarna:Update_authorization",
+    "Timeslot": "klarna:Timeslot",
+    "cutoff": {
+      "@id": "klarna:cutoff",
+      "@type": "xsd:string"
+    },
+    "Address": "klarna:Address",
+    "street_address__2": {
+      "@id": "klarna:street_address__2",
+      "@type": "xsd:string"
+    },
+    "UpdateConsumer": "klarna:UpdateConsumer",
+    "Addon": "klarna:Addon",
+    "SelectedShippingOptionDto": "klarna:SelectedShippingOptionDto",
+    "carrier_product": {
+      "@id": "klarna:carrier_product",
+      "@type": "@id"
+    },
+    "location": {
+      "@id": "klarna:location",
+      "@type": "@id"
+    },
+    "Cancel_not_allowed_error_message": "klarna:Cancel_not_allowed_error_message",
+    "CarrierProduct": "klarna:CarrierProduct",
+    "Location": "klarna:Location",
+    "Refund": "klarna:Refund",
+    "credit_invoice": {
+      "@id": "klarna:credit_invoice",
+      "@type": "xsd:boolean"
+    },
+    "refund_id": {
+      "@id": "klarna:refund_id",
+      "@type": "xsd:string"
+    },
+    "refunded_at": {
+      "@id": "klarna:refunded_at",
+      "@type": "xsd:dateTime"
+    },
+    "InitialPaymentMethodDto": "klarna:InitialPaymentMethodDto",
+    "customer_token_creation_request": "klarna:customer_token_creation_request",
+    "intended_use": {
+      "@id": "klarna:intended_use",
+      "@type": "xsd:string"
+    },
+    "asset_urls": "klarna:asset_urls",
+    "descriptive": {
+      "@id": "klarna:descriptive",
+      "@type": "xsd:string"
+    },
+    "standard": {
+      "@id": "klarna:standard",
+      "@type": "xsd:string"
+    },
+    "session_read": "klarna:session_read",
+    "acquiring_channel": {
+      "@id": "klarna:acquiring_channel",
+      "@type": "xsd:string"
+    },
+    "client_token": {
+      "@id": "klarna:client_token",
+      "@type": "xsd:string"
+    },
+    "custom_payment_method_ids": {
+      "@id": "klarna:custom_payment_method_ids",
+      "@container": "@list"
+    },
+    "design": {
+      "@id": "klarna:design",
+      "@type": "xsd:string"
+    },
+    "intent": {
+      "@id": "klarna:intent",
+      "@type": "xsd:string"
+    },
+    "customer_token_creation_response": "klarna:customer_token_creation_response",
+    "payment_method_reference": {
+      "@id": "klarna:payment_method_reference",
+      "@type": "xsd:string"
+    },
+    "token_id": {
+      "@id": "klarna:token_id",
+      "@type": "xsd:string"
+    },
+    "session": "klarna:session",
+    "create_order_request": "klarna:create_order_request",
+    "customer_read_create_token": "klarna:customer_read_create_token",
+    "session_create": "klarna:session_create",
+    "merchant_session": "klarna:merchant_session",
+    "customer_read": "klarna:customer_read",
+    "organization_entity_type": {
+      "@id": "klarna:organization_entity_type",
+      "@type": "xsd:string"
+    },
+    "Totals": "klarna:Totals",
+    "commission_amount": {
+      "@id": "klarna:commission_amount",
+      "@type": "xsd:integer"
+    },
+    "repay_amount": {
+      "@id": "klarna:repay_amount",
+      "@type": "xsd:integer"
+    },
+    "sale_amount": {
+      "@id": "klarna:sale_amount",
+      "@type": "xsd:integer"
+    },
+    "holdback_amount": {
+      "@id": "klarna:holdback_amount",
+      "@type": "xsd:integer"
+    },
+    "settlement_amount": {
+      "@id": "klarna:settlement_amount",
+      "@type": "xsd:integer"
+    },
+    "fee_correction_amount": {
+      "@id": "klarna:fee_correction_amount",
+      "@type": "xsd:integer"
+    },
+    "reversal_amount": {
+      "@id": "klarna:reversal_amount",
+      "@type": "xsd:integer"
+    },
+    "release_amount": {
+      "@id": "klarna:release_amount",
+      "@type": "xsd:integer"
+    },
+    "return_amount": {
+      "@id": "klarna:return_amount",
+      "@type": "xsd:integer"
+    },
+    "fee_amount": {
+      "@id": "klarna:fee_amount",
+      "@type": "xsd:integer"
+    },
+    "charge_amount": {
+      "@id": "klarna:charge_amount",
+      "@type": "xsd:integer"
+    },
+    "credit_amount": {
+      "@id": "klarna:credit_amount",
+      "@type": "xsd:integer"
+    },
+    "fee_refund_amount": {
+      "@id": "klarna:fee_refund_amount",
+      "@type": "xsd:integer"
+    },
+    "tax_refund_amount": {
+      "@id": "klarna:tax_refund_amount",
+      "@type": "xsd:integer"
+    },
+    "deposit_amount": {
+      "@id": "klarna:deposit_amount",
+      "@type": "xsd:integer"
+    },
+    "opening_debt_balance_amount": {
+      "@id": "klarna:opening_debt_balance_amount",
+      "@type": "xsd:integer"
+    },
+    "closing_debt_balance_amount": {
+      "@id": "klarna:closing_debt_balance_amount",
+      "@type": "xsd:integer"
+    },
+    "ErrorResponse": "klarna:ErrorResponse",
+    "Payout": "klarna:Payout",
+    "totals": {
+      "@id": "klarna:totals",
+      "@type": "@id"
+    },
+    "payment_reference": {
+      "@id": "klarna:payment_reference",
+      "@type": "xsd:string"
+    },
+    "payout_date": {
+      "@id": "klarna:payout_date",
+      "@type": "xsd:dateTime"
+    },
+    "currency_code": {
+      "@id": "klarna:currency_code",
+      "@type": "xsd:string"
+    },
+    "currency_code_of_registration_country": {
+      "@id": "klarna:currency_code_of_registration_country",
+      "@type": "xsd:string"
+    },
+    "merchant_settlement_type": {
+      "@id": "klarna:merchant_settlement_type",
+      "@type": "xsd:string"
+    },
+    "merchant_id": {
+      "@id": "klarna:merchant_id",
+      "@type": "xsd:string"
+    },
+    "transactions": {
+      "@id": "klarna:transactions",
+      "@type": "xsd:string"
+    },
+    "PayoutSummary": "klarna:PayoutSummary",
+    "summary_total_fee_correction_amount": {
+      "@id": "klarna:summary_total_fee_correction_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_payout_date_start": {
+      "@id": "klarna:summary_payout_date_start",
+      "@type": "xsd:dateTime"
+    },
+    "summary_total_release_amount": {
+      "@id": "klarna:summary_total_release_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_settlement_currency": {
+      "@id": "klarna:summary_settlement_currency",
+      "@type": "xsd:string"
+    },
+    "summary_payout_date_end": {
+      "@id": "klarna:summary_payout_date_end",
+      "@type": "xsd:dateTime"
+    },
+    "summary_total_tax_amount": {
+      "@id": "klarna:summary_total_tax_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_settlement_amount": {
+      "@id": "klarna:summary_total_settlement_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_holdback_amount": {
+      "@id": "klarna:summary_total_holdback_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_reversal_amount": {
+      "@id": "klarna:summary_total_reversal_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_return_amount": {
+      "@id": "klarna:summary_total_return_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_fee_amount": {
+      "@id": "klarna:summary_total_fee_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_commission_amount": {
+      "@id": "klarna:summary_total_commission_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_sale_amount": {
+      "@id": "klarna:summary_total_sale_amount",
+      "@type": "xsd:integer"
+    },
+    "summary_total_repay_amount": {
+      "@id": "klarna:summary_total_repay_amount",
+      "@type": "xsd:integer"
+    },
+    "Pagination": "klarna:Pagination",
+    "count": {
+      "@id": "klarna:count",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "klarna:total",
+      "@type": "xsd:integer"
+    },
+    "next": {
+      "@id": "klarna:next",
+      "@type": "xsd:string"
+    },
+    "prev": {
+      "@id": "klarna:prev",
+      "@type": "xsd:string"
+    },
+    "offset": {
+      "@id": "klarna:offset",
+      "@type": "xsd:integer"
+    },
+    "PayoutCollection": "klarna:PayoutCollection",
+    "payouts": {
+      "@id": "klarna:payouts",
+      "@container": "@list"
+    },
+    "pagination": {
+      "@id": "klarna:pagination",
+      "@type": "@id"
+    },
+    "Not_found_error_message": "klarna:Not_found_error_message",
+    "Refund_not_allowed_error_message": "klarna:Refund_not_allowed_error_message",
+    "RefundObject": "klarna:RefundObject",
+    "TransactionCollection": "klarna:TransactionCollection",
+    "Transaction": "klarna:Transaction",
+    "sale_date": {
+      "@id": "klarna:sale_date",
+      "@type": "xsd:dateTime"
+    },
+    "capture_date": {
+      "@id": "klarna:capture_date",
+      "@type": "xsd:dateTime"
+    },
+    "payout": {
+      "@id": "klarna:payout",
+      "@type": "xsd:string"
+    },
+    "short_order_id": {
+      "@id": "klarna:short_order_id",
+      "@type": "xsd:string"
+    },
+    "vat_rate": {
+      "@id": "klarna:vat_rate",
+      "@type": "xsd:integer"
+    },
+    "vat_amount": {
+      "@id": "klarna:vat_amount",
+      "@type": "xsd:integer"
+    },
+    "shipping_country": {
+      "@id": "klarna:shipping_country",
+      "@type": "xsd:string"
+    },
+    "initial_payment_method_type": {
+      "@id": "klarna:initial_payment_method_type",
+      "@type": "xsd:string"
+    },
+    "initial_number_of_installments": {
+      "@id": "klarna:initial_number_of_installments",
+      "@type": "xsd:integer"
+    },
+    "initial_payment_method_monthly_downpayments": {
+      "@id": "klarna:initial_payment_method_monthly_downpayments",
+      "@type": "xsd:integer"
+    },
+    "merchant_capture_reference": {
+      "@id": "klarna:merchant_capture_reference",
+      "@type": "xsd:string"
+    },
+    "merchant_refund_reference": {
+      "@id": "klarna:merchant_refund_reference",
+      "@type": "xsd:string"
+    },
+    "detailed_type": {
+      "@id": "klarna:detailed_type",
+      "@type": "xsd:string"
+    },
+    "tax_in_currency_of_registration_country": {
+      "@id": "klarna:tax_in_currency_of_registration_country",
+      "@type": "xsd:integer"
+    },
+    "klarna_comment": {
+      "@id": "klarna:klarna_comment",
+      "@type": "xsd:string"
+    },
+    "reversal_reference": {
+      "@id": "klarna:reversal_reference",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Klarna API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Klarna's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-12) from openapi/klarna-captures-api-openapi.yml, openapi/klarna-checkout-api-openapi.yml, openapi/klarna-customer-token-api-openapi.yml.",
+  "dcterms:created": "2026-10-12",
+  "dcterms:source": [
+    "openapi/klarna-captures-api-openapi.yml",
+    "openapi/klarna-checkout-api-openapi.yml",
+    "openapi/klarna-customer-token-api-openapi.yml",
+    "openapi/klarna-hpp-api-openapi.yml",
+    "openapi/klarna-merchant-card-api-openapi.yml"
+  ]
+}

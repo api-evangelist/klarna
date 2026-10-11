@@ -1,5 +1,5 @@
 ---
-name: Sell without a checkout page using the Klarna Hosted Payment Page
+name: klarna-hosted-payment-page
 description: >-
   Create a Klarna-hosted payment page, have Klarna deliver the link to the shopper by email or
   SMS, and follow the session to a completed order. The right skill when there is no merchant

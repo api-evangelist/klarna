@@ -1,0 +1,431 @@
+generated: '2026-10-12'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/klarna-captures-api-openapi.yml
+- openapi/klarna-checkout-api-openapi.yml
+- openapi/klarna-customer-token-api-openapi.yml
+- openapi/klarna-hpp-api-openapi.yml
+- openapi/klarna-merchant-card-api-openapi.yml
+vocabulary:
+  name: Klarna Domain Vocabulary
+  description: 'Terms declared by Klarna''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-12'
+  terms:
+  - term: ErrorMessageDto
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/ErrorMessageDto
+  - term: UpdateShippingInfo
+    definition: 'Object declared by the contract with fields: shipping_info.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/UpdateShippingInfo
+  - term: Capture
+    definition: 'Object declared by the contract with fields: billing_address, capture_id, captured_amount, captured_at, description, klarna_reference,
+      order_lines, reference, refunded_amount, shipping_address, shipping_info.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/Capture
+  - term: order_line
+    definition: List of order lines for the capture shown to the customer.
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/order_line
+  - term: Capture_not_allowed_error_message
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/Capture_not_allowed_error_message
+  - term: Not_allowed_error_message
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/Not_allowed_error_message
+  - term: ExtendDueDateOptions
+    definition: 'Object declared by the contract with fields: currency, options.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/ExtendDueDateOptions
+  - term: No_such_order_error_message
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/No_such_order_error_message
+  - term: ProductIdentifiers
+    definition: product_identifiers
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/ProductIdentifiers
+  - term: ExtendDueDateRequest
+    definition: 'Object declared by the contract with fields: number_of_days.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/ExtendDueDateRequest
+  - term: address
+    definition: Shipping address for the capture.
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/address
+  - term: No_such_capture_error_message
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/No_such_capture_error_message
+  - term: OptionDto
+    definition: The available options and corresponding fees for extending the due date
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/OptionDto
+  - term: shipping_info
+    definition: Shipping information for this capture.
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/shipping_info
+  - term: CaptureObject
+    definition: Capture request data
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/CaptureObject
+  - term: subscription
+    definition: Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.
+    tags:
+    - Object
+    source: openapi/klarna-captures-api-openapi.yml#/components/schemas/subscription
+  - term: discount_line
+    definition: 'Object declared by the contract with fields: name, quantity, unit_price, tax_rate, total_amount, total_tax_amount, reference,
+      merchant_data.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/discount_line
+  - term: PickupLocationV1
+    definition: 'Object declared by the contract with fields: id, name, address.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/PickupLocationV1
+  - term: ProductV1
+    definition: 'Object declared by the contract with fields: name, identifier.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/ProductV1
+  - term: payment_provider
+    definition: 'Object declared by the contract with fields: name, fee, description, countries, label, redirect_url, image_url.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/payment_provider
+  - term: DeliveryDetailsV1
+    definition: 'Object declared by the contract with fields: carrier, class, product, timeslot, pickup_location.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/DeliveryDetailsV1
+  - term: customer
+    definition: 'Object declared by the contract with fields: type, gender, date_of_birth, organization_registration_id, vat_id.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/customer
+  - term: checkbox
+    definition: 'Object declared by the contract with fields: text, checked, required.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/checkbox
+  - term: checkbox-v2
+    definition: 'Object declared by the contract with fields: text, checked, required, id.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/checkbox-v2
+  - term: selected_addon
+    definition: 'Object declared by the contract with fields: type, price, external_id, user_input.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/selected_addon
+  - term: order
+    definition: 'Object declared by the contract with fields: order_id, name, purchase_country, purchase_currency, locale, status, billing_address,
+      shipping_address, order_amount, order_tax_amount, order_lines, customer. (23 more)'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/order
+  - term: TimeslotV1
+    definition: 'Object declared by the contract with fields: id, start, end.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/TimeslotV1
+  - term: options
+    definition: 'Object declared by the contract with fields: require_validate_callback_success, acquiring_channel, vat_removed, allow_separate_shipping_address,
+      color_button, color_button_text, color_checkbox, color_checkbox_checkmark, color_header, color_link, date_of_birth_mandatory, shipping_details.
+      (14 more)'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/options
+  - term: shipping_attributes
+    definition: 'Object declared by the contract with fields: weight, dimensions, tags.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/shipping_attributes
+  - term: merchant_urls
+    definition: 'Object declared by the contract with fields: terms, checkout, confirmation, push, validation, notification, cancellation_terms,
+      shipping_option_update, address_update, country_change.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/merchant_urls
+  - term: product_identifiers
+    definition: 'Object declared by the contract with fields: brand, color, category_path, global_trade_item_number, manufacturer_part_number,
+      size.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/product_identifiers
+  - term: shipping_option
+    definition: 'Object declared by the contract with fields: id, name, description, promo, price, preselected, tax_amount, tax_rate, shipping_method,
+      delivery_details, tms_reference, selected_addons.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/shipping_option
+  - term: merchant_requested_checkbox
+    definition: 'Object declared by the contract with fields: id, checked.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/merchant_requested_checkbox
+  - term: gui
+    definition: 'Object declared by the contract with fields: options.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/gui
+  - term: dimensions
+    definition: 'Object declared by the contract with fields: height, width, length.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/dimensions
+  - term: merchant_requested
+    definition: 'Object declared by the contract with fields: additional_checkbox, additional_checkboxes.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/merchant_requested
+  - term: attachment
+    definition: 'Object declared by the contract with fields: body, content_type.'
+    tags:
+    - Object
+    source: openapi/klarna-checkout-api-openapi.yml#/components/schemas/attachment
+  - term: direct_debit_information
+    definition: 'Object declared by the contract with fields: masked_number.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/direct_debit_information
+  - term: card_information
+    definition: 'Object declared by the contract with fields: brand, expiry_date, masked_number.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/card_information
+  - term: customer_token
+    definition: 'Object declared by the contract with fields: card, direct_debit, payment_method_type, status.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/customer_token
+  - term: authorized_payment_method
+    definition: 'Object declared by the contract with fields: number_of_days, number_of_installments, type.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/authorized_payment_method
+  - term: customer_token_order
+    definition: 'Object declared by the contract with fields: attachment, auto_capture, merchant_data, merchant_reference1, merchant_reference2,
+      merchant_urls, order_amount, order_lines, order_tax_amount, purchase_currency, shipping_address, usage.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/customer_token_order
+  - term: ErrorV2
+    definition: 'Object declared by the contract with fields: authorized_payment_method, correlation_id, error_code, error_messages, fraud_status,
+      reason.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/ErrorV2
+  - term: customer_token_status_update_request
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/klarna-customer-token-api-openapi.yml#/components/schemas/customer_token_status_update_request
+  - term: DistributionContactV1
+    definition: 'Object declared by the contract with fields: access_id, email, phone, phone_country.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/DistributionContactV1
+  - term: DistributionRequestV1
+    definition: 'Object declared by the contract with fields: contact_information, method, template.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/DistributionRequestV1
+  - term: SessionCreationRequestV1
+    definition: 'Object declared by the contract with fields: merchant_urls, options, payment_session_url, profile_id.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/SessionCreationRequestV1
+  - term: SessionCreationResponseV1
+    definition: 'Object declared by the contract with fields: distribution_module, distribution_url, expires_at, manual_identification_check_url,
+      qr_code_url, redirect_url, session_id, session_url.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/SessionCreationResponseV1
+  - term: MerchantUrlsV1
+    definition: 'Object declared by the contract with fields: back, cancel, error, failure, status_update, success.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/MerchantUrlsV1
+  - term: CustomerV1
+    definition: 'Object declared by the contract with fields: date_of_birth, family_name, given_name, national_identification_number, title.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/CustomerV1
+  - term: MerchantManualIdentificationV1
+    definition: 'Object declared by the contract with fields: challenge, customer, customer_obfuscated, expires_at.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/MerchantManualIdentificationV1
+  - term: SessionResponseV1
+    definition: 'Object declared by the contract with fields: authorization_token, customer, expires_at, klarna_reference, manual_identification,
+      order_id, session_id, status, updated_at.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/SessionResponseV1
+  - term: BackgroundImageV1
+    definition: 'Object declared by the contract with fields: url, width.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/BackgroundImageV1
+  - term: DistributionModuleV1
+    definition: 'Object declared by the contract with fields: generation_url, standalone_url, token.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/DistributionModuleV1
+  - term: OptionsV1
+    definition: 'Object declared by the contract with fields: background_images, logo_url, page_title, payment_method_categories, payment_method_category,
+      place_order_mode, purchase_type, show_subtotal_detail.'
+    tags:
+    - Object
+    source: openapi/klarna-hpp-api-openapi.yml#/components/schemas/OptionsV1
+  - term: card_specification
+    definition: 'Object declared by the contract with fields: amount, currency, fund_amount, reference.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/card_specification
+  - term: settlement_response
+    definition: 'Object declared by the contract with fields: settlement_id, promise_id, order_id, cards, created_at, expires_at.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/settlement_response
+  - term: cancel_order_request_status_cancelled
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/cancel_order_request_status_cancelled
+  - term: card
+    definition: 'Object declared by the contract with fields: reference, card_id, amount, currency, pci_data, iv, aes_key, brand, holder.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/card
+  - term: cancel_order_request_status_pending
+    definition: 'Object declared by the contract with fields: status, check_after.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/cancel_order_request_status_pending
+  - term: cancel_order_request_status_no_request_found
+    definition: 'Object declared by the contract with fields: status, reason_code, reason_message.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/cancel_order_request_status_no_request_found
+  - term: promise_created_response
+    definition: 'Object declared by the contract with fields: expires_at, promise_id.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/promise_created_response
+  - term: cancel_order_request_status
+    definition: 'Object declared by the contract with fields: status, check_after, reason_code, reason_message.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/cancel_order_request_status
+  - term: promise_response
+    definition: 'Object declared by the contract with fields: promise_id, order_id, cards, created_at, expire_at.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/promise_response
+  - term: promise_request
+    definition: 'Object declared by the contract with fields: order_id, cards.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/promise_request
+  - term: settlement_request
+    definition: 'Object declared by the contract with fields: promise_id, order_id, key_id.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-card-api-openapi.yml#/components/schemas/settlement_request
+  - term: AddressV1
+    definition: 'Object declared by the contract with fields: given_name, family_name, email, title, street_address, street_address2, street_name,
+      street_number, house_extension, postal_code, city, region. (3 more)'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-urls-address-update-api-openapi.yml#/components/schemas/AddressV1
+  - term: shipping_service_response
+    definition: 'Object declared by the contract with fields: order_amount, order_tax_amount, merchant_data, order_lines, shipping_options, attachment,
+      purchase_currency, locale, external_payment_methods, tags.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-urls-address-update-api-openapi.yml#/components/schemas/shipping_service_response
+  - term: shipping_service_error_response
+    definition: 'Object declared by the contract with fields: error_type, error_text.'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-urls-address-update-api-openapi.yml#/components/schemas/shipping_service_error_response
+  - term: shipping_service_request
+    definition: 'Object declared by the contract with fields: order_amount, order_tax_amount, order_lines, billing_address, shipping_address,
+      selected_shipping_option, purchase_currency, merchant_data, merchant_reference1, merchant_reference2, customer, locale. (1 more)'
+    tags:
+    - Object
+    source: openapi/klarna-merchant-urls-address-update-api-openapi.yml#/components/schemas/shipping_service_request
+  - term: MerchantOrderDto
+    definition: Order
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/MerchantOrderDto
+  - term: Update_merchant_references
+    definition: 'Object declared by the contract with fields: merchant_reference1, merchant_reference2.'
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Update_merchant_references
+  - term: Update_authorization
+    definition: 'Object declared by the contract with fields: description, order_amount, order_lines.'
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Update_authorization
+  - term: Timeslot
+    definition: The chosen timeslot of the selected shipping option
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Timeslot
+  - term: Address
+    definition: The address of the location
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Address
+  - term: UpdateConsumer
+    definition: 'Object declared by the contract with fields: shipping_address.'
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/UpdateConsumer
+  - term: Addon
+    definition: Array consisting of add-ons selected by the consumer, may be empty
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Addon
+  - term: SelectedShippingOptionDto
+    definition: The shipping option selected by the user.
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/SelectedShippingOptionDto
+  - term: Cancel_not_allowed_error_message
+    definition: 'Object declared by the contract with fields: correlation_id, error_code, error_messages.'
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/Cancel_not_allowed_error_message
+  - term: CarrierProduct
+    definition: The chosen timeslot of the selected shipping option
+    tags:
+    - Object
+    source: openapi/klarna-orders-api-openapi.yml#/components/schemas/CarrierProduct

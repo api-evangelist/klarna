@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-session-creation-request-v1-schema.json",
+  "title": "SessionCreationRequestV1",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-hpp-api-openapi.yml#/components/schemas/SessionCreationRequestV1",
+  "type": "object",
+  "required": [
+    "payment_session_url"
+  ],
+  "properties": {
+    "merchant_urls": {
+      "$ref": "#/$defs/MerchantUrlsV1"
+    },
+    "options": {
+      "$ref": "#/$defs/OptionsV1"
+    },
+    "payment_session_url": {
+      "type": "string",
+      "description": "URL of the KP Session or KCO Order to be hosted by the HPP Session"
+    },
+    "profile_id": {
+      "type": "string",
+      "description": "Profile id for default session options"
+    }
+  },
+  "$defs": {
+    "BackgroundImageV1": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Url for the image"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Width of the image"
+        }
+      }
+    },
+    "MerchantUrlsV1": {
+      "type": "object",
+      "properties": {
+        "back": {
+          "type": "string",
+          "description": "Back URL"
+        },
+        "cancel": {
+          "type": "string",
+          "description": "Cancel URL"
+        },
+        "error": {
+          "type": "string",
+          "description": "System error URL"
+        },
+        "failure": {
+          "type": "string",
+          "description": "Failure URL"
+        },
+        "status_update": {
+          "type": "string",
+          "description": "Status update URL"
+        },
+        "success": {
+          "type": "string",
+          "description": "Success URL"
+        }
+      }
+    },
+    "OptionsV1": {
+      "type": "object",
+      "properties": {
+        "background_images": {
+          "type": "array",
+          "description": "List of Images to use for the background. Best matching resolution will be used.",
+          "items": {
+            "$ref": "#/$defs/BackgroundImageV1"
+          }
+        },
+        "logo_url": {
+          "type": "string",
+          "description": "URL of the logo to be displayed"
+        },
+        "page_title": {
+          "type": "string",
+          "description": "Title for the Payment Page"
+        },
+        "payment_method_categories": {
+          "type": "array",
+          "description": "Payment Method Categories to show on the Payment Page. All available categories will be given to the customer if none is specified using payment_method_category or payment_method_categories. Ignored field for KCO Orders.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "DIRECT_DEBIT",
+              "DIRECT_BANK_TRANSFER",
+              "PAY_NOW",
+              "PAY_LATER",
+              "PAY_OVER_TIME",
+              "KLARNA"
+            ]
+          }
+        },
+        "payment_method_category": {
+          "type": "string",
+          "description": "Payment Method Category to show on the Payment Page. All available categories will be given to the customer if none is specified using payment_method_category or payment_method_categories. Ignored field for KCO Orders.",
+          "enum": [
+            "DIRECT_DEBIT",
+            "DIRECT_BANK_TRANSFER",
+            "PAY_NOW",
+            "PAY_LATER",
+            "PAY_OVER_TIME",
+            "KLARNA"
+          ]
+        },
+        "place_order_mode": {
+          "type": "string",
+          "enum": [
+            "PLACE_ORDER",
+            "CAPTURE_ORDER",
+            "NONE"
+          ]
+        },
+        "purchase_type": {
+          "type": "string",
+          "description": "The type of this purchase",
+          "enum": [
+            "BUY",
+            "RENT",
+            "BOOK",
+            "SUBSCRIBE",
+            "DOWNLOAD",
+            "ORDER",
+            "CONTINUE"
+          ]
+        },
+        "show_subtotal_detail": {
+          "type": "string",
+          "enum": [
+            "HIDE"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+generated: '2026-10-12'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: www.klarna.com
+  evidence: header:x-amz-cf-id
+  signal: header
+  confidence: high
+  kin_score: []
+reliance:
+  areas_vendor_served:
+  - cdn
+  vendor_count: 1
+  areas_observed: 12
+  share_of_observable_areas: 0.083
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: not probed'
+- www.klarna.com (Website)
+- docs.klarna.com (DeveloperPortal)
+- docs.klarna.com (Documentation)
+- docs.klarna.com (APIReference)
+- docs.klarna.com (GettingStarted)
+- www.klarna.com (Support)
+- portal.playground.klarna.com (SignUp)
+- portal.klarna.com (Login)
+- status.klarna.com (StatusPage)
+- api.klarna.com (baseURL)
+- merchant.example.com (baseURL)

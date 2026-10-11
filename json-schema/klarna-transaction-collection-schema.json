@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-transaction-collection-schema.json",
+  "title": "TransactionCollection",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-transactions-api-openapi.yml#/components/schemas/TransactionCollection",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Transaction"
+      }
+    },
+    "pagination": {
+      "$ref": "#/$defs/Pagination"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "transactions",
+    "pagination"
+  ],
+  "$defs": {
+    "Pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The amount of elements in the current result",
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "description": "The total amount of elements that are available",
+          "type": "integer",
+          "format": "int64"
+        },
+        "next": {
+          "description": "The URI to the next \"page\" of results.",
+          "type": "string"
+        },
+        "prev": {
+          "description": "The URI to the previous \"page\" of results.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The current offset. Describes \"where\" in a collection the current starts.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "count"
+      ]
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Total amount of the specific transaction, in minor units",
+          "type": "integer",
+          "format": "int64"
+        },
+        "capture_id": {
+          "description": "Each capture on an order is assigned a unique identifier, referred to as the capture_id, which is provided exclusively for sale and fee transactions. In instances of partial shipments, an order may undergo multiple captures, each of which is reflected as a separate transaction with its own unique capture_id. It's important to note that for certain transaction types such as RETURNS and REVERSALS, where captures do not exist, the API will return empty strings for the capture_ID field.",
+          "type": "string"
+        },
+        "merchant_reference1": {
+          "description": "Merchant assigned reference, typically a reference to an order management system id",
+          "type": "string"
+        },
+        "sale_date": {
+          "description": "ISO 8601 formatted date-time string",
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "description": "The type of transaction.",
+          "type": "string",
+          "enum": [
+            "COMMISSION",
+            "SALE",
+            "REVERSAL",
+            "RETURN",
+            "TAX",
+            "FEE",
+            "FEE_REFUND",
+            "CORRECTION",
+            "REVERSAL_MERCHANT_PROTECTION",
+            "CHARGE",
+            "CREDIT",
+            "HOLDBACK",
+            "RELEASE"
+          ]
+        },
+        "capture_date": {
+          "description": "ISO 8601 formatted date-time string",
+          "type": "string",
+          "format": "date-time"
+        },
+        "payment_reference": {
+          "description": "Reference to the specific payout the transaction is part of, if available.",
+          "type": "string"
+        },
+        "order_id": {
+          "description": "The Klarna assigned order id reference",
+          "type": "string",
+          "format": "uuid"
+        },
+        "payout": {
+          "description": "Link to the payout that this transaction is part of",
+          "type": "string"
+        },
+        "refund_id": {
+          "description": "The Klarna assigned id reference of a specific refund",
+          "type": "string"
+        },
+        "short_order_id": {
+          "description": "The Klarna assigned short order id reference",
+          "type": "string"
+        },
+        "merchant_reference2": {
+          "description": "Merchant assigned reference, typically a reference to an order management system id",
+          "type": "string"
+        },
+        "currency_code": {
+          "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+          "type": "string"
+        },
+        "purchase_country": {
+          "type": "string",
+          "description": "ISO Alpha-2 Country Code"
+        },
+        "vat_rate": {
+          "type": "integer",
+          "description": "VAT (Value added tax) rate on Klarna fees"
+        },
+        "vat_amount": {
+          "type": "integer",
+          "description": "VAT (Value added tax) amount on Klarna fees, in minor units"
+        },
+        "shipping_country": {
+          "type": "string",
+          "description": "ISO Alpha-2 Country Code"
+        },
+        "initial_payment_method_type": {
+          "type": "string",
+          "description": "Payment method the consumer chose during checkout"
+        },
+        "initial_number_of_installments": {
+          "type": "integer",
+          "description": "Number of installments the consumer chose during checkout in case of installment payments"
+        },
+        "initial_payment_method_monthly_downpayments": {
+          "type": "integer",
+          "description": "Number of monthly downpayments that were chosen during the checkout in case of installment payments."
+        },
+        "merchant_capture_reference": {
+          "type": "string",
+          "description": "Your internal reference to the capture, that has been submitted during capturing an order via API"
+        },
+        "merchant_refund_reference": {
+          "type": "string",
+          "description": "Your internal reference to the refund, that has been submitted during refunding an order via API"
+        },
+        "detailed_type": {
+          "type": "string",
+          "description": "Detailed description of the transaction type",
+          "enum": [
+            "COMMISSION",
+            "CREDITED_CORRECTION",
+            "PURCHASE_FEE_PERCENTAGE",
+            "PURCHASE_FEE_PERCENTAGE_REFUND",
+            "LATE_RETURN_FEE",
+            "PURCHASE_FEE_FIXED",
+            "EXPIRY_FEE_GROSS",
+            "EXPIRY_FEE",
+            "SERVICING_FEE",
+            "RETURN_FEE",
+            "EXTRA_INVOICE_FEE",
+            "PURCHASE_RETURN",
+            "COMMISSION_RETURN",
+            "REVERSAL",
+            "FRAUD_POLICY_CHARGE",
+            "COMMISSION_RETURN_GROSS",
+            "FRAUD_POLICY_CREDIT_NET",
+            "PURCHASE",
+            "MANUAL_ENTRY",
+            "LOAN_PAYOUT",
+            "LOAN_AMORTISATION",
+            "LOAN_FEE",
+            "FEE_REFUND",
+            "PURCHASE_COMMISSION_PERCENTAGE",
+            "EXTEND_DUE_DATE_FEE",
+            "TRANSFER_FROM_LEGACY_INTEGRATION",
+            "FIXED_FEE_CORRECTION_UK",
+            "PERCENTAGE_FEE_CORRECTION_UK",
+            "VAT_ON_FEE_CORRECTION_UK",
+            "FIXED_FEE_CORRECTION_SE",
+            "PERCENTAGE_FEE_CORRECTION_SE",
+            "PERCENTAGE_FEE_CORRECTION",
+            "FIXED_FEE_CORRECTION",
+            "ROLLING_RESERVE",
+            "PERCENTAGE_FEES",
+            "PAYMENT_REMINDER",
+            "CORRECTION",
+            "UNDER_REVIEW",
+            "INSUFFICIENT_BANK_ACCOUNT_DETAILS",
+            "DISPUTE_FEE",
+            "DISPUTE_FEE_REFUND",
+            "CORRECTION_DISPUTE",
+            "PAYMENT_DEFAULT"
+          ]
+        },
+        "tax_in_currency_of_registration_country": {
+          "type": "integer",
+          "description": "The tax amount on the respective fee, converted into the currency of your registration country. In case you are a German merchant selling in another currency then EUR or a Swedish merchant selling in another currency then SEK, we convert the VAT amount on the Klarna fees into the currency of the country you are registered in, based on the exchange rate of the capture date."
+        },
+        "currency_code_of_registration_country": {
+          "type": "string",
+          "description": "ISO 4217 Currency Code of the country you are registered in."
+        },
+        "klarna_comment": {
+          "type": "string",
+          "description": "Any additional information necessary to provide more context about the transaction."
+        },
+        "reversal_reference": {
+          "type": "string",
+          "description": "Unique internal identifier, known as DisputeKRN, assigned to each dispute by Klarna. This identifier includes a dispute category and a numeric code, enabling efficient tracking and management of the dispute's status."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "sale_date",
+        "type",
+        "capture_date",
+        "order_id",
+        "currency_code",
+        "purchase_country"
+      ]
+    }
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-merchant-order-dto-schema.json",
+  "title": "MerchantOrderDto",
+  "description": "Order",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-orders-api-openapi.yml#/components/schemas/MerchantOrderDto",
+  "properties": {
+    "billing_address": {
+      "$ref": "#/$defs/address"
+    },
+    "captured_amount": {
+      "description": "The total amount of all captures. In minor units.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "captures": {
+      "description": "List of captures for this order.",
+      "items": {
+        "$ref": "#/$defs/Capture"
+      },
+      "type": "array"
+    },
+    "created_at": {
+      "description": "The time for the purchase. Formatted according to ISO 8601.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "customer": {
+      "$ref": "#/$defs/customer"
+    },
+    "expires_at": {
+      "description": "Order expiration time. The order can only be captured until this time. Formatted according to ISO 8601.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "fraud_status": {
+      "description": "Fraud status for the order. Either ACCEPTED, PENDING or REJECTED.",
+      "type": "string"
+    },
+    "initial_payment_method": {
+      "$ref": "#/$defs/InitialPaymentMethodDto"
+    },
+    "klarna_reference": {
+      "description": "A Klarna generated reference that is shorter than the Klarna Order Id and is used as a customer friendly reference. It is most often used as a reference when Klarna is communicating with the customer with regard to payment statuses.",
+      "type": "string"
+    },
+    "locale": {
+      "description": "The customers locale. Specified according to RFC 1766.",
+      "type": "string"
+    },
+    "merchant_data": {
+      "description": "Text field for storing data about the order. Set at order creation.",
+      "type": "string"
+    },
+    "merchant_reference1": {
+      "description": "The order number that the merchant should assign to the order. This is how a customer would reference the purchase they made. If supplied, it is labeled as the Order Number within post purchase communications as well as the Klarna App.",
+      "type": "string"
+    },
+    "merchant_reference2": {
+      "description": "Can be used to store your internal reference to the order. This is generally an internal reference number that merchants use as alternate identifier that matches their internal ERP or Order Management system.",
+      "type": "string"
+    },
+    "order_amount": {
+      "description": "The order amount in minor units. That is the smallest currency unit available such as cent or penny.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "order_id": {
+      "description": "The unique order ID. Cannot be longer than 255 characters.",
+      "type": "string"
+    },
+    "order_lines": {
+      "description": "An array of order_line objects. Each line represents one item in the cart.",
+      "items": {
+        "$ref": "#/$defs/order_line"
+      },
+      "type": "array"
+    },
+    "original_order_amount": {
+      "description": "The original order amount. In minor units.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "purchase_country": {
+      "description": "The purchase country. Formatted according to ISO 3166-1 alpha-2.",
+      "type": "string"
+    },
+    "purchase_currency": {
+      "description": "The currency for this order. Specified in ISO 4217 format.",
+      "type": "string"
+    },
+    "refunded_amount": {
+      "description": "The total amount of refunded for this order. In minor units.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "refunds": {
+      "description": "List of refunds for this order.",
+      "items": {
+        "$ref": "#/$defs/Refund"
+      },
+      "type": "array"
+    },
+    "remaining_authorized_amount": {
+      "description": "The remaining authorized amount for this order. To increase the `remaining_authorized_amount` the `order_amount` needs to be increased.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "selected_shipping_option": {
+      "$ref": "#/$defs/SelectedShippingOptionDto"
+    },
+    "shipping_address": {
+      "$ref": "#/$defs/address"
+    },
+    "shipping_info": {
+      "description": "Shipping information for this order.",
+      "items": {
+        "$ref": "#/$defs/shipping_info"
+      },
+      "type": "array"
+    },
+    "status": {
+      "description": "The order status.",
+      "enum": [
+        "AUTHORIZED",
+        "PART_CAPTURED",
+        "CAPTURED",
+        "CANCELLED",
+        "EXPIRED",
+        "CLOSED"
+      ],
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "Addon": {
+      "description": "Array consisting of add-ons selected by the consumer, may be empty",
+      "properties": {
+        "external_id": {
+          "description": "The ID provided by the TMS",
+          "type": "string"
+        },
+        "price": {
+          "description": "The price of the add-on",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "type": {
+          "description": "The type of the add-on, e.g. sms or entry-code",
+          "type": "string"
+        },
+        "user_input": {
+          "description": "The text provided by the user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "price",
+        "type"
+      ],
+      "type": "object"
+    },
+    "Address": {
+      "description": "The address of the location",
+      "properties": {
+        "city": {
+          "description": "City",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country",
+          "type": "string"
+        },
+        "postal_code": {
+          "description": "Postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+          "type": "string"
+        },
+        "region": {
+          "description": "Region",
+          "type": "string"
+        },
+        "street_address": {
+          "description": "The street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+          "type": "string"
+        },
+        "street_address__2": {
+          "description": "Additional street address",
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "street_address"
+      ],
+      "type": "object"
+    },
+    "Capture": {
+      "properties": {
+        "billing_address": {
+          "$ref": "#/$defs/address"
+        },
+        "capture_id": {
+          "description": "The capture id. Generated when the capture is created.",
+          "type": "string"
+        },
+        "captured_amount": {
+          "description": "The captured amount in minor units.",
+          "format": "int64",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "captured_at": {
+          "description": "The time of the capture. Specified in ISO 8601.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the capture shown to the customer.",
+          "type": "string"
+        },
+        "klarna_reference": {
+          "description": "Customer friendly reference id, used as a reference when communicating with the customer.",
+          "type": "string"
+        },
+        "order_lines": {
+          "description": "List of order lines for the capture shown to the customer.",
+          "items": {
+            "$ref": "#/$defs/order_line"
+          },
+          "type": "array"
+        },
+        "reference": {
+          "description": "Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "refunded_amount": {
+          "description": "Refunded amount for this capture in minor units.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "shipping_address": {
+          "$ref": "#/$defs/address"
+        },
+        "shipping_info": {
+          "description": "Shipping information for this capture.",
+          "items": {
+            "$ref": "#/$defs/shipping_info"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CarrierProduct": {
+      "description": "The chosen timeslot of the selected shipping option",
+      "properties": {
+        "identifier": {
+          "description": "Id of carrier product",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of carrier product",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InitialPaymentMethodDto": {
+      "description": "Initial payment method for this order",
+      "properties": {
+        "description": {
+          "description": "The description of the initial payment method.",
+          "type": "string"
+        },
+        "number_of_installments": {
+          "description": "The number of installments (if applicable).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": {
+          "description": "The type of the initial payment method. One of ACCOUNT, ALTERNATIVE_PAYMENT_METHOD, BANK_TRANSFER, CARD, DEFERRED_INTEREST, DIRECT_DEBIT, FIXED_AMOUNT_BY_CARD, FIXED_AMOUNT, FIXED_SUM_CREDIT, INVOICE_BUSINESS, INVOICE, MOBILEPAY, PAY_BY_CARD, PAY_IN_X, PAY_LATER_BY_CARD, PAY_LATER_IN_PARTS, SWISH, OTHER",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Location": {
+      "description": "The location of the selected shipping option",
+      "properties": {
+        "address": {
+          "$ref": "#/$defs/Address"
+        },
+        "id": {
+          "description": "The location id",
+          "type": "string"
+        },
+        "name": {
+          "description": "The display name of the location",
+          "type": "string"
+        },
+        "price": {
+          "description": "The price for this location",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ProductIdentifiers": {
+      "description": "product_identifiers",
+      "properties": {
+        "brand": {
+          "description": "The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel",
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string"
+        },
+        "category_path": {
+          "description": "The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops",
+          "maxLength": 750,
+          "minLength": 0,
+          "type": "string"
+        },
+        "color": {
+          "description": "Color to be shown to the end customer (max 64 characters). Example: Denim blue",
+          "maxLength": 64,
+          "minLength": 0,
+          "type": "string"
+        },
+        "global_trade_item_number": {
+          "description": "The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "manufacturer_part_number": {
+          "description": "The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH",
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string"
+        },
+        "size": {
+          "description": "Size to be shown to the end customer (max 64 characters). Example: 4",
+          "maxLength": 64,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Refund": {
+      "properties": {
+        "credit_invoice": {
+          "description": "Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+          "type": "string"
+        },
+        "order_lines": {
+          "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+          "items": {
+            "$ref": "#/$defs/order_line"
+          },
+          "type": "array"
+        },
+        "reference": {
+          "description": "Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.",
+          "type": "string"
+        },
+        "refund_id": {
+          "description": "The refund id. Generated when the refund is created.",
+          "type": "string"
+        },
+        "refunded_amount": {
+          "description": "Refunded amount in minor units.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "refunded_at": {
+          "description": "The time of the refund. ISO 8601.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SelectedShippingOptionDto": {
+      "description": "The shipping option selected by the user.",
+      "properties": {
+        "carrier": {
+          "description": "The carrier for the selected shipping option",
+          "type": "string"
+        },
+        "carrier_product": {
+          "$ref": "#/$defs/CarrierProduct"
+        },
+        "class": {
+          "description": "The class of the selected shipping option",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the selected shipping option as provided by the TMS",
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/$defs/Location"
+        },
+        "method": {
+          "description": "The method of the selected shipping option",
+          "type": "string"
+        },
+        "name": {
+          "description": "The display name of the selected shipping option",
+          "type": "string"
+        },
+        "price": {
+          "description": "The price of the selected shipping option",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "selected_addons": {
+          "description": "Array consisting of add-ons selected by the consumer, may be empty",
+          "items": {
+            "$ref": "#/$defs/Addon"
+          },
+          "type": "array"
+        },
+        "tax_amount": {
+          "description": "The tax amount of the selected shipping option",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "tax_rate": {
+          "description": "The tax rate of the selected shipping option",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "timeslot": {
+          "$ref": "#/$defs/Timeslot"
+        },
+        "tms_reference": {
+          "description": "The shipment_id provided by the TMS",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the selected shipping option",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Timeslot": {
+      "description": "The chosen timeslot of the selected shipping option",
+      "properties": {
+        "cutoff": {
+          "description": "Cutoff time for delivery",
+          "type": "string"
+        },
+        "end": {
+          "description": "End of the timeslot",
+          "type": "string"
+        },
+        "id": {
+          "description": "The timeslot id",
+          "type": "string"
+        },
+        "price": {
+          "description": "Price",
+          "enum": [
+            null
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "start": {
+          "description": "Start of the timeslot",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "address": {
+      "description": "Shipping address for the capture.",
+      "properties": {
+        "attention": {
+          "description": "'Attn.' - optional parameter.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "city": {
+          "description": "City.",
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "country": {
+          "description": "Country. ISO 3166 alpha-2.",
+          "type": "string"
+        },
+        "email": {
+          "description": "E-mail address.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "family_name": {
+          "description": "Family name.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "given_name": {
+          "description": "Given name.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "organization_name": {
+          "description": "Organization name (if applicable). Only applicable for B2B customers.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "postal_code": {
+          "description": "Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+          "maxLength": 10,
+          "minLength": 0,
+          "type": "string"
+        },
+        "region": {
+          "description": "State/Region. Required for US.",
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "street_address": {
+          "description": "First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "street_address2": {
+          "description": "Second line of street address.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "title": {
+          "description": "Title.",
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "customer": {
+      "description": "Information about the customer placing the order.",
+      "properties": {
+        "date_of_birth": {
+          "description": "The customer date of birth. ISO 8601. ",
+          "format": "date",
+          "type": "string"
+        },
+        "national_identification_number": {
+          "description": "The customer national identification number",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "order_line": {
+      "description": "List of order lines for the capture shown to the customer.",
+      "properties": {
+        "image_url": {
+          "description": "URL to an image that can be embedded in communications between Klarna and the customer.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "merchant_data": {
+          "description": "Data about the order line.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "name": {
+          "description": "Descriptive item name.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "product_identifiers": {
+          "$ref": "#/$defs/ProductIdentifiers"
+        },
+        "product_url": {
+          "description": "URL to the product that can be used in communications between Klarna and the customer.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Item quantity.",
+          "format": "int64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "quantity_unit": {
+          "description": "Unit used to describe the quantity.",
+          "maxLength": 10,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reference": {
+          "description": "Article number, SKU, or similar identifier on the product variant level.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "subscription": {
+          "$ref": "#/$defs/subscription"
+        },
+        "tax_rate": {
+          "description": "The tax rate in percent with two implicit decimals.",
+          "format": "int32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_amount": {
+          "description": "Total amount including tax and discounts (`quantity * unit_price - total_discount_amount`).",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        },
+        "total_discount_amount": {
+          "description": "The discount amount in minor units. Includes tax. Example: 1200 = $12. Max value: 200000000",
+          "format": "int64",
+          "maximum": 200000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total_tax_amount": {
+          "description": "The total tax amount in minor units.",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Order line type.",
+          "enum": [
+            "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee"
+          ],
+          "pattern": "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee",
+          "type": "string"
+        },
+        "unit_price": {
+          "description": "Unit price including tax without applying discounts in minor units.",
+          "format": "int64",
+          "maximum": 200000000,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "quantity",
+        "total_amount",
+        "unit_price"
+      ],
+      "type": "object"
+    },
+    "shipping_info": {
+      "description": "Shipping information for this capture.",
+      "properties": {
+        "return_shipping_company": {
+          "description": "Name of the shipping company for the return shipment (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "return_tracking_number": {
+          "description": "Tracking number for the return shipment. Maximum 100 characters.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "return_tracking_uri": {
+          "description": "URL where the customer can track the return shipment. Maximum 1024 characters.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        },
+        "shipping_company": {
+          "description": "Name of the shipping company (as specific as possible). Maximum 100 characters. Example: 'DHL US' and not only 'DHL'",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "shipping_method": {
+          "description": "Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+          "pattern": "(PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+          "type": "string"
+        },
+        "tracking_number": {
+          "description": "Tracking number for the shipment. Maximum 100 characters.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "tracking_uri": {
+          "description": "URI where the customer can track their shipment. Maximum 1024 characters.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "subscription": {
+      "description": "Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.",
+      "properties": {
+        "interval": {
+          "description": "The cadence unit. Matches: DAY|WEEK|MONTH|YEAR",
+          "pattern": "DAY|WEEK|MONTH|YEAR",
+          "type": "string"
+        },
+        "interval_count": {
+          "description": "The number of intervals.",
+          "format": "int32",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "The name of the subscription product. Maximum 255 characters.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "interval",
+        "interval_count",
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

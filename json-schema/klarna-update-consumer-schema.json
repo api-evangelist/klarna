@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-update-consumer-schema.json",
+  "title": "UpdateConsumer",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-orders-api-openapi.yml#/components/schemas/UpdateConsumer",
+  "properties": {
+    "shipping_address": {
+      "$ref": "#/$defs/address"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "address": {
+      "description": "Shipping address for the capture.",
+      "properties": {
+        "attention": {
+          "description": "'Attn.' - optional parameter.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "city": {
+          "description": "City.",
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "country": {
+          "description": "Country. ISO 3166 alpha-2.",
+          "type": "string"
+        },
+        "email": {
+          "description": "E-mail address.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "family_name": {
+          "description": "Family name.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "given_name": {
+          "description": "Given name.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "organization_name": {
+          "description": "Organization name (if applicable). Only applicable for B2B customers.",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "postal_code": {
+          "description": "Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+          "maxLength": 10,
+          "minLength": 0,
+          "type": "string"
+        },
+        "region": {
+          "description": "State/Region. Required for US.",
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "street_address": {
+          "description": "First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "street_address2": {
+          "description": "Second line of street address.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "title": {
+          "description": "Title.",
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

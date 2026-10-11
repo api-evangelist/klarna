@@ -1,5 +1,5 @@
 ---
-name: Set up recurring Klarna purchases with a customer token
+name: klarna-recurring-with-customer-token
 description: >-
   Turn a one-time Klarna authorization into a reusable customer token, charge it for
   subscription or on-demand purchases, and cancel it cleanly. The only Klarna path that lets a

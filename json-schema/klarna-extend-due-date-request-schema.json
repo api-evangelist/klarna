@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/klarna/main/json-schema/klarna-extend-due-date-request-schema.json",
+  "title": "ExtendDueDateRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/klarna-captures-api-openapi.yml#/components/schemas/ExtendDueDateRequest",
+  "properties": {
+    "number_of_days": {
+      "description": "Number of days to extend the due date.",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "number_of_days"
+  ],
+  "type": "object"
+}

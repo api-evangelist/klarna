@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: Klarna WooCommerce Capture on Completion
+  summary: Capture a Klarna order when the matching WooCommerce order is fulfilled, and note it on the order.
+  description: >-
+    Reads the WooCommerce order, captures the authorized Klarna order through Klarna Order Management,
+    and writes the Klarna capture id back to the WooCommerce order as a note. Klarna amounts are in minor
+    units while WooCommerce totals are decimal strings, so the capture amount is an input rather than a
+    conversion this workflow performs.
+  version: 1.0.0
+x-integration:
+  partner: woocommerce
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/woocommerce/conversion-boosters/how-to-enable-sign-in-with-klarna-in-woocommerce
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: api-evangelist enrichment local-v5
+sourceDescriptions:
+  - name: klarnaCaptures
+    url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-captures-api-openapi.yml
+    type: openapi
+  - name: wooOrders
+    url: https://raw.githubusercontent.com/api-evangelist/woocommerce/refs/heads/main/openapi/woocommerce-orders-api-openapi.yml
+    type: openapi
+  - name: wooOrderNotes
+    url: https://raw.githubusercontent.com/api-evangelist/woocommerce/refs/heads/main/openapi/woocommerce-order-notes-api-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: capture-klarna-order-on-woocommerce-completion
+    summary: Capture the Klarna authorization for a completed WooCommerce order.
+    description: >-
+      Fetch the WooCommerce order for its reference, capture the Klarna order with an idempotency key,
+      and record the Klarna Capture-Id on the WooCommerce order.
+    inputs:
+      type: object
+      required: [woo_order_id, klarna_order_id, captured_amount, idempotency_key]
+      properties:
+        woo_order_id: {type: integer}
+        klarna_order_id: {type: string}
+        captured_amount: {type: integer, description: Amount in minor units}
+        idempotency_key: {type: string}
+    steps:
+      - stepId: get-woo-order
+        description: Read the WooCommerce order.
+        operationId: $sourceDescriptions.wooOrders.getOrder
+        parameters:
+          - {name: id, in: path, value: $inputs.woo_order_id}
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          order_number: $response.body#/number
+      - stepId: capture-klarna-order
+        description: Capture the authorized Klarna order.
+        operationId: $sourceDescriptions.klarnaCaptures.captureOrder
+        parameters:
+          - {name: order_id, in: path, value: $inputs.klarna_order_id}
+          - {name: Klarna-Idempotency-Key, in: header, value: $inputs.idempotency_key}
+        requestBody:
+          contentType: application/json
+          payload:
+            captured_amount: $inputs.captured_amount
+            reference: $steps.get-woo-order.outputs.order_number
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          capture_id: $response.header.Capture-Id
+      - stepId: note-woo-order
+        description: Record the Klarna capture on the WooCommerce order.
+        operationId: $sourceDescriptions.wooOrderNotes.createOrderNote
+        parameters:
+          - {name: order_id, in: path, value: $inputs.woo_order_id}
+        requestBody:
+          contentType: application/json
+          payload:
+            note: $steps.capture-klarna-order.outputs.capture_id
+            customer_note: false
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          note_id: $response.body#/id
+    outputs:
+      capture_id: $steps.capture-klarna-order.outputs.capture_id
+      note_id: $steps.note-woo-order.outputs.note_id

@@ -1,0 +1,124 @@
+generated: '2026-10-12'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 10
+  own: 6
+  other_domain: 2
+  platform: 2
+  roles:
+  - api
+  - identity
+  - marketing
+  - other
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.klarna.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: klarna.com
+  role: api
+  relation: own
+- host: docs.klarna.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - Deprecation
+  - LlmsText
+  serves:
+  - docs
+  registrable_domain: klarna.com
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: merchant.example.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: example.com
+  role: other
+  relation: other-domain
+- host: portal.klarna.com
+  found_by:
+  - pointer
+  types:
+  - Login
+  serves: []
+  registrable_domain: klarna.com
+  role: identity
+  relation: own
+- host: portal.playground.klarna.com
+  found_by:
+  - pointer
+  types:
+  - SignUp
+  serves: []
+  registrable_domain: klarna.com
+  role: identity
+  relation: own
+- host: status.klarna.com
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: klarna.com
+  role: status
+  relation: own
+- host: www.klarna.com
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - Website
+  - Support
+  - Blog
+  - TermsOfService
+  - PrivacyPolicy
+  - Security
+  serves:
+  - cdn
+  vendor: cloudfront
+  registrable_domain: klarna.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: x.klarnacdn.net
+  found_by:
+  - pointer
+  types:
+  - Pricing
+  serves: []
+  registrable_domain: klarnacdn.net
+  role: marketing
+  relation: other-domain

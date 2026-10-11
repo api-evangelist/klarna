@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Klarna VTEX Capture and Invoice
+  summary: Capture the Klarna order and send the invoice notification to VTEX OMS.
+  description: Reads the VTEX order, captures the Klarna authorization, and notifies VTEX OMS of the invoice using
+    the Klarna capture id as the invoice number.
+  version: 1.0.0
+x-integration:
+  partner: vtex
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/vtex/conversion-boosters/enable-on-site-messaging
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
+sourceDescriptions:
+- name: vtexOrders
+  url: https://raw.githubusercontent.com/api-evangelist/vtex/refs/heads/main/openapi/vtex-orders-api-openapi.yml
+  type: openapi
+- name: vtexInvoice
+  url: https://raw.githubusercontent.com/api-evangelist/vtex/refs/heads/main/openapi/vtex-invoice-api-openapi.yml
+  type: openapi
+- name: klarnaCaptures
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-captures-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: capture-klarna-and-invoice-vtex-order
+  summary: Capture the Klarna order and send the invoice notification to VTEX OMS.
+  inputs:
+    type: object
+    required:
+    - vtex_order_id
+    - issuance_date
+    - invoice_items
+    - klarna_order_id
+    - captured_amount
+    - idempotency_key
+    properties:
+      klarna_order_id:
+        type: string
+      captured_amount:
+        type: integer
+        description: Amount in minor units
+      idempotency_key:
+        type: string
+      vtex_order_id:
+        type: string
+      issuance_date:
+        type: string
+      invoice_items:
+        type: array
+  steps:
+  - stepId: get-vtex-order
+    description: Read the VTEX order.
+    operationId: $sourceDescriptions.vtexOrders.GetOrder
+    parameters:
+    - name: Accept
+      in: header
+      value: application/json
+    - name: Content-Type
+      in: header
+      value: application/json
+    - name: orderId
+      in: path
+      value: $inputs.vtex_order_id
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      order_id: $response.body#/orderId
+      value: $response.body#/value
+  - stepId: capture-klarna-order
+    description: Capture the authorized Klarna order with an idempotency key.
+    operationId: $sourceDescriptions.klarnaCaptures.captureOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        captured_amount: $inputs.captured_amount
+        description: $steps.get-vtex-order.outputs.order_id
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      capture_id: $response.header.Capture-Id
+  - stepId: notify-vtex-invoice
+    description: Send the invoice notification to VTEX OMS.
+    operationId: $sourceDescriptions.vtexInvoice.InvoiceNotification
+    parameters:
+    - name: Accept
+      in: header
+      value: application/json
+    - name: Content-Type
+      in: header
+      value: application/json
+    - name: orderId
+      in: path
+      value: $inputs.vtex_order_id
+    requestBody:
+      contentType: application/json
+      payload:
+        type: Output
+        issuanceDate: $inputs.issuance_date
+        invoiceNumber: $steps.capture-klarna-order.outputs.capture_id
+        invoiceValue: $inputs.captured_amount
+        items: $inputs.invoice_items
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    capture_id: $steps.capture-klarna-order.outputs.capture_id

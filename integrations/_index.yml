@@ -24,8 +24,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/shopify/payments/payments-for-shopify
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-shopify-cancel-sync.yml
+  status: arazzo
 - slug: klarna-woocommerce
   label: WooCommerce
   partner: woocommerce
@@ -47,8 +47,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/salesforce-commerce-cloud/before-you-start/user-guide
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-salesforce-commerce-cloud-acknowledge-order.yml
+  status: arazzo
 - slug: klarna-sap-commerce-cloud
   label: SAP Commerce Cloud
   partner: sap-commerce-cloud
@@ -59,8 +59,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/sap-commerce-cloud/before-you-start
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-sap-commerce-cloud-capture-order.yml
+  status: arazzo
 - slug: klarna-prestashop
   label: PrestaShop
   partner: prestashop
@@ -91,8 +91,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/vtex/conversion-boosters/enable-on-site-messaging
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-vtex-capture-and-invoice.yml
+  status: arazzo
 - slug: klarna-wix
   label: Wix
   partner: wix
@@ -102,8 +102,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/wix/before-you-start
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-wix-capture-order.yml
+  status: arazzo
 - slug: klarna-billie
   label: Billie
   partner: billie

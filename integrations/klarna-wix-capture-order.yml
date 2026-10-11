@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Klarna Wix Capture Order
+  summary: Capture the Klarna order behind a Wix eCommerce order.
+  description: Reads the Wix order to confirm it exists, then captures the authorized Klarna order and stamps the
+    Wix order id on it as merchant reference 1.
+  version: 1.0.0
+x-integration:
+  partner: wix
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/wix/before-you-start
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
+sourceDescriptions:
+- name: wixOrders
+  url: https://raw.githubusercontent.com/api-evangelist/wix/refs/heads/main/openapi/wix-orders-api-openapi.yml
+  type: openapi
+- name: klarnaOrders
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-orders-api-openapi.yml
+  type: openapi
+- name: klarnaCaptures
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-captures-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: capture-klarna-for-wix-order
+  summary: Capture the Klarna order behind a Wix eCommerce order.
+  inputs:
+    type: object
+    required:
+    - wix_order_id
+    - klarna_order_id
+    - captured_amount
+    - idempotency_key
+    properties:
+      klarna_order_id:
+        type: string
+      captured_amount:
+        type: integer
+        description: Amount in minor units
+      idempotency_key:
+        type: string
+      wix_order_id:
+        type: string
+  steps:
+  - stepId: get-wix-order
+    description: Read the Wix order.
+    operationId: $sourceDescriptions.wixOrders.getOrder
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.wix_order_id
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: set-klarna-merchant-reference
+    description: Write the platform order reference onto the Klarna order.
+    operationId: $sourceDescriptions.klarnaOrders.updateMerchantReferences
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        merchant_reference1: $inputs.wix_order_id
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: capture-klarna-order
+    description: Capture the authorized Klarna order with an idempotency key.
+    operationId: $sourceDescriptions.klarnaCaptures.captureOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        captured_amount: $inputs.captured_amount
+        description: $inputs.wix_order_id
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      capture_id: $response.header.Capture-Id
+  outputs:
+    capture_id: $steps.capture-klarna-order.outputs.capture_id

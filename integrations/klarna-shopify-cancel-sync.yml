@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Klarna Shopify Cancel Sync
+  summary: Cancel the Klarna order when the matching Shopify order is cancelled.
+  description: Reads the Shopify order, cancels the uncaptured Klarna order through Order Management, then cancels
+    the Shopify order with the same reason.
+  version: 1.0.0
+x-integration:
+  partner: shopify
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/shopify/payments/payments-for-shopify
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
+sourceDescriptions:
+- name: shopifyOrders
+  url: https://raw.githubusercontent.com/api-evangelist/shopify/refs/heads/main/openapi/shopify-orders-api-openapi.yml
+  type: openapi
+- name: klarnaOrders
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-orders-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-klarna-and-shopify-order
+  summary: Cancel the Klarna order when the matching Shopify order is cancelled.
+  inputs:
+    type: object
+    required:
+    - shopify_order_id
+    - klarna_order_id
+    - idempotency_key
+    properties:
+      shopify_order_id:
+        type: integer
+      klarna_order_id:
+        type: string
+      idempotency_key:
+        type: string
+      reason:
+        type: string
+        default: customer
+  steps:
+  - stepId: get-shopify-order
+    description: Read the Shopify order.
+    operationId: $sourceDescriptions.shopifyOrders.getOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.shopify_order_id
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      order_name: $response.body#/order/name
+  - stepId: cancel-klarna-order
+    description: Cancel the Klarna order (only possible before capture).
+    operationId: $sourceDescriptions.klarnaOrders.cancelOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: cancel-shopify-order
+    description: Cancel the Shopify order.
+    operationId: $sourceDescriptions.shopifyOrders.cancelOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.shopify_order_id
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.reason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cancelled_at: $response.body#/order/cancelled_at
+  outputs:
+    order_name: $steps.get-shopify-order.outputs.order_name
+    cancelled_at: $steps.cancel-shopify-order.outputs.cancelled_at

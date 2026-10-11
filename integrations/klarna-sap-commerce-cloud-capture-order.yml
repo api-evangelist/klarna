@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Klarna SAP Commerce Cloud Capture Order
+  summary: Capture the Klarna order for a placed SAP Commerce Cloud order.
+  description: Reads the SAP Commerce Cloud order, writes its order code onto the Klarna order, then captures the
+    Klarna authorization.
+  version: 1.0.0
+x-integration:
+  partner: sap-commerce-cloud
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/sap-commerce-cloud/before-you-start
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
+sourceDescriptions:
+- name: sapOrders
+  url: https://raw.githubusercontent.com/api-evangelist/sap-commerce-cloud/refs/heads/main/openapi/sap-commerce-cloud-orders-api-openapi.yml
+  type: openapi
+- name: klarnaOrders
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-orders-api-openapi.yml
+  type: openapi
+- name: klarnaCaptures
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-captures-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: capture-klarna-for-sap-order
+  summary: Capture the Klarna order for a placed SAP Commerce Cloud order.
+  inputs:
+    type: object
+    required:
+    - user_id
+    - order_code
+    - klarna_order_id
+    - captured_amount
+    - idempotency_key
+    properties:
+      klarna_order_id:
+        type: string
+      captured_amount:
+        type: integer
+        description: Amount in minor units
+      idempotency_key:
+        type: string
+      user_id:
+        type: string
+      order_code:
+        type: string
+  steps:
+  - stepId: get-sap-order
+    description: Read the SAP Commerce Cloud order.
+    operationId: $sourceDescriptions.sapOrders.getOrder
+    parameters:
+    - name: userId
+      in: path
+      value: $inputs.user_id
+    - name: orderCode
+      in: path
+      value: $inputs.order_code
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      code: $response.body#/code
+  - stepId: set-klarna-merchant-reference
+    description: Write the platform order reference onto the Klarna order.
+    operationId: $sourceDescriptions.klarnaOrders.updateMerchantReferences
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        merchant_reference1: $steps.get-sap-order.outputs.code
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: capture-klarna-order
+    description: Capture the authorized Klarna order with an idempotency key.
+    operationId: $sourceDescriptions.klarnaCaptures.captureOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        captured_amount: $inputs.captured_amount
+        description: $steps.get-sap-order.outputs.code
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      capture_id: $response.header.Capture-Id
+  outputs:
+    sap_order_code: $steps.get-sap-order.outputs.code
+    capture_id: $steps.capture-klarna-order.outputs.capture_id

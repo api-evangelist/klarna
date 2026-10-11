@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Klarna Salesforce Commerce Cloud Acknowledge Order
+  summary: Acknowledge a Klarna order once Salesforce Commerce Cloud has created the matching order.
+  description: Reads the B2C Commerce order created through the Shopper Orders API, acknowledges the Klarna order
+    and records the SFCC order number as merchant reference 1.
+  version: 1.0.0
+x-integration:
+  partner: salesforce-commerce-cloud
+  template: null
+  edge_evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/salesforce-commerce-cloud/before-you-start/user-guide
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
+sourceDescriptions:
+- name: sfccShopper
+  url: https://raw.githubusercontent.com/api-evangelist/salesforce-commerce-cloud/refs/heads/main/openapi/salesforce-commerce-cloud-shopper-api-openapi.yml
+  type: openapi
+- name: klarnaOrders
+  url: https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/openapi/klarna-orders-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: acknowledge-klarna-for-sfcc-order
+  summary: Acknowledge a Klarna order once Salesforce Commerce Cloud has created the matching order.
+  inputs:
+    type: object
+    required:
+    - organization_id
+    - site_id
+    - order_no
+    - klarna_order_id
+    - idempotency_key
+    properties:
+      organization_id:
+        type: string
+      site_id:
+        type: string
+      order_no:
+        type: string
+      klarna_order_id:
+        type: string
+      idempotency_key:
+        type: string
+  steps:
+  - stepId: get-sfcc-order
+    description: Read the SFCC order.
+    operationId: $sourceDescriptions.sfccShopper.getOrder
+    parameters:
+    - name: organizationId
+      in: path
+      value: $inputs.organization_id
+    - name: orderNo
+      in: path
+      value: $inputs.order_no
+    - name: siteId
+      in: query
+      value: $inputs.site_id
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: acknowledge-klarna-order
+    description: Acknowledge the Klarna order.
+    operationId: $sourceDescriptions.klarnaOrders.acknowledgeOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: set-klarna-merchant-reference
+    description: Write the platform order reference onto the Klarna order.
+    operationId: $sourceDescriptions.klarnaOrders.updateMerchantReferences
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.klarna_order_id
+    - name: Klarna-Idempotency-Key
+      in: header
+      value: $inputs.idempotency_key
+    requestBody:
+      contentType: application/json
+      payload:
+        merchant_reference1: $inputs.order_no
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    order_no: $inputs.order_no

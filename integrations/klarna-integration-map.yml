@@ -1,0 +1,374 @@
+# DERIVED by derive-integration-map.py (roadmap#949): each integration workflow, step by step,
+# resolved to spec file -> tag -> business capability (Turbo EA, CC BY 4.0) and the operation's
+# phrasing intent. Read from our own files; an unmapped link says why.
+slug: klarna
+workflows:
+- file: klarna-salesforce-commerce-cloud-acknowledge-order.yml
+  title: Klarna Salesforce Commerce Cloud Acknowledge Order
+  partner: salesforce-commerce-cloud
+  template: null
+  repos:
+  - salesforce-commerce-cloud
+  - klarna
+  steps:
+  - step: get-sfcc-order
+    repo: salesforce-commerce-cloud
+    spec_file: salesforce-commerce-cloud-shopper-api-openapi.yml
+    operationId: getOrder
+    tag: Shopper
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: acknowledge-klarna-order
+    repo: klarna
+    spec_file: klarna-orders-api-openapi.yml
+    operationId: acknowledgeOrder
+    tag: Orders
+    capability_id: BC-1340.10
+    capability: Payment Initiation Management
+    capability_l1: BC-1340
+    intent: Acknowledge a checkout order
+    effect: write
+    unmapped: null
+  - step: set-klarna-merchant-reference
+    repo: klarna
+    spec_file: klarna-orders-api-openapi.yml
+    operationId: updateMerchantReferences
+    tag: Orders
+    capability_id: BC-1340.10
+    capability: Payment Initiation Management
+    capability_l1: BC-1340
+    intent: Update an order's merchant references
+    effect: write
+    unmapped: null
+  connects:
+    salesforce-commerce-cloud:
+      capabilities: []
+      tags:
+      - Shopper
+    klarna:
+      capabilities:
+      - BC-1340.10
+      tags:
+      - Orders
+  intents:
+  - Acknowledge a checkout order
+  - Update an order's merchant references
+- file: klarna-sap-commerce-cloud-capture-order.yml
+  title: Klarna SAP Commerce Cloud Capture Order
+  partner: sap-commerce-cloud
+  template: null
+  repos:
+  - sap-commerce-cloud
+  - klarna
+  steps:
+  - step: get-sap-order
+    repo: sap-commerce-cloud
+    spec_file: sap-commerce-cloud-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: set-klarna-merchant-reference
+    repo: klarna
+    spec_file: klarna-orders-api-openapi.yml
+    operationId: updateMerchantReferences
+    tag: Orders
+    capability_id: BC-1340.10
+    capability: Payment Initiation Management
+    capability_l1: BC-1340
+    intent: Update an order's merchant references
+    effect: write
+    unmapped: null
+  - step: capture-klarna-order
+    repo: klarna
+    spec_file: klarna-captures-api-openapi.yml
+    operationId: captureOrder
+    tag: Captures
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Capture an order's payment
+    effect: write
+    unmapped: no capability edge for this spec file
+  connects:
+    sap-commerce-cloud:
+      capabilities: []
+      tags:
+      - Orders
+    klarna:
+      capabilities:
+      - BC-1340.10
+      tags:
+      - Captures
+      - Orders
+  intents:
+  - Update an order's merchant references
+  - Capture an order's payment
+- file: klarna-shopify-cancel-sync.yml
+  title: Klarna Shopify Cancel Sync
+  partner: shopify
+  template: null
+  repos:
+  - shopify
+  - klarna
+  steps:
+  - step: get-shopify-order
+    repo: shopify
+    spec_file: shopify-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
+    intent: Get one order's details
+    effect: read
+    unmapped: null
+  - step: cancel-klarna-order
+    repo: klarna
+    spec_file: klarna-orders-api-openapi.yml
+    operationId: cancelOrder
+    tag: Orders
+    capability_id: BC-1340.10
+    capability: Payment Initiation Management
+    capability_l1: BC-1340
+    intent: Cancel an order
+    effect: destructive
+    unmapped: null
+  - step: cancel-shopify-order
+    repo: shopify
+    spec_file: shopify-orders-api-openapi.yml
+    operationId: cancelOrder
+    tag: Orders
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
+    intent: Cancel an order and optionally restock
+    effect: destructive
+    unmapped: null
+  connects:
+    shopify:
+      capabilities:
+      - BC-520.40
+      tags:
+      - Orders
+    klarna:
+      capabilities:
+      - BC-1340.10
+      tags:
+      - Orders
+  intents:
+  - Get one order's details
+  - Cancel an order
+  - Cancel an order and optionally restock
+- file: klarna-vtex-capture-and-invoice.yml
+  title: Klarna VTEX Capture and Invoice
+  partner: vtex
+  template: null
+  repos:
+  - vtex
+  - klarna
+  steps:
+  - step: get-vtex-order
+    repo: vtex
+    spec_file: vtex-orders-api-openapi.yml
+    operationId: GetOrder
+    tag: Orders
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
+    intent: null
+    effect: null
+    unmapped: null
+  - step: capture-klarna-order
+    repo: klarna
+    spec_file: klarna-captures-api-openapi.yml
+    operationId: captureOrder
+    tag: Captures
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Capture an order's payment
+    effect: write
+    unmapped: no capability edge for this spec file
+  - step: notify-vtex-invoice
+    repo: vtex
+    spec_file: vtex-invoice-api-openapi.yml
+    operationId: InvoiceNotification
+    tag: Invoice
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    vtex:
+      capabilities:
+      - BC-520.40
+      tags:
+      - Invoice
+      - Orders
+    klarna:
+      capabilities: []
+      tags:
+      - Captures
+  intents:
+  - Capture an order's payment
+- file: klarna-wix-capture-order.yml
+  title: Klarna Wix Capture Order
+  partner: wix
+  template: null
+  repos:
+  - wix
+  - klarna
+  steps:
+  - step: get-wix-order
+    repo: wix
+    spec_file: wix-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: set-klarna-merchant-reference
+    repo: klarna
+    spec_file: klarna-orders-api-openapi.yml
+    operationId: updateMerchantReferences
+    tag: Orders
+    capability_id: BC-1340.10
+    capability: Payment Initiation Management
+    capability_l1: BC-1340
+    intent: Update an order's merchant references
+    effect: write
+    unmapped: null
+  - step: capture-klarna-order
+    repo: klarna
+    spec_file: klarna-captures-api-openapi.yml
+    operationId: captureOrder
+    tag: Captures
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Capture an order's payment
+    effect: write
+    unmapped: no capability edge for this spec file
+  connects:
+    wix:
+      capabilities: []
+      tags:
+      - Orders
+    klarna:
+      capabilities:
+      - BC-1340.10
+      tags:
+      - Captures
+      - Orders
+  intents:
+  - Update an order's merchant references
+  - Capture an order's payment
+- file: klarna-woocommerce-capture-on-completion.yml
+  title: Klarna WooCommerce Capture on Completion
+  partner: woocommerce
+  template: null
+  repos:
+  - woocommerce
+  - klarna
+  steps:
+  - step: get-woo-order
+    repo: woocommerce
+    spec_file: woocommerce-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: capture-klarna-order
+    repo: klarna
+    spec_file: klarna-captures-api-openapi.yml
+    operationId: captureOrder
+    tag: Captures
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Capture an order's payment
+    effect: write
+    unmapped: no capability edge for this spec file
+  - step: note-woo-order
+    repo: woocommerce
+    spec_file: woocommerce-order-notes-api-openapi.yml
+    operationId: createOrderNote
+    tag: Order Notes
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    woocommerce:
+      capabilities: []
+      tags:
+      - Order Notes
+      - Orders
+    klarna:
+      capabilities: []
+      tags:
+      - Captures
+  intents:
+  - Capture an order's payment
+- file: klarna-woocommerce-refund-sync.yml
+  title: Klarna WooCommerce Refund Sync
+  partner: woocommerce
+  template: null
+  repos:
+  - klarna
+  - woocommerce
+  steps:
+  - step: refund-klarna-order
+    repo: klarna
+    spec_file: klarna-refunds-api-openapi.yml
+    operationId: refundOrder
+    tag: Refunds
+    capability_id: BC-1340.20
+    capability: Payment Processing Management
+    capability_l1: BC-1340
+    intent: Refund an order
+    effect: write
+    unmapped: null
+  - step: record-woo-refund
+    repo: woocommerce
+    spec_file: woocommerce-order-refunds-api-openapi.yml
+    operationId: createOrderRefund
+    tag: Order Refunds
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    klarna:
+      capabilities:
+      - BC-1340.20
+      tags:
+      - Refunds
+    woocommerce:
+      capabilities: []
+      tags:
+      - Order Refunds
+  intents:
+  - Refund an order

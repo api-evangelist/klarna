@@ -137,8 +137,8 @@
   type: claimed
   evidence: https://docs.klarna.com/llms.txt
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: klarna-stripe-preconfig.yml
+  status: arazzo
 - slug: klarna-mollie
   label: Mollie
   partner: mollie
@@ -214,5 +214,5 @@
     property: schemas.PostSetupIntentsRequest.payment_method_data
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
-  status: not-a-workflow
-  arazzo: null
+  arazzo: klarna-stripe-preconfig.yml
+  status: arazzo

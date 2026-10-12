@@ -51,7 +51,6 @@
   status: arazzo
 - slug: klarna-sap-commerce-cloud
   label: SAP Commerce Cloud
-  partner: sap-commerce-cloud
   partner_name: SAP Commerce Cloud
   category: e-commerce-platform
   use_case: Klarna documents its SAP Commerce Cloud integration under docs.klarna.com/platform-solutions (page 200
@@ -59,8 +58,8 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/e-commerce-platforms/sap-commerce-cloud/before-you-start
   source: edge
-  arazzo: klarna-sap-commerce-cloud-capture-order.yml
-  status: arazzo
+  status: pending-partner-spec
+  arazzo: null
 - slug: klarna-prestashop
   label: PrestaShop
   partner: prestashop

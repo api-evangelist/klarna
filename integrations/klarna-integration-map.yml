@@ -168,6 +168,31 @@ workflows:
   - Get one order's details
   - Cancel an order
   - Cancel an order and optionally restock
+- file: klarna-stripe-preconfig.yml
+  title: 'klarna through stripe: PostSetupIntents preconfigured with klarna'
+  partner: stripe
+  template: null
+  repos:
+  - stripe
+  steps:
+  - step: call-with-preset
+    repo: stripe
+    spec_file: stripe-setup-intents-api-openapi.yml
+    operationId: PostSetupIntents
+    tag: Setup Intents
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Start saving a payment method for later
+    effect: write
+    unmapped: no capability edge for this spec file
+  connects:
+    stripe:
+      capabilities: []
+      tags:
+      - Setup Intents
+  intents:
+  - Start saving a payment method for later
 - file: klarna-vtex-capture-and-invoice.yml
   title: Klarna VTEX Capture and Invoice
   partner: vtex

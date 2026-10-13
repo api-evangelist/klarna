@@ -70,12 +70,12 @@ workflows:
     spec_file: sap-commerce-cloud-orders-api-openapi.yml
     operationId: getOrder
     tag: Orders
-    capability_id: null
-    capability: null
-    capability_l1: null
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
     intent: null
     effect: null
-    unmapped: no capability edge for this spec file
+    unmapped: null
   - step: set-klarna-merchant-reference
     repo: klarna
     spec_file: klarna-orders-api-openapi.yml
@@ -100,7 +100,8 @@ workflows:
     unmapped: no capability edge for this spec file
   connects:
     sap-commerce-cloud:
-      capabilities: []
+      capabilities:
+      - BC-520.40
       tags:
       - Orders
     klarna:

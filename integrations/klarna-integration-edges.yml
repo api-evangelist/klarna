@@ -11,6 +11,8 @@ checked:
 - https://monid.ai/tools/klarna
 - https://n8n.io/integrations/klarna/
 - https://zapier.com/apps/klarna/integrations
+- shopify/integrations/shopify-integration-edges.yml
+- woocommerce/integrations/woocommerce-integration-edges.yml
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -160,4 +162,40 @@ edges:
     property: schemas.PostSetupIntentsRequest.payment_method_data
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+- partner_name: Shopify (own)
+  partner: shopify
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://apps.shopify.com/klarna-search-compare
+  mirror_of: shopify/integrations/shopify-integration-edges.yml
+  apps:
+  - Klarna Search & Compare
+  - Klarna On‑Site Messaging
+  listing_count: 2
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  publisher_verified:
+  - Built for Shopify
+- partner_name: WooCommerce (own)
+  partner: woocommerce
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://woocommerce.com/products/klarna-payments/
+  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
+  apps:
+  - Klarna
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: extension
 templates: []

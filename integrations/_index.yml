@@ -112,7 +112,7 @@
   type: claimed
   evidence: https://docs.klarna.com/platform-solutions/issuing-partners/billie/payments-with-billie.md
   source: edge
-  status: pending-partner-spec
+  status: pending-generation
   arazzo: null
 - slug: klarna-adyen
   label: Adyen
@@ -214,4 +214,29 @@
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
   arazzo: klarna-stripe-preconfig.yml
+  status: arazzo
+- slug: klarna-shopify-own
+  label: Shopify (own)
+  partner: shopify
+  partner_name: Shopify (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.shopify.com/klarna-search-compare
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-shopify-cancel-sync.yml
+  status: arazzo
+- slug: klarna-woocommerce-own
+  label: WooCommerce (own)
+  partner: woocommerce
+  partner_name: WooCommerce (own)
+  category: extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://woocommerce.com/products/klarna-payments/
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-woocommerce-capture-on-completion.yml
   status: arazzo

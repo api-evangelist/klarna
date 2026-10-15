@@ -8,8 +8,11 @@ source:
 checked:
 - https://composio.dev/toolkits/klarna
 - https://docs.klarna.com/llms.txt
+- https://kantarainitiative.org/trust-status-list/
 - https://monid.ai/tools/klarna
+- https://msb.fincen.gov/
 - https://n8n.io/integrations/klarna/
+- https://www.access-dvs-register.service.gov.uk/register/download-register
 - https://zapier.com/apps/klarna/integrations
 - shopify/integrations/shopify-integration-edges.yml
 - woocommerce/integrations/woocommerce-integration-edges.yml
@@ -198,4 +201,36 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: extension
+- partner_name: FinCEN (MSB registration)
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://msb.fincen.gov/
+  category: Money services business
+  contract_reference:
+    register: FinCEN MSB Registrant Search (msb.fincen.gov, full list export)
+    spec_file: null
+    standard: FinCEN MSB registration (US Bank Secrecy Act)
+    role: fincen-msb-registrant
+    registered_name: Klarna Inc.
+    dba_name: null
+    register_id: Klarna Inc.
+    matched_domain: klarna.com
+    matched_by: domain+name-among-holders
+    identity: wikidata Q1165072 'Klarna' P856 https://www.klarna.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    msb_activities:
+    - 409 money transmitter
+    - 414 provider of prepaid access
+    states_of_activity: 59
+    received_date: 01/30/2025
+    signal_note: 'participation only: an MSB registration is not a licence or a certification; activities and states
+      are context, never counted'
+    detected_by: sweep-regtech-aml.py
+    detected: '2026-10-15'
+  detected_by: sweep-regtech-aml.py
+  first_seen: '2026-10-15'
 templates: []

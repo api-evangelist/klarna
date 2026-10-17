@@ -114,6 +114,75 @@ components:
           type: string
           example: '**********124'
           description: Masked bank account number
+    order:
+      type: object
+      required:
+      - fraud_status
+      - order_id
+      - redirect_url
+      properties:
+        authorized_payment_method:
+          $ref: '#/components/schemas/authorized_payment_method'
+        fraud_status:
+          type: string
+          description: Fraud status for the order. Either ACCEPTED or PENDING. If ACCEPTED, the order could be captured. If PENDING, please wait till you receive the notification from Klarna in the notification URL that the order has been approved. You can find additional information here.
+        order_id:
+          type: string
+          description: Unique order ID of the transaction. This ID will be used for all order management processes.
+        redirect_url:
+          type: string
+          example: https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect
+          description: URL to redirect the customer to after placing the order. This is a Klarna URL to which the merchant should redirect the customer to. Klarna will place a cookie in the customers browser (if redirected) and redirect the customer back to the confirmation URL provided by the merchant. This is not a mandatory step but a recommended one to improve the returning customers experience. It is a spontaneous step and does not harm the customers experience.
+    ErrorV2:
+      type: object
+      properties:
+        authorized_payment_method:
+          $ref: '#/components/schemas/authorized_payment_method'
+        correlation_id:
+          type: string
+        error_code:
+          type: string
+        error_messages:
+          type: array
+          items:
+            type: string
+        fraud_status:
+          type: string
+        reason:
+          type: string
+    merchant_urls:
+      type: object
+      required:
+      - confirmation
+      properties:
+        confirmation:
+          type: string
+          description: URL of merchant confirmation page. (max 2000 characters)
+          minLength: 0
+          maxLength: 2000
+        push:
+          type: string
+          description: URL that will be requested when an order is completed. Should be different than checkout and confirmation URLs. (max 2000 characters)
+          minLength: 0
+          maxLength: 2000
+    customer_token:
+      type: object
+      required:
+      - payment_method_type
+      - status
+      properties:
+        card:
+          $ref: '#/components/schemas/card_information'
+        direct_debit:
+          $ref: '#/components/schemas/direct_debit_information'
+        payment_method_type:
+          type: string
+          example: INVOICE
+          description: Selected payment method
+        status:
+          type: string
+          example: ACTIVE
+          description: Status of token, can be active, cancelled, suspended
     card_information:
       type: object
       required:
@@ -133,51 +202,6 @@ components:
           type: string
           example: '************1234'
           description: Masked credit card number
-    customer_token:
-      type: object
-      required:
-      - payment_method_type
-      - status
-      properties:
-        card:
-          $ref: '#/components/schemas/card_information'
-        direct_debit:
-          $ref: '#/components/schemas/direct_debit_information'
-        payment_method_type:
-          type: string
-          example: INVOICE
-          description: Selected payment method
-        status:
-          type: string
-          example: ACTIVE
-          description: Status of token, can be active, cancelled, suspended
-    authorized_payment_method:
-      type: object
-      required:
-      - type
-      properties:
-        number_of_days:
-          type: integer
-          format: int32
-        number_of_installments:
-          type: integer
-          format: int32
-        type:
-          type: string
-          enum:
-          - invoice
-          - fixed_amount
-          - pix
-          - base_account
-          - deferred_interest
-          - direct_debit
-          - direct_bank_transfer
-          - b2b_invoice
-          - card
-          - slice_it_by_card
-          - pay_later_by_card
-          - fixed_sum_credit
-          - pay_by_card
     order_line:
       type: object
       required:
@@ -293,67 +317,31 @@ components:
           description: The number of intervals
           type: integer
           minimum: 1
-    customer_token_order:
+    attachment:
       type: object
       required:
-      - order_amount
-      - order_lines
-      - order_tax_amount
-      - purchase_currency
+      - body
+      - content_type
       properties:
-        attachment:
-          $ref: '#/components/schemas/attachment'
-        auto_capture:
-          type: boolean
-          description: Allow merchant to trigger auto capturing.
-          default: false
-        merchant_data:
+        body:
           type: string
-          example: '{"order_specific":[{"substore":"Women''s Fashion","product_name":"Women Sweatshirt"}]}'
-          description: Pass through field (max 6000 characters).
-          minLength: 0
-          maxLength: 6000
-        merchant_reference1:
+          example: '{"customer_account_info":[{"unique_account_identifier":"test@gmail.com","account_registration_date":"2017-02-13T10:49:20Z","account_last_modified":"2019-03-13T11:45:27Z"}]}'
+          description: The content of the extra merchant data should be presented as a string inside this property. The body should be an object containing any of the keys and sub-objects described below serialized to JSON. More information on that object can be found [here](https://docs.klarna.com/api/extra-merchant-data).
+        content_type:
           type: string
-          example: ON4711
-          description: Used for storing merchant's internal order number or other reference. If set, will be shown on the confirmation page as "order number" (max 255 characters).
-          minLength: 0
-          maxLength: 255
-        merchant_reference2:
+          example: application/vnd.klarna.internal.emd-v2+json
+          description: The content type of the body. It is usually represented as "application/vnd.klarna.internal.emd-v2+json"
+    customer_token_status_update_request:
+      type: object
+      required:
+      - status
+      properties:
+        status:
           type: string
-          example: ON4711
-          description: Used for storing merchant's internal order number or other reference (max 255 characters).
-          minLength: 0
-          maxLength: 255
-        merchant_urls:
-          $ref: '#/components/schemas/merchant_urls'
-        order_amount:
-          type: integer
-          format: int64
-          description: Non-negative, minor units. Total amount of the order, including tax and any discounts.
-          minimum: 1
-        order_lines:
-          type: array
-          description: The applicable order lines (max 1000)
-          items:
-            $ref: '#/components/schemas/order_line'
-          maxItems: 1000
-          minItems: 1
-        order_tax_amount:
-          type: integer
-          format: int64
-          description: Non-negative, minor units. The total tax amount of the order.
-          minimum: 0
-        purchase_currency:
-          type: string
-          example: GBP
-          description: ISO 4217 purchase currency.
-          pattern: ^[A-Za-z]{3,3}$
-        shipping_address:
-          $ref: '#/components/schemas/address'
-        usage:
-          type: string
-          readOnly: true
+          example: CANCELLED
+          description: The token status to update to.
+          enum:
+          - CANCELLED
     address:
       type: object
       properties:
@@ -439,40 +427,94 @@ components:
           description: "Customers Title. Allowed values per country:\nUK - \"Mr\", \"Ms\"\nDE - \"Herr\", \"Frau\"\nAT: \"Herr, \"Frau\"\nCH: de-CH: \"Herr, \"Frau\" it-CH: \"Sig.\", \"Sig.ra\" fr-CH: \"M\", \"Mme\" \nBE: \"Dhr.\", \"Mevr.\"\nNL: \"Dhr.\", \"Mevr.\""
           minLength: 0
           maxLength: 20
-    merchant_urls:
+    authorized_payment_method:
       type: object
       required:
-      - confirmation
+      - type
       properties:
-        confirmation:
+        number_of_days:
+          type: integer
+          format: int32
+        number_of_installments:
+          type: integer
+          format: int32
+        type:
           type: string
-          description: URL of merchant confirmation page. (max 2000 characters)
-          minLength: 0
-          maxLength: 2000
-        push:
-          type: string
-          description: URL that will be requested when an order is completed. Should be different than checkout and confirmation URLs. (max 2000 characters)
-          minLength: 0
-          maxLength: 2000
-    order:
+          enum:
+          - invoice
+          - fixed_amount
+          - pix
+          - base_account
+          - deferred_interest
+          - direct_debit
+          - direct_bank_transfer
+          - b2b_invoice
+          - card
+          - slice_it_by_card
+          - pay_later_by_card
+          - fixed_sum_credit
+          - pay_by_card
+    customer_token_order:
       type: object
       required:
-      - fraud_status
-      - order_id
-      - redirect_url
+      - order_amount
+      - order_lines
+      - order_tax_amount
+      - purchase_currency
       properties:
-        authorized_payment_method:
-          $ref: '#/components/schemas/authorized_payment_method'
-        fraud_status:
+        attachment:
+          $ref: '#/components/schemas/attachment'
+        auto_capture:
+          type: boolean
+          description: Allow merchant to trigger auto capturing.
+          default: false
+        merchant_data:
           type: string
-          description: Fraud status for the order. Either ACCEPTED or PENDING. If ACCEPTED, the order could be captured. If PENDING, please wait till you receive the notification from Klarna in the notification URL that the order has been approved. You can find additional information here.
-        order_id:
+          example: '{"order_specific":[{"substore":"Women''s Fashion","product_name":"Women Sweatshirt"}]}'
+          description: Pass through field (max 6000 characters).
+          minLength: 0
+          maxLength: 6000
+        merchant_reference1:
           type: string
-          description: Unique order ID of the transaction. This ID will be used for all order management processes.
-        redirect_url:
+          example: ON4711
+          description: Used for storing merchant's internal order number or other reference. If set, will be shown on the confirmation page as "order number" (max 255 characters).
+          minLength: 0
+          maxLength: 255
+        merchant_reference2:
           type: string
-          example: https://credit.klarna.com/v1/sessions/0b1d9815-165e-42e2-8867-35bc03789e00/redirect
-          description: URL to redirect the customer to after placing the order. This is a Klarna URL to which the merchant should redirect the customer to. Klarna will place a cookie in the customers browser (if redirected) and redirect the customer back to the confirmation URL provided by the merchant. This is not a mandatory step but a recommended one to improve the returning customers experience. It is a spontaneous step and does not harm the customers experience.
+          example: ON4711
+          description: Used for storing merchant's internal order number or other reference (max 255 characters).
+          minLength: 0
+          maxLength: 255
+        merchant_urls:
+          $ref: '#/components/schemas/merchant_urls'
+        order_amount:
+          type: integer
+          format: int64
+          description: Non-negative, minor units. Total amount of the order, including tax and any discounts.
+          minimum: 1
+        order_lines:
+          type: array
+          description: The applicable order lines (max 1000)
+          items:
+            $ref: '#/components/schemas/order_line'
+          maxItems: 1000
+          minItems: 1
+        order_tax_amount:
+          type: integer
+          format: int64
+          description: Non-negative, minor units. The total tax amount of the order.
+          minimum: 0
+        purchase_currency:
+          type: string
+          example: GBP
+          description: ISO 4217 purchase currency.
+          pattern: ^[A-Za-z]{3,3}$
+        shipping_address:
+          $ref: '#/components/schemas/address'
+        usage:
+          type: string
+          readOnly: true
     product_identifiers:
       type: object
       properties:
@@ -512,45 +554,3 @@ components:
           description: Size to be shown to the end customer (max 64 characters).
           minLength: 0
           maxLength: 64
-    ErrorV2:
-      type: object
-      properties:
-        authorized_payment_method:
-          $ref: '#/components/schemas/authorized_payment_method'
-        correlation_id:
-          type: string
-        error_code:
-          type: string
-        error_messages:
-          type: array
-          items:
-            type: string
-        fraud_status:
-          type: string
-        reason:
-          type: string
-    attachment:
-      type: object
-      required:
-      - body
-      - content_type
-      properties:
-        body:
-          type: string
-          example: '{"customer_account_info":[{"unique_account_identifier":"test@gmail.com","account_registration_date":"2017-02-13T10:49:20Z","account_last_modified":"2019-03-13T11:45:27Z"}]}'
-          description: The content of the extra merchant data should be presented as a string inside this property. The body should be an object containing any of the keys and sub-objects described below serialized to JSON. More information on that object can be found [here](https://docs.klarna.com/api/extra-merchant-data).
-        content_type:
-          type: string
-          example: application/vnd.klarna.internal.emd-v2+json
-          description: The content type of the body. It is usually represented as "application/vnd.klarna.internal.emd-v2+json"
-    customer_token_status_update_request:
-      type: object
-      required:
-      - status
-      properties:
-        status:
-          type: string
-          example: CANCELLED
-          description: The token status to update to.
-          enum:
-          - CANCELLED

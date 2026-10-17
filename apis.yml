@@ -208,9 +208,11 @@ apis:
     url: https://docs.klarna.com/klarna-payments/
   aid: klarna:klarna-payments-api-2
 - name: Klarna Checkout API
-  description: Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout product and it now trades as Kustom;
-    as of 2026-08-27 Klarna no longer publishes a dedicated Klarna Checkout reference on docs.klarna.com (https://docs.klarna.com/klarna-checkout/
-    returns 404) and lists Kustom among its acquiring partners instead. The checkout/v3 OpenAPI in this repo remains served from api.klarna.com.
+  description: >-
+    Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout product
+    and it now trades as Kustom; as of 2026-08-27 Klarna no longer publishes a dedicated Klarna Checkout
+    reference on docs.klarna.com (https://docs.klarna.com/klarna-checkout/ returns 404) and lists Kustom
+    among its acquiring partners instead. The checkout/v3 OpenAPI in this repo remains served from api.klarna.com.
   humanURL: https://docs.klarna.com/
   baseURL: https://api.klarna.com
   tags:
@@ -222,28 +224,33 @@ apis:
   aid: klarna:klarna-checkout-api-2
 - name: Klarna Order Management API
   description: Capture, refund, cancel and update orders post-authorization.
-  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
   baseURL: https://api.klarna.com
   tags:
   - Order Management
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
   aid: klarna:klarna-order-management-api
 - name: Klarna Customer Token API
   description: Persist a payment authorization as a customer token for repeat purchases.
-  humanURL: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
   baseURL: https://api.klarna.com
   tags:
   - Tokens
   - Recurring
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/web-payments/integrate-with-klarna-payments/tokenized-payments/customer-token/
   aid: klarna:klarna-customer-token-api-2
 - name: Klarna Settlements API
   description: Read merchant settlement reports and transactions.
-  humanURL: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
+  humanURL: >-
+    https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
   baseURL: https://api.klarna.com
   tags:
   - Settlement
@@ -253,11 +260,13 @@ apis:
   - Reporting
   properties:
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/after-payments/settlements/settlement-reporting-getting-started/
   aid: klarna:klarna-settlements-api
 - name: Klarna Push Notifications
-  description: Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP status updates, Checkout push,
-    and pending-order risk decisions.
+  description: >-
+    Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP
+    status updates, Checkout push, and pending-order risk decisions.
   humanURL: https://docs.klarna.com/
   baseURL: https://merchant.example.com
   tags:
@@ -274,11 +283,14 @@ apis:
   - type: AsyncAPI
     url: asyncapi/klarna-push-notifications-asyncapi.yml
   - type: Documentation
-    url: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/other-actions/authorization-callback/
+    url: >-
+      https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/other-actions/authorization-callback/
   - type: Documentation
-    url: https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/
+    url: >-
+      https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/
   - type: Documentation
-    url: https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
+    url: >-
+      https://docs.klarna.com/acquirer/klarna/after-payments/order-management/manage-orders-with-the-api/
   aid: klarna:klarna-push-notifications
 - aid: klarna:klarna-captures-api
   name: Klarna Captures API
@@ -364,7 +376,8 @@ apis:
     url: json-schema/klarna-distribution-request-v1-schema.json
 - aid: klarna:klarna-merchant-urls-address-update-api
   name: Klarna Merchant Urls.address Update API
-  description: The Merchant Urls.address Update API from Klarna — 1 operation(s) for merchant urls.address update.
+  description: >-
+    The Merchant Urls.address Update API from Klarna — 1 operation(s) for merchant urls.address update.
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
@@ -378,7 +391,8 @@ apis:
     url: json-schema/klarna-shipping-service-response-schema.json
 - aid: klarna:klarna-merchant-urls-country-change-api
   name: Klarna Merchant Urls.country Change API
-  description: The Merchant Urls.country Change API from Klarna — 1 operation(s) for merchant urls.country change.
+  description: >-
+    The Merchant Urls.country Change API from Klarna — 1 operation(s) for merchant urls.country change.
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
@@ -392,7 +406,9 @@ apis:
     url: json-schema/klarna-shipping-service-response-schema.json
 - aid: klarna:klarna-merchant-urls-shipping-option-update-api
   name: Klarna Merchant Urls.shipping Option Update API
-  description: The Merchant Urls.shipping Option Update API from Klarna — 1 operation(s) for merchant urls.shipping option update.
+  description: >-
+    The Merchant Urls.shipping Option Update API from Klarna — 1 operation(s) for merchant urls.shipping
+    option update.
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
@@ -406,7 +422,8 @@ apis:
     url: json-schema/klarna-shipping-service-response-schema.json
 - aid: klarna:klarna-merchant-urls-validation-api
   name: Klarna Merchant Urls.validation API
-  description: The Merchant Urls.validation API from Klarna — 1 operation(s) for merchant urls.validation.
+  description: >-
+    The Merchant Urls.validation API from Klarna — 1 operation(s) for merchant urls.validation.
   humanURL: https://docs.klarna.com/klarna-payments/
   baseURL: https://api.klarna.com
   tags:
@@ -529,8 +546,9 @@ apis:
   - type: JSONSchema
     url: json-schema/klarna-transaction-collection-schema.json
 - name: Klarna Agentic Product Protocol (KAPP) API
-  description: Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to query. Registered 2026-09-04 from the
-    same declined submission.
+  description: >-
+    Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to query.
+    Registered 2026-09-04 from the same declined submission.
   humanURL: https://docs.klarna.com/klarna-search/klarna-agentic-product-protocol/
   baseURL: https://api.klarna.com
   tags:

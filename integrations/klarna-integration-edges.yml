@@ -6,9 +6,11 @@ source:
 - https://composio.dev/toolkits/klarna
 - https://monid.ai/tools/klarna
 checked:
+- https://api.nuget.org/v3
 - https://composio.dev/toolkits/klarna
 - https://connectors.airbyte.com/files/registries/v0/cloud_registry.json
 - https://connectors.airbyte.com/files/registries/v0/oss_registry.json
+- https://crates.io/api/v1
 - https://docs.klarna.com/llms.txt
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
@@ -17,6 +19,11 @@ checked:
 - https://monid.ai/tools/klarna
 - https://msb.fincen.gov/
 - https://n8n.io/integrations/klarna/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://www.access-dvs-register.service.gov.uk/register/download-register
 - https://zapier.com/apps/klarna/integrations
 - shopify/integrations/shopify-integration-edges.yml
@@ -322,5 +329,62 @@ edges:
     - bronze
     builder: 'community (Meltano Hub variant maintainers: airbyte)'
   detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@klarna/react-native-klarna-network-core'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-messaging'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-payment'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: react-native-klarna-inapp-sdk
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
 templates: []

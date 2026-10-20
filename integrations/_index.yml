@@ -197,24 +197,6 @@
   source: edge
   status: pending-partner-spec
   arazzo: null
-- slug: klarna-stripe
-  label: stripe
-  partner: stripe
-  partner_name: stripe
-  type: contract
-  channel: partner-built
-  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
-  source: edge
-  relationship: payment-method
-  contract_reference:
-    repo: stripe
-    spec_file: stripe-setup-intents-api-openapi.yml
-    value: klarna
-    property: schemas.PostSetupIntentsRequest.payment_method_data
-    detected_by: detect-payment-method-edges.py
-    detected: '2026-10-12'
-  arazzo: klarna-stripe-preconfig.yml
-  status: arazzo
 - slug: klarna-shopify-own
   label: Shopify (own)
   partner: shopify
@@ -270,6 +252,64 @@
       are context, never counted'
     detected_by: sweep-regtech-aml.py
     detected: '2026-10-15'
+  status: not-a-workflow
+  arazzo: null
+- slug: klarna-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@klarna/react-native-klarna-network-core'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-messaging'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-payment'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: react-native-klarna-inapp-sdk
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
 - slug: klarna-airbyte
@@ -357,61 +397,21 @@
     builder: 'community (Meltano Hub variant maintainers: airbyte)'
   status: not-a-workflow
   arazzo: null
-- slug: klarna-npm-registry
-  label: npm registry
-  partner: npm
-  partner_name: npm registry
-  category: official SDK (JavaScript/TypeScript)
-  type: register
-  channel: package-registry
-  evidence: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+- slug: klarna-stripe
+  label: stripe
+  partner: stripe
+  partner_name: stripe
+  type: contract
+  channel: partner-built
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-payment-intents-api-openapi.yml
   source: edge
-  relationship: distribution-channel
+  relationship: payment-method
   contract_reference:
-    register: npm registry (public registry JSON)
-    spec_file: null
-    language: JavaScript/TypeScript
-    packages:
-    - name: '@klarna/react-native-klarna-network-core'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: '@klarna/react-native-klarna-network-messaging'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: '@klarna/react-native-klarna-network-payment'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: react-native-klarna-inapp-sdk
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  status: not-a-workflow
-  arazzo: null
+    repo: stripe
+    spec_file: stripe-payment-intents-api-openapi.yml
+    value: klarna
+    property: schemas.PostPaymentIntentsRequest.payment_method_data
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+  arazzo: klarna-stripe-preconfig.yml
+  status: arazzo

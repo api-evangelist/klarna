@@ -162,21 +162,6 @@ edges:
   evidence: https://docs.klarna.com/llms.txt
   use_case: Listed under platform-solutions/acquiring-partners/kustom/ in Klarna's live llms.txt (200, 2026-10-12);
     the linked pages returned 404 on 2026-10-12.
-- partner_name: stripe
-  partner: stripe
-  partner_match: domain
-  type: contract
-  channel: partner-built
-  relationship: payment-method
-  direction: partner-built
-  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
-  contract_reference:
-    repo: stripe
-    spec_file: stripe-setup-intents-api-openapi.yml
-    value: klarna
-    property: schemas.PostSetupIntentsRequest.payment_method_data
-    detected_by: detect-payment-method-edges.py
-    detected: '2026-10-12'
 - partner_name: Shopify (own)
   partner: shopify
   partner_match: mirror
@@ -245,6 +230,63 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-regtech-aml.py
   first_seen: '2026-10-15'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@klarna/react-native-klarna-network-core'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-messaging'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: '@klarna/react-native-klarna-network-payment'
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    - name: react-native-klarna-inapp-sdk
+      version: 2.9.3
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
+      repo_leg: shared-github-org:klarna
+      publisher_leg: email:klarna.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 - partner_name: Airbyte
   partner: airbyte
   partner_match: aggregator
@@ -330,61 +372,19 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: airbyte)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
-- partner_name: npm registry
-  partner: npm
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: official SDK (JavaScript/TypeScript)
-  evidence: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
-  channel: package-registry
-  relationship: distribution-channel
+- partner_name: stripe
+  partner: stripe
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: payment-method
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-payment-intents-api-openapi.yml
   contract_reference:
-    register: npm registry (public registry JSON)
-    spec_file: null
-    language: JavaScript/TypeScript
-    packages:
-    - name: '@klarna/react-native-klarna-network-core'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-core
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: '@klarna/react-native-klarna-network-messaging'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-messaging
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: '@klarna/react-native-klarna-network-payment'
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@klarna/react-native-klarna-network-payment
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    - name: react-native-klarna-inapp-sdk
-      version: 2.9.3
-      released: '2026-10-12'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/react-native-klarna-inapp-sdk
-      repo_leg: shared-github-org:klarna
-      publisher_leg: email:klarna.com
-      matched_by: domain+name-among-holders
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
+    repo: stripe
+    spec_file: stripe-payment-intents-api-openapi.yml
+    value: klarna
+    property: schemas.PostPaymentIntentsRequest.payment_method_data
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
 templates: []

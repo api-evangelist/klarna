@@ -29,6 +29,13 @@ checked:
 - shopify/integrations/shopify-integration-edges.yml
 - woocommerce/integrations/woocommerce-integration-edges.yml
 - bigcommerce/integrations/bigcommerce-integration-edges.yml
+- https://docs.stripe.com/stripe-apps
+- https://docs.stripe.com/stripe-apps/review-requirements
+- https://marketplace.stripe.com/
+- https://marketplace.stripe.com/appm/apps
+- https://stripe.com/partners/directory
+- https://stripe.com/partners/verified-partners
+- https://stripe.partners/sitemap.xml
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -405,4 +412,61 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: Payments & Security, Payment Processors & Gateways
+- partner_name: Stripe Partner Ecosystem
+  partner: stripe
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://stripe.partners/directory/klarna
+  category: Stripe ecosystem partner
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Klarna
+    register_id: klarna
+    partner_tier:
+    - Premier Payments Partner
+    matched_domain: klarna.com
+    matched_by: domain+name-among-holders
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'certified_products = ONE entry per verified product type (Premier Apps / SaaS Platform / Payments
+      Partner: Stripe verified the product integration; no dates printed, lapsed null = unknown); Premier Services
+      Partner is a services tier (partner_tier only); Certified Professional Developers certify PEOPLE (context);
+      callouts / products never counted'
+    context:
+      callouts:
+      - CRM
+      stripe_products:
+      - Connect
+      - Payments
+      - Invoicing
+      - Billing
+      - Terminal
+      - Radar
+      - Sigma
+      - Tax
+      - Identity
+      - Revenue Recognition
+      - Capital for Platforms
+      - Stripe Data Pipeline
+      - Instant Payouts
+      - Issuing
+      - Link
+      - Treasury
+      location: Stockholm, Sweden
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: Klarna
+      product_type: payments integration (verified)
+      certifier: Stripe (Verified Partner program)
+      verification: Premier Payments Partner
+      lapsed: null
+  detected_by: sweep-stripe-app-marketplace.py
+  first_seen: '2026-10-21'
 templates: []

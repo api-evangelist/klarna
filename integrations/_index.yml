@@ -197,31 +197,6 @@
   source: edge
   status: pending-partner-spec
   arazzo: null
-- slug: klarna-shopify-own
-  label: Shopify (own)
-  partner: shopify
-  partner_name: Shopify (own)
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://apps.shopify.com/klarna-search-compare
-  source: edge
-  relationship: platform-app
-  arazzo: klarna-shopify-cancel-sync.yml
-  status: arazzo
-- slug: klarna-woocommerce-own
-  label: WooCommerce (own)
-  partner: woocommerce
-  partner_name: WooCommerce (own)
-  category: extension
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://woocommerce.com/products/klarna-payments/
-  source: edge
-  relationship: platform-app
-  arazzo: klarna-woocommerce-capture-on-completion.yml
-  status: arazzo
 - slug: klarna-fincen-msb-registration
   label: FinCEN (MSB registration)
   partner_name: FinCEN (MSB registration)
@@ -415,3 +390,41 @@
     detected: '2026-10-12'
   arazzo: klarna-stripe-preconfig.yml
   status: arazzo
+- slug: klarna-shopify-own
+  label: Shopify (own)
+  partner: shopify
+  partner_name: Shopify (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.shopify.com/klarna-search-compare
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-shopify-cancel-sync.yml
+  status: arazzo
+- slug: klarna-woocommerce-own
+  label: WooCommerce (own)
+  partner: woocommerce
+  partner_name: WooCommerce (own)
+  category: extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://woocommerce.com/products/klarna-payments/
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-woocommerce-capture-on-completion.yml
+  status: arazzo
+- slug: klarna-bigcommerce-own
+  label: BigCommerce (own)
+  partner: bigcommerce
+  partner_name: BigCommerce (own)
+  category: Payments & Security, Payment Processors & Gateways
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.bigcommerce.com/apps/klarna-checkout/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

@@ -53,6 +53,8 @@ checked:
 - https://www.payments.ca/payment-resources/directories?field_directory_type=10
 - https://www.payments.ca/payment-resources/directories?field_directory_type=13
 - https://www.payments.ca/payment-resources/directories?field_directory_type=14
+- https://api.apis.guru/v2/list.json
+- https://api.apis.guru/v2/providers.json
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -638,5 +640,54 @@ edges:
     detected: '2026-10-22'
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   detected_by: sweep-canada-rpaa-psp-registry.py
+  first_seen: '2026-10-22'
+- partner_name: APIs.guru OpenAPI Directory
+  partner: apis-guru
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: third-party
+  evidence: https://apis.guru/
+  category: API definition directory listing (OpenAPI)
+  contract_reference:
+    register: APIs.guru OpenAPI Directory
+    spec_file: null
+    standard: APIs.guru OpenAPI Directory
+    role: listed-in-directory
+    directory_provider: klarna.com
+    matched_domain: klarna.com
+    matched_by: domain+name-among-holders
+    apis_listed: 2
+    version_count: 2
+    first_added: '2023-03-25'
+    last_updated: '2023-04-02'
+    origin_publisher_hosted: true
+    origin_hosts:
+    - www.klarna.com
+    categories:
+    - ecommerce
+    - financial
+    own_openapi_files: 23
+    listings:
+    - key: klarna.com:openai
+      title: Open AI Klarna product Api
+      preferred: v0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/klarna.com/openai/v0/openapi.json
+      origin_url: https://www.klarna.com/us/shopping/public/openai/v0/api-docs/
+      openapi_version: 3.0.1
+    - key: klarna.com:payments
+      title: Klarna Payments API V1
+      preferred: 1.0.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/klarna.com/payments/1.0.0/openapi.json
+      origin_url: file:///home/mike/Downloads/swagger.json
+      openapi_version: 3.0.0
+    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
+      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
+    detected_by: sweep-openapi-directory-apis-guru.py
+    detected: '2026-10-22'
+  detected_by: sweep-openapi-directory-apis-guru.py
   first_seen: '2026-10-22'
 templates: []

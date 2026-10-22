@@ -513,3 +513,36 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
+- slug: klarna-finansinspektionen-company-register-sweden
+  label: Finansinspektionen company register (Sweden)
+  partner_name: Finansinspektionen company register (Sweden)
+  category: Swedish licensed bank / credit / payment / e-money institution
+  type: register
+  channel: regulator-register
+  evidence: https://www.fi.se/en/our-registers/company-register/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Finansinspektionen company register (Sweden)
+    spec_file: null
+    standard: null
+    role: licensed-institution
+    registrations:
+    - registered_name: Klarna Bank AB
+      licences:
+      - Banking companies (limited liability company)
+      register_country: SE
+      matched_domain: klarna.com
+      matched_by: domain+name-among-holders
+      register_id: 556737-0431
+      lei: 549300O3HXYXXUHR0897
+      authorisations:
+      - Tillstånd att bedriva bankrörelse, enligt lag 2004:297 om bank och finansieringsrörelse
+      identity: wikidata Q1165072 P1278 LEI 549300O3HXYXXUHR0897 P856 https://www.klarna.com/
+    signal_note: 'participation only: a regulator licence listing; no API conformance is published by this register'
+    detected_by: sweep-nordic-financial-registers.py
+    detected: '2026-10-21'
+    identity_source: wikidata P1278 (the register's LEI) -> P856 (labelled provenance step; Kin 2026-10-15 decision
+      1)
+  status: not-a-workflow
+  arazzo: null

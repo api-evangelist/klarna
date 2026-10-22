@@ -42,6 +42,9 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- https://virksomhedsregister.finanstilsynet.dk/
+- https://www.fi.se/en/our-registers/company-register/
+- https://www.finanstilsynet.no/en/finanstilsynets-registry/
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -500,5 +503,38 @@ edges:
     detected_by: sweep-vc-portfolios.py
     detected: '2026-10-21'
   detected_by: sweep-vc-portfolios.py
+  first_seen: '2026-10-21'
+- partner_name: Finansinspektionen company register (Sweden)
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.fi.se/en/our-registers/company-register/
+  category: Swedish licensed bank / credit / payment / e-money institution
+  contract_reference:
+    register: Finansinspektionen company register (Sweden)
+    spec_file: null
+    standard: null
+    role: licensed-institution
+    registrations:
+    - registered_name: Klarna Bank AB
+      licences:
+      - Banking companies (limited liability company)
+      register_country: SE
+      matched_domain: klarna.com
+      matched_by: domain+name-among-holders
+      register_id: 556737-0431
+      lei: 549300O3HXYXXUHR0897
+      authorisations:
+      - Tillstånd att bedriva bankrörelse, enligt lag 2004:297 om bank och finansieringsrörelse
+      identity: wikidata Q1165072 P1278 LEI 549300O3HXYXXUHR0897 P856 https://www.klarna.com/
+    signal_note: 'participation only: a regulator licence listing; no API conformance is published by this register'
+    detected_by: sweep-nordic-financial-registers.py
+    detected: '2026-10-21'
+    identity_source: wikidata P1278 (the register's LEI) -> P856 (labelled provenance step; Kin 2026-10-15 decision
+      1)
+  detected_by: sweep-nordic-financial-registers.py
   first_seen: '2026-10-21'
 templates: []

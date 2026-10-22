@@ -48,6 +48,11 @@ checked:
 - adobe-commerce/integrations/adobe-commerce-integration-edges.yml
 - https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-blanches
 - https://www.regafi.fr/
+- https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+- https://www.bankofcanada.ca/rps-api/cif2/accounts/list
+- https://www.payments.ca/payment-resources/directories?field_directory_type=10
+- https://www.payments.ca/payment-resources/directories?field_directory_type=13
+- https://www.payments.ca/payment-resources/directories?field_directory_type=14
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -591,5 +596,47 @@ edges:
     detected: '2026-10-22'
     identity_source: wikidata P856 (LEI P1278 or name; labelled provenance step; Kin 2026-10-15 decision 1)
   detected_by: sweep-france-regafi-acpr.py
+  first_seen: '2026-10-22'
+- partner_name: Bank of Canada RPAA registry of payment service providers
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+  category: Canadian retail payment activities (RPAA) PSP registration
+  contract_reference:
+    register: Bank of Canada RPAA registry of payment service providers
+    spec_file: null
+    standard: null
+    role: registered-psp
+    registrations:
+    - registered_name: Klarna Canada Limited
+      register_status: registered
+      register_country: CA
+      register_id: e4b64316-909b-ef11-8a69-000d3a84a24c
+      matched_domain: klarna.com
+      matched_by: domain+name-among-holders
+      evidence_url: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/psp-registry-details/?account_id=e4b64316-909b-ef11-8a69-000d3a84a24c
+      licences:
+      - RPAA registered PSP
+      brand: Klarna Canada Limited
+      registration_date: '2026-04-14'
+      head_office_country: Canada
+      trade_names:
+      - Klarna
+      payment_functions:
+      - The initiation of an electronic funds transfer at the request of an end user
+      - Authorization or Transmission, Reception or Facilitation of an instruction in relation to an electronic
+        funds transfer
+      has_violations: false
+      identity: wikidata Q1165072 'Klarna' P856 https://www.klarna.com/
+    signal_note: 'participation only: a regulator registration / payment-system membership; no API conformance is
+      published by this register'
+    detected_by: sweep-canada-rpaa-psp-registry.py
+    detected: '2026-10-22'
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-canada-rpaa-psp-registry.py
   first_seen: '2026-10-22'
 templates: []

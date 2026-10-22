@@ -46,6 +46,8 @@ checked:
 - https://www.fi.se/en/our-registers/company-register/
 - https://www.finanstilsynet.no/en/finanstilsynets-registry/
 - adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+- https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-blanches
+- https://www.regafi.fr/
 summary: Klarna's own docs (Platform Solutions) name 10 e-commerce platforms, 7 acquiring partners and 1 issuing
   partner; no iPaaS marketplace listing was found. direction is provider-built only where the docs call it the Klarna
   extension/app (Adobe Commerce, Shopify); acquirers enable Klarna in their own dashboards (partner-built).
@@ -555,4 +557,39 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Adobe Commerce Marketplace extension
+- partner_name: REGAFI (ACPR / Banque de France register of authorised financial firms)
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.regafi.fr/
+  category: French financial supervisory authorisation (ACPR, REGAFI)
+  contract_reference:
+    register: REGAFI (ACPR / Banque de France register of authorised financial firms)
+    spec_file: null
+    standard: null
+    role: passported-into-france
+    registrations:
+    - registered_name: Klarna Bank AB
+      role: passported-into-france
+      licences:
+      - Établissement de Crédit
+      register_country: SE
+      matched_domain: klarna.com
+      matched_by: domain+name-among-holders
+      register_id: '51902'
+      lei: 549300O3HXYXXUHR0897
+      passports:
+      - Libre prestation de services
+      home_authority: Finansinspektionen (Swedish Financial Supervisory Authority)
+      identity: wikidata Q1165072 (LEI P1278) P856 https://www.klarna.com/
+    signal_note: 'participation only: a supervisory authorisation / passport notification; no API conformance is
+      published by this register'
+    detected_by: sweep-france-regafi-acpr.py
+    detected: '2026-10-22'
+    identity_source: wikidata P856 (LEI P1278 or name; labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-france-regafi-acpr.py
+  first_seen: '2026-10-22'
 templates: []

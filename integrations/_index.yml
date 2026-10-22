@@ -390,44 +390,6 @@
     detected: '2026-10-12'
   arazzo: klarna-stripe-preconfig.yml
   status: arazzo
-- slug: klarna-shopify-own
-  label: Shopify (own)
-  partner: shopify
-  partner_name: Shopify (own)
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://apps.shopify.com/klarna-search-compare
-  source: edge
-  relationship: platform-app
-  arazzo: klarna-shopify-cancel-sync.yml
-  status: arazzo
-- slug: klarna-woocommerce-own
-  label: WooCommerce (own)
-  partner: woocommerce
-  partner_name: WooCommerce (own)
-  category: extension
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://woocommerce.com/products/klarna-payments/
-  source: edge
-  relationship: platform-app
-  arazzo: klarna-woocommerce-capture-on-completion.yml
-  status: arazzo
-- slug: klarna-bigcommerce-own
-  label: BigCommerce (own)
-  partner: bigcommerce
-  partner_name: BigCommerce (own)
-  category: Payments & Security, Payment Processors & Gateways
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://www.bigcommerce.com/apps/klarna-checkout/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: klarna-stripe-partner-ecosystem
   label: Stripe Partner Ecosystem
   partner: stripe
@@ -544,5 +506,56 @@
     detected: '2026-10-21'
     identity_source: wikidata P1278 (the register's LEI) -> P856 (labelled provenance step; Kin 2026-10-15 decision
       1)
+  status: not-a-workflow
+  arazzo: null
+- slug: klarna-shopify-own
+  label: Shopify (own)
+  partner: shopify
+  partner_name: Shopify (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.shopify.com/klarna-search-compare
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-shopify-cancel-sync.yml
+  status: arazzo
+- slug: klarna-woocommerce-own
+  label: WooCommerce (own)
+  partner: woocommerce
+  partner_name: WooCommerce (own)
+  category: extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://woocommerce.com/products/klarna-payments/
+  source: edge
+  relationship: platform-app
+  arazzo: klarna-woocommerce-capture-on-completion.yml
+  status: arazzo
+- slug: klarna-bigcommerce-own
+  label: BigCommerce (own)
+  partner: bigcommerce
+  partner_name: BigCommerce (own)
+  category: Payments & Security, Payment Processors & Gateways
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.bigcommerce.com/apps/klarna-checkout/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: klarna-adobe-commerce-own
+  label: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_name: Adobe Commerce (own)
+  category: Adobe Commerce Marketplace extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://commercemarketplace.adobe.com/klarna-m2-klarna.html
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

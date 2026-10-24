@@ -153,6 +153,72 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/klarna-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/klarna-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
+  integrations/klarna-integration-map.yml:
+    method: unknown
+    evidence: no authorship recorded
+  integrations/klarna-salesforce-commerce-cloud-acknowledge-order-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-salesforce-commerce-cloud-acknowledge-order.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-sap-commerce-cloud-capture-order-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-sap-commerce-cloud-capture-order.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-shopify-cancel-sync-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-shopify-cancel-sync.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-stripe-integration-overlay.yaml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/klarna-stripe-preconfig-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-stripe-preconfig.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/klarna-vtex-capture-and-invoice-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-vtex-capture-and-invoice.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-wix-capture-order-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-wix-capture-order.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-woocommerce-capture-on-completion-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-woocommerce-capture-on-completion.yml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-woocommerce-refund-sync-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  integrations/klarna-woocommerce-refund-sync.yml:
+    method: generated
+    evidence: declared in the artifact
+  json-ld/klarna-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-addon-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -180,6 +246,9 @@ artifacts:
   json-schema/klarna-capture-not-allowed-error-message-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-capture-object-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-capture-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -195,10 +264,28 @@ artifacts:
   json-schema/klarna-carrierproduct-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-create-order-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-customer-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-customer-token-creation-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-customer-token-order-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-customer-token-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-customer-token-status-update-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-customerv1-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-distribution-request-v1-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-distributioncontactv1-schema.json:
@@ -216,6 +303,12 @@ artifacts:
   json-schema/klarna-errorresponse-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-extend-due-date-options-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-extend-due-date-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-extendduedateoptions-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -226,6 +319,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-location-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-merchant-order-dto-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-merchantmanualidentificationv1-schema.json:
@@ -258,10 +354,19 @@ artifacts:
   json-schema/klarna-order-line-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-order-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-pagination-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-payout-collection-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-payout-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-payout-summary-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-payoutcollection-schema.json:
@@ -285,6 +390,9 @@ artifacts:
   json-schema/klarna-refund-not-allowed-error-message-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-refund-object-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-refund-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -292,6 +400,24 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-selectedshippingoptiondto-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-create-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-creation-request-v1-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-creation-response-v1-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-read-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-response-v1-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-session-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-sessioncreationrequestv1-schema.json:
@@ -312,6 +438,9 @@ artifacts:
   json-schema/klarna-shipping-info-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-shipping-service-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-subscription-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -319,6 +448,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-totals-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-transaction-collection-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-transaction-schema.json:
@@ -330,7 +462,13 @@ artifacts:
   json-schema/klarna-update-authorization-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/klarna-update-consumer-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/klarna-update-merchant-references-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/klarna-update-shipping-info-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/klarna-updateconsumer-schema.json:
@@ -339,127 +477,7 @@ artifacts:
   json-schema/klarna-updateshippinginfo-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -543,9 +561,27 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/klarna-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/klarna-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/klarna-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -645,51 +681,96 @@ artifacts:
   openapi/order-management-api-openapi-review.yml:
     method: unknown
     evidence: no authorship recorded
+  overlays/klarna-captures-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   overlays/klarna-captures-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-checkout-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-checkout-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-customer-token-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-customer-token-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-hpp-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-hpp-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-merchant-card-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/klarna-merchant-urls-address-update-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-merchant-urls-address-update-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-merchant-urls-country-change-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-merchant-urls-country-change-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-merchant-urls-shipping-option-update-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-merchant-urls-shipping-option-update-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-merchant-urls-validation-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-merchant-urls-validation-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   overlays/klarna-merchantcard-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-orders-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-orders-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-payments-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-payments-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-payouts-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-payouts-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-refunds-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-refunds-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-reports-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-reports-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/klarna-transactions-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/klarna-transactions-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/klarna-packages.yml:
     method: searched
     evidence: declared in the artifact
@@ -703,6 +784,9 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   rules/klarna-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/klarna-rules.yml:
     method: generated
     evidence: declared in the artifact
   sandbox/klarna-sandbox.yml:
@@ -734,6 +818,12 @@ artifacts:
     evidence: declared in the artifact
   skills/klarna-refund-and-reconcile.md:
     method: generated
+    evidence: declared in the artifact
+  vendors/klarna-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/klarna-vocabulary.yml:
+    method: derived
     evidence: declared in the artifact
   well-known/klarna-openid-configuration.json:
     method: unknown

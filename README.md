@@ -1,4 +1,4 @@
-# Klarna (klarna)
+# Klarna
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,184 +64,277 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Klarna is a Swedish fintech offering BNPL, banking, cards, and a shopping app to 150M+ consumers. Merchant API supports Pay-in-3, Pay-in-30, and financing.
+Klarna Bank AB is a Swedish licensed bank and payments network serving 150M+ consumers and 600k+ merchants with buy-now-pay-later, financing, cards, banking and a shopping app. For developers Klarna publishes a merchant API estate covering payment sessions and authorization (Klarna Payments), hosted checkout (Klarna Checkout and the Hosted Payment Page), post-purchase order management (capture, refund, cancel, extend due date), customer tokens for recurring purchases, settlement payouts and transaction reporting, the Merchant Card Service, and a PSD2 XS2A open-banking API for licensed TPPs. Authentication is HTTP Basic with a Klarna-issued API key; Sign in with Klarna adds a full OAuth 2.0 / OpenID Connect consumer-identity surface. Klarna publishes rate limits, a six-month deprecation policy, public service-level objectives, a self-serve playground with market-specific sample data, and an llms.txt — but no fetchable OpenAPI, no server-side SDK in any language, and no MCP server.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/klarna/refs/heads/main/apis.yml)
+**Areas:** Fintech · Buy Now Pay Later · Payments · Cards · Shopping · Banking · Checkout · Order Management · Settlement · Open Banking · PSD2 · Consumer Credit
 
-## Tags
+## Klarna on APIs.io
 
-- Fintech
-- BNPL
-- Payments
-- Cards
-- Shopping
+Everything profiled for Klarna is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/klarna/](https://apis.io/providers/klarna/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (22)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-30
+- [Klarna Payments API](https://apis.io/apis/klarna/klarna-payments-api-2/) — Create and authorize Klarna payment sessions; create orders against authorizations.
+- [Klarna Checkout API](https://apis.io/apis/klarna/klarna-checkout-api-2/) — Hosted Klarna Checkout (KCO), the checkout/v3 surface. Klarna divested the Klarna Checkout product and it now trades as Kustom; as of 2026-08-27 Klarna no…
+- [Klarna Order Management API](https://apis.io/apis/klarna/klarna-order-management-api/) — Capture, refund, cancel and update orders post-authorization.
+- [Klarna Customer Token API](https://apis.io/apis/klarna/klarna-customer-token-api-2/) — Persist a payment authorization as a customer token for repeat purchases.
+- [Klarna Settlements API](https://apis.io/apis/klarna/klarna-settlements-api/) — Read merchant settlement reports and transactions.
+- [Klarna Push Notifications](https://apis.io/apis/klarna/klarna-push-notifications/) — Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP status updates, Checkout push, and pending-order risk…
+- [Klarna Captures API](https://apis.io/apis/klarna/klarna-captures-api/) — The Captures API from Klarna — 6 operation(s) for captures.
+- [Klarna Checkout API](https://apis.io/apis/klarna/klarna-checkout-api/) — The Checkout API from Klarna — 3 operation(s) for checkout.
+- [Klarna Customer Token API](https://apis.io/apis/klarna/klarna-customer-token-api/) — The Customer Token API from Klarna — 3 operation(s) for customer token.
+- [Klarna Hpp API](https://apis.io/apis/klarna/klarna-hpp-api/) — The Hpp API from Klarna — 3 operation(s) for hpp.
+- [Klarna Merchant Urls.address Update API](https://apis.io/apis/klarna/klarna-merchant-urls-address-update-api/) — The Merchant Urls.address Update API from Klarna — 1 operation(s) for merchant urls.address update.
+- [Klarna Merchant Urls.country Change API](https://apis.io/apis/klarna/klarna-merchant-urls-country-change-api/) — The Merchant Urls.country Change API from Klarna — 1 operation(s) for merchant urls.country change.
+- [Klarna Merchant Urls.shipping Option Update API](https://apis.io/apis/klarna/klarna-merchant-urls-shipping-option-update-api/) — The Merchant Urls.shipping Option Update API from Klarna — 1 operation(s) for merchant urls.shipping option update.
+- [Klarna Merchant Urls.validation API](https://apis.io/apis/klarna/klarna-merchant-urls-validation-api/) — The Merchant Urls.validation API from Klarna — 1 operation(s) for merchant urls.validation.
+- [Klarna Orders API](https://apis.io/apis/klarna/klarna-orders-api/) — The Orders API from Klarna — 9 operation(s) for orders.
+- [Klarna Payments API](https://apis.io/apis/klarna/klarna-payments-api/) — The Payments API from Klarna — 5 operation(s) for payments.
+- [Klarna Payouts API](https://apis.io/apis/klarna/klarna-payouts-api/) — The Payouts API from Klarna — 3 operation(s) for payouts.
+- [Klarna Refunds API](https://apis.io/apis/klarna/klarna-refunds-api/) — The Refunds API from Klarna — 2 operation(s) for refunds.
+- [Klarna Reports API](https://apis.io/apis/klarna/klarna-reports-api/) — The Reports API from Klarna — 4 operation(s) for reports.
+- [Klarna Transactions API](https://apis.io/apis/klarna/klarna-transactions-api/) — The Transactions API from Klarna — 1 operation(s) for transactions.
+- [Klarna Agentic Product Protocol (KAPP) API](https://apis.io/apis/klarna/klarna-agentic-product-protocol-kapp-api/) — Klarna's agent-facing product protocol, exposing product and commerce data for AI agents to query. Registered 2026-09-04 from the same declined submission.
+- [Klarna Merchant Card API](https://apis.io/apis/klarna/klarna-merchant-card-api/) — The Merchant Card API from Klarna — 6 operation(s) for merchant card.
 
-## APIs
+### Published properties
 
-### Klarna Payments API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create and authorize Klarna payment sessions; create orders against authorizations.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.klarna.com/klarna-payments/](https://docs.klarna.com/klarna-payments/)
-- **Base URL:** `https://api.klarna.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Klarna Push Notifications](https://apis.io/asyncapis/klarna/klarna-push-notifications-asyncapi/)
 
-- Payments
-- BNPL
+#### Event channels (4)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.klarna.com/klarna-payments/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [checkout/push](https://apis.io/channels/klarna/checkout-push/)
+- [payments/authorization-callback](https://apis.io/channels/klarna/payments-authorization-callback/)
+- [payments/hpp-status-update](https://apis.io/channels/klarna/payments-hpp-status-update/)
+- [payments/pending-order-notification](https://apis.io/channels/klarna/payments-pending-order-notification/)
 
-### Klarna Checkout API
+#### GraphQL (1)
 
-Hosted Klarna Checkout (KCO) for full-funnel checkout experience.
+GraphQL schemas.
 
-- **Human URL:** [https://docs.klarna.com/klarna-checkout/](https://docs.klarna.com/klarna-checkout/)
-- **Base URL:** `https://api.klarna.com`
+- [Moved to /providers/klarna/](https://apis.io/graphqls/klarna/klarna-graphql/)
 
-#### Tags
+#### MCP servers (1)
 
-- Checkout
-- Hosted
+Model Context Protocol servers that expose the API to agents.
 
-#### Properties
+- [klarna](https://apis.io/servers/klarna/klarna/)
 
-- [Documentation](https://docs.klarna.com/klarna-checkout/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Agentic access (1)
 
-### Klarna Order Management API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Capture, refund, cancel and update orders post-authorization.
+- [Klarna Agentic Access](https://apis.io/agentic-access/klarna/klarna-agentic-access/)
 
-- **Human URL:** [https://docs.klarna.com/order-management/](https://docs.klarna.com/order-management/)
-- **Base URL:** `https://api.klarna.com`
+#### JSON Schema (86)
 
-#### Tags
+The data models the API reads and writes.
 
-- Order Management
+- [Addon](https://apis.io/schemas/klarna/klarna-addon/)
+- [Address](https://apis.io/schemas/klarna/klarna-address/)
+- [BackgroundImageV1](https://apis.io/schemas/klarna/klarna-backgroundimagev1/)
+- [Cancel not allowed error message](https://apis.io/schemas/klarna/klarna-cancel-not-allowed-error-message/)
+- [cancel_order_request_status](https://apis.io/schemas/klarna/klarna-cancel-order-request-status/)
+- [cancel_order_request_status_cancelled](https://apis.io/schemas/klarna/klarna-cancel-order-request-status-cancelled/)
+- [cancel_order_request_status_no_request_found](https://apis.io/schemas/klarna/klarna-cancel-order-request-status-no-request-found/)
+- [cancel_order_request_status_pending](https://apis.io/schemas/klarna/klarna-cancel-order-request-status-pending/)
+- [Capture](https://apis.io/schemas/klarna/klarna-capture/)
+- [Capture not allowed error message](https://apis.io/schemas/klarna/klarna-capture-not-allowed-error-message/)
+- [CaptureObject](https://apis.io/schemas/klarna/klarna-capture-object/)
+- [CaptureObject](https://apis.io/schemas/klarna/klarna-captureobject/)
+- [card](https://apis.io/schemas/klarna/klarna-card/)
+- [card_specification](https://apis.io/schemas/klarna/klarna-card-specification/)
+- [CarrierProduct](https://apis.io/schemas/klarna/klarna-carrierproduct/)
+- [create_order_request](https://apis.io/schemas/klarna/klarna-create-order-request/)
+- [customer](https://apis.io/schemas/klarna/klarna-customer/)
+- [customer_token](https://apis.io/schemas/klarna/klarna-customer-token/)
+- [customer_token_creation_response](https://apis.io/schemas/klarna/klarna-customer-token-creation-response/)
+- [customer_token_order](https://apis.io/schemas/klarna/klarna-customer-token-order/)
+- [customer_token_status_update_request](https://apis.io/schemas/klarna/klarna-customer-token-status-update-request/)
+- [CustomerV1](https://apis.io/schemas/klarna/klarna-customerv1/)
+- [DistributionRequestV1](https://apis.io/schemas/klarna/klarna-distribution-request-v1/)
+- [DistributionContactV1](https://apis.io/schemas/klarna/klarna-distributioncontactv1/)
+- [DistributionModuleV1](https://apis.io/schemas/klarna/klarna-distributionmodulev1/)
+- …and 61 more published on APIs.io
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://docs.klarna.com/order-management/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Linked-data contexts for the provider's vocabulary.
 
-### Klarna Customer Token API
+- [Klarna Context](https://apis.io/jsonld/klarna/klarna-context/)
 
-Persist a payment authorization as a customer token for repeat purchases.
+#### Collections (19)
 
-- **Human URL:** [https://docs.klarna.com/customer-token/](https://docs.klarna.com/customer-token/)
-- **Base URL:** `https://api.klarna.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Klarna HPP](https://apis.io/collections/klarna/open-hosted-payment-page-api/)
+- [Klarna HPP Captures API](https://apis.io/collections/klarna/open-klarna-captures-api/)
+- [Klarna HPP Captures Checkout API](https://apis.io/collections/klarna/open-klarna-checkout-api/)
+- [Klarna HPP Captures Customer Token API](https://apis.io/collections/klarna/open-klarna-customer-token-api/)
+- [Klarna Captures Hpp API](https://apis.io/collections/klarna/open-klarna-hpp-api/)
+- [Klarna HPP Captures Merchant Urls.address Update API](https://apis.io/collections/klarna/open-klarna-merchant-urls-address-update-api/)
+- [Klarna HPP Captures Merchant Urls.country Change API](https://apis.io/collections/klarna/open-klarna-merchant-urls-country-change-api/)
+- [Klarna HPP Captures Merchant Urls.shipping Option Update API](https://apis.io/collections/klarna/open-klarna-merchant-urls-shipping-option-update-api/)
+- [Klarna HPP Captures Merchant Urls.validation API](https://apis.io/collections/klarna/open-klarna-merchant-urls-validation-api/)
+- [Klarna HPP Captures Merchantcard API](https://apis.io/collections/klarna/open-klarna-merchantcard-api/)
+- [Klarna HPP Captures Orders API](https://apis.io/collections/klarna/open-klarna-orders-api/)
+- [Klarna HPP Captures Payments API](https://apis.io/collections/klarna/open-klarna-payments-api/)
+- [Klarna HPP Captures Payouts API](https://apis.io/collections/klarna/open-klarna-payouts-api/)
+- [Klarna HPP Captures Refunds API](https://apis.io/collections/klarna/open-klarna-refunds-api/)
+- [Klarna HPP Captures Reports API](https://apis.io/collections/klarna/open-klarna-reports-api/)
+- [Klarna Settlements API](https://apis.io/collections/klarna/open-klarna-settlements-api/)
+- [Klarna HPP Captures Transactions API](https://apis.io/collections/klarna/open-klarna-transactions-api/)
+- [Klarna Merchant Card Service API](https://apis.io/collections/klarna/open-merchant-card-service-api/)
+- [Klarna Order Management API](https://apis.io/collections/klarna/open-order-management-api/)
 
-- Tokens
-- Recurring
+#### Overlays (30)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://docs.klarna.com/customer-token/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Klarna Captures Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-captures-api-phrasing-overlay/)
+- [Klarna Captures Overlay](https://apis.io/overlays/klarna/klarna-captures-overlay/)
+- [Klarna Checkout Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-checkout-api-phrasing-overlay/)
+- [Klarna Checkout Overlay](https://apis.io/overlays/klarna/klarna-checkout-overlay/)
+- [Klarna Customer Token Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-customer-token-api-phrasing-overlay/)
+- [Klarna Customer Token Overlay](https://apis.io/overlays/klarna/klarna-customer-token-overlay/)
+- [Klarna Hpp Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-hpp-api-phrasing-overlay/)
+- [Klarna Hpp Overlay](https://apis.io/overlays/klarna/klarna-hpp-overlay/)
+- [Klarna Merchant Card Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-merchant-card-api-phrasing-overlay/)
+- [Klarna Merchant Urls Address Update Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-address-update-api-phrasing-overlay/)
+- [Klarna Merchant Urls Address Update Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-address-update-overlay/)
+- [Klarna Merchant Urls Country Change Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-country-change-api-phrasing-overlay/)
+- [Klarna Merchant Urls Country Change Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-country-change-overlay/)
+- [Klarna Merchant Urls Shipping Option Update Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-shipping-option-update-api-phrasing-overlay/)
+- [Klarna Merchant Urls Shipping Option Update Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-shipping-option-update-overlay/)
+- [Klarna Merchant Urls Validation Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-validation-api-phrasing-overlay/)
+- [Klarna Merchant Urls Validation Overlay](https://apis.io/overlays/klarna/klarna-merchant-urls-validation-overlay/)
+- [Klarna Merchantcard Overlay](https://apis.io/overlays/klarna/klarna-merchantcard-overlay/)
+- [Klarna Orders Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-orders-api-phrasing-overlay/)
+- [Klarna Orders Overlay](https://apis.io/overlays/klarna/klarna-orders-overlay/)
+- [Klarna Payments Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-payments-api-phrasing-overlay/)
+- [Klarna Payments Overlay](https://apis.io/overlays/klarna/klarna-payments-overlay/)
+- [Klarna Payouts Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-payouts-api-phrasing-overlay/)
+- [Klarna Payouts Overlay](https://apis.io/overlays/klarna/klarna-payouts-overlay/)
+- [Klarna Refunds Api Phrasing Overlay](https://apis.io/overlays/klarna/klarna-refunds-api-phrasing-overlay/)
+- …and 5 more published on APIs.io
 
-### Klarna Settlements API
+#### Governance rules (3)
 
-Read merchant settlement reports and transactions.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://docs.klarna.com/settlements/](https://docs.klarna.com/settlements/)
-- **Base URL:** `https://api.klarna.com`
+- [Klarna — asyncapi rules](https://apis.io/rules/klarna/klarna-asyncapi-spectral-rules/)
+- [Klarna — jsonschema rules](https://apis.io/rules/klarna/klarna-jsonschema-spectral-rules/)
+- [Klarna API Rules](https://apis.io/rules/klarna/klarna-rules/)
 
-#### Tags
+#### Security (3)
 
-- Settlements
-- Reporting
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Klarna Authentication](https://apis.io/security/klarna/klarna-authentication/)
+- [Klarna Domain Security](https://apis.io/security/klarna/klarna-domain-security/)
+- [Klarna Vulnerability Disclosure](https://apis.io/security/klarna/klarna-vulnerability-disclosure/)
 
-- [Documentation](https://docs.klarna.com/settlements/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### OAuth scopes (1)
 
-### Klarna Push Notifications
+The permissions the API asks for.
 
-Outbound HTTP POST callbacks Klarna issues to merchant-hosted URLs for Payments authorization, HPP status updates, Checkout push, and pending-order risk decisions.
+- [Klarna Scopes](https://apis.io/scopes/klarna/klarna-scopes/)
 
-- **Human URL:** [https://docs.klarna.com/](https://docs.klarna.com/)
-- **Base URL:** `https://merchant.example.com`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Webhooks
-- Push Notifications
-- Callbacks
-- Events
+- [Klarna Plans Pricing](https://apis.io/plans/klarna/klarna-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [AsyncAPI](asyncapi/klarna-push-notifications-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Documentation](https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/other-actions/authorization-callback/)
-- [Documentation](https://docs.klarna.com/payments/web-payments/integrate-with-klarna-payments/integrate-via-hpp/api-documentation/status-callbacks/)
-- [Documentation](https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/acknowledge-your-kco-orders/)
-- [Postman Collection](collections/hosted-payment-page-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hosted-payment-page-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/klarna-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klarna-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/merchant-card-service-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/merchant-card-service-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/order-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/order-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-## Common Properties
+- [Klarna Rate Limits](https://apis.io/rate-limits/klarna/klarna-rate-limits/)
 
-- [GitHub Organization](https://github.com/klarna)
-- [LinkedIn](https://www.linkedin.com/company/klarna)
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Klarna Finops](https://apis.io/finops/klarna/klarna-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.klarna.com/)
-- [Plans](plans/klarna-plans-pricing.yml)
-- [Rate Limits](rate-limits/klarna-rate-limits.yml)
-- [Fin Ops](finops/klarna-finops.yml)
-- [L L Ms Txt](https://docs.klarna.com/llms.txt)
+- [Documentation](https://docs.klarna.com/)
+- [Getting started](https://docs.klarna.com/acquirer/klarna/resources/developer-tools/testing-payments/before-you-test/)
+- [API reference](https://docs.klarna.com/api/kn/introduction/)
+- [Pricing](https://x.klarnacdn.net/mepo/onboarding/pricing-annexes/pricing-annex-kp-CA-US-en-20230905.pdf)
+- [Sign up](https://portal.playground.klarna.com/)
+- [Support](https://www.klarna.com/us/help/)
+- [Blog](https://www.klarna.com/international/press/category/blog/)
+- [Security](https://www.klarna.com/international/responsible-disclosure/)
+- [Terms of service](https://www.klarna.com/us/terms-of-use/)
+- [Privacy policy](https://www.klarna.com/us/privacy-policy/)
+- [GitHub](https://github.com/klarna)
+- [Status](https://status.klarna.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 73.6** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 66.9 |
+| Contract governance | 35.6 |
+| Operational transparency | 92.1 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 59.2 |
+
+**Agent readiness 46.0** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 48.8** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/klarna/](https://apis.io/providers/klarna/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Klarna: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/klarna/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
